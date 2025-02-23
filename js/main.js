@@ -48,16 +48,16 @@ loader.setDRACOLoader(dracoLoader);
 
 async function loadModels() {
     try {
-        // const gltf1 = loader.loadAsync("./models/eye/r3.gltf");
+        const gltf1 = loader.loadAsync("./models/eye/r3.gltf");
         // const gltf2 = loader.loadAsync("./models/eye/r22.gltf");
 
-        const [gltf1Result, gltf2Result] = await Promise.all([gltf1, gltf2]);
+        const [gltf1Result, gltf2Result] = await Promise.all([gltf1]);
 
         const object1 = gltf1Result.scene;
-        const object2 = gltf2Result.scene;
+        // const object2 = gltf2Result.scene;
         
         scene.add(object1);
-        scene.add(object2);
+        // scene.add(object2);
 
         const box = new THREE.Box3().setFromObject(object1);
         const center = box.getCenter(new THREE.Vector3());
