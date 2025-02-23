@@ -106,7 +106,7 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   position: absolute;
   width: 85px;  /* Adjust to fit marker size */
   height: 70px; /* Adjust as needed */
-  background: transparent;
+  background: red;
   pointer-events: auto; /* Ensure it can be clicked */
   cursor: pointer;
 }
