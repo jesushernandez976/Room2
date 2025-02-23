@@ -661,6 +661,57 @@ function onPointerDown(event) {
 window.addEventListener("pointermove", onPointerMove);
 window.addEventListener("pointerdown", onPointerDown);
 
+// Mobile settings function (only runs on mobile)
+function handleMobileSettings() {
+    if (window.innerWidth <= 450) {
+        console.log("📱 Mobile mode active");
+
+        // Disable hover effects on mobile
+        window.removeEventListener("mousemove", onPointerMove2);
+        window.removeEventListener("pointermove", onPointerMove3);
+
+        // Disable zoom & rotation for better mobile experience
+        controls.enableRotate = false;
+        controls.enableZoom = false;
+
+        // Hide unnecessary markers
+        marker3.visible = false;
+        marker3a.visible = false;
+
+        // Hide hover text elements
+        hoverText.style.display = "none";
+        hoverTextMarker1.style.display = "none";
+        hoverTextMarker2.style.display = "none";
+        hoverTextMarker4.style.display = "none";
+
+    } else {
+        console.log("💻 Desktop mode active");
+
+        // Re-enable hover effects on desktop
+        window.addEventListener("mousemove", onPointerMove2);
+        window.addEventListener("pointermove", onPointerMove3);
+
+        // Enable zoom & rotation
+        controls.enableRotate = true;
+        controls.enableZoom = true;
+
+        // Show markers again
+        marker3.visible = true;
+        marker3a.visible = false;
+
+        // Show hover text elements
+        hoverText.style.display = "block";
+        hoverTextMarker1.style.display = "block";
+        hoverTextMarker2.style.display = "block";
+        hoverTextMarker4.style.display = "block";
+    }
+}
+
+// Run mobile settings on load and when resizing
+handleMobileSettings();
+window.addEventListener("resize", handleMobileSettings);
+
+
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate);
@@ -670,4 +721,6 @@ function animate() {
      // Update div position
    
 }
+
+
 animate();
