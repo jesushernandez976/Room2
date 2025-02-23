@@ -664,23 +664,23 @@ window.addEventListener("pointerdown", onPointerDown);
 // Function to detect mobile and switch UI
 // Function to detect mobile and switch UI
 // Function to detect mobile and switch UI
-// Function to detect mobile and switch UI
+// Function to detect mobile and switch UI behavior
 function handleMobileView() {
     if (window.innerWidth <= 450) {
         console.log("📱 Switching to Mobile Version");
 
-        // Disable zoom & rotation for better mobile experience
-        controls.enableRotate = false;
+        // Enable rotation but disable zoom for better mobile experience
+        controls.enableRotate = true;
         controls.enableZoom = false;
 
-        // Make markers always visible with low opacity on mobile
-        setMarkerOpacity(0.2); // Set low opacity for all markers
+        // Make markers ALWAYS visible on mobile (low opacity, no hover needed)
+        setMarkerVisibility(0.2);
 
-        // Remove hover event listeners since mobile doesn't support hover
+        // Remove hover event listeners (since mobile has no hover)
         window.removeEventListener("mousemove", onPointerMove2);
         window.removeEventListener("pointermove", onPointerMove3);
 
-        // Use touch-friendly event listeners
+        // Ensure touch-friendly event listeners are added
         window.addEventListener("touchstart", onTouchStart, { passive: false });
 
     } else {
@@ -691,9 +691,9 @@ function handleMobileView() {
         controls.enableZoom = true;
 
         // Restore hover-based marker visibility for desktop
-        setMarkerOpacity(0); // Markers hidden unless hovered
+        setMarkerVisibility(0); // Desktop markers hidden unless hovered
 
-        // Restore hover event listeners for desktop
+        // Restore hover event listeners
         window.addEventListener("mousemove", onPointerMove2);
         window.addEventListener("pointermove", onPointerMove3);
 
@@ -702,8 +702,8 @@ function handleMobileView() {
     }
 }
 
-// Function to set marker opacity
-function setMarkerOpacity(opacityValue) {
+// Function to set marker opacity (0 on desktop, low opacity on mobile)
+function setMarkerVisibility(opacityValue) {
     const markers = [marker1, marker2, marker3, marker4];
 
     markers.forEach(marker => {
@@ -712,10 +712,10 @@ function setMarkerOpacity(opacityValue) {
     });
 }
 
-// Function to handle touch interactions
+// Function to handle touch interactions (no hover required)
 function onTouchStart(event) {
     if (event.touches.length === 1) { // Ensure it's a single touch
-        event.preventDefault(); // Prevent unintended scrolling
+        event.preventDefault(); // Prevent scrolling
         const touch = event.touches[0];
 
         // Convert touch position to normalized coordinates
