@@ -1,0 +1,192 @@
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #000;
+  overflow: hidden;
+}
+
+header {
+  margin-top: 3em;
+  text-align: center;
+  color: white;
+}
+
+header h1 {
+  font-size: 2em;
+  font-weight: 900;
+}
+
+#container3D canvas {
+  width: 100vw !important;
+  height: 100vh !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.modal-content {
+  background: rgba(234, 234, 234, 0.7); /* Make it slightly transparent */
+  box-shadow: rgba(173, 207, 255, 0.7) 0 -12px 7px inset;
+  backdrop-filter: blur(10px); /* Apply the blur effect */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color:black;
+}
+
+.modal {
+z-index: 1050; /* Bootstrap default */
+color: black;
+}
+.modal-backdrop {
+z-index: 1040; /* Ensures backdrop is behind modal */
+}
+
+.socials-container{
+  display: flex;
+}
+.socials-container a{
+  background-color: white;
+  padding: 1.7em;
+  height: 70px;
+  width: 64px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.socials-container a::before{
+  content: attr(data-social);
+  position: absolute;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 100px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  transform: translateY(-30px) rotate(25deg);
+  opacity: 0;
+  transition: 200ms cubic-bezier(.42,0,.44,1.68);
+}
+.socials-container a:hover{
+  background-color: var(--accent-color);
+  fill: white;
+}
+.socials-container a::after{
+  content: '';
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 1px solid var(--accent-color);
+  transform: translateY(0) rotate(25deg);
+  opacity: 0;
+  transition: 200ms cubic-bezier(.42,0,.44,1.68);
+}
+.socials-container a:hover::before{
+  transform: translateY(-65px) rotate(0);
+  opacity: 1;
+}
+.socials-container a:hover::after{
+  transform: translateY(-42px) rotate(0);
+  opacity: 1;
+}
+
+#marker1Div {
+  position: absolute;
+  width: 85px;  /* Adjust to fit marker size */
+  height: 70px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker1Div2 {
+  position: absolute;
+  width: 85px;  /* Adjust to fit marker size */
+  height: 70px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker1Div3 {
+  position: absolute;
+  width: 85px;  /* Adjust to fit marker size */
+  height: 70px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker1Div4 {
+  position: absolute;
+  width: 85px;  /* Adjust to fit marker size */
+  height: 70px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker1Div5 {
+  position: absolute;
+  width: 85px;  /* Adjust to fit marker size */
+  height: 70px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker1Div6 {
+  position: absolute;
+  width: 85px;  /* Adjust to fit marker size */
+  height: 70px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker2Div {
+  position: absolute;
+  width: 240px;  /* Adjust to fit marker size */
+  height: 140px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker3aDiv {
+  position: absolute;
+  width: 120px;  /* Adjust to fit marker size */
+  height: 85px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker3aDiv2 {
+  position: absolute;
+  width: 100px;  /* Adjust to fit marker size */
+  height: 55px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+#marker4Div {
+  position: absolute;
+  width: 170px;  /* Adjust to fit marker size */
+  height: 150px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#footerDiv {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 6px;
+}

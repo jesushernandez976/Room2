@@ -1,0 +1,8 @@
+#marker3aDiv {
+    position: absolute;
+    width: 50px;  /* Adjust to fit marker size */
+    height: 50px; /* Adjust as needed */
+    background: transparent;
+    pointer-events: auto; /* Ensure it can be clicked */
+    cursor: pointer;
+}
