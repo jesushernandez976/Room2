@@ -664,18 +664,19 @@ window.addEventListener("pointerdown", onPointerDown);
 // Function to detect mobile and switch UI
 // Function to detect mobile and switch UI
 // Function to detect mobile and switch UI
+// Function to detect mobile and switch UI
 function handleMobileView() {
     if (window.innerWidth <= 450) {
         console.log("📱 Switching to Mobile Version");
 
         // Disable zoom & rotation for better mobile experience
-        controls.enableRotate = true;
+        controls.enableRotate = false;
         controls.enableZoom = false;
 
         // Make markers always visible with low opacity on mobile
-        setMarkerVisibility(true, 0.15);
+        setMarkerOpacity(0.2); // Set low opacity for all markers
 
-        // Remove hover event listeners (since mobile has no hover)
+        // Remove hover event listeners since mobile doesn't support hover
         window.removeEventListener("mousemove", onPointerMove2);
         window.removeEventListener("pointermove", onPointerMove3);
 
@@ -689,28 +690,25 @@ function handleMobileView() {
         controls.enableRotate = true;
         controls.enableZoom = true;
 
-        // Restore marker hover behavior for desktop
-        setMarkerVisibility(false, 0); // Markers hidden unless hovered
+        // Restore hover-based marker visibility for desktop
+        setMarkerOpacity(0); // Markers hidden unless hovered
 
-        // Restore hover event listeners
+        // Restore hover event listeners for desktop
         window.addEventListener("mousemove", onPointerMove2);
         window.addEventListener("pointermove", onPointerMove3);
 
-        // Remove touch event listener
+        // Remove mobile touch event listener
         window.removeEventListener("touchstart", onTouchStart);
     }
 }
 
-// Function to set marker visibility & opacity
-function setMarkerVisibility(alwaysVisible, opacityValue) {
+// Function to set marker opacity
+function setMarkerOpacity(opacityValue) {
     const markers = [marker1, marker2, marker3, marker4];
 
     markers.forEach(marker => {
-        if (alwaysVisible) {
-            marker.material.opacity = opacityValue; // Make visible on mobile
-        } else {
-            marker.material.opacity = 0; // Only visible when hovered on desktop
-        }
+        marker.material.opacity = opacityValue; // Apply opacity
+        marker.material.transparent = true; // Ensure transparency is enabled
     });
 }
 
@@ -740,6 +738,7 @@ function onTouchStart(event) {
 // Run on page load and when resizing
 handleMobileView();
 window.addEventListener("resize", handleMobileView);
+
 
 
 
