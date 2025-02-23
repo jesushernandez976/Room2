@@ -460,11 +460,13 @@ window.addEventListener("pointermove", onPointerMove3);
 
 // Camera Movement Functions
 function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
+
+    
     gsap.to(camera.position, {
         x: marker.position.x + offsetX,
         y: 2.3 + offsetY,
         z: marker.position.z + offsetZ,
-        duration: 2.5,
+        duration: 3,
         ease: "power2.inOut",
         onUpdate: () => controls.update(),
     });
@@ -472,7 +474,7 @@ function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
         x: marker.position.x,
         y: 2.3,
         z: marker.position.z,
-        duration: 2.5,
+        duration: 3,
         ease: "power2.inOut",
         onUpdate: () => controls.update(),
     });
@@ -482,6 +484,12 @@ function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
 
 // Click Event for Reset Button
 resetButton.addEventListener("click", () => {
+    console.log("🔄 Resetting Camera");
+
+
+    gsap.killTweensOf(camera.position);
+    gsap.killTweensOf(controls.target);
+
     gsap.to(camera.position, {
         x: 9,
         y: 2.3,
@@ -529,7 +537,7 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function onPointerMove(event) {
-    if (window.innerWidth <= 450) return; // Ignore hover events on mobile
+    if (window.innerWidth <= 500) return; // ❌ Ignore hover on mobile
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -545,6 +553,8 @@ function onPointerMove(event) {
         document.body.style.cursor = "default";
     }
 }
+
+
 function onPointerDown(event) {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects([marker1, marker2, marker3,marker4]);
@@ -662,45 +672,31 @@ function onPointerDown(event) {
 window.addEventListener("pointermove", onPointerMove);
 window.addEventListener("pointerdown", onPointerDown);
 
-// Function to detect mobile and switch UI
-// Function to detect mobile and switch UI
-// Function to detect mobile and switch UI
-// Function to detect mobile and switch UI behavior
+
 function handleMobileView() {
-    if (window.innerWidth <= 450) {
+    if (window.innerWidth <= 500) {
         console.log("📱 Switching to Mobile Version");
 
-        // Enable rotation but disable zoom for better mobile experience
-        controls.enableRotate = true;
-        controls.enableZoom = false;
-
-        // Make markers ALWAYS visible on mobile (low opacity, no hover needed)
-        setMarkerVisibility(0.1);
-
-        // Remove hover event listeners (since mobile has no hover)
+        // Remove hover event listeners completely
         window.removeEventListener("pointermove", onPointerMove);
         window.removeEventListener("pointermove", onPointerMove3);
-        // Ensure touch-friendly event listeners are added
+
+        // Ensure markers are completely invisible unless tapped
+        setMarkerVisibility(.2);
+
+        // Add mobile touch event
         window.addEventListener("touchstart", onTouchStart, { passive: false });
 
     } else {
         console.log("💻 Switching to Desktop Version");
 
-        // Restore desktop settings
-        controls.enableRotate = true;
-        controls.enableZoom = true;
-
-        // Restore hover-based marker visibility for desktop
-        setMarkerVisibility(0); // Desktop markers hidden unless hovered
-
-        // Restore hover event listeners
+        // Restore hover event listeners for desktop
         window.addEventListener("pointermove", onPointerMove);
 
-        // Remove mobile touch event listener
+        // Remove mobile touch event
         window.removeEventListener("touchstart", onTouchStart);
     }
 }
-
 // Function to set marker opacity (0 on desktop, low opacity on mobile)
 function setMarkerVisibility(opacityValue) {
     const markers = [marker1, marker2, marker3, marker4];
@@ -714,22 +710,38 @@ function setMarkerVisibility(opacityValue) {
 // Function to handle touch interactions (no hover required)
 function onTouchStart(event) {
     if (event.touches.length === 1) { // Ensure it's a single touch
-        event.preventDefault(); // Prevent scrolling
         const touch = event.touches[0];
 
-        // Convert touch position to normalized coordinates
-        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+        // Check if the user touched the 3D canvas (Three.js renderer)
+        const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (targetElement === renderer.domElement) {
+            event.preventDefault(); // Only prevent default if touching the 3D scene
 
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4], true);
+            // Convert touch position to normalized coordinates
+            const rect = renderer.domElement.getBoundingClientRect();
+            const x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+            const y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
 
-        if (intersects.length > 0) {
-            const clickedObject = intersects[0].object;
-            if (clickedObject.name === "Marker1") moveCamera(marker1);
-            if (clickedObject.name === "Marker2") moveCamera(marker2, -1, 4, 1);
-            if (clickedObject.name === "Marker3") moveCamera(marker3, -0.5, 1, -2);
-            if (clickedObject.name === "Marker4") moveCamera(marker4, 1, 1, 1.6);
+            mouse.x = x;
+            mouse.y = y;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4], true);
+
+            console.log("📱 Touch detected at:", touch.clientX, touch.clientY);
+            console.log("🔍 Intersected Markers:", intersects.map(obj => obj.object.name)); // Debugging output
+
+            if (intersects.length > 0) {
+                const clickedObject = intersects[0].object;
+                console.log("✅ Marker Clicked:", clickedObject.name); // Debugging output
+
+                if (clickedObject.name === "Marker1") moveCamera(marker1);
+                if (clickedObject.name === "Marker2") moveCamera(marker2, -4, 4, 6);
+                if (clickedObject.name === "Marker3") moveCamera(marker3, -0.5, 1, -2);
+                if (clickedObject.name === "Marker4") moveCamera(marker4, 1, 2, 9.6);
+            } else {
+        
+            }
         }
     }
 }
@@ -737,7 +749,7 @@ function onTouchStart(event) {
 // Run on page load and when resizing
 handleMobileView();
 window.addEventListener("resize", handleMobileView);
-window.addEventListener("pointermove", onPointerMove);
+window.addEventListener("touchstart", onTouchStart, { passive: false }); // Ensure touchstart is added
 
 // Animation Loop
 function animate() {
