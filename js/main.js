@@ -48,8 +48,8 @@ loader.setDRACOLoader(dracoLoader);
 
 async function loadModels() {
     try {
-        const gltf1 = loader.loadAsync("./models/eye/r3.gltf");
-        const gltf2 = loader.loadAsync("./models/eye/r22.gltf");
+        // const gltf1 = loader.loadAsync("./models/eye/r3.gltf");
+        // const gltf2 = loader.loadAsync("./models/eye/r22.gltf");
 
         const [gltf1Result, gltf2Result] = await Promise.all([gltf1, gltf2]);
 
