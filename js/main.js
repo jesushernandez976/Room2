@@ -661,6 +661,84 @@ function onPointerDown(event) {
 window.addEventListener("pointermove", onPointerMove);
 window.addEventListener("pointerdown", onPointerDown);
 
+// Function to detect mobile and switch UI
+function handleMobileView() {
+    if (window.innerWidth <= 450) {
+        console.log("📱 Switching to Mobile Version");
+
+        // Disable zoom & rotation for better mobile experience
+        controls.enableRotate = true;
+        controls.enableZoom = false;
+
+        // Hide desktop markers and hover text
+        marker3.visible = false;
+        marker3a.visible = false;
+        hoverText.style.display = "none";
+        hoverTextMarker1.style.display = "none";
+        hoverTextMarker2.style.display = "none";
+        hoverTextMarker4.style.display = "none";
+
+        // Remove hover event listeners
+        window.removeEventListener("mousemove", onPointerMove2);
+        window.removeEventListener("pointermove", onPointerMove3);
+
+        // Create a simpler mobile UI
+        createMobileUI();
+
+    } else {
+        console.log("💻 Switching to Desktop Version");
+
+        // Restore desktop settings
+        controls.enableRotate = true;
+        controls.enableZoom = true;
+
+        // Show markers again
+        marker3.visible = true;
+        marker3a.visible = false;
+        hoverText.style.display = "block";
+        hoverTextMarker1.style.display = "block";
+        hoverTextMarker2.style.display = "block";
+        hoverTextMarker4.style.display = "block";
+
+        // Restore hover event listeners
+        window.addEventListener("mousemove", onPointerMove2);
+        window.addEventListener("pointermove", onPointerMove3);
+
+        // Remove mobile UI if it was created
+        removeMobileUI();
+    }
+}
+
+// Function to create a simple mobile UI
+function createMobileUI() {
+    if (!document.getElementById("mobileUI")) {
+        const mobileUI = document.createElement("div");
+        mobileUI.id = "mobileUI";
+        mobileUI.style.position = "absolute";
+        mobileUI.style.top = "50%";
+        mobileUI.style.left = "50%";
+        mobileUI.style.transform = "translate(-50%, -50%)";
+        mobileUI.style.background = "rgba(0, 0, 0, 0.7)";
+        mobileUI.style.color = "white";
+        mobileUI.style.padding = "15px";
+        mobileUI.style.fontSize = "18px";
+        mobileUI.style.borderRadius = "10px";
+        mobileUI.innerText = "Mobile version loaded";
+        document.body.appendChild(mobileUI);
+    }
+}
+
+// Function to remove the mobile UI when switching back to desktop
+function removeMobileUI() {
+    const mobileUI = document.getElementById("mobileUI");
+    if (mobileUI) {
+        mobileUI.remove();
+    }
+}
+
+// Run on page load and when resizing
+handleMobileView();
+window.addEventListener("resize", handleMobileView);
 
 
 // Animation Loop
