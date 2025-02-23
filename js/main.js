@@ -529,21 +529,22 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function onPointerMove(event) {
+    if (window.innerWidth <= 450) return; // Ignore hover events on mobile
+
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects([marker1, marker2, marker3,marker4]);
+    const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4]);
 
     if (intersects.length > 0) {
         gsap.to(intersects[0].object.material, { opacity: 0.12, duration: 0.3 });
         document.body.style.cursor = "pointer";
     } else {
-        gsap.to([marker1.material, marker2.material, marker3.material, marker4.material ], { opacity: 0, duration: 0.3 });
+        gsap.to([marker1.material, marker2.material, marker3.material, marker4.material], { opacity: 0, duration: 0.3 });
         document.body.style.cursor = "default";
     }
 }
-
 function onPointerDown(event) {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects([marker1, marker2, marker3,marker4]);
@@ -674,12 +675,11 @@ function handleMobileView() {
         controls.enableZoom = false;
 
         // Make markers ALWAYS visible on mobile (low opacity, no hover needed)
-        setMarkerVisibility(0.2);
+        setMarkerVisibility(0.1);
 
         // Remove hover event listeners (since mobile has no hover)
-        window.removeEventListener("mousemove", onPointerMove2);
+        window.removeEventListener("pointermove", onPointerMove);
         window.removeEventListener("pointermove", onPointerMove3);
-
         // Ensure touch-friendly event listeners are added
         window.addEventListener("touchstart", onTouchStart, { passive: false });
 
@@ -694,8 +694,7 @@ function handleMobileView() {
         setMarkerVisibility(0); // Desktop markers hidden unless hovered
 
         // Restore hover event listeners
-        window.addEventListener("mousemove", onPointerMove2);
-        window.addEventListener("pointermove", onPointerMove3);
+        window.addEventListener("pointermove", onPointerMove);
 
         // Remove mobile touch event listener
         window.removeEventListener("touchstart", onTouchStart);
@@ -738,10 +737,7 @@ function onTouchStart(event) {
 // Run on page load and when resizing
 handleMobileView();
 window.addEventListener("resize", handleMobileView);
-
-
-
-
+window.addEventListener("pointermove", onPointerMove);
 
 // Animation Loop
 function animate() {
