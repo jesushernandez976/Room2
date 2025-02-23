@@ -662,6 +662,7 @@ window.addEventListener("pointermove", onPointerMove);
 window.addEventListener("pointerdown", onPointerDown);
 
 // Function to detect mobile and switch UI
+// Function to detect mobile and switch UI
 function handleMobileView() {
     if (window.innerWidth <= 450) {
         console.log("📱 Switching to Mobile Version");
@@ -671,18 +672,19 @@ function handleMobileView() {
         controls.enableZoom = false;
 
         // Hide desktop markers and hover text
+        marker3.visible = false;
+        marker3a.visible = false;
         hoverText.style.display = "none";
         hoverTextMarker1.style.display = "none";
         hoverTextMarker2.style.display = "none";
-
         hoverTextMarker4.style.display = "none";
 
         // Remove hover event listeners
         window.removeEventListener("mousemove", onPointerMove2);
         window.removeEventListener("pointermove", onPointerMove3);
 
-        // Create a simpler mobile UI
-        createMobileUI();
+        // Use touch-friendly event listeners
+        window.addEventListener("touchstart", onTouchStart, { passive: false });
 
     } else {
         console.log("💻 Switching to Desktop Version");
@@ -692,6 +694,8 @@ function handleMobileView() {
         controls.enableZoom = true;
 
         // Show markers again
+        marker3.visible = true;
+        marker3a.visible = false;
         hoverText.style.display = "block";
         hoverTextMarker1.style.display = "block";
         hoverTextMarker2.style.display = "block";
@@ -701,41 +705,38 @@ function handleMobileView() {
         window.addEventListener("mousemove", onPointerMove2);
         window.addEventListener("pointermove", onPointerMove3);
 
-        // Remove mobile UI if it was created
-        removeMobileUI();
+        // Remove touch event listener
+        window.removeEventListener("touchstart", onTouchStart);
     }
 }
 
-// Function to create a simple mobile UI
-function createMobileUI() {
-    if (!document.getElementById("mobileUI")) {
-        const mobileUI = document.createElement("div");
-        mobileUI.id = "mobileUI";
-        mobileUI.style.position = "absolute";
-        mobileUI.style.top = "50%";
-        mobileUI.style.left = "50%";
-        mobileUI.style.transform = "translate(-50%, -50%)";
-        mobileUI.style.background = "rgba(0, 0, 0, 0.7)";
-        mobileUI.style.color = "white";
-        mobileUI.style.padding = "15px";
-        mobileUI.style.fontSize = "18px";
-        mobileUI.style.borderRadius = "10px";
-        mobileUI.innerText = "Mobile version loaded";
-        document.body.appendChild(mobileUI);
-    }
-}
+// Function to handle touch interactions
+function onTouchStart(event) {
+    if (event.touches.length === 1) { // Ensure it's a single touch
+        event.preventDefault(); // Prevent unintended scrolling
+        const touch = event.touches[0];
 
-// Function to remove the mobile UI when switching back to desktop
-function removeMobileUI() {
-    const mobileUI = document.getElementById("mobileUI");
-    if (mobileUI) {
-        mobileUI.remove();
+        // Convert touch position to normalized coordinates
+        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4], true);
+
+        if (intersects.length > 0) {
+            const clickedObject = intersects[0].object;
+            if (clickedObject.name === "Marker1") moveCamera(marker1);
+            if (clickedObject.name === "Marker2") moveCamera(marker2, -1, 4, 1);
+            if (clickedObject.name === "Marker3") moveCamera(marker3, -0.5, 1, -2);
+            if (clickedObject.name === "Marker4") moveCamera(marker4, 1, 1, 1.6);
+        }
     }
 }
 
 // Run on page load and when resizing
 handleMobileView();
 window.addEventListener("resize", handleMobileView);
+
 
 
 
