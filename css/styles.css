@@ -191,3 +191,66 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   font-size: 6px;
 }
 
+@media screen and (max-width: 500px) {
+  #marker1Div {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 70px; /* Adjust as needed */
+   
+  }
+  
+  #marker1Div2 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 70px; /* Adjust as needed */
+    background: blue;
+  }
+  
+  #marker1Div3 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 70px; /* Adjust as needed */
+  }
+  
+  #marker1Div4 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 70px; /* Adjust as needed */
+    
+  }
+  
+  #marker1Div5 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 70px; /* Adjust as needed */
+  
+  }
+  
+  #marker1Div6 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 70px; /* Adjust as needed */
+  }
+  
+  #marker2Div {
+    width: 240px;  /* Adjust to fit marker size */
+    height: 140px; /* Adjust as needed */
+  }
+  
+  #marker3aDiv {
+    width: 120px;  /* Adjust to fit marker size */
+    height: 85px; /* Adjust as needed */
+  }
+  
+  #marker3aDiv2 {
+    width: 100px;  /* Adjust to fit marker size */
+    height: 55px; /* Adjust as needed */
+  }
+  #marker4Div {
+    width: 170px;  /* Adjust to fit marker size */
+    height: 150px; /* Adjust as needed */
+  }
+  
+  #footerDiv {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 6px;
+  }
+}

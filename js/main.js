@@ -460,6 +460,8 @@ window.addEventListener("pointermove", onPointerMove3);
 
 // Camera Movement Functions
 function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
+    gsap.killTweensOf(camera.position);
+    gsap.killTweensOf(controls.target);
 
     
     gsap.to(camera.position, {
@@ -750,6 +752,29 @@ function onTouchStart(event) {
 handleMobileView();
 window.addEventListener("resize", handleMobileView);
 window.addEventListener("touchstart", onTouchStart, { passive: false }); // Ensure touchstart is added
+
+function loadCSS(cssFile) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = cssFile;
+    link.type = "text/css";
+    document.head.appendChild(link);
+}
+
+// Load CSS file (update the path if needed)
+loadCSS("styles.css");
+function applyResponsiveStyles() {
+    if (window.innerWidth <= 500) {
+        document.body.classList.add("mobile-view");
+    } else {
+        document.body.classList.remove("mobile-view");
+    }
+}
+
+// Apply styles on load and resize
+window.addEventListener("load", applyResponsiveStyles);
+window.addEventListener("resize", applyResponsiveStyles);
+
 
 // Animation Loop
 function animate() {
