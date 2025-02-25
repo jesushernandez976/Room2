@@ -4,6 +4,7 @@ import { DRACOLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { gsap } from "https://cdn.skypack.dev/gsap@3.9.1";
 
+
 // Scene, Camera, and Renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -41,38 +42,68 @@ controls.target.set(5.5, 2.3, 0);
 controls.update();
 
 // Load 3D Models
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("https://cdn.skypack.dev/three@0.129.0/examples/js/libs/draco/");
 const loader = new GLTFLoader();
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
 loader.setDRACOLoader(dracoLoader);
 
-async function loadModels() {
-    try {
-        const gltf1 = loader.loadAsync("./models/eye/r3.gltf");
-        // const gltf2 = loader.loadAsync("./models/eye/r22.gltf");
+// async function loadModels() {
+//     try {
 
-        const [gltf1Result, gltf2Result] = await Promise.all([gltf1]);
+//         // Load r722.glb model
+//         const gltf1 = await loader.loadAsync("./models/eye/r722.glb");
 
-        const object1 = gltf1Result.scene;
-        // const object2 = gltf2Result.scene;
-        
-        scene.add(object1);
-        // scene.add(object2);
+//         if (gltf1 && gltf1.scene) {
+//             scene.add(gltf1.scene);
 
-        const box = new THREE.Box3().setFromObject(object1);
-        const center = box.getCenter(new THREE.Vector3());
+//             // Compute bounding box for camera positioning
+//             const box = new THREE.Box3().setFromObject(gltf1.scene);
+//             const center = box.getCenter(new THREE.Vector3());
 
-        if (center.length() > 0) {
-            camera.position.set(center.x + 9, 2.3, center.z + 0.5);
-            camera.lookAt(center.x, 2.3, center.z);
-            controls.target.set(center.x + 2.5, 2.3, center.z);
-            controls.update();
-        }
-    } catch (error) {
-        console.error("Error loading models:", error);
+//             if (center.length() > 0) {
+//                 camera.position.set(center.x + 9, 2.3, center.z + 0.5);
+//                 camera.lookAt(center.x, 2.3, center.z);
+//                 controls.target.set(center.x + 2.5, 2.3, center.z);
+//                 controls.update();
+//             }
+//         } else {
+//             console.error("❌ gltf1.scene is null or invalid.");
+//         }
+//     } catch (error) {
+//         console.error("❌ Error loading r722.glb:", error);
+//     }
+// }
+
+// // Call the function
+// loadModels();
+
+loader.load(
+    "./models/eye/r722.glb",
+    function (gltf) {
+        console.log("✅ Model Loaded:", gltf);
+
+        // Check every mesh in the model
+        gltf.scene.traverse((child) => {
+            if (child.isMesh) {
+                console.log("🔹 Mesh Found:", child.name || "(Unnamed)");
+
+                // Make sure morph targets exist before updating them
+                if (child.morphTargetInfluences && child.name) {
+                    child.updateMorphTargets();
+                } else {
+                    console.warn("⚠️ Skipping morph target update for:", child.name || "(Unnamed)");
+                }
+            }
+        });
+
+        scene.add(gltf.scene);
+    },
+    undefined,
+    function (error) {
+        console.error("❌ Error loading r62.glb:", error);
     }
-}
-loadModels();
+);
+
 
 // Clickable Markers
 function createMarker(position, size, name, rotation = [0, 0, 0], shape = "box") {
@@ -581,7 +612,7 @@ function onPointerDown(event) {
                 setTimeout(() => {
                     div.style.display = "block";
                     div.style.pointerEvents = "auto";
-                }, 1500 + index * 50); // 300ms base delay + 50ms incremental for each
+                }, 1700 + index * 50); // 300ms base delay + 50ms incremental for each
             });
         }
         
@@ -608,7 +639,7 @@ function onPointerDown(event) {
             setTimeout(() => {
                 marker2Div.style.display = "block";
                 marker2Div.style.pointerEvents = "auto";
-            }, 1500);
+            }, 1700);
         }
         
         if (clickedObject.name !== "Marker2" && marker2Div.style.pointerEvents === "auto") {
@@ -626,7 +657,7 @@ function onPointerDown(event) {
             marker3aDiv.style.display = "block";
             marker3aDiv.style.pointerEvents = "auto";
 
-        }, 1500);
+        }, 1700);
         }
 
         if (clickedObject.name === "Marker3") {
@@ -638,7 +669,7 @@ function onPointerDown(event) {
                 marker3aDiv2.style.display = "block";
                 marker3aDiv2.style.pointerEvents = "auto";
     
-            }, 1500);
+            }, 1700);
             }
 
         if (clickedObject.name !== "Marker3" && marker3aDiv.style.pointerEvents === "auto") {
@@ -661,7 +692,7 @@ function onPointerDown(event) {
             setTimeout(() => {
                 marker4Div.style.display = "block";
                 marker4Div.style.pointerEvents = "auto";
-            }, 1500);
+            }, 1700);
         }
         
         if (clickedObject.name !== "Marker4" && marker4Div.style.pointerEvents === "auto") {
@@ -753,16 +784,6 @@ handleMobileView();
 window.addEventListener("resize", handleMobileView);
 window.addEventListener("touchstart", onTouchStart, { passive: false }); // Ensure touchstart is added
 
-function loadCSS(cssFile) {
-    let link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = cssFile;
-    link.type = "text/css";
-    document.head.appendChild(link);
-}
-
-// Load CSS file (update the path if needed)
-loadCSS("styles.css");
 function applyResponsiveStyles() {
     if (window.innerWidth <= 500) {
         document.body.classList.add("mobile-view");
@@ -774,6 +795,7 @@ function applyResponsiveStyles() {
 // Apply styles on load and resize
 window.addEventListener("load", applyResponsiveStyles);
 window.addEventListener("resize", applyResponsiveStyles);
+
 
 
 // Animation Loop
