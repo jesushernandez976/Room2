@@ -16,6 +16,7 @@ header h1 {
   font-weight: 900;
 }
 
+
 #container3D canvas {
   width: 100vw !important;
   height: 100vh !important;
@@ -25,12 +26,12 @@ header h1 {
 }
 
 .modal-content {
-  background: rgba(234, 234, 234, 0.7); /* Make it slightly transparent */
-  box-shadow: rgba(173, 207, 255, 0.7) 0 -12px 7px inset;
-  backdrop-filter: blur(10px); /* Apply the blur effect */
+  background: rgba(74, 74, 74, 0.7); /* Make it slightly transparent */
+  /* box-shadow: rgba(87, 87, 87, 0.83) 0 -12px 7px inset; */
+  backdrop-filter: blur(20px); /* Apply the blur effect */
   border-radius: 10px; /* Optional: Adds rounded corners */
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color:black;
+  color:white;
 }
 
 .modal {
@@ -93,11 +94,18 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   opacity: 1;
 }
 
+.hidden {
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+
 #marker1Div {
   position: absolute;
   width: 85px;  /* Adjust to fit marker size */
   height: 70px; /* Adjust as needed */
-  background: transparent;
+  background: blue;
   pointer-events: auto; /* Ensure it can be clicked */
   cursor: pointer;
 }
@@ -106,7 +114,7 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   position: absolute;
   width: 85px;  /* Adjust to fit marker size */
   height: 70px; /* Adjust as needed */
-  background: red;
+  background: transparent;
   pointer-events: auto; /* Ensure it can be clicked */
   cursor: pointer;
 }
@@ -191,66 +199,30 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   font-size: 6px;
 }
 
-@media screen and (max-width: 500px) {
-  #marker1Div {
-    width: 85px;  /* Adjust to fit marker size */
-    height: 70px; /* Adjust as needed */
-   
+@media (max-width: 700px) {
+
+
+  .blinking-dot {
+    position: fixed;
+    width: 5px; /* Size of the dot */
+    height: 5px;
+    background-color: white; /* Change color as needed */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: blink 1.2s infinite alternate;
+    overflow: hidden;
   }
   
-  #marker1Div2 {
-    width: 85px;  /* Adjust to fit marker size */
-    height: 70px; /* Adjust as needed */
-    background: blue;
+  @keyframes blink {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0.1;
+      transform: scale(3);
+    }
   }
   
-  #marker1Div3 {
-    width: 85px;  /* Adjust to fit marker size */
-    height: 70px; /* Adjust as needed */
-  }
   
-  #marker1Div4 {
-    width: 85px;  /* Adjust to fit marker size */
-    height: 70px; /* Adjust as needed */
-    
-  }
-  
-  #marker1Div5 {
-    width: 85px;  /* Adjust to fit marker size */
-    height: 70px; /* Adjust as needed */
-  
-  }
-  
-  #marker1Div6 {
-    width: 85px;  /* Adjust to fit marker size */
-    height: 70px; /* Adjust as needed */
-  }
-  
-  #marker2Div {
-    width: 240px;  /* Adjust to fit marker size */
-    height: 140px; /* Adjust as needed */
-  }
-  
-  #marker3aDiv {
-    width: 120px;  /* Adjust to fit marker size */
-    height: 85px; /* Adjust as needed */
-  }
-  
-  #marker3aDiv2 {
-    width: 100px;  /* Adjust to fit marker size */
-    height: 55px; /* Adjust as needed */
-  }
-  #marker4Div {
-    width: 170px;  /* Adjust to fit marker size */
-    height: 150px; /* Adjust as needed */
-  }
-  
-  #footerDiv {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-size: 6px;
-  }
 }

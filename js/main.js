@@ -27,12 +27,12 @@ controls.maxPolarAngle = Math.PI / 1.7;
 
 // Lighting
 scene.add(new THREE.AmbientLight(0xffffff, .6));
-const pointLight1 = new THREE.PointLight(0xffffff, 2, 10);
+const pointLight1 = new THREE.PointLight(0xffffff, 2.5, 10);
 pointLight1.position.set(0, 2, 0);
 scene.add(pointLight1);
 
 const pointLight2 = new THREE.PointLight(0xffffff, 1, 10);
-pointLight2.position.set(5, 2, -5);
+pointLight2.position.set(5, 3, -5);
 scene.add(pointLight2);
 
 // Initial Camera Position
@@ -51,7 +51,7 @@ loader.setDRACOLoader(dracoLoader);
 //     try {
 
 //         // Load r722.glb model
-//         const gltf1 = await loader.loadAsync("./models/eye/r722.glb");
+//         const gltf1 = await loader.loadAsync("./models/eye/r724.glb");
 
 //         if (gltf1 && gltf1.scene) {
 //             scene.add(gltf1.scene);
@@ -77,32 +77,113 @@ loader.setDRACOLoader(dracoLoader);
 // // Call the function
 // loadModels();
 
-loader.load(
-    "./models/eye/r722.glb",
-    function (gltf) {
-        console.log("✅ Model Loaded:", gltf);
+renderer.domElement.addEventListener("webglcontextlost", (event) => {
+    event.preventDefault();
+    console.error("❌ WebGL Context Lost! Reloading scene...");
+    location.reload(); // Reloads the page to free memory
+});
 
-        // Check every mesh in the model
-        gltf.scene.traverse((child) => {
-            if (child.isMesh) {
-                console.log("🔹 Mesh Found:", child.name || "(Unnamed)");
+// loader.load(
+//     "./models/eye/r723.glb",
+//     function (gltf) {
+//         console.log("✅ Model Loaded:", gltf);
 
-                // Make sure morph targets exist before updating them
-                if (child.morphTargetInfluences && child.name) {
-                    child.updateMorphTargets();
+//         // Check every mesh in the model
+//         gltf.scene.traverse((child) => {
+//             if (child.isMesh) {
+//                 console.log("🔹 Mesh Found:", child.name || "(Unnamed)");
+
+//                 // Make sure morph targets exist before updating them
+//                 if (child.morphTargetInfluences && child.name) {
+//                     child.updateMorphTargets();
+//                 } else {
+//                     console.warn("⚠️ Skipping morph target update for:", child.name || "(Unnamed)");
+//                 }
+//             }
+//         });
+
+//         scene.add(gltf.scene);
+//     },
+//     undefined,
+//     function (error) {
+//         console.error("❌ Error loading r62.glb:", error);
+//     }
+// );
+
+// Handle WebGL context loss gracefully
+renderer.domElement.addEventListener("webglcontextlost", (event) => {
+    event.preventDefault();
+    console.error("❌ WebGL Context Lost! Freeing memory and reloading model...");
+    
+    // Remove existing models before reloading to free memory
+    scene.children.forEach((child) => {
+        if (child.isMesh) {
+            child.geometry.dispose();
+            if (child.material) {
+                if (Array.isArray(child.material)) {
+                    child.material.forEach((mat) => mat.dispose());
                 } else {
-                    console.warn("⚠️ Skipping morph target update for:", child.name || "(Unnamed)");
+                    child.material.dispose();
                 }
             }
-        });
+        }
+        scene.remove(child);
+    });
 
-        scene.add(gltf.scene);
-    },
-    undefined,
-    function (error) {
-        console.error("❌ Error loading r62.glb:", error);
-    }
-);
+    // Reload the model instead of reloading the entire page
+    loadModel();
+});
+
+// Function to load the model
+function loadModel() {
+    
+
+    loader.load(
+        "./models/eye/r10.glb",
+        function (gltf) {
+            console.log("✅ Model Loaded:", gltf);
+
+            // Check every mesh in the model
+            gltf.scene.traverse((child) => {
+                if (child.isMesh) {
+                    console.log("🔹 Mesh Found:", child.name || "(Unnamed)");
+
+                    // Only update morph targets if they exist
+                    if (child.morphTargetInfluences) {
+                        console.log("🔄 Updating Morph Targets for:", child.name);
+                        child.updateMorphTargets();
+                    }
+                }
+            });
+
+            scene.add(gltf.scene);
+        },
+        undefined,
+        function (error) {
+            console.error("❌ Error loading r723.glb:", error);
+        }
+    );
+}
+
+// Load the model initially
+loadModel();
+
+
+function disposeModel(model) {
+    model.traverse((child) => {
+        if (child.isMesh) {
+            child.geometry.dispose();
+            if (child.material) {
+                if (Array.isArray(child.material)) {
+                    child.material.forEach((mat) => mat.dispose());
+                } else {
+                    child.material.dispose();
+                }
+            }
+        }
+    });
+    scene.remove(model);
+}
 
 
 // Clickable Markers
@@ -516,9 +597,12 @@ function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
 }
 
 // Click Event for Reset Button
+let resetRecently = false; // Track if reset was clicked
+
 resetButton.addEventListener("click", () => {
     console.log("🔄 Resetting Camera");
 
+    resetRecently = true; // Prevent re-enabling for a short time
 
     gsap.killTweensOf(camera.position);
     gsap.killTweensOf(controls.target);
@@ -540,28 +624,26 @@ resetButton.addEventListener("click", () => {
         onUpdate: () => controls.update(),
     });
 
-    marker1.visible = true;
-    marker1Div.style.pointerEvents = "none";
-    marker1Div2.style.pointerEvents = "none";
-    marker1Div3.style.pointerEvents = "none";
-    marker1Div4.style.pointerEvents = "none";
-    marker1Div5.style.pointerEvents = "none";
-    marker1Div6.style.pointerEvents = "none";
-    marker2.visible = true;
-    marker2Div.style.pointerEvents = "none";
-    marker3.visible = true; 
-    marker3a.visible = false;
-    marker4.visible = true;
-    marker3aDiv.style.display = "none"; // Hide marker3aDiv on reset
-    marker3aDiv2.style.pointerEvents = "none";
-    marker3aDiv.style.pointerEvents = "none";
-    marker4Div.style.pointerEvents = "none";
+    // Disable all marker divs
+    const markerDivs = [
+        marker1Div, marker1Div2, marker1Div3, marker1Div4,
+        marker1Div5, marker1Div6, marker2Div, marker3aDiv,
+        marker3aDiv2, marker4Div
+    ];
+    markerDivs.forEach(div => {
+        div.style.display = "none";
+        div.style.pointerEvents = "none";
+    });
 
+    setTimeout(() => {
+        resetRecently = false; // Allow marker divs to re-enable after a delay
+    }, 2000); // Adjust delay if needed
 
     setTimeout(() => {
         resetButton.style.display = "none";
-    }, 1500);
+    }, 1000);
 });
+
 
 
 
@@ -570,7 +652,7 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function onPointerMove(event) {
-    if (window.innerWidth <= 500) return; // ❌ Ignore hover on mobile
+    if (window.innerWidth <= 700) return; // ❌ Ignore hover on mobile
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -579,7 +661,7 @@ function onPointerMove(event) {
     const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4]);
 
     if (intersects.length > 0) {
-        gsap.to(intersects[0].object.material, { opacity: 0.12, duration: 0.3 });
+        gsap.to(intersects[0].object.material, { opacity: 0.05, duration: 0.3 });
         document.body.style.cursor = "pointer";
     } else {
         gsap.to([marker1.material, marker2.material, marker3.material, marker4.material], { opacity: 0, duration: 0.3 });
@@ -588,126 +670,131 @@ function onPointerMove(event) {
 }
 
 
-function onPointerDown(event) {
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects([marker1, marker2, marker3,marker4]);
 
-    if (intersects.length > 0) {
-        const clickedObject = intersects[0].object;
+    resetButton.addEventListener("click", () => {
+        console.log("🔄 Resetting Camera");
+    
+        resetRecently = true; // Prevent re-enabling for a short time
+    
+        gsap.killTweensOf(camera.position);
+        gsap.killTweensOf(controls.target);
+    
+        gsap.to(camera.position, {
+            x: 9,
+            y: 2.3,
+            z: 0.5,
+            duration: 2.5,
+            ease: "power2.inOut",
+            onUpdate: () => controls.update(),
+        });
+        gsap.to(controls.target, {
+            x: 5.5,
+            y: 2.3,
+            z: 0,
+            duration: 2.5,
+            ease: "power2.inOut",
+            onUpdate: () => controls.update(),
+        });
 
-        if (clickedObject.name === "Marker1") {
-            moveCamera(marker1);
-            marker3.visible = true;  
-            marker3a.visible = false;
-            marker1.visible = false;
-        
-            // List of marker divs
-            const markerDivs = [
-                marker1Div, marker1Div2, marker1Div3, 
-                marker1Div4, marker1Div5, marker1Div6
-            ];
-        
-            // Apply delay before enabling each marker div
-            markerDivs.forEach((div, index) => {
-                setTimeout(() => {
-                    div.style.display = "block";
-                    div.style.pointerEvents = "auto";
-                }, 1700 + index * 50); // 300ms base delay + 50ms incremental for each
-            });
-        }
-        
-        // Hide marker divs instantly when clicking elsewhere
-        if (clickedObject.name !== "Marker1" && marker1Div.style.pointerEvents === "auto") {
-            const markerDivs = [
-                marker1Div, marker1Div2, marker1Div3, 
-                marker1Div4, marker1Div5, marker1Div6
-            ];
-        
-            markerDivs.forEach(div => {
-                div.style.display = "none"; 
-                div.style.pointerEvents = "none";
-            });
-        }
-        
+        disableMarkerDivs(); // ✅ Hides all marker divs
 
-        if (clickedObject.name === "Marker2") {
-            moveCamera(marker2, -1, 4, 1);
-            marker3.visible = true;  
-            marker3a.visible = false;
-            marker2.visible = false;
-        
-            setTimeout(() => {
-                marker2Div.style.display = "block";
-                marker2Div.style.pointerEvents = "auto";
-            }, 1700);
-        }
-        
-        if (clickedObject.name !== "Marker2" && marker2Div.style.pointerEvents === "auto") {
-            marker2Div.style.display = "none";
-            marker2Div.style.pointerEvents = "none";
-        }
-
-
-        if (clickedObject.name === "Marker3") {
-        moveCamera(marker3, -0.5, 1, -2);
-        marker3.visible = false;
-        marker3a.visible = true;
-
+    
+        // Disable all marker divs
+        const markerDivs = [
+            marker1Div, marker1Div2, marker1Div3, marker1Div4,
+            marker1Div5, marker1Div6, marker2Div, marker3aDiv,
+            marker3aDiv2, marker4Div
+        ];
+        markerDivs.forEach(div => {
+            div.style.display = "none";
+            div.style.pointerEvents = "none";
+        });
+    
         setTimeout(() => {
-            marker3aDiv.style.display = "block";
-            marker3aDiv.style.pointerEvents = "auto";
-
-        }, 1700);
-        }
-
-        if (clickedObject.name === "Marker3") {
-            moveCamera(marker3, -0.5, 1, -2);
-            marker3.visible = false;
-            marker3a.visible = true;
+            resetRecently = false; // Allow marker divs to re-enable after a delay
+        }, 4000); // Adjust delay if needed
     
-            setTimeout(() => {
-                marker3aDiv2.style.display = "block";
-                marker3aDiv2.style.pointerEvents = "auto";
+        setTimeout(() => {
+            resetButton.style.display = "none";
+        }, 1500);
+    });
+
+
+
     
-            }, 1700);
-            }
-
-        if (clickedObject.name !== "Marker3" && marker3aDiv.style.pointerEvents === "auto") {
-        marker3aDiv.style.display = "none";
-        marker3aDiv.style.pointerEvents = "none";
+    function onPointerDown(event) {
+        if (resetRecently) {
+            console.log("🚫 Reset was clicked recently, not enabling divs.");
+            return; // Prevent enabling too soon after reset
         }
-
-        if (clickedObject.name !== "Marker3" && marker3aDiv2.style.pointerEvents === "auto") {
-            marker3aDiv2.style.display = "none";
-            marker3aDiv2.style.pointerEvents = "none";
+    
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4]);
+    
+        if (intersects.length > 0) {
+            const clickedObject = intersects[0].object;
+    
+            if (clickedObject.name === "Marker1") {
+                moveCamera(marker1);
+                setTimeout(() => {
+                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
+                        marker1Div.style.display = "block";
+                        marker1Div.style.pointerEvents = "auto";
+                        marker1Div2.style.display = "block";
+                        marker1Div2.style.pointerEvents = "auto";
+                        marker1Div3.style.display = "block";
+                        marker1Div3.style.pointerEvents = "auto";
+                        marker1Div4.style.display = "block";
+                        marker1Div4.style.pointerEvents = "auto";
+                        marker1Div5.style.display = "block";
+                        marker1Div5.style.pointerEvents = "auto";
+                        marker1Div6.style.display = "block";
+                        marker1Div6.style.pointerEvents = "auto";
+                    }
+                }, 2500);
             }
-
-
-        if (clickedObject.name === "Marker4") {
-            moveCamera(marker4, 1, 1, 1.6);
-            marker3.visible = true;  
-            marker3a.visible = false;
-            marker4.visible = false;
-        
-            setTimeout(() => {
-                marker4Div.style.display = "block";
-                marker4Div.style.pointerEvents = "auto";
-            }, 1700);
-        }
-        
-        if (clickedObject.name !== "Marker4" && marker4Div.style.pointerEvents === "auto") {
-            marker4Div.style.display = "none";
-            marker4Div.style.pointerEvents = "none";
+    
+            if (clickedObject.name === "Marker2") {
+                moveCamera(marker2, -4, 4, 6);
+                setTimeout(() => {
+                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
+                        marker2Div.style.display = "block";
+                        marker2Div.style.pointerEvents = "auto";
+                    }
+                }, 2500);
+            }
+    
+            if (clickedObject.name === "Marker3") {
+                moveCamera(marker3, -0.5, 1, -2);
+                setTimeout(() => {
+                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
+                        marker3aDiv.style.display = "block";
+                        marker3aDiv.style.pointerEvents = "auto";
+                        marker3aDiv2.style.display = "block";
+                        marker3aDiv2.style.pointerEvents = "auto";
+                    }
+                }, 2500);
+            }
+    
+            if (clickedObject.name === "Marker4") {
+                moveCamera(marker4, 1, 1, 1.6);
+                setTimeout(() => {
+                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
+                        marker4Div.style.display = "block";
+                        marker4Div.style.pointerEvents = "auto";
+                    }
+                }, 2500);
+            }
         }
     }
-}
+    
 
 window.addEventListener("pointermove", onPointerMove);
 window.addEventListener("pointerdown", onPointerDown);
 
 
 function handleMobileView() {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 700) {
         console.log("📱 Switching to Mobile Version");
 
         // Remove hover event listeners completely
@@ -715,7 +802,7 @@ function handleMobileView() {
         window.removeEventListener("pointermove", onPointerMove3);
 
         // Ensure markers are completely invisible unless tapped
-        setMarkerVisibility(.2);
+        setMarkerVisibility(0);
 
         // Add mobile touch event
         window.addEventListener("touchstart", onTouchStart, { passive: false });
@@ -741,16 +828,23 @@ function setMarkerVisibility(opacityValue) {
 }
 
 // Function to handle touch interactions (no hover required)
+
+
+
 function onTouchStart(event) {
+    if (resetRecently) {
+        console.log("🚫 Reset was clicked recently, not enabling divs.");
+        return; // Prevent enabling too soon after reset
+    }
+
     if (event.touches.length === 1) { // Ensure it's a single touch
         const touch = event.touches[0];
 
-        // Check if the user touched the 3D canvas (Three.js renderer)
         const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
         if (targetElement === renderer.domElement) {
-            event.preventDefault(); // Only prevent default if touching the 3D scene
+            event.preventDefault(); 
 
-            // Convert touch position to normalized coordinates
+            // Convert touch position
             const rect = renderer.domElement.getBoundingClientRect();
             const x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
             const y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
@@ -761,31 +855,103 @@ function onTouchStart(event) {
             raycaster.setFromCamera(mouse, camera);
             const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4], true);
 
-            console.log("📱 Touch detected at:", touch.clientX, touch.clientY);
-            console.log("🔍 Intersected Markers:", intersects.map(obj => obj.object.name)); // Debugging output
-
             if (intersects.length > 0) {
                 const clickedObject = intersects[0].object;
-                console.log("✅ Marker Clicked:", clickedObject.name); // Debugging output
+                console.log("✅ Marker Clicked:", clickedObject.name);
 
-                if (clickedObject.name === "Marker1") moveCamera(marker1);
-                if (clickedObject.name === "Marker2") moveCamera(marker2, -4, 4, 6);
-                if (clickedObject.name === "Marker3") moveCamera(marker3, -0.5, 1, -2);
-                if (clickedObject.name === "Marker4") moveCamera(marker4, 1, 2, 9.6);
-            } else {
-        
+                if (clickedObject.name === "Marker1") {
+                    moveCamera(marker1);
+                    enableMarkerDivsAfterDelay(2500, [marker1Div, marker1Div2, marker1Div3, marker1Div4, marker1Div5, marker1Div6]);
+                }
+
+                if (clickedObject.name === "Marker2") {
+                    moveCamera(marker2, -4, 4, 6);
+                    enableMarkerDivsAfterDelay(2500, [marker2Div]);
+                }
+
+                if (clickedObject.name === "Marker3") {
+                    moveCamera(marker3, -0.5, 1, -2);
+                    enableMarkerDivsAfterDelay(2500, [marker3aDiv, marker3aDiv2]);
+                }
+
+                if (clickedObject.name === "Marker4") {
+                    moveCamera(marker4, 1, 1, 1.6);
+                    enableMarkerDivsAfterDelay(2500, [marker4Div]);
+                }
             }
         }
     }
 }
 
+
+/**
+ * Enables a list of marker divs after a delay
+ * @param {number} delay - Delay in milliseconds
+ * @param {Array} markerDivs - List of marker div elements
+ */
+function enableMarkerDivsAfterDelay(delay, markerDivs) {
+    setTimeout(() => {
+        if (!resetRecently) {
+            markerDivs.forEach(div => {
+                div.style.display = "block";
+                div.style.pointerEvents = "auto";
+            });
+        }
+    }, delay);
+}
+function disableMarkerDivs() {
+    console.log("❌ Hiding all marker divs after reset...");
+    [marker1Div, marker1Div2, marker1Div3, marker1Div4, marker1Div5, marker1Div6,
+     marker2Div, marker3aDiv, marker3aDiv2, marker4Div].forEach(div => {
+        div.style.display = "none";
+        div.style.pointerEvents = "none";
+    });
+}
+
+
+
+
+
+// Function to create a blinking dot on a marker
+function createBlinkingDot(dotId) {
+    const dot = document.createElement("div");
+    dot.classList.add("blinking-dot");
+    dot.id = dotId;
+    document.body.appendChild(dot);
+}
+
+// Create blinking dots for each marker
+createBlinkingDot("marker1Dot");
+createBlinkingDot("marker2Dot");
+createBlinkingDot("marker3Dot");
+createBlinkingDot("marker4Dot");
+
+// Function to update the blinking dot position based on the 3D marker position
+function updateBlinkingDot(marker, dotId) {
+    if (!marker) return;
+
+    const markerPos = marker.position.clone();
+    markerPos.project(camera); // Convert 3D position to 2D screen space
+
+    const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (-markerPos.y * 0.8 + 0.5) * window.innerHeight;
+
+    const dot = document.getElementById(dotId);
+    if (dot) {
+        dot.style.left = `${x}px`;
+        dot.style.top = `${y}px`;
+    }
+}
+
+
 // Run on page load and when resizing
 handleMobileView();
 window.addEventListener("resize", handleMobileView);
-window.addEventListener("touchstart", onTouchStart, { passive: false }); // Ensure touchstart is added
+window.addEventListener("touchstart", onPointerDown, { passive: false });
+
 
 function applyResponsiveStyles() {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 700) {
         document.body.classList.add("mobile-view");
     } else {
         document.body.classList.remove("mobile-view");
@@ -801,9 +967,15 @@ window.addEventListener("resize", applyResponsiveStyles);
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate);
+    updateBlinkingDot(marker1, "marker1Dot");
+    updateBlinkingDot(marker2, "marker2Dot");
+    updateBlinkingDot(marker3, "marker3Dot");
+    updateBlinkingDot(marker4, "marker4Dot");
+    
     controls.update();
     updateMarker3aDiv();  
     renderer.render(scene, camera);
+   
      // Update div position
    
 }
