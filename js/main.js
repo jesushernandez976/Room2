@@ -207,11 +207,11 @@ function createMarker(position, size, name, rotation = [0, 0, 0], shape = "box")
 
 
 const marker1 = createMarker([-0.15, 2.2, 2.3], [2.25, 2, 1], "Marker1");
-const marker2 = createMarker([3.43, 1.94, -2.98], [0.2, 1.01, 1.64], "Marker2", [0, Math.PI / 4.3, 0]);
-const marker3 = createMarker([5.9, 1.29, 1.3], [1, 1, .5], "Marker3", [Math.PI / 2, Math.PI /1, 0]);
+const marker2 = createMarker([3.43, 1.94, -2.98], [0.5, 1.01, 1.64], "Marker2", [0, Math.PI / 4.3, 0]);
+const marker3 = createMarker([5.9, 1.29, 2], [2, 2, .03], "Marker3", [Math.PI / 2, Math.PI /1, 0]);
 const marker3a = createMarker([5.9, 1.29, 1.9], [2.5, 2.5,2.5], "Marker3a", [Math.PI / 2, Math.PI /1, 0, 0], "circle")
 marker3a.visible = false;
-const marker4 = createMarker([.10, 1.2, -1.6], [.7, 1, .7], "Marker4", [Math.PI / 2, Math.PI / 2, 0]);
+const marker4 = createMarker([.10, 1.2, -1.6], [2, 2, 1.2], "Marker4", [Math.PI / 2, Math.PI / 2, 0]);
 
 
 // Reset View Button
@@ -400,6 +400,7 @@ function updateMarker1Div5() {
 
     const x = (markerPos.x * 0.32 + 0.5) * window.innerWidth;
     const y = (-markerPos.y * -3.7 + 0.5) * window.innerHeight;
+    
 
     const marker1Div5 = document.getElementById("marker1Div5");
     if (marker1Div5) {
@@ -600,9 +601,7 @@ function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
 let resetRecently = false; // Track if reset was clicked
 
 resetButton.addEventListener("click", () => {
-    console.log("🔄 Resetting Camera");
-
-    resetRecently = true; // Prevent re-enabling for a short time
+    console.log("🔄 Resetting Camera on iPhone");
 
     gsap.killTweensOf(camera.position);
     gsap.killTweensOf(controls.target);
@@ -623,27 +622,26 @@ resetButton.addEventListener("click", () => {
         ease: "power2.inOut",
         onUpdate: () => controls.update(),
     });
-
-    // Disable all marker divs
-    const markerDivs = [
-        marker1Div, marker1Div2, marker1Div3, marker1Div4,
-        marker1Div5, marker1Div6, marker2Div, marker3aDiv,
-        marker3aDiv2, marker4Div
-    ];
-    markerDivs.forEach(div => {
-        div.style.display = "none";
+    forceHideDivs();
+    // 🚨 Forcefully hide all divs  
+    document.querySelectorAll(".markerDiv").forEach(div => {
+        div.style.display = "none";  
         div.style.pointerEvents = "none";
+        div.offsetHeight; // ⚡ Force reflow
     });
-
-    setTimeout(() => {
-        resetRecently = false; // Allow marker divs to re-enable after a delay
-    }, 2000); // Adjust delay if needed
 
     setTimeout(() => {
         resetButton.style.display = "none";
     }, 1000);
 });
 
+function forceHideDivs() {
+    document.querySelectorAll(".markerDiv").forEach(div => {
+        div.style.display = "none";
+        void div.offsetHeight; // 🚀 Forces Safari to recognize change
+        div.style.display = "none"; 
+    });
+}
 
 
 
@@ -652,7 +650,7 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 function onPointerMove(event) {
-    if (window.innerWidth <= 700) return; // ❌ Ignore hover on mobile
+    if (window.innerWidth <= 500) return; // ❌ Ignore hover on mobile
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -661,7 +659,7 @@ function onPointerMove(event) {
     const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4]);
 
     if (intersects.length > 0) {
-        gsap.to(intersects[0].object.material, { opacity: 0.05, duration: 0.3 });
+        gsap.to(intersects[0].object.material, { opacity: 0.01, duration: 0.3 });
         document.body.style.cursor = "pointer";
     } else {
         gsap.to([marker1.material, marker2.material, marker3.material, marker4.material], { opacity: 0, duration: 0.3 });
@@ -722,71 +720,40 @@ function onPointerMove(event) {
 
 
     
+    const markers = [marker1, marker2, marker3, marker4];
+
     function onPointerDown(event) {
-        if (resetRecently) {
-            console.log("🚫 Reset was clicked recently, not enabling divs.");
-            return; // Prevent enabling too soon after reset
-        }
+        if (resetRecently) return;
     
         raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4]);
+        const intersects = raycaster.intersectObjects(markers, true); // ✅ Check all markers
     
         if (intersects.length > 0) {
             const clickedObject = intersects[0].object;
+            console.log("✅ Marker Clicked:", clickedObject.name);
     
             if (clickedObject.name === "Marker1") {
                 moveCamera(marker1);
-                setTimeout(() => {
-                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
-                        marker1Div.style.display = "block";
-                        marker1Div.style.pointerEvents = "auto";
-                        marker1Div2.style.display = "block";
-                        marker1Div2.style.pointerEvents = "auto";
-                        marker1Div3.style.display = "block";
-                        marker1Div3.style.pointerEvents = "auto";
-                        marker1Div4.style.display = "block";
-                        marker1Div4.style.pointerEvents = "auto";
-                        marker1Div5.style.display = "block";
-                        marker1Div5.style.pointerEvents = "auto";
-                        marker1Div6.style.display = "block";
-                        marker1Div6.style.pointerEvents = "auto";
-                    }
-                }, 2500);
+                enableMarkerDivsAfterDelay(2500, [marker1Div, marker1Div2, marker1Div3, marker1Div4, marker1Div5, marker1Div6]);
             }
     
             if (clickedObject.name === "Marker2") {
                 moveCamera(marker2, -4, 4, 6);
-                setTimeout(() => {
-                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
-                        marker2Div.style.display = "block";
-                        marker2Div.style.pointerEvents = "auto";
-                    }
-                }, 2500);
+                enableMarkerDivsAfterDelay(2500, [marker2Div]);
             }
     
             if (clickedObject.name === "Marker3") {
                 moveCamera(marker3, -0.5, 1, -2);
-                setTimeout(() => {
-                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
-                        marker3aDiv.style.display = "block";
-                        marker3aDiv.style.pointerEvents = "auto";
-                        marker3aDiv2.style.display = "block";
-                        marker3aDiv2.style.pointerEvents = "auto";
-                    }
-                }, 2500);
+                enableMarkerDivsAfterDelay(2500, [marker3aDiv, marker3aDiv2]);
             }
     
             if (clickedObject.name === "Marker4") {
                 moveCamera(marker4, 1, 1, 1.6);
-                setTimeout(() => {
-                    if (!resetRecently) { // ✅ Only enable if reset was not clicked recently
-                        marker4Div.style.display = "block";
-                        marker4Div.style.pointerEvents = "auto";
-                    }
-                }, 2500);
+                enableMarkerDivsAfterDelay(2500, [marker4Div]);
             }
         }
     }
+    
     
 
 window.addEventListener("pointermove", onPointerMove);
@@ -950,6 +917,7 @@ window.addEventListener("resize", handleMobileView);
 window.addEventListener("touchstart", onPointerDown, { passive: false });
 
 
+
 function applyResponsiveStyles() {
     if (window.innerWidth <= 700) {
         document.body.classList.add("mobile-view");
@@ -964,6 +932,7 @@ window.addEventListener("resize", applyResponsiveStyles);
 
 
 
+
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate);
@@ -975,8 +944,9 @@ function animate() {
     controls.update();
     updateMarker3aDiv();  
     renderer.render(scene, camera);
-   
-     // Update div position
+
+    raycaster.setFromCamera(mouse, camera); // ✅ Keeps raycasting active
+    renderer.render(scene, camera);
    
 }
 

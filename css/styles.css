@@ -105,7 +105,7 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   position: absolute;
   width: 85px;  /* Adjust to fit marker size */
   height: 70px; /* Adjust as needed */
-  background: blue;
+  background: transparent;
   pointer-events: auto; /* Ensure it can be clicked */
   cursor: pointer;
 }
@@ -199,7 +199,7 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   font-size: 6px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 500px) {
 
 
   .blinking-dot {
@@ -222,6 +222,61 @@ z-index: 1040; /* Ensures backdrop is behind modal */
       opacity: 0.1;
       transform: scale(3);
     }
+  }
+
+  #marker1Div {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 100px; /* Adjust as needed */
+  
+  }
+
+  #marker1Div2 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 100px; /* Adjust as needed */
+  
+  }
+
+  #marker1Div3 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 100px; /* Adjust as needed */
+  }
+
+  #marker1Div4 {
+    width: 85px;  /* Adjust to fit marker size */
+    height: 100px; /* Adjust as needed */
+  }
+  
+  #marker1Div5 {
+    width: 90px;  /* Adjust to fit marker size */
+    height: 110px; /* Adjust as needed */
+    
+  }
+
+  #marker1Div6 {
+    width: 90px;  /* Adjust to fit marker size */
+    height: 110px; /* Adjust as needed */
+  
+  }
+
+  #marker2Div {
+    width: 320px;  /* Adjust to fit marker size */
+    height: 240px; /* Adjust as needed */
+  
+  }
+
+  #marker3aDiv {
+    width: 150px;  /* Adjust to fit marker size */
+    height: 120px; /* Adjust as needed */
+  }
+
+  #marker3aDiv2 {
+    width: 100px;  /* Adjust to fit marker size */
+    height: 120px; /* Adjust as needed */
+  }
+
+  #marker4Div {
+    width: 230px;  /* Adjust to fit marker size */
+    height: 200px; /* Adjust as needed */
   }
   
   
