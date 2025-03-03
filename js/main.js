@@ -26,7 +26,7 @@ controls.minPolarAngle = Math.PI / 2;
 controls.maxPolarAngle = Math.PI / 1.7;
 
 // Lighting
-scene.add(new THREE.AmbientLight(0xffffff, .6));
+scene.add(new THREE.AmbientLight(0xffffff, .8));
 const pointLight1 = new THREE.PointLight(0xffffff, 2.5, 10);
 pointLight1.position.set(0, 2, 0);
 scene.add(pointLight1);
@@ -139,7 +139,7 @@ function loadModel() {
     
 
     loader.load(
-        "./models/eye/r10.glb",
+        "./models/eye/r20.glb",
         function (gltf) {
             console.log("✅ Model Loaded:", gltf);
 
