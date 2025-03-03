@@ -212,7 +212,7 @@ const marker3 = createMarker([5.9, 1.29, 2], [2, 2, .03], "Marker3", [Math.PI / 
 const marker3a = createMarker([5.9, 1.29, 1.9], [2.5, 2.5,2.5], "Marker3a", [Math.PI / 2, Math.PI /1, 0, 0], "circle")
 marker3a.visible = false;
 const marker4 = createMarker([.10, 1.2, -1.6], [2, 2, 1.2], "Marker4", [Math.PI / 2, Math.PI / 2, 0]);
-
+const marker5 = createMarker([5.3, 3.2, -3.2], [.7, .7, .7], "Marker5", [0, 0, 0]);
 
 // Reset View Button
 const resetButton = document.createElement("button");
@@ -656,16 +656,17 @@ function onPointerMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4]);
+    const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5]);
 
     if (intersects.length > 0) {
-        gsap.to(intersects[0].object.material, { opacity: 0.01, duration: 0.3 });
+        gsap.to(intersects[0].object.material, { opacity: 0.001, duration: 0.3 });
         document.body.style.cursor = "pointer";
     } else {
-        gsap.to([marker1.material, marker2.material, marker3.material, marker4.material], { opacity: 0, duration: 0.3 });
+        gsap.to([marker1.material, marker2.material, marker3.material, marker4.material, marker5.material], { opacity: 0, duration: 0.3 });
         document.body.style.cursor = "default";
     }
 }
+
 
 
 
@@ -720,7 +721,7 @@ function onPointerMove(event) {
 
 
     
-    const markers = [marker1, marker2, marker3, marker4];
+    const markers = [marker1, marker2, marker3, marker4, marker5];
 
     function onPointerDown(event) {
         if (resetRecently) return;
@@ -751,6 +752,10 @@ function onPointerMove(event) {
                 moveCamera(marker4, 1, 1, 1.6);
                 enableMarkerDivsAfterDelay(2500, [marker4Div]);
             }
+
+            if (clickedObject.name === "Marker5") {
+                toggleLight(); // ✅ Call function to dim/restore light
+            }
         }
     }
     
@@ -761,7 +766,7 @@ window.addEventListener("pointerdown", onPointerDown);
 
 
 function handleMobileView() {
-    if (window.innerWidth <= 700) {
+    if (window.innerWidth <= 500) {
         console.log("📱 Switching to Mobile Version");
 
         // Remove hover event listeners completely
@@ -786,7 +791,7 @@ function handleMobileView() {
 }
 // Function to set marker opacity (0 on desktop, low opacity on mobile)
 function setMarkerVisibility(opacityValue) {
-    const markers = [marker1, marker2, marker3, marker4];
+    const markers = [marker1, marker2, marker3, marker4, marker5];
 
     markers.forEach(marker => {
         marker.material.opacity = opacityValue; // Apply opacity
@@ -820,7 +825,7 @@ function onTouchStart(event) {
             mouse.y = y;
 
             raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4], true);
+            const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5], true);
 
             if (intersects.length > 0) {
                 const clickedObject = intersects[0].object;
@@ -845,6 +850,12 @@ function onTouchStart(event) {
                     moveCamera(marker4, 1, 1, 1.6);
                     enableMarkerDivsAfterDelay(2500, [marker4Div]);
                 }
+                
+
+                if (clickedObject.name === "Marker5") {
+                    toggleLight(); // ✅ Call function to dim/restore light
+                }// ✅ Only toggle lights when clicking marker5
+                
             }
         }
     }
@@ -875,8 +886,28 @@ function disableMarkerDivs() {
     });
 }
 
+let isDimmed = false;
 
+function toggleLight() {
+    isDimmed = !isDimmed; // Toggle state
 
+    gsap.to(pointLight1, { intensity: isDimmed ? 0.1 : 2.5, duration: 1 });
+    gsap.to(pointLight2, { intensity: isDimmed ? 0.05 : 1, duration: 1 });
+
+    // Ensure scene background is set if transparent
+    if (!scene.background) {
+        scene.background = new THREE.Color(0x000000); // Default to black if null
+    }
+    
+    gsap.to(scene.background, {
+        r: isDimmed ? 0.05 : 1,
+        g: isDimmed ? 0.05 : 1,
+        b: isDimmed ? 0.05 : 1,
+        duration: 1
+    });
+
+    console.log(isDimmed ? "🌙 Lights Dimmed" : "☀️ Lights Restored");
+}
 
 
 // Function to create a blinking dot on a marker
