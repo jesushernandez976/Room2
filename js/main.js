@@ -573,6 +573,7 @@ window.addEventListener("pointermove", onPointerMove3);
 
 // Camera Movement Functions
 function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
+    
     gsap.killTweensOf(camera.position);
     gsap.killTweensOf(controls.target);
 
@@ -602,6 +603,7 @@ let resetRecently = false; // Track if reset was clicked
 
 resetButton.addEventListener("click", () => {
     console.log("🔄 Resetting Camera on iPhone");
+    
 
     gsap.killTweensOf(camera.position);
     gsap.killTweensOf(controls.target);
@@ -642,31 +644,6 @@ function forceHideDivs() {
         div.style.display = "none"; 
     });
 }
-
-
-
-// Raycasting
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
-function onPointerMove(event) {
-    if (window.innerWidth <= 500) return; // ❌ Ignore hover on mobile
-
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5]);
-
-    if (intersects.length > 0) {
-        gsap.to(intersects[0].object.material, { opacity: 0.001, duration: 0.3 });
-        document.body.style.cursor = "pointer";
-    } else {
-        gsap.to([marker1.material, marker2.material, marker3.material, marker4.material, marker5.material], { opacity: 0, duration: 0.3 });
-        document.body.style.cursor = "default";
-    }
-}
-
 
 
 
@@ -711,13 +688,34 @@ function onPointerMove(event) {
     
         setTimeout(() => {
             resetRecently = false; // Allow marker divs to re-enable after a delay
-        }, 4000); // Adjust delay if needed
+        }, 2000); // Adjust delay if needed
     
         setTimeout(() => {
             resetButton.style.display = "none";
         }, 1500);
     });
 
+// Raycasting
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function onPointerMove(event) {
+        if (window.innerWidth <= 500) return; // ❌ Ignore hover on mobile
+
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5]);
+
+        if (intersects.length > 0) {
+            gsap.to(intersects[0].object.material, { opacity: 0.001, duration: 0.3 });
+            document.body.style.cursor = "pointer";
+        } else {
+            gsap.to([marker1.material, marker2.material, marker3.material, marker4.material, marker5.material], { opacity: 0, duration: 0.3 });
+            document.body.style.cursor = "default";
+        }
+    }
 
 
     
@@ -725,6 +723,9 @@ function onPointerMove(event) {
 
     function onPointerDown(event) {
         if (resetRecently) return;
+
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(markers, true); // ✅ Check all markers
