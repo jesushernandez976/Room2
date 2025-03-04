@@ -136,33 +136,20 @@ renderer.domElement.addEventListener("webglcontextlost", (event) => {
 
 // Function to load the model
 function loadModel() {
-    
+    loader.load("./models/eye/r21.glb", function (gltf) {
+        const room = gltf.scene;
+        scene.add(room);
 
-    loader.load(
-        "./models/eye/r20.glb",
-        function (gltf) {
-            console.log("✅ Model Loaded:", gltf);
-
-            // Check every mesh in the model
-            gltf.scene.traverse((child) => {
-                if (child.isMesh) {
-                    console.log("🔹 Mesh Found:", child.name || "(Unnamed)");
-
-                    // Only update morph targets if they exist
-                    if (child.morphTargetInfluences) {
-                        console.log("🔄 Updating Morph Targets for:", child.name);
-                        child.updateMorphTargets();
-                    }
-                }
-            });
-
-            scene.add(gltf.scene);
-        },
-        undefined,
-        function (error) {
-            console.error("❌ Error loading r723.glb:", error);
+        // Ensure whiteboard exists
+        const whiteboard = room.getObjectByName("whiteboard");
+        
+        if (whiteboard) {
+            console.log("✅ Whiteboard found:", whiteboard);
+            setupWhiteboard(whiteboard);
+        } else {
+            console.error("❌ Whiteboard not found in the scene!");
         }
-    );
+    });
 }
 
 // Load the model initially
@@ -184,7 +171,6 @@ function disposeModel(model) {
     });
     scene.remove(model);
 }
-
 
 // Clickable Markers
 function createMarker(position, size, name, rotation = [0, 0, 0], shape = "box") {
@@ -211,8 +197,11 @@ const marker2 = createMarker([3.43, 1.94, -2.98], [0.5, 1.01, 1.64], "Marker2", 
 const marker3 = createMarker([5.9, 1.29, 2], [2, 2, .03], "Marker3", [Math.PI / 2, Math.PI /1, 0]);
 const marker3a = createMarker([5.9, 1.29, 1.9], [2.5, 2.5,2.5], "Marker3a", [Math.PI / 2, Math.PI /1, 0, 0], "circle")
 marker3a.visible = false;
-const marker4 = createMarker([.10, 1.2, -1.6], [2, 2, 1.2], "Marker4", [Math.PI / 2, Math.PI / 2, 0]);
+const marker4 = createMarker([.10, 1.2, -1.7], [.8, 2, 1.2], "Marker4", [Math.PI / 2, Math.PI / 2, 0]);
 const marker5 = createMarker([5.3, 3.2, -3.2], [.7, .7, .7], "Marker5", [0, 0, 0]);
+const marker6 = createMarker([-3.2, 2.1, .4], [.4, 1, 2], "Marker6", [0, 0, 0]);
+
+
 
 // Reset View Button
 const resetButton = document.createElement("button");
@@ -299,9 +288,6 @@ function onPointerMove2(event) {
         hoverText.style.display = "none";
     }
 }
-
-// Function to handle mouse click (for redirection
-
 
 
 function updateMarker1Div() {
@@ -527,6 +513,27 @@ function updateMarker4Div() {
 marker4Div.style.pointerEvents = "none";
 updateMarker4Div(); 
 
+function updateMarker6Div() {
+    if (!marker6) return;
+
+    const markerPos = marker6.position.clone();
+    markerPos.project(camera); // Convert 3D position to 2D screen space
+
+    const x = (markerPos.x * 4 + 0.45) * window.innerWidth;
+    const y = (-markerPos.y * 0.5 + 0.3) * window.innerHeight;
+
+    const marker6Div = document.getElementById("marker6Div");
+    if (marker6Div) {
+        marker6Div.style.left = `${x}px`;
+        marker6Div.style.top = `${y}px`;
+    }
+
+    
+}
+
+marker6Div.style.pointerEvents = "none";
+updateMarker6Div(); 
+
 
 // Add event listeners
 window.addEventListener("mousemove", onPointerMove2);
@@ -585,6 +592,8 @@ function moveCamera(marker, offsetX = -0.7, offsetY = 0, offsetZ = -4) {
         duration: 3,
         ease: "power2.inOut",
         onUpdate: () => controls.update(),
+        
+
     });
     gsap.to(controls.target, {
         x: marker.position.x,
@@ -679,7 +688,7 @@ function forceHideDivs() {
         const markerDivs = [
             marker1Div, marker1Div2, marker1Div3, marker1Div4,
             marker1Div5, marker1Div6, marker2Div, marker3aDiv,
-            marker3aDiv2, marker4Div
+            marker3aDiv2, marker4Div, marker6Div
         ];
         markerDivs.forEach(div => {
             div.style.display = "none";
@@ -693,6 +702,16 @@ function forceHideDivs() {
         setTimeout(() => {
             resetButton.style.display = "none";
         }, 1500);
+
+        if (whiteboardCanvas) {
+            whiteboardCanvas.style.display = "none";
+        }
+    
+        // ✅ Hide the whiteboard container (including background)
+        const whiteboardContainer = document.getElementById("whiteboardContainer");
+        if (whiteboardContainer) {
+            whiteboardContainer.style.display = "none";
+        }
     });
 
 // Raycasting
@@ -706,49 +725,49 @@ function forceHideDivs() {
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
         raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5]);
+        const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5, marker6]);
 
         if (intersects.length > 0) {
-            gsap.to(intersects[0].object.material, { opacity: 0.001, duration: 0.3 });
+            gsap.to(intersects[0].object.material, { opacity: 0.6, duration: 0.3 });
             document.body.style.cursor = "pointer";
         } else {
-            gsap.to([marker1.material, marker2.material, marker3.material, marker4.material, marker5.material], { opacity: 0, duration: 0.3 });
+            gsap.to([marker1.material, marker2.material, marker3.material, marker4.material, marker5.material, marker6.material], { opacity: 0, duration: 0.3 });
             document.body.style.cursor = "default";
         }
     }
 
 
     
-    const markers = [marker1, marker2, marker3, marker4, marker5];
+    const markers = [marker1, marker2, marker3, marker4, marker5, marker6];
 
     function onPointerDown(event) {
         if (resetRecently) return;
 
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    
+
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(markers, true); // ✅ Check all markers
-    
+
         if (intersects.length > 0) {
             const clickedObject = intersects[0].object;
             console.log("✅ Marker Clicked:", clickedObject.name);
-    
+
             if (clickedObject.name === "Marker1") {
                 moveCamera(marker1);
                 enableMarkerDivsAfterDelay(2500, [marker1Div, marker1Div2, marker1Div3, marker1Div4, marker1Div5, marker1Div6]);
             }
-    
+
             if (clickedObject.name === "Marker2") {
                 moveCamera(marker2, -4, 4, 6);
                 enableMarkerDivsAfterDelay(2500, [marker2Div]);
             }
-    
+
             if (clickedObject.name === "Marker3") {
                 moveCamera(marker3, -0.5, 1, -2);
                 enableMarkerDivsAfterDelay(2500, [marker3aDiv, marker3aDiv2]);
             }
-    
+
             if (clickedObject.name === "Marker4") {
                 moveCamera(marker4, 1, 1, 1.6);
                 enableMarkerDivsAfterDelay(2500, [marker4Div]);
@@ -757,14 +776,151 @@ function forceHideDivs() {
             if (clickedObject.name === "Marker5") {
                 toggleLight(); // ✅ Call function to dim/restore light
             }
+            if (clickedObject.name === "Marker6") {
+                moveCamera(marker6, 9, 1, -0.5);
+                enableMarkerDivsAfterDelay(2500, [marker6Div]);
+            }
+            
         }
+    }   
+    function enableDrawing(canvas, texture) {
+        let isDrawing = false;
+        const ctx = canvas.getContext("2d");
+    
+        function getPos(event) {
+            const rect = canvas.getBoundingClientRect();
+            const x = (event.touches ? event.touches[0].clientX : event.clientX) - rect.left;
+            const y = (event.touches ? event.touches[0].clientY : event.clientY) - rect.top;
+            return { x, y };
+        }
+    
+        function startDrawing(event) {
+            isDrawing = true;
+            const { x, y } = getPos(event);
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+        
+        function draw(event) {
+            if (!isDrawing) return;
+            event.preventDefault(); // Prevent scrolling
+    
+            const { x, y } = getPos(event);
+            ctx.lineWidth = 5;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "black";
+    
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            
+            // 🔥 Ensure Three.js whiteboard updates in real-time
+            texture.needsUpdate = true;  
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.closePath();
+        }
+        
+        canvas.addEventListener("mousedown", startDrawing);
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("mouseup", stopDrawing);
+        canvas.addEventListener("touchstart", startDrawing, { passive: false });
+        canvas.addEventListener("touchmove", draw, { passive: false });
+        canvas.addEventListener("touchend", stopDrawing);
     }
     
+    let whiteboardCanvas, whiteboardTexture, whiteboardMesh;
+
+    function setupWhiteboard(whiteboard) {
+        if (whiteboardCanvas) return; // Prevent multiple setups
     
+        // Create the drawing canvas
+        whiteboardCanvas = document.createElement("canvas");
+        whiteboardCanvas.width = 600;
+        whiteboardCanvas.height = 350;
+        const ctx = whiteboardCanvas.getContext("2d");
+    
+        // Fill the canvas with a white background
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+    
+        // ✅ Create a Three.js texture from the canvas
+        whiteboardTexture = new THREE.CanvasTexture(whiteboardCanvas);
+        whiteboardTexture.needsUpdate = true;
+    
+        // ✅ Find the whiteboard in the Three.js scene and apply the texture
+        whiteboard.traverse((child) => {
+            if (child.isMesh && child.name === "whiteboard") {
+                console.log("✅ Applying texture to whiteboard:", child.name);
+                whiteboardMesh = child;
+                whiteboardMesh.material.map = whiteboardTexture;
+                whiteboardMesh.material.needsUpdate = true;
+            }
+        });
+    
+        // ✅ Enable drawing and update the texture in real-time
+        enableDrawing(whiteboardCanvas, whiteboardTexture);
+    
+        // ✅ Ensure the container exists before appending
+        let container = document.getElementById("whiteboardContainer");
+        if (!container) {
+            container = document.createElement("div");
+            container.id = "whiteboardContainer";
+            document.body.appendChild(container);
+        }
+    
+        // ✅ Append the canvas inside the container
+        container.appendChild(whiteboardCanvas);
+    
+        // ✅ Apply styles for centering
+
+        whiteboardCanvas.style.position = "relative"; // Change from "absolute"
+        whiteboardCanvas.style.top = "50px";
+        container.style.position = "fixed";
+        container.style.top = "0";
+        container.style.left = "0";
+        container.style.width = "100vw";
+        container.style.height = "100vh";
+        container.style.display = "flex";
+        container.style.justifyContent = "center";
+        container.style.alignItems = "center";
+        container.style.background = "rgba(0, 0, 0, 0.46)"; // Optional: Dim background
+        container.style.zIndex = "999";
+        container.style.display = "none"; // Hide until activated
+    
+        whiteboardCanvas.style.border = "2px solid black";
+        whiteboardCanvas.style.display = "none"; // Hidden until "Start Drawing" is clicked
+    }
+    
+
+
+document.getElementById("drawButton").addEventListener("click", function(event) {
+    console.log("🖊 'Start Drawing' button clicked!");
+
+    if (!whiteboardCanvas) {
+        console.log("🖼 Setting up whiteboard...");
+        setupWhiteboard();
+    }
+
+    // ✅ Show the container and canvas
+    let container = document.getElementById("whiteboardContainer");
+    if (container) container.style.display = "flex";
+
+    whiteboardCanvas.style.display = "block";
+    whiteboardCanvas.style.opacity = "1";
+    whiteboardCanvas.style.pointerEvents = "auto";
+
+    console.log("📜 Whiteboard is now visible!");
+
+   
+});
+
+
+
 
 window.addEventListener("pointermove", onPointerMove);
 window.addEventListener("pointerdown", onPointerDown);
-
 
 function handleMobileView() {
     if (window.innerWidth <= 500) {
@@ -957,6 +1113,8 @@ function applyResponsiveStyles() {
         document.body.classList.remove("mobile-view");
     }
 }
+
+applyResponsiveStyles();
 
 // Apply styles on load and resize
 window.addEventListener("load", applyResponsiveStyles);

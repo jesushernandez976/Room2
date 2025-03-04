@@ -17,6 +17,8 @@ header h1 {
 }
 
 
+
+
 #container3D canvas {
   width: 100vw !important;
   height: 100vh !important;
@@ -99,6 +101,11 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   pointer-events: none !important;
   opacity: 0 !important;
 }
+
+.modal-backdrop {
+  pointer-events: none !important;
+}
+
 
 
 #marker1Div {
@@ -185,6 +192,15 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   position: absolute;
   width: 170px;  /* Adjust to fit marker size */
   height: 150px; /* Adjust as needed */
+  background: transparent;
+  pointer-events: auto; /* Ensure it can be clicked */
+  cursor: pointer;
+}
+
+#marker6Div {
+  position: absolute;
+  width: 600px;  /* Adjust to fit marker size */
+  height: 350px; /* Adjust as needed */
   background: transparent;
   pointer-events: auto; /* Ensure it can be clicked */
   cursor: pointer;
