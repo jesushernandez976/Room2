@@ -706,6 +706,11 @@ function forceHideDivs() {
         if (whiteboardCanvas) {
             whiteboardCanvas.style.display = "none";
         }
+
+        if (whiteboardControls){
+            whiteboardControls.style.display = "none"; // 🚀 Make controls visible
+
+        }
     
         // ✅ Hide the whiteboard container (including background)
         const whiteboardContainer = document.getElementById("whiteboardContainer");
@@ -782,10 +787,15 @@ function forceHideDivs() {
             }
             
         }
-    }   
+    } 
+    
+    let updateScheduled = false;
+
     function enableDrawing(canvas, texture) {
         let isDrawing = false;
         const ctx = canvas.getContext("2d");
+        let selectedColor = "black"; // Default color
+        let brushSize = 5; // Default brush size
     
         function getPos(event) {
             const rect = canvas.getBoundingClientRect();
@@ -800,34 +810,64 @@ function forceHideDivs() {
             ctx.beginPath();
             ctx.moveTo(x, y);
         }
-        
+    
         function draw(event) {
             if (!isDrawing) return;
             event.preventDefault(); // Prevent scrolling
-    
+        
             const { x, y } = getPos(event);
-            ctx.lineWidth = 5;
+            ctx.lineWidth = brushSize;
             ctx.lineCap = "round";
-            ctx.strokeStyle = "black";
-    
+            ctx.strokeStyle = selectedColor;
+        
             ctx.lineTo(x, y);
             ctx.stroke();
-            
-            // 🔥 Ensure Three.js whiteboard updates in real-time
-            texture.needsUpdate = true;  
-        }
         
+            // ✅ Optimize texture updates (reduces GPU load)
+            if (!updateScheduled) {
+                updateScheduled = true;
+                setTimeout(() => {
+                    texture.needsUpdate = true;
+                    updateScheduled = false;
+                }, 100);
+            }
+        }
+    
         function stopDrawing() {
             isDrawing = false;
             ctx.closePath();
         }
-        
+    
+        // Event Listeners
         canvas.addEventListener("mousedown", startDrawing);
         canvas.addEventListener("mousemove", draw);
         canvas.addEventListener("mouseup", stopDrawing);
         canvas.addEventListener("touchstart", startDrawing, { passive: false });
         canvas.addEventListener("touchmove", draw, { passive: false });
         canvas.addEventListener("touchend", stopDrawing);
+    
+        // ✅ Color Picker Event
+        document.getElementById("colorPicker").addEventListener("input", (event) => {
+            selectedColor = event.target.value;
+        });
+    
+        // ✅ Brush Size Event
+        document.getElementById("brushSize").addEventListener("input", (event) => {
+            brushSize = event.target.value;
+        });
+    
+        // ✅ Eraser Button - Sets Color to White (Background Color)
+        document.getElementById("eraserButton").addEventListener("click", () => {
+            selectedColor = "white"; // Eraser works by "painting" over with white
+        });
+    
+        // ✅ Clear Button - Fully Clears the Canvas
+        document.getElementById("clearButton").addEventListener("click", () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears everything
+            ctx.fillStyle = "white"; // Reset to white background
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            texture.needsUpdate = true; // 🔥 Ensure the Three.js whiteboard resets
+        });
     }
     
     let whiteboardCanvas, whiteboardTexture, whiteboardMesh;
@@ -872,6 +912,8 @@ function forceHideDivs() {
     
         // ✅ Append the canvas inside the container
         container.appendChild(whiteboardCanvas);
+        container.style.display = "none"; // Hide until activated
+
     
         // ✅ Apply styles for centering
 
@@ -892,6 +934,16 @@ function forceHideDivs() {
         whiteboardCanvas.style.border = "2px solid black";
         whiteboardCanvas.style.display = "none"; // Hidden until "Start Drawing" is clicked
     }
+
+    function removeDrawingEvents(canvas) {
+    canvas.removeEventListener("mousedown", startDrawing);
+    canvas.removeEventListener("mousemove", draw);
+    canvas.removeEventListener("mouseup", stopDrawing);
+    canvas.removeEventListener("touchstart", startDrawing);
+    canvas.removeEventListener("touchmove", draw);
+    canvas.removeEventListener("touchend", stopDrawing);
+}
+
     
 
 
@@ -912,6 +964,11 @@ document.getElementById("drawButton").addEventListener("click", function(event) 
     whiteboardCanvas.style.pointerEvents = "auto";
 
     console.log("📜 Whiteboard is now visible!");
+
+    if (whiteboardControls) {
+        whiteboardControls.style.display = "block"; // 🚀 Make controls visible
+
+    }
 
    
 });
@@ -948,7 +1005,7 @@ function handleMobileView() {
 }
 // Function to set marker opacity (0 on desktop, low opacity on mobile)
 function setMarkerVisibility(opacityValue) {
-    const markers = [marker1, marker2, marker3, marker4, marker5];
+    const markers = [marker1, marker2, marker3, marker4, marker5, marker6];
 
     markers.forEach(marker => {
         marker.material.opacity = opacityValue; // Apply opacity
@@ -982,7 +1039,7 @@ function onTouchStart(event) {
             mouse.y = y;
 
             raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5], true);
+            const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5, marker6], true);
 
             if (intersects.length > 0) {
                 const clickedObject = intersects[0].object;
@@ -1012,6 +1069,11 @@ function onTouchStart(event) {
                 if (clickedObject.name === "Marker5") {
                     toggleLight(); // ✅ Call function to dim/restore light
                 }// ✅ Only toggle lights when clicking marker5
+
+                if (clickedObject.name === "Marker6") {
+                    moveCamera(marker6, 9, 1, -0.5);
+                    enableMarkerDivsAfterDelay(2500, [marker6Div]);
+                }
                 
             }
         }

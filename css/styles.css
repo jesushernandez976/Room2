@@ -106,7 +106,10 @@ z-index: 1040; /* Ensures backdrop is behind modal */
   pointer-events: none !important;
 }
 
+#whiteboardControls{
 
+  display: none;
+}
 
 #marker1Div {
   position: absolute;
