@@ -42,107 +42,98 @@ controls.target.set(5.5, 2.3, 0);
 controls.update();
 
 // Load 3D Models
+const loadingScreen = document.getElementById('loadingScreen');
+const loadingText = document.getElementById('loadingText');
+
+let loadedItems = 0;
+const totalItems = 1;
+
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
 loader.setDRACOLoader(dracoLoader);
 
-// async function loadModels() {
-//     try {
-
-//         // Load r722.glb model
-//         const gltf1 = await loader.loadAsync("./models/eye/r724.glb");
-
-//         if (gltf1 && gltf1.scene) {
-//             scene.add(gltf1.scene);
-
-//             // Compute bounding box for camera positioning
-//             const box = new THREE.Box3().setFromObject(gltf1.scene);
-//             const center = box.getCenter(new THREE.Vector3());
-
-//             if (center.length() > 0) {
-//                 camera.position.set(center.x + 9, 2.3, center.z + 0.5);
-//                 camera.lookAt(center.x, 2.3, center.z);
-//                 controls.target.set(center.x + 2.5, 2.3, center.z);
-//                 controls.update();
-//             }
-//         } else {
-//             console.error("❌ gltf1.scene is null or invalid.");
-//         }
-//     } catch (error) {
-//         console.error("❌ Error loading r722.glb:", error);
-//     }
-// }
-
-// // Call the function
-// loadModels();
-
-renderer.domElement.addEventListener("webglcontextlost", (event) => {
-    event.preventDefault();
-    console.error("❌ WebGL Context Lost! Reloading scene...");
-    location.reload(); // Reloads the page to free memory
-});
-
-// loader.load(
-//     "./models/eye/r723.glb",
-//     function (gltf) {
-//         console.log("✅ Model Loaded:", gltf);
-
-//         // Check every mesh in the model
-//         gltf.scene.traverse((child) => {
-//             if (child.isMesh) {
-//                 console.log("🔹 Mesh Found:", child.name || "(Unnamed)");
-
-//                 // Make sure morph targets exist before updating them
-//                 if (child.morphTargetInfluences && child.name) {
-//                     child.updateMorphTargets();
-//                 } else {
-//                     console.warn("⚠️ Skipping morph target update for:", child.name || "(Unnamed)");
-//                 }
-//             }
-//         });
-
-//         scene.add(gltf.scene);
-//     },
-//     undefined,
-//     function (error) {
-//         console.error("❌ Error loading r62.glb:", error);
-//     }
-// );
-
 // Handle WebGL context loss gracefully
 renderer.domElement.addEventListener("webglcontextlost", (event) => {
     event.preventDefault();
     console.error("❌ WebGL Context Lost! Freeing memory and reloading model...");
-    
-    // Remove existing models before reloading to free memory
-    scene.children.forEach((child) => {
-        if (child.isMesh) {
-            child.geometry.dispose();
-            if (child.material) {
-                if (Array.isArray(child.material)) {
-                    child.material.forEach((mat) => mat.dispose());
-                } else {
-                    child.material.dispose();
-                }
-            }
-        }
-        scene.remove(child);
-    });
 
-    // Reload the model instead of reloading the entire page
+    // Dispose of existing models before reloading
+    if (currentModel) {
+        disposeModel(currentModel);
+    }
+
+    // Reload the model without refreshing the page
     loadModel();
 });
+const analysisPhrases = [
+    "Initializing System",
+    "Optimizing System Performance",
+    "Scanning Environment",
+    "Executing Neural Mapping",
+    "Integrating Data Nodes",
+    "Running Predictive Analysis",
+    "Compiling Insights FPS speeds",
+    "Generating Visualizations",
+    "Processing Data Streams",
+    "Finalizing Operations",
+    "Loading Shader Modules",
+    "Rendering 3D Models",
+    "Compiling Shaders",
+    "Loading Textures"
+];
+// Keep track of the current model
+let currentModel = null;
+let index = 0;
+let targetPercentage = 100; // Ensure it reaches 100%
+let currentPercentage = 0;
+
+function updateLoadingProgress() {
+    let interval = setInterval(() => {
+        if (currentPercentage < targetPercentage) {
+            currentPercentage++;
+            loadingText.textContent = `${analysisPhrases[index]} ${currentPercentage}%`;
+        } else {
+            clearInterval(interval);
+            loadingText.textContent = "Loading 100%"; // Final loading message
+
+            setTimeout(() => {
+                loadingText.textContent = "Welcome"; // Display "Welcome" after loading
+                setTimeout(() => {
+                    loadingScreen.style.opacity = "0"; 
+                    setTimeout(() => loadingScreen.style.display = "none", 100);
+                    initScene(); // Transition to the scene
+                }, 900); // Delay before hiding loading screen
+            }, 600); // Display "Welcome" for 500ms
+        }
+    }, 9); // Adjust speed of counting
+
+    // Change analysis phrases every 1.5 seconds
+    setInterval(() => {
+        if (currentPercentage < 100) { // Only change messages while loading
+            index = (index + 1) % analysisPhrases.length;
+        }
+    }, 120);
+}
+
+        
+
+
+
 
 // Function to load the model
 function loadModel() {
     loader.load("./models/eye/r21.glb", function (gltf) {
-        const room = gltf.scene;
-        scene.add(room);
+        if (currentModel) {
+            disposeModel(currentModel);
+        }
 
-        // Ensure whiteboard exists
-        const whiteboard = room.getObjectByName("whiteboard");
-        
+        scene.add(gltf.scene);
+        currentModel = gltf.scene;
+        loadedItems++;
+        updateLoadingProgress(); // ✅ Track loading progress
+
+        const whiteboard = currentModel.getObjectByName("whiteboard");
         if (whiteboard) {
             console.log("✅ Whiteboard found:", whiteboard);
             setupWhiteboard(whiteboard);
@@ -152,10 +143,8 @@ function loadModel() {
     });
 }
 
-// Load the model initially
-loadModel();
 
-
+// Function to properly dispose of models
 function disposeModel(model) {
     model.traverse((child) => {
         if (child.isMesh) {
@@ -171,6 +160,9 @@ function disposeModel(model) {
     });
     scene.remove(model);
 }
+
+// Load the model initially
+loadModel();
 
 // Clickable Markers
 function createMarker(position, size, name, rotation = [0, 0, 0], shape = "box") {
