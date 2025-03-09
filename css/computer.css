@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(/background.jpg);
+    background-repeat-y: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.Menu {
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    position: absolute;
+    width: 100vw;
+    align-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+   
+}
+
+.startBar1 {
+    height: 40px;
+    width: 100vw;
+    border-top: 1x solid rgb(0, 0, 0);
+    box-shadow:
+    inset 0px 4px 4px -3px #fff0,
+    inset 0px -3px 4px -3px #fff;
+    background: linear-gradient(#d3d3d3, #a9a9a9 50%,rgb(146, 146, 146) 50%);
+
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    width: 100px;
+    height: 35px;
+    background: linear-gradient(rgb(255, 255, 255),rgba(187, 187, 187, 0.58) 50%);
+    border-radius: 4px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.time > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+
+}
+
+.folderContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-evenly;
+    padding: 20px;
+    max-width: 100vw;
+    cursor: pointer;
+
+}
+
+.folder {
+    width: 50px;
+    height: auto;
+    position: relative;
+    align-items: center;
+
+}
+
+.one {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.folderText {
+    
+}
+
+.folder:nth-child(1) { transform: translate(clamp(-50px, 4vw, 80px), clamp(20px, 10vh, 120px)); }
+.folder:nth-child(2) { transform: translate(clamp(10px, 6vw, 100px), clamp(230px, 8vh, 150px)); }
+.folder:nth-child(3) { transform: translate(clamp(-30px, 5vw, 90px), clamp(234px, 7vh, 100px)); }
+.folder:nth-child(4) { transform: translate(clamp(50px, 8vw, 200px), clamp(180px, 20vh, 350px)); }
+.folder:nth-child(5) { transform: translate(clamp(-40px, 7vw, 120px), clamp(50px, 12vh, 180px)); }
+.folder:nth-child(6) { transform: translate(clamp(20px, 9vw, 180px), clamp(170px, 25vh, 400px)); }
+.folder:nth-child(7) { transform: translate(clamp(-60px, 10vw, 220px), clamp(390px, 30vh, 500px)); }
+.folder:nth-child(8) { transform: translate(clamp(30px, 6vw, 110px), clamp(210px, 5vh, 80px)); }
+.folder:nth-child(9) { transform: translate(clamp(-1000px, -15vw, -2200px), clamp(350px, 35vh, 600px)); }
+
+
+
+
+.vista-button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    color: #fff;
+    text-shadow: 1px 1px #000;
+    box-shadow:
+      inset 0px 4px 4px -3px #fff0,
+      inset 0px -3px 4px -3px #fff;
+    background: linear-gradient(#66ccff, #3399ff 50%, #003366 50%);
+    isolation: isolate;
+    transition:
+      0.25s all,
+      0.1s background-position;
+  }
+  
+  .vista-button::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(circle at 50% 150%, #48b9ef, #0000 50%);
+    background-size: 300% 50%;
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: inherit;
+  }
+  
+  .vista-button::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(circle at 50% 320%, #48b9ef, #0000 50%);
+    background-size: 300% 50%;
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: inherit;
+  }
+  
+  .vista-button:hover {
+    box-shadow:
+      inset 0px 4px 4px -3px #fff5,
+      inset 0px -3px 4px -3px #fff;
+  }
+  .vista-button:hover::before,
+  .vista-button:hover::after {
+    opacity: 1;
+  }
+  
+  .vista-button:active::before,
+  .vista-button:active::after {
+    opacity: 0;
+  }
+  
+  .vista-button:active {
+    box-shadow:
+      inset 0px 4px 4px -3px #000,
+      inset 0px -4px 4px -3px #000c,
+      inset 0px 0px 24px -3px #000a;
+    background-position: 1px 1px;
+  }
+  
+  .vista-button div {
+    transition: 0.1s translate;
+  }
+  
+  .vista-button:active div {
+    translate: 1px 1px;
+  }
+
+  @media (max-width: 1200px) {
+    .folderContainer {
+        gap: 50px;
+        justify-content: center;
+    }
+
+    
+    .folder:nth-child(1) { transform: translate(clamp(-50px, 4vw, 80px), clamp(20px, 10vh, 120px)); }
+    .folder:nth-child(2) { transform: translate(clamp(10px, 6vw, 100px), clamp(230px, 8vh, 150px)); }
+    .folder:nth-child(3) { transform: translate(clamp(-30px, 5vw, 90px), clamp(234px, 7vh, 100px)); }
+    .folder:nth-child(4) { transform: translate(clamp(50px, 8vw, 200px), clamp(180px, 20vh, 350px)); }
+    .folder:nth-child(5) { transform: translate(clamp(-40px, 7vw, 120px), clamp(50px, 12vh, 180px)); }
+    .folder:nth-child(6) { transform: translate(clamp(20px, 9vw, 180px), clamp(170px, 25vh, 400px)); }
+    .folder:nth-child(7) { transform: translate(clamp(-60px, 10vw, 220px), clamp(390px, 30vh, 500px)); }
+    .folder:nth-child(8) { transform: translate(clamp(30px, 6vw, 110px), clamp(210px, 5vh, 80px)); }
+    .folder:nth-child(9) { transform: translate(clamp(-700px, -15vw, -2200px), clamp(350px, 35vh, 600px)); }
+
+}
+
+@media (max-width: 900px) {
+    .folderContainer {
+        justify-content: center;
+        gap: 35px;
+    }
+
+    .folder:nth-child(1) { transform: translate(clamp(-50px, 4vw, 80px), clamp(20px, 10vh, 120px)); }
+    .folder:nth-child(2) { transform: translate(clamp(10px, 6vw, 100px), clamp(230px, 8vh, 150px)); }
+    .folder:nth-child(3) { transform: translate(clamp(-30px, 5vw, 90px), clamp(234px, 7vh, 100px)); }
+    .folder:nth-child(4) { transform: translate(clamp(50px, 8vw, 200px), clamp(180px, 20vh, 350px)); }
+    .folder:nth-child(5) { transform: translate(clamp(-40px, 7vw, 120px), clamp(50px, 12vh, 180px)); }
+    .folder:nth-child(6) { transform: translate(clamp(20px, 9vw, 180px), clamp(170px, 25vh, 400px)); }
+    .folder:nth-child(7) { transform: translate(clamp(-60px, 10vw, 220px), clamp(390px, 30vh, 500px)); }
+    .folder:nth-child(8) { transform: translate(clamp(30px, 6vw, 110px), clamp(210px, 5vh, 80px)); }
+    .folder:nth-child(9) { transform: translate(clamp(-300px, -15vw, -2200px), clamp(250px, 35vh, 600px)); }
+
+@media (max-width: 600px) {
+    .folderContainer {
+        justify-content: center;
+        gap: 20px;
+    }
+    .folder:nth-child(1) { transform: translate(clamp(-50px, 4vw, 80px), clamp(20px, 10vh, 120px)); }
+    .folder:nth-child(2) { transform: translate(clamp(10px, 6vw, 100px), clamp(230px, 8vh, 150px)); }
+    .folder:nth-child(3) { transform: translate(clamp(-30px, 5vw, 90px), clamp(234px, 7vh, 100px)); }
+    .folder:nth-child(4) { transform: translate(clamp(50px, 8vw, 200px), clamp(180px, 20vh, 350px)); }
+    .folder:nth-child(5) { transform: translate(clamp(-40px, 7vw, 120px), clamp(50px, 12vh, 180px)); }
+    .folder:nth-child(6) { transform: translate(clamp(20px, 9vw, 180px), clamp(170px, 25vh, 400px)); }
+    .folder:nth-child(7) { transform: translate(clamp(-60px, 10vw, 220px), clamp(390px, 30vh, 500px)); }
+    .folder:nth-child(8) { transform: translate(clamp(30px, 6vw, 110px), clamp(210px, 5vh, 80px)); }
+    .folder:nth-child(9) { transform: translate(clamp(-300px, -15vw, -2200px), clamp(250px, 35vh, 600px)); }
+
+
+    }
+
+}
+
+@media (max-width: 450px) {
+    .folderContainer {
+        justify-content: center;
+        gap: 10px;
+    }
+    .folder:nth-child(1) { transform: translate(clamp(-50px, 4vw, 80px), clamp(20px, 10vh, 120px)); }
+    .folder:nth-child(2) { transform: translate(clamp(10px, 6vw, 100px), clamp(230px, 8vh, 150px)); }
+    .folder:nth-child(3) { transform: translate(clamp(130px, 5vw, 90px), clamp(334px, 7vh, 200px)); }
+    .folder:nth-child(4) { transform: translate(clamp(50px, 8vw, 200px), clamp(180px, 20vh, 350px)); }
+    .folder:nth-child(5) { transform: translate(clamp(-40px, 7vw, 120px), clamp(50px, 12vh, 180px)); }
+    .folder:nth-child(6) { transform: translate(clamp(-320px, 9vw, -280px), clamp(10px, 25vh, 300px)); }
+    .folder:nth-child(7) { transform: translate(clamp(-160px, 10vw, -20px), clamp(270px, 30vh, 500px)); }
+    .folder:nth-child(8) { transform: translate(clamp(30px, 6vw, 110px), clamp(310px, 5vh, 180px)); }
+    .folder:nth-child(9) { transform: translate(clamp(-220px, -15vw, -540px), clamp(250px, 35vh, 600px)); }
+}
