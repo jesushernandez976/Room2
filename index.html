@@ -1,447 +1,84 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Room</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-  <body>
-    <header></header>
-    <main>
-      <!-- Loading Screen -->
-      <div class="loading-screen" id="loadingScreen">
-        <video class="loading-video" id="loadingVideo" autoplay muted playsinline loop>
-          <source src="./loading screen.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="loading-text" id="loadingText">0%</div>
-      </div>
-
-
-      <div id="container3D"></div>
-      <div id="whiteboardContainer">
-        <!-- The canvas will be appended here -->
-    </div>
-    <div id="whiteboardControls" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;">
-      <input type="color" id="colorPicker" value="#000000">
-      <input type="range" id="brushSize" min="1" max="20" value="5">
-      <button id="eraserButton">Eraser</button>
-      <button id="clearButton">Clear</button>
-  </div>
-    </main>
-
-    <!-- Modals -->
-    <div class="modal fade" id="modalAbout" tabindex="-1" aria-labelledby="modalAboutLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalAboutLabel">About</h1>
-          </div>
-          <div class="modal-body">
-            This project introduces a fully interactive 3D web experience, redefining user engagement with immersive navigation and dynamic interactions.<br><br>  
-
-            Visitors can explore a virtual environment where every element is interactive, creating a seamless and engaging journey.<br><br>  
-            
-            Key features include:<br>  
-            - Smooth, real-time navigation through a 3D space.<br>  
-            - Clickable 3D markers that trigger modals with detailed information, services, and external links.<br>  
-            - A futuristic, interactive UI that enhances traditional web navigation.<br><br>  
-            
-            At the heart of this experience is a 3D box room, where users can freely look around, move through the space, and interact with objects like a fridge, tables, computer, and more.<br><br>  
-            
-            This creates a highly realistic and engaging digital environment, transforming the way users interact with web content.<br><br>  
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modalServices" tabindex="-1" aria-labelledby="modalServicesLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalServicesLabel">Our Services</h1>
-          </div>
-          <div class="modal-body">
-            We specialize in cutting-edge 3D services that transform ideas into stunning visuals and interactive experiences.<br><br>  
-
-            From 3D modeling, texturing, and rendering to real-time interactive environments, we bring products, spaces, and characters to life with exceptional detail and precision.<br><br>  
-            
-            Our expertise includes:<br>  
-            - High-quality 3D modeling and rendering for products, architecture, and characters.<br>  
-            - Immersive real-time 3D experiences for websites, applications, and virtual environments.<br>  
-            - Interactive elements designed to enhance user engagement and interaction.<br><br>  
-            
-            Whether you need architectural visualizations, product showcases, or custom 3D assets, we deliver high-performance solutions tailored to your vision.<br><br>  
-            
-            Let’s build something extraordinary.<br><br>  
-             
-             </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="modalContactLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalContactLabel">Contact Us</h1>
-          </div>
-          <div class="modal-body">
-            We're here to bring your ideas to life. Contact us for inquiries, collaborations, or support. <br><br>
-
-            <p>📞 <a href="tel:3128852636">(312) 885-2636</a></p>
-            <p>📧 <a href="mailto:info@accesscodepro.com">info@accesscodepro.com</a></p>
-            <p>🌍 <a href="https://www.accesscodepro.com" target="_blank">www.accesscodepro.com</a></p>
-            <p>📱 <a href="https://www.instagram.com/accesscodepro" target="_blank">@accesscodepro</a></p>
-
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modalGallery" tabindex="-1" aria-labelledby="modalGalleryLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalGalleryLabel">Gallery</h1>
-          </div>
-          <div class="modal-body">
-            View our latest projects and designs.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modalFAQ" tabindex="-1" aria-labelledby="modalFAQLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalFAQLabel">FAQ</h1>
-          </div>
-          <div class="modal-body">
-                <strong>1. What is a 3D website?</strong><br>  
-                A 3D website integrates interactive three-dimensional elements, allowing users to explore, engage, and navigate in a virtual space. Unlike traditional flat websites, 3D websites create an immersive experience by using real-time rendering, animations, and interactive objects.<br><br>  
-
-                <strong>2. How do 3D websites work?</strong><br>  
-                3D websites use WebGL (Web Graphics Library) to render graphics directly in a browser without needing additional plugins. Technologies like Three.js and A-Frame help create realistic 3D environments that users can interact with, using mouse clicks, touch gestures, or even VR/AR integration.<br><br>  
-
-                <strong>3. What are the benefits of a 3D website?</strong><br>  
-                - Engagement – Interactive visuals keep users engaged longer.<br>  
-                - Realism – Products, spaces, and animations look more lifelike.<br>  
-                - Immersion – Users can navigate and explore in a more dynamic way.<br>  
-                - Modern Appeal – Stands out compared to traditional websites.<br><br>  
-
-                <strong>4. Do 3D websites work on all devices?</strong><br>  
-                Yes, but performance depends on the device. Modern browsers on desktops and high-end mobile devices support 3D rendering smoothly. However, older or low-powered devices may experience lag. To improve performance, 3D websites use optimization techniques like model compression and adaptive rendering.<br><br>  
-
-                <strong>5. Do I need special software to view a 3D website?</strong><br>  
-                No special software is required! Any modern web browser (Chrome, Firefox, Edge, Safari) can display 3D content as long as WebGL is enabled.<br><br>  
-
-                <strong>6. Can a 3D website be interactive?</strong><br>  
-                Absolutely! 3D websites allow users to interact with elements, such as clicking objects, zooming, rotating, and even triggering animations. Advanced setups can also integrate VR (Virtual Reality) or AR (Augmented Reality) for a more immersive experience.<br><br>  
-
-                <strong>7. Are 3D websites slower than regular websites?</strong><br>  
-                3D websites may require more processing power than standard sites, but with proper optimization—such as reducing model complexity, using efficient textures, and leveraging WebGL performance features—they can run smoothly without significant delays.<br><br>  
-
-                <strong>8. What industries benefit from 3D websites?</strong><br>  
-                3D websites are ideal for industries like:<br>  
-                - E-commerce – Showcasing products in a realistic, interactive way.<br>  
-                - Architecture & Real Estate – Virtual property tours.<br>  
-                - Gaming & Entertainment – Interactive storytelling and experiences.<br>  
-                - Education & Training – Simulations and learning tools.<br><br>  
-
-                <strong>9. How do users navigate a 3D website?</strong><br>  
-                Navigation varies depending on the design. Users can move through a 3D space by clicking, dragging, using a keyboard, or even motion controls. Some 3D websites use first-person or orbit controls to create an interactive experience similar to video games.<br><br>  
-
-                <strong>10. Can a 3D website be optimized for SEO?</strong><br>  
-                Yes! Even though 3D content is visual-heavy, proper SEO strategies—like structured metadata, alt tags, keyword-rich descriptions, and fast-loading assets—can ensure search engines index the site properly.<br><br>  
-
-                <strong>11. How do businesses benefit from 3D websites?</strong><br>  
-                A 3D website enhances user engagement, provides a unique brand experience, and helps businesses showcase products, services, or environments in a highly interactive and memorable way. It’s a powerful tool to stand out in competitive markets.<br><br>  
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modalTerms" tabindex="-1" aria-labelledby="modalTermsLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalTermsLabel">Terms & Conditions</h1>
-          </div>
-          <div class="modal-body">
-            Terms and Conditions<br>
-            Last Updated: 03/02/2025<br>
-
-            Welcome to Access Code Programming, LLC. These Terms and Conditions ("Terms") govern your use of our website, services, and products. By accessing or using our website, you agree to comply with and be bound by these Terms.
-
-            <br>
-            1. Definitions
-            "Company," "we," "our," or "us" refers to Access Code Programming, LLC.
-            "You" or "User" refers to any visitor, client, or customer accessing our website or services.
-            "Services" refers to web development, standard websites, applications, 3D modeling, AR/VR integration, software solutions, and related services provided by us.
-            <br>
-            2. Use of Our Services
-            2.1 Website Access
-            Our website is open to users of all ages. However, certain services, purchases, or agreements may require individuals to be 18 years or older or have parental/guardian consent.
-            2.2 License to Use
-            We grant you a limited, non-exclusive, non-transferable license to use our website and services for personal or business use, subject to these Terms.
-
-            2.3 Prohibited Activities
-            You agree not to:
-
-            Use our services for unlawful purposes.
-            Copy, modify, or reverse-engineer our software, code, or 3D assets.
-            Interfere with our website’s security or functionality.
-            Misrepresent your identity or engage in fraudulent activity.
-            <br>
-            3. Purchases, Payments, and Refunds
-            3.1 Pricing & Payment Structure
-            Pricing for our services is not listed on our website because each project is unique and tailored to specific user requirements. Prices vary based on project complexity, features, customization, and scope of work. We provide custom quotes based on an individual assessment of each client’s needs.
-
-            3.2 Deposit Requirement
-            To initiate a project, clients must pay 50% of the agreed total cost as a temporary refundable deposit. This deposit secures the project and ensures serious inquiries while protecting our business time and efforts.
-
-            3.3 Refund Policy
-            Full Refund: Clients are eligible for a 100% refund of their deposit within the first 14 days from the date of payment.
-            Partial Refund: After 14 days, clients may receive a 50% refund of their deposit if they choose to cancel.
-            No Refund: After the project has commenced beyond the initial planning phase, or significant work has been completed, no refunds will be issued.
-            3.4 Final Payment
-            The remaining 50% balance must be paid upon project completion before the final product is delivered, deployed, or transferred. 
-            <br>
-            4. Intellectual Property
-            All content, including code, 3D models, designs, and software created by Access Code Programming, is our intellectual property and may not be copied, distributed, or resold without permission.
-
-            Clients retain ownership of any content they provide and have the right to modify, customize, or request removal of assets related to their project. While we maintain ownership of the original assets created, clients are free to request changes, updates, or deletion of specific elements as needed.
-
-            If a client wishes to remove or alter specific elements, they may submit a formal request, and we will work with them to accommodate their needs.
-            <br>
-            5. Disclaimers & Limitation of Liability
-            5.1 No Guarantees
-            We strive to provide high-quality services but do not guarantee specific results, uninterrupted service, or error-free performance.
-
-            5.2 Limitation of Liability
-            To the maximum extent permitted by law, Access Code Programming is not liable for any:
-
-            Loss of data, profits, or business opportunities.
-            Service interruptions, security breaches, or unauthorized access.
-            Third-party software issues or compatibility errors.
-            You agree to use our services at your own risk.
-            <br>
-            6. Third-Party Links & Services
-            Our website may contain links to third-party websites, tools, or services. These third-party services operate independently, and we do not endorse, control, or take responsibility for their content, privacy policies, security practices, or business operations. Any interactions, transactions, or agreements you enter with third-party providers are strictly between you and that provider.
-
-            Hosting, Cloud Storage, and Content Delivery
-            To ensure high performance, security, and scalability for our projects and client websites, Access Code Programming relies on third-party hosting providers, cloud storage solutions, and content delivery networks (CDNs). These services allow us to optimize loading speeds, store large assets efficiently, and enhance the overall user experience.
-
-            Amazon Web Services (AWS) & CloudFront
-            We utilize Amazon Web Services (AWS) for secure, scalable, and high-performance cloud storage and content delivery solutions. Our AWS integrations include:
-
-            Amazon S3 (Simple Storage Service): Used to securely store and manage large files such as 3D models, images, videos, PDFs, and application data.
-            Amazon CloudFront (CDN): A global content delivery network that accelerates website performance, reduces latency, and ensures faster access to assets by serving cached content from edge locations worldwide. This minimizes loading times for users across different geographic regions.
-            Reliability & Service Responsibility
-            While we take extensive measures to ensure the reliability and security of these third-party services, we are not responsible for:
-
-            Downtime, service interruptions, or outages caused by third-party providers.
-            Security breaches, unauthorized access, or data loss that occur due to issues within third-party infrastructure.
-            Changes in third-party terms, pricing, or policies that may affect service availability or performance.
-            We continuously monitor and optimize our integration with these services to provide the best experience possible for our clients. However, by using our services, you acknowledge and agree that Access Code Programming is not liable for any third-party service failures or disruptions.
-            <br>
-            7. Privacy & Data Protection
-            We take your privacy seriously. No personal information is sold, shared, or distributed to any third parties. Any information collected stays strictly within our company and is used solely for the purpose of delivering our services.
-
-            We only collect the necessary information, which may include:
-
-            Name
-            Email address
-            Phone number
-            Shipping address (only when processing orders for physical products)
-            No additional personal data is stored or used beyond what is required to fulfill our services.
-            <br>
-            8. Termination
-            We reserve the right to suspend or terminate your access to our services if you violate these Terms.
-
-            At Access Code Programming, we do not tolerate fraud, discrimination, or hateful behavior of any kind. We are committed to serving everyone equally, regardless of race, gender, ethnicity, nationality, or background. Any client or user found engaging in fraudulent activities, discriminatory behavior, or offensive conduct will have their project and access to our services immediately terminated.
-
-            If a project is terminated due to these violations, no refunds will be issued. We take these matters very seriously and will not hesitate to discontinue any collaboration if these principles are in question.
-            <br>
-            9. Governing Law & Dispute Resolution
-            All disputes shall first be handled directly between Access Code Programming, LLC and the client in an effort to reach a fair resolution. If a resolution cannot be reached, the matter will be taken to court.
-
-            By agreeing to these Terms, you acknowledge that any legal disputes shall be handled exclusively in the courts of DuPage County, Illinois. Both parties agree to submit to the jurisdiction of these courts for any disputes arising out of or related to these Terms and Services.
-            <br>
-            10. Service Modifications & Client Responsibilities
-            Project Scope Changes: Additional features or modifications beyond the agreed-upon scope may require additional fees.
-            Client Responsibilities: Clients must provide logos, content, images, and other materials in a timely manner. Delays in delivering assets may extend project timelines. 
-            <br>
-            11. Maintenance & Support
-            Unless otherwise agreed, post-launch maintenance is not included.
-            Support services for bug fixes, updates, or modifications may require a separate agreement. 
-            <br>
-            12. Force Majeure Clause
-            We are not responsible for delays or failures beyond our control, including natural disasters, cyberattacks, server failures, or government actions.
-            <br>
-            13. Changes to These Terms
-            We may update these Terms at any time. Changes take effect upon posting. Continued use of our services means you accept the updated Terms.
-            <br>
-            <br>
-            14. Contact Information
-            <br>
-            For any questions, contact us at:
-            <br>
-            📧 info@accesscodepro.com
-            <br>
-            🌐 accesscodepro.com
-
-                      </div>
-                      <div class="modal-footer">
-                        <a href="./models/eye/Terms and Conditions.pdf" 
-                           download="Terms_and_Conditions.pdf" 
-                           class="btn btn-primary">
-                           Download Terms & Conditions
-                        </a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DOTfiles Modal -->
-<div class="modal fade" id="modalDOTfiles" tabindex="-1" aria-labelledby="modalDOTfilesLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalDOTfilesLabel">DOTfiles</h1>
-      </div>
-      <div class="modal-body">
-        DOTfiles is a quick and efficient file converter application designed to seamlessly convert PDFs, JPGs, JPEGs, and PNGs. Whether you need to transform documents into images or vice versa, DOTfiles provides a fast, user-friendly experience with high-quality output.
-      </div>
-      <div class="modal-footer">
-        <a href="https://jesushernandez976.github.io/threeJS/" target="_blank" class="btn btn-primary">Visit DOTfiles</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Narrify Modal -->
-<div class="modal fade" id="modalNarrify" tabindex="-1" aria-labelledby="modalNarrifyLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalNarrifyLabel">Narrify</h1>
-      </div>
-      <div class="modal-body">
-        Narrify is an interactive platform offering innovative storytelling experiences powered by real-time 3D technology.
-      </div>
-      <div class="modal-footer">
-        <a href="https://jesushernandez976.github.io/NarrifyPlus/" target="_blank" class="btn btn-primary">Visit Narrify</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Shop Modal -->
-<div class="modal fade" id="modalShop" tabindex="-1" aria-labelledby="modalShopLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalShopLabel">[ACP] Shop</h1>
-      </div>
-      <div class="modal-body">
-        Access Code Shop offers official merchandise and exclusive branded items. As the brand grows, more unique products and innovative designs will be added, expanding the collection beyond just merch. Stay tuned for future releases and updates.
-      </div>
-      <div class="modal-footer">
-        <a href="https://accesscodepro.com/shop.html" target="_blank" class="btn btn-primary">Visit Shop</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Explore Modal -->
-<div class="modal fade" id="modalExplore" tabindex="-1" aria-labelledby="modalExploreLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalExploreLabel">Explore</h1>
-      </div>
-      <div class="modal-body">
-        Explore showcases a variety of ongoing projects that Access Code is actively developing. This includes unfinished concepts, experimental 
-        applications, games, and unreleased projects. It’s a glimpse into the creative and technical innovations in progress, giving users early access to what’s coming next.
-      </div>
-      <div class="modal-footer">
-        <a href="computer.html" target="_blank" class="btn btn-primary">Explore Now</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modalWhiteboard" tabindex="-1" aria-labelledby="modalWhiteboardLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalWhiteboardLabel">Whiteboard</h1>
-      </div>
-      <div class="modal-body">
-        Explore showcases a variety of ongoing projects that Access Code is actively developing. This includes unfinished concepts, experimental 
-        applications, games, and unreleased projects. It’s a glimpse into the creative and technical innovations in progress, giving users early access to what’s coming next.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="drawButton">Start Drawing</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    <!-- Socials Container -->
-    <div class="socials-container">
-      <a id="marker1Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalAbout" data-social="About"></a>
-      <a id="marker1Div2" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalServices" data-social="Services"></a>
-      <a id="marker1Div3" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalContact" data-social="Contact"></a>
-      <a id="marker1Div4" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalGallery" data-social="Gallery"></a>
-      <a id="marker1Div5" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalFAQ" data-social="FAQ"></a>
-      <a id="marker1Div6" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalTerms" data-social="Terms"></a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>Document</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
     
-      <a id="marker3aDiv" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalDOTfiles" data-social="DOTfiles"></a>
-      <a id="marker3aDiv2" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalNarrify" data-social="Narrify"></a>
-      <a id="marker4Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalShop" data-social="ACP Shop"></a>
-      <a id="marker2Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalExplore" data-social="Explore More"></a>
-      <a id="marker6Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalWhiteboard" data-social="Whiteboard"></a>
-      <p id="footerDiv">Access Code Programming, LLC [Version 1.0.3] <br>
-      © 2025 [ACP] All Rights Reserved.</p>
+    <div class="ui-container">
+        <button id="button1">
+            S E R V I C E S 
+            <div id="clip">
+                <div id="leftTop" class="corner"></div>
+                <div id="rightBottom" class="corner"></div>
+                <div id="rightTop" class="corner"></div>
+                <div id="leftBottom" class="corner"></div>
+            </div>
+            <span id="rightArrow" class="arrow"></span>
+            <span id="leftArrow" class="arrow"></span>
+        </button>
+
+        <button class="button2" id="button2">
+            A B O U T
+            <div id="clip">
+                <div id="leftTop" class="corner"></div>
+                <div id="rightBottom" class="corner"></div>
+                <div id="rightTop" class="corner"></div>
+                <div id="leftBottom" class="corner"></div>
+            </div>
+            <span id="rightArrow" class="arrow"></span>
+            <span id="leftArrow" class="arrow"></span>
+        </button>
+
+        <button class="button3" id="button3">
+            M E T A W O R L D 
+            <div id="clip">
+                <div id="leftTop" class="corner"></div>
+                <div id="rightBottom" class="corner"></div>
+                <div id="rightTop" class="corner"></div>
+                <div id="leftBottom" class="corner"></div>
+            </div>
+            <span id="rightArrow" class="arrow"></span>
+            <span id="leftArrow" class="arrow"></span>
+        </button>
+
+        <button class="button4" id="button4">
+            C O N T A C T
+            <div id="clip">
+                <div id="leftTop" class="corner"></div>
+                <div id="rightBottom" class="corner"></div>
+                <div id="rightTop" class="corner"></div>
+                <div id="leftBottom" class="corner"></div>
+            </div>
+            <span id="rightArrow" class="arrow"></span>
+            <span id="leftArrow" class="arrow"></span>
+        </button>
+
+        <button class="button5" id="button5">
+            P R O J E C T S
+            <div id="clip">
+                <div id="leftTop" class="corner"></div>
+                <div id="rightBottom" class="corner"></div>
+                <div id="rightTop" class="corner"></div>
+                <div id="leftBottom" class="corner"></div>
+            </div>
+            <span id="rightArrow" class="arrow"></span>
+            <span id="leftArrow" class="arrow"></span>
+
+        </button>
+
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./js/main.js"></script>
-  </body>
+    <p id="footerDiv">Access Code Programming, LLC [Version 1.0.3] <br>
+        © 2025 [ACP] All Rights Reserved.</p>
+      </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script type="module" src="../js/index.js"></script>
+    </body>
 </html>
-
