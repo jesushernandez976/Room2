@@ -1,6 +1,7 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
+import { DRACOLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/DRACOLoader.js";
 
 
 // Scene setup
@@ -17,7 +18,7 @@ document.body.appendChild(renderer.domElement);
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 directionalLight.position.set(2, 5, 5);
 scene.add(directionalLight);
 
@@ -27,6 +28,10 @@ controls.enableDamping = true;
 
 // Load GLB Model
 const loader = new GLTFLoader();
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+loader.setDRACOLoader(dracoLoader);
+
 
 // Set up a function to handle loading models with reusable logic
 function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
@@ -50,16 +55,18 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
 
   
   // Load all models
-  const modelPath1 = './models/eye/logofinal.glb';
-  const modelPath2 = './models/eye/satellite.glb';
-  const modelPath3 = './models/eye/space_explorer.glb';
+  const modelPath1 = './models/eye/logo.glb';
+  const modelPath2 = './models/eye/sat1.glb';
+  const modelPath3 = './models/eye/space_explorer1.glb';
   const modelPath4 = './models/eye/nebula2.glb';
+  const modelPath5 = './models/eye/craft.glb';
   
   // Load models with appropriate scaling and positioning
-  loadModel(modelPath1, 1, { x: 0, y: 0, z: 0 });  
+  loadModel(modelPath1, 15, { x: 0, y: 0, z: 0 });  
   loadModel(modelPath2, 0.5, { x: -4, y: -2, z: -20 });
   loadModel(modelPath3, 1, { x: -30, y: -10, z: -50 });
   loadModel(modelPath4, 1, { x: 150, y: 150, z: -60 });
+  loadModel(modelPath5, 0.2, { x: 90, y: 80, z: 190 });
   
   // Camera positioning
 
@@ -77,7 +84,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
     gsap.set(camera.position, {
       x: -40,
       y: -20,
-      z: -80
+      z: -90
     });
 
     gsap.set(camera, { fov: isMobile ? 75 : 75 });
@@ -153,7 +160,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   // Call the function to hide the button
   hideButton();
   
-const gridRadius = 10;  // Radius of the sphere
+const gridRadius = 5;  // Radius of the sphere
 const gridDivisions = 30;  // Number of divisions (latitude and longitude lines)
 
 // Create spherical grid lines (longitude lines)
@@ -248,7 +255,7 @@ let gridRotationSpeed = 0.0005; // Control rotation speed
 let particleRotationSpeed = -0.001; // Control particle system's opposite rotation speed
 
 // Shooting Star Particle System
-const shootingStarCount = 100; // Number of shooting stars to spawn
+const shootingStarCount = 200; // Number of shooting stars to spawn
 const shootingStars = new THREE.BufferGeometry();
 const shootingStarPositions = [];
 const velocities = [];
@@ -585,7 +592,7 @@ planetColors.forEach((color, index) => {
 });
 
 // You can add more planets by repeating the createPlanet function with different parameters
-const firePlanet = createFirePlanet(12, 200, 200, "./images/lava.jpg", 0.010);
+const firePlanet = createFirePlanet(15, 200, 200, "./images/lava.jpg", 0.010);
 const electricPlanet = createElectricPlanet(10, 500, 50, "./images/lava.jpg", 0.009);
 
 
