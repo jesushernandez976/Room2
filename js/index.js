@@ -97,9 +97,9 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
 
     // Animate the camera position
     gsap.to(camera.position, {
-        x: 0,
+        x: 3,
         y: 0,
-        z: isMobile ? 6 : 4,  
+        z: isMobile ? 6 : 3,  
         duration: 5,  
         ease: "power2.inOut"
     });
@@ -107,7 +107,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
     // Animate the field of view
     gsap.to(camera, {
         fov: isMobile ? 50 : 50,  
-        duration: 6,  
+        duration: 7,  
         ease: "power2.inOut",
         onUpdate: () => {
             camera.updateProjectionMatrix();
@@ -595,7 +595,7 @@ planetColors.forEach((color, index) => {
 
 // You can add more planets by repeating the createPlanet function with different parameters
 const firePlanet = createFirePlanet(15, 200, 130, "./images/lava.jpg", 0.005);
-const electricPlanet = createElectricPlanet(10, 400, 50, "./images/lava.jpg", 0.009);
+const electricPlanet = createElectricPlanet(10, 200, 50, "./images/lava.jpg", 0.003);
 
 
 // Resize Handling
