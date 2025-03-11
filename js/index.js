@@ -57,16 +57,16 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   // Load all models
   const modelPath1 = './models/eye/logo.glb';
   const modelPath2 = './models/eye/sat1.glb';
-  const modelPath3 = './models/eye/space_explorer1.glb';
+  const modelPath3 = './models/eye/shuttle2.glb';
   const modelPath4 = './models/eye/nebula2.glb';
-  const modelPath5 = './models/eye/craft.glb';
+  const modelPath5 = './models/eye/craftplanet1.glb';
   
   // Load models with appropriate scaling and positioning
   loadModel(modelPath1, 15, { x: 0, y: 0, z: 0 });  
   loadModel(modelPath2, 0.5, { x: -4, y: -2, z: -20 });
-  loadModel(modelPath3, 1, { x: -30, y: -10, z: -50 });
+  loadModel(modelPath3, .24, { x: -30, y: -10, z: -50 });
   loadModel(modelPath4, 1, { x: 150, y: 150, z: -60 });
-  loadModel(modelPath5, 0.2, { x: 90, y: 80, z: 190 });
+  loadModel(modelPath5, 0.3, { x: 90, y: 80, z: 190 });
   
   // Camera positioning
 
@@ -377,7 +377,7 @@ const planetColors = Array.from({ length: 12 }, () => getRandomColor()); // Uniq
 
 // Now create planets with unique textures and colors
 const planet1 = createPlanet(4, 140, 40, planetTextures[0], 0.002, planetColors[0]);
-const planet2 = createPlanet(9, -60, -15, planetTextures[1], 0.001, planetColors[1]);
+const planet2 = createPlanet(12, -60, -15, planetTextures[1], 0.001, planetColors[1]);
 const planet3 = createPlanet(2, 200, 30, planetTextures[2], 0.003, planetColors[2]);
 const planet4 = createPlanet(4, -250, 10, planetTextures[3], 0.004, planetColors[3]);
 const planet5 = createPlanet(2, 30, 5, planetTextures[4], 0.01, planetColors[4]);
