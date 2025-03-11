@@ -336,9 +336,11 @@ const getRandomRockTexture = (() => {
     const textures = [
         "./images/Rocks011.jpg",  
         "./images/Ground068.jpg",
-        "./images/Metal049A.png",
-        "./images/Marble006.png",
-        "./images/lava.jpg"
+        "./images/Moss002.jpg",
+        "./images/Ground081.jpg",
+        "./images/lava.jpg",
+        "./images/Marble.jpg",
+        "./images/Metal05.jpg",
     ];
     
     return () => {
@@ -592,8 +594,8 @@ planetColors.forEach((color, index) => {
 });
 
 // You can add more planets by repeating the createPlanet function with different parameters
-const firePlanet = createFirePlanet(15, 200, 200, "./images/lava.jpg", 0.010);
-const electricPlanet = createElectricPlanet(10, 500, 50, "./images/lava.jpg", 0.009);
+const firePlanet = createFirePlanet(15, 200, 130, "./images/lava.jpg", 0.005);
+const electricPlanet = createElectricPlanet(10, 400, 50, "./images/lava.jpg", 0.009);
 
 
 // Resize Handling
