@@ -384,7 +384,7 @@ const planet3 = createPlanet(2, 200, 30, planetTextures[2], 0.003, planetColors[
 const planet4 = createPlanet(4, -250, 10, planetTextures[3], 0.004, planetColors[3]);
 const planet5 = createPlanet(2, 30, 5, planetTextures[4], 0.01, planetColors[4]);
 const planet6 = createPlanet(3.5, -280, -25, planetTextures[5], 0.006, planetColors[5]);
-const planet7 = createPlanet(1.8, 300, -5, planetTextures[6], 0.009, planetColors[6]);
+const planet7 = createPlanet(8.8, 300, -30, planetTextures[6], 0.009, planetColors[6]);
 const planet8 = createPlanet(3, -100, 2, planetTextures[7], 0.005, planetColors[7]);
 const planet9 = createPlanet(2.5, 150, 40, planetTextures[8], 0.002, planetColors[8]);
 const planet10 = createPlanet(6, -200, 50, planetTextures[9], 0.003, planetColors[9]);
@@ -508,7 +508,7 @@ const createElectricPlanet = (size, distance, positionY, textureUrl, rotationSpe
     const material = new THREE.MeshStandardMaterial({
         map: texture,
         emissive: new THREE.Color(0, 0, 1), // Electric blue color
-        emissiveIntensity: 1.5, // Intensity of the glow effect
+        emissiveIntensity: 2.5, // Intensity of the glow effect
         roughness: 0.5,
         metalness: 0.6
     });
@@ -530,7 +530,7 @@ const addElectricityParticles = (planet) => {
     const particlesGeometry = new THREE.BufferGeometry();
     const particlesMaterial = new THREE.PointsMaterial({
         color: new THREE.Color(0, 0, 1), // Electric blue color
-        size: .1,  // Particle size
+        size: .3,  // Particle size
         transparent: true,
         blending: THREE.AdditiveBlending,
         opacity: 0.2
@@ -595,7 +595,7 @@ planetColors.forEach((color, index) => {
 
 // You can add more planets by repeating the createPlanet function with different parameters
 const firePlanet = createFirePlanet(25, 500, 100, "./images/lava.jpg", 0.005);
-const electricPlanet = createElectricPlanet(10, 400, 20, "./images/lava.jpg", 0.003);
+const electricPlanet = createElectricPlanet(6, 400, 20, "./images/lava.jpg", 0.008);
 
 
 // Resize Handling
