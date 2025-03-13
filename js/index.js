@@ -55,7 +55,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
 
   
   // Load all models
-  const modelPath1 = './models/eye/logo.glb';
+  const modelPath1 = './models/eye/logo3.glb';
   const modelPath2 = './models/eye/sat1.glb';
   const modelPath3 = './models/eye/shuttle2.glb';
   const modelPath4 = './models/eye/nebula2.glb';
@@ -66,7 +66,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   loadModel(modelPath2, 0.5, { x: -4, y: -2, z: -20 });
   loadModel(modelPath3, .24, { x: -30, y: -10, z: -50 });
   loadModel(modelPath4, 1, { x: 150, y: 150, z: -60 });
-  loadModel(modelPath5, 0.3, { x: 90, y: 80, z: 190 });
+  loadModel(modelPath5, 0.3, { x: 90, y: 60, z: 160 });
   
   // Camera positioning
 
@@ -100,7 +100,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
         x: 3,
         y: 0,
         z: isMobile ? 6 : 3,  
-        duration: 5,  
+        duration: 6,  
         ease: "power2.inOut"
     });
 
@@ -255,7 +255,7 @@ let gridRotationSpeed = 0.0005; // Control rotation speed
 let particleRotationSpeed = -0.001; // Control particle system's opposite rotation speed
 
 // Shooting Star Particle System
-const shootingStarCount = 200; // Number of shooting stars to spawn
+const shootingStarCount = 250; // Number of shooting stars to spawn
 const shootingStars = new THREE.BufferGeometry();
 const shootingStarPositions = [];
 const velocities = [];
@@ -385,11 +385,11 @@ const planet4 = createPlanet(4, -250, 10, planetTextures[3], 0.004, planetColors
 const planet5 = createPlanet(2, 30, 5, planetTextures[4], 0.01, planetColors[4]);
 const planet6 = createPlanet(3.5, -280, -25, planetTextures[5], 0.006, planetColors[5]);
 const planet7 = createPlanet(1.8, 300, -5, planetTextures[6], 0.009, planetColors[6]);
-const planet8 = createPlanet(2, -100, 2, planetTextures[7], 0.005, planetColors[7]);
+const planet8 = createPlanet(3, -100, 2, planetTextures[7], 0.005, planetColors[7]);
 const planet9 = createPlanet(2.5, 150, 40, planetTextures[8], 0.002, planetColors[8]);
 const planet10 = createPlanet(6, -200, 50, planetTextures[9], 0.003, planetColors[9]);
 const planet11 = createPlanet(4, 30, -40, planetTextures[10], 0.004, planetColors[10]);
-const planet12 = createPlanet(1.2, 30, 60, planetTextures[11], 0.008, planetColors[11]);
+const planet12 = createPlanet(4.2, 30, 60, planetTextures[11], 0.008, planetColors[11]);
 
 const createRingedPlanet = (size, distance, positionY, textureUrl, ringTextureUrl, rotationSpeed, color) => {
     // Create the planet
@@ -594,8 +594,8 @@ planetColors.forEach((color, index) => {
 });
 
 // You can add more planets by repeating the createPlanet function with different parameters
-const firePlanet = createFirePlanet(15, 200, 130, "./images/lava.jpg", 0.005);
-const electricPlanet = createElectricPlanet(10, 200, 50, "./images/lava.jpg", 0.003);
+const firePlanet = createFirePlanet(25, 500, 100, "./images/lava.jpg", 0.005);
+const electricPlanet = createElectricPlanet(10, 400, 20, "./images/lava.jpg", 0.003);
 
 
 // Resize Handling
