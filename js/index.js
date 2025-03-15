@@ -605,6 +605,33 @@ window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 })
 
+window.openModal = function (modalId) {
+    document.getElementById(modalId).style.display = "block";
+};
+window.closeModal = function (modalId) {
+    document.getElementById(modalId).style.display = "none";
+};
+
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+}
+
+// Function to close modal
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// Close modal if user clicks outside the content
+window.onclick = function(event) {
+    let modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+};
+
+
 
 function animate() {
     requestAnimationFrame(animate);
