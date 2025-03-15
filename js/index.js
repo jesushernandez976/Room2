@@ -160,7 +160,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   // Call the function to hide the button
   hideButton();
   
-const gridRadius = 5;  // Radius of the sphere
+const gridRadius = 12;  // Radius of the sphere
 const gridDivisions = 30;  // Number of divisions (latitude and longitude lines)
 
 // Create spherical grid lines (longitude lines)
