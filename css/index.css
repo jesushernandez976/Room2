@@ -665,89 +665,82 @@ button  {
     
     @media screen and (max-width: 450px) {
 
-      @keyframes gradientAnimation {
-        0% {
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(22, 0, 165, 0.71));
-        }
-        50% {
-            background: linear-gradient(45deg, rgba(22, 0, 168, 0.73), rgba(255, 0, 150, 0.9));
-        }
-        100% {
-            background: linear-gradient(45deg, rgba(255, 0, 150, 0.6), rgba(0, 0, 0, 0.6));
-        }
-    }
-    
-    .hidden-menu {
+      .hidden-menu {
         position: fixed;
         top: 0;
-        right: -110%;
-        width: 420px;
-        height: 100vh;
+        right: -100vw; /* Starts hidden */
+        width: 100vw; /* Full width */
+        height: 100vh; /* Full height */
         backdrop-filter: blur(1px);
-        background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(13, 0, 101, 0.7));
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.66), rgba(9, 0, 71, 0.77), rgba(181, 0, 106, 0.3), rgba(0, 49, 79, 0.54));
+        background-size: 400% 400%;
         transition: transform 0.5s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     /* When menu is active */
-    .hidden-menu.active {
-        right: 0;
-        animation: gradientAnimation 1s infinite alternate ease-in-out;
+    .toggle-checkbox:checked ~ .hidden-menu {
+        transform: translateX(-100vw);
+        animation: smoothGradient 10s infinite ease-in-out;
     }
     
-
-      .toggle-checkbox:checked ~ .hidden-menu {
-        transform: translateX(-95%);
-      }
-
-
-        .toggle-checkbox {
-          display: none;
+    /* Ultra-Smooth Gradient Animation */
+    @keyframes smoothGradient {
+        0% {
+            background-position: 0% 50%;
         }
-
-        .hamburger {
-          position: fixed;
-          top: 15px;
-          right: 15px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          width: 35px;
-          height: 24px;
-          cursor: pointer;
-          z-index: 99999;
+        50% {
+            background-position: 100% 50%;
         }
-
-        .hamburger .bar {
-          width: 100%;
-          height: 4px;
-          background-color: #333;
-          border-radius: 10px;
-          transition:
-            transform 0.3s ease,
-            opacity 0.3s ease;
-          position: relative;
+        100% {
+            background-position: 0% 50%;
         }
-
-        .toggle-checkbox:checked + .hamburger .bar:nth-child(2) {
-          transform: translate(0px, 10px);
-          opacity: 0;
-          transition-delay: 0.3s;
-        }
-
-        .toggle-checkbox:checked + .hamburger .bar:nth-child(3) {
-          transform: translate(0px, -10px);
-          transition-delay: 0s;
-        }
-
-        .toggle-checkbox:checked + .hamburger .bar:nth-child(1) {
-          transform: rotate(-45deg) scale(0.7);
-          transition-delay: 0.6s;
-        }
-        .toggle-checkbox:checked + .hamburger .bar:nth-child(3) {
-          transform: rotate(45deg) scale(0.7);
-          transition-delay: 0.6s;
-        }
-
+    }
+    
+    
+    
+    /* Hide checkbox */
+    .toggle-checkbox {
+        display: none;
+    }
+    
+    /* Hamburger Menu */
+    .hamburger {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 35px;
+        height: 24px;
+        cursor: pointer;
+        z-index: 99999;
+    }
+    
+    .hamburger .bar {
+        width: 100%;
+        height: 4px;
+        background-color: #fff;
+        border-radius: 10px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    /* Animation when menu is toggled */
+    .toggle-checkbox:checked + .hamburger .bar:nth-child(1) {
+        transform: translateY(10px) rotate(-45deg);
+    }
+    
+    .toggle-checkbox:checked + .hamburger .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .toggle-checkbox:checked + .hamburger .bar:nth-child(3) {
+        transform: translateY(-10px) rotate(45deg);
+    }
+    
 
         button {
             width: 15em;
