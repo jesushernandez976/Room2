@@ -667,10 +667,10 @@ button  {
 
       @keyframes gradientAnimation {
         0% {
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(22, 0, 165, 0.71));
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(22, 0, 165, 0.71));
         }
         50% {
-            background: linear-gradient(45deg, rgba(22, 0, 168, 0.73), rgba(255, 0, 150, 0.6));
+            background: linear-gradient(45deg, rgba(22, 0, 168, 0.73), rgba(255, 0, 150, 0.9));
         }
         100% {
             background: linear-gradient(45deg, rgba(255, 0, 150, 0.6), rgba(0, 0, 0, 0.6));
@@ -684,14 +684,14 @@ button  {
         width: 420px;
         height: 100vh;
         backdrop-filter: blur(1px);
-        background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(13, 0, 101, 0.6));
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(13, 0, 101, 0.7));
         transition: transform 0.5s ease-in-out;
     }
     
     /* When menu is active */
     .hidden-menu.active {
         right: 0;
-        animation: gradientAnimation 2s infinite alternate ease-in-out;
+        animation: gradientAnimation 1s infinite alternate ease-in-out;
     }
     
 
