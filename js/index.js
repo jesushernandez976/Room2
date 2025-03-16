@@ -722,7 +722,7 @@ scene.add(ufo);
 
 // UFO Dome (Top)
 const domeGeometry = new THREE.SphereGeometry(2, 32, 32);
-const domeMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.3 });
+const domeMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.8 });
 const dome = new THREE.Mesh(domeGeometry, domeMaterial);
 dome.position.y = 2; // Raise above the disc
 scene.add(dome);
@@ -733,7 +733,7 @@ ufoGroup.add(ufo);
 ufoGroup.add(dome);
 scene.add(ufoGroup);
 
-ufoGroup.position.set(450, 11, -50); // Start far left
+ufoGroup.position.set(-150, 15, -50); // Start far left
 
 
 // Blinking Lights Under the UFO
@@ -754,7 +754,7 @@ lightPositions.forEach((pos, index) => {
 
 function flyByAnimation() {
     gsap.to(ufoGroup.position, {
-        x: -100, // Move across the screen
+        x:150, // Move across the screen
         y: 20,  // Slight height change
         z: 7,  // Move forward slightly
         duration: 4, // Duration of fly-by
@@ -765,7 +765,7 @@ function flyByAnimation() {
     });
 
     gsap.to(ufoGroup.rotation, {
-        z: 0.9, // Slight tilt for realism
+        z: -1, // Slight tilt for realism
         duration: 5,
         repeat: -1, // Keep rotating during flight
         yoyo: false,
