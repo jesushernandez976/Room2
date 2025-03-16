@@ -690,6 +690,7 @@ function updateVersion() {
   updateVersion(); // Initial call
   setInterval(updateVersion, 86400000);
 
+
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
