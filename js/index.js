@@ -691,6 +691,91 @@ function updateVersion() {
   setInterval(updateVersion, 86400000);
 
 
+  function createBlinkingLight(position, color = 0xff0000, intensity = 40, size = 0.1) {
+    const light = new THREE.PointLight(color, intensity, 40); // Small range light
+    const sphereGeometry = new THREE.SphereGeometry(size, .5, .5);
+    const sphereMaterial = new THREE.MeshBasicMaterial({ color, emissive: color });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+    const lightGroup = new THREE.Group();
+    lightGroup.add(light);
+    lightGroup.add(sphere);
+
+    // Set the exact position
+    lightGroup.position.set(position.x, position.y, position.z);
+
+    scene.add(lightGroup);
+
+    return light;
+}
+
+// Create two blinking lights at specified locations
+const light1 = createBlinkingLight({ x: -30, y: -9.5, z: -50 });
+const light2 = createBlinkingLight({ x: 90, y: 65, z: 160 });
+const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20}, 0xffffff); // White
+
+
+const ufoGeometry = new THREE.CylinderGeometry(5, 8, 2, 32); // (radiusTop, radiusBottom, height, radialSegments)
+const ufoMaterial = new THREE.MeshStandardMaterial({ color: 0x666666, metalness: 0.9, roughness: 0.3 });
+const ufo = new THREE.Mesh(ufoGeometry, ufoMaterial);
+scene.add(ufo);
+
+// UFO Dome (Top)
+const domeGeometry = new THREE.SphereGeometry(2, 32, 32);
+const domeMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.3 });
+const dome = new THREE.Mesh(domeGeometry, domeMaterial);
+dome.position.y = 2; // Raise above the disc
+scene.add(dome);
+
+// Attach the dome to the UFO body
+const ufoGroup = new THREE.Group();
+ufoGroup.add(ufo);
+ufoGroup.add(dome);
+scene.add(ufoGroup);
+
+ufoGroup.position.set(450, 11, -50); // Start far left
+
+
+// Blinking Lights Under the UFO
+const blinkingLights = [];
+const lightPositions = [
+    { x: 2, y: -1, z: 4 },
+    { x: -4, y: -1, z: 4 },
+    { x: 4, y: -1, z: -4 },
+    { x: -4, y: -1, z: -4 },
+];
+
+lightPositions.forEach((pos, index) => {
+    const light = new THREE.PointLight(0xff0000, 4, 3); // Red lights
+    light.position.set(pos.x, pos.y, pos.z);
+    scene.add(light);
+    blinkingLights.push({ light, phase: index * Math.PI * 4 }); // Different phases for staggered blinking
+});
+
+function flyByAnimation() {
+    gsap.to(ufoGroup.position, {
+        x: -100, // Move across the screen
+        y: 20,  // Slight height change
+        z: 7,  // Move forward slightly
+        duration: 4, // Duration of fly-by
+        ease: "power1.inOut",
+        onComplete: () => {
+            scene.remove(ufoGroup); // Remove UFO from the scene after animation
+        }
+    });
+
+    gsap.to(ufoGroup.rotation, {
+        z: 0.9, // Slight tilt for realism
+        duration: 5,
+        repeat: -1, // Keep rotating during flight
+        yoyo: false,
+        ease: "power1.inOut"
+    });
+}
+
+flyByAnimation();
+
+
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
@@ -706,6 +791,19 @@ function animate() {
 
     // Rotate the entire scene to create the spherical motion effect
     scene.rotation.y += gridRotationSpeed;
+    const time = performance.now() * 0.007;
+
+    light1.intensity = Math.abs(Math.sin(time)) * 4; // Blink effect
+    light2.intensity = Math.abs(Math.sin(time + 1)) * 4; 
+    whiteLight.intensity = Math.abs(Math.sin(time * .1)) * 1; // White blink, slightly faster
+
+    ufoGroup.rotation.y += 0.01;
+
+    // Blinking light effect
+    blinkingLights.forEach(({ light, phase }) => {
+        light.intensity = Math.abs(Math.sin(time + phase)) * 20;
+    });
+
 
     // Rotate the particle system in the opposite direction
     particleSystem.rotation.y += particleRotationSpeed;
