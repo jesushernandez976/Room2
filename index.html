@@ -14,6 +14,29 @@
     </style>
 </head>
 <body>
+<div id="container">
+
+    <input class="toggle-checkbox" id="toggle" type="checkbox" />
+<label class="hamburger" for="toggle">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</label>
+
+<div class="hidden-menu">
+ 
+<div class="checkbox-wrapper-35">
+    <input value="private" name="switch" id="switch" type="checkbox" class="switch">
+    <label for="switch">
+      <span class="switch-x-text switch-x-unchecked" ></span>
+      <span class="switch-x-toggletext">
+        <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked: </span><svg fill="#78768d" width="25px" height="14px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#78768d"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1129.432 113v1694.148H903.545l-451.772-451.773V564.773L903.545 113h225.887Zm542.545 248.057C1832.017 521.097 1920 733.882 1920 960.107c0 226.226-87.983 438.898-248.023 598.938l-79.851-79.85c138.694-138.582 214.93-323.018 214.93-519.087 0-196.183-76.236-380.506-214.93-519.2ZM338.83 564.773v790.602H169.415C75.672 1355.375 0 1279.703 0 1185.96V734.187c0-93.742 75.672-169.414 169.415-169.414H338.83Zm1093.922 36.085c95.776 97.018 148.407 224.644 148.407 359.16 0 134.628-52.631 262.253-148.407 359.272l-80.303-79.174c74.656-75.897 115.767-175.4 115.767-280.099 0-104.585-41.111-204.088-115.767-279.986Z" fill-rule="evenodd"></path> </g></svg></span>
+        <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span><svg fill="#78768d" width="25px" height="14px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#78768d"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1129.433 113v1694.15H903.547l-451.774-451.773V564.773L903.547 113h225.886ZM338.83 564.773v790.604H169.415c-92.806 0-167.9-74.166-169.392-166.609L0 1185.962V734.188c0-92.805 74.166-167.9 166.608-169.392l2.807-.023H338.83ZM1789.951 635 1920 764.926 1724.988 959.94 1920 1154.95 1789.951 1285l-194.89-195.012L1400.05 1285 1270 1154.951l195.012-195.012L1270 764.926 1400.049 635l195.012 195.012L1789.951 635Z" fill-rule="evenodd"></path> </g></svg></span>
+      </span>
+    </label>
+  </div>
+  
+  
     <div class="ui-container">
         <button id="button1">
             S E R V I C E S 
@@ -77,7 +100,8 @@
         </button>
 
     </div>
-
+    
+</div>
     <!-- Terms & Conditions Modal -->
 <div id="termsModal" class="modal">
     <div class="modal-content">
@@ -205,7 +229,11 @@
             <br>
             accesscodepro.com
 </p>
+<a href="Terms and Conditions.pdf" download="Terms_and_Conditions.pdf" class="download-btn">
+    Download Terms & Conditions (PDF)
+</a>
     </div>
+
 </div>
 
 <!-- Privacy Policy Modal -->
@@ -213,7 +241,57 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('privacyModal')">&times;</span>
             <h2>Privacy Policy</h2>
-            <p>Here is the privacy policy...</p>
+            <p>Last Updated: 03/02/2025
+                <br>
+                Welcome to Access Code Programming, LLC. We take your privacy seriously and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.<br>
+                1. Information We Collect
+                We collect only the necessary information to provide and improve our services. This may include:
+                •	Personal Information:
+                o	Name
+                o	Email address
+                o	Phone number
+                o	Shipping address (only when processing orders for physical products)
+                •	Automatically Collected Data:
+                o	IP address
+                o	Browser type and version
+                o	Usage data (such as pages visited, time spent on our site, and interactions)
+                We do not collect sensitive personal data, such as payment details or government-issued identification.<br>
+                2. How We Use Your Information
+                We use the information we collect for the following purposes:
+                •	To provide and improve our services
+                •	To respond to inquiries and provide customer support
+                •	To process transactions and orders
+                •	To send important service-related updates
+                •	To enhance security and prevent fraudulent activities <br>
+                3. Data Sharing and Third-Party Services
+                We do not sell, trade, or rent your personal information to third parties. However, we may share your data with trusted third-party service providers that help us operate our website and services, including:
+                •	Amazon Web Services (AWS) for secure cloud storage and hosting
+                •	Amazon CloudFront (CDN) for fast and reliable content delivery
+                We take extensive measures to ensure the security of these third-party services but are not responsible for their independent policies or service failures.<br>
+                4. Data Security
+                We implement industry-standard security measures to protect your personal information, including secure data storage. While we strive to protect your data, no system is completely immune to security breaches. By using our services, you acknowledge this risk.<br>
+                5. Cookies and Tracking Technologies
+                Our website may use cookies and similar tracking technologies to enhance user experience and gather analytics. You can choose to disable cookies through your browser settings, but doing so may impact website functionality. <br>
+                6. Your Rights and Choices
+                You have the following rights regarding your personal data:
+                •	Access & Update: You can request access to the personal information we store about you and update any inaccuracies.
+                •	Opt-Out: You may opt out of marketing communications at any time.
+                •	Deletion: You can request the deletion of your personal data, subject to legal and contractual obligations. <br>
+                To exercise these rights, contact us at info@accesscodepro.com.<br>
+                7. Children's Privacy
+                Our website and services are intended for children of all ages. We do not knowingly collect personal information from children. If you believe we have unintentionally collected data from a child, please contact us for removal.<br>
+                8. Changes to This Privacy Policy
+                We may update this Privacy Policy periodically to reflect changes in our practices. Any updates will be posted on this page, and continued use of our services constitutes acceptance of the revised policy.<br><br>
+                Contact Information
+                For any questions or concerns regarding this Privacy Policy, contact us at:<br>
+                Email: info@accesscodepro.com<br>
+                Website: accesscodepro.com
+                
+                </p>
+                <a href="Privacy Policy.pdf" download="Terms_and_Conditions.pdf" class="download-btn">
+                    Download Privacy Policy (PDF)
+                </a>
+
         </div>
     </div>
 
@@ -225,32 +303,54 @@
             <p>Here are the credits...</p>
         </div>
     </div>
-    
 
-    <!-- Social Media Modal -->
-    <div id="socialModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('socialModal')">&times;</span>
-            <h2>Social Media</h2>
-            <p>Follow us on social media...</p>
-        </div>
+    <div id="socialWheel" class="social-wheel">
+        <a href="https://facebook.com/yourpage" target="_blank" class="icon" style="--i:0">
+            <img src="facebook.png" alt="Facebook">
+        </a>
+        <a href="https://twitter.com/yourhandle" target="_blank" class="icon" style="--i:1">
+            <img src="facebook.png" alt="Twitter">
+        </a>
+        <a href="https://instagram.com/yourprofile" target="_blank" class="icon" style="--i:2">
+            <img src="facebook.png" alt="Instagram">
+        </a>
+        <a href="https://tiktok.com/@yourusername" target="_blank" class="icon" style="--i:3">
+            <img src="facebook.png" alt="TikTok">
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="icon" style="--i:4">
+            <img src="facebook.png" alt="LinkedIn">
+        </a>
+        <a href="https://youtube.com/c/yourchannel" target="_blank" class="icon" style="--i:5">
+            <img src="facebook.png" alt="YouTube">
+        </a>
+        <a href="https://github.com/yourgithub" target="_blank" class="icon" style="--i:6">
+            <img src="facebook.png" alt="GitHub">
+        </a>
+        <a href="https://discord.gg/yourserver" target="_blank" class="icon" style="--i:7">
+            <img src="facebook.png" alt="Discord">
+        </a>
+        <a href="mailto:your@email.com" class="icon center">
+            <img src="facebook.png" alt="Email">
+        </a>
+        <a href="https://discord.gg/yourserver" target="_blank" class="icon" style="--i:8">
+            <img src="facebook.png" alt="Discord">
+        </a>
     </div>
-
+    
 
     <footer id="footer">
         <ul>
             <li><a href="#" onclick="openModal('termsModal')">Terms & Conditions</a></li>
             <li><a href="#" onclick="openModal('privacyModal')">Privacy Policy</a></li>
             <li><a href="#" onclick="openModal('creditsModal')">Credits</a></li>
-            <li><a href="#" onclick="openModal('socialModal')">Social Media</a></li>
+            <li><a href="#" id="socialLink">Social Media</a></li>
         </ul>
-        <p id="footerDiv">Access Code Programming, LLC [Version 1.0.3] <br>
+        <p id="footerDiv">Access Code Programming, LLC <span id="version">[Version 1.0.0]</span> <br>
             © 2025 [ACP] All Rights Reserved.</p>
     </footer>
     
-    
+</div>
       </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script type="module" src="./js/index.js"></script>
     </body>

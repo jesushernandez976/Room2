@@ -72,57 +72,67 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
 
   
   const zoomAndPan = () => {
-    // Hide renderer initially to prevent flickering
-    renderer.domElement.style.visibility = "hidden";
+    // Get the container element
+    const container = document.getElementById("container");
+
+    // Hide the container initially
+    container.style.opacity = "0";
+    container.style.pointerEvents = "none"; // Disable all clicks
+
 
     // Start position (far from the scene)
-    camera.position.set(-100, -100, -100); 
+    camera.position.set(-100, -100, -100);
 
     const isMobile = window.innerWidth <= 500; // Detect mobile screen
 
     // Instantly set the initial position to prevent flickering
     gsap.set(camera.position, {
-      x: -40,
-      y: -20,
-      z: -90
+        x: -40,
+        y: -20,
+        z: -90
     });
 
     gsap.set(camera, { fov: isMobile ? 75 : 75 });
     camera.updateProjectionMatrix();
 
-    // Delay for a brief moment, then make the scene visible
-    setTimeout(() => {
-        renderer.domElement.style.visibility = "visible";
-    }, 10); // Small delay for smooth transition
-
     // Animate the camera position
     gsap.to(camera.position, {
         x: 3,
         y: 0,
-        z: isMobile ? 6 : 3,  
-        duration: 6,  
+        z: isMobile ? 6 : 3,
+        duration: 6,
         ease: "power2.inOut"
     });
 
     // Animate the field of view
     gsap.to(camera, {
-        fov: isMobile ? 50 : 50,  
-        duration: 7,  
+        fov: isMobile ? 50 : 50,
+        duration: 7,
         ease: "power2.inOut",
         onUpdate: () => {
             camera.updateProjectionMatrix();
+        },
+        onComplete: () => {
+            // Fade in the container when animation completes
+            container.style.transition = "opacity 1s ease-in-out";
+            container.style.opacity = "1";
+            container.style.pointerEvents = "auto";
         }
     });
-   
 };
 
-  
-  // Call the zoom and pan function on page load
-  window.onload = () => {
-    camera.position.set(-100, -100, -100); 
+// Call the zoom and pan function on page load
+window.onload = () => {
+    camera.position.set(-100, -100, -100);
     zoomAndPan();
-  };
-  
+};
+
+// Call the zoom and pan function on page load
+window.onload = () => {
+    camera.position.set(-100, -100, -100);
+    zoomAndPan();
+};
+
   // Optionally, update based on screen width (if needed)
   if (window.innerWidth <= 500) {
     // Adjust model positions or scaling for small screens here
@@ -132,33 +142,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
       }
     });
   }
-  function hideButton() {
-    // Select the button with the ID 'button'
-    const button = document.getElementById('button1');
-    const button2 = document.getElementById('button2');
-    const button3 = document.getElementById('button3');
-    const button4 = document.getElementById('button4');
-    const button5 = document.getElementById('button5');
-    // Hide the button
-    button.style.display = 'none';
-    button2.style.display = 'none';
-    button3.style.display = 'none';
-    button4.style.display = 'none';
-    button5.style.display = 'none';
-  
-    // After 6 seconds, show the button again
-    setTimeout(() => {
-    button.style.display = 'block';
-    button2.style.display = 'block';
-    button3.style.display = 'block';
-    button4.style.display = 'block';
-    button5.style.display = 'block';
 
-    }, 5000);  // 6000 milliseconds = 6 seconds
-  }
-  
-  // Call the function to hide the button
-  hideButton();
   
 const gridRadius = 12;  // Radius of the sphere
 const gridDivisions = 30;  // Number of divisions (latitude and longitude lines)
@@ -620,18 +604,91 @@ function openModal(modalId) {
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const socialLink = document.getElementById("socialLink");
+    const wheel = document.getElementById("socialWheel");
 
-// Close modal if user clicks outside the content
-window.onclick = function(event) {
-    let modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    function toggleSocialWheel(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (wheel.classList.contains("active")) {
+            closeSocialWheel();
+        } else {
+            openSocialWheel();
+        }
+    }
+
+    function openSocialWheel() {
+        wheel.style.display = "flex"; // Ensure it's visible before animation
+        wheel.classList.remove("closing"); // Remove closing animation if present
+        requestAnimationFrame(() => {
+            wheel.classList.add("active");
+        });
+    }
+
+    function closeSocialWheel() {
+        if (wheel.classList.contains("active")) {
+            wheel.classList.add("closing"); // Add closing animation
+            setTimeout(() => {
+                wheel.classList.remove("active", "closing");
+                wheel.style.display = "none"; // Hide after animation ends
+            }, 300);
+        }
+    }
+
+    // Toggle on click
+    socialLink.addEventListener("click", toggleSocialWheel);
+
+    // Close when clicking outside (Desktop & Mobile)
+    document.addEventListener("click", function (event) {
+        if (!wheel.contains(event.target) && event.target !== socialLink) {
+            closeSocialWheel();
         }
     });
-};
+
+    // Close when touching outside (Mobile)
+    document.addEventListener("touchstart", function (event) {
+        if (!wheel.contains(event.target) && event.target !== socialLink) {
+            closeSocialWheel();
+        }
+    });
+});
 
 
+function updateVersion() {
+    let startDate = new Date("2025-03-15T00:00:00"); // Set the initial start date
+    let now = new Date();
+
+    // Calculate the number of days elapsed since startDate
+    let diffInMs = now - startDate;
+    let daysElapsed = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Convert ms to days
+
+    let major = 1;  // First number (1-10)
+    let minor = 0;  // Middle number (0-50)
+    let patch = daysElapsed; // Last number (increments daily)
+
+    // Handle rollovers
+    if (patch >= 100) {
+      minor += Math.floor(patch / 100); // Increment minor when patch reaches 100
+      patch = patch % 100; // Reset patch to 0 after 100
+    }
+    if (minor >= 50) {
+      major += Math.floor(minor / 50); // Increment major when minor reaches 50
+      minor = minor % 50; // Reset minor to 0 after 50
+    }
+    if (major > 10) {
+      major = 10; // Cap major version at 10
+      minor = 50; // Stop minor at 50 when major is 10
+      patch = 100; // Stop patch at 100 when both limits are hit
+    }
+
+    let version = `[Version ${major}.${minor}.${patch}]`;
+    document.getElementById('version').textContent = version;
+  }
+
+  updateVersion(); // Initial call
+  setInterval(updateVersion, 86400000);
 
 function animate() {
     requestAnimationFrame(animate);

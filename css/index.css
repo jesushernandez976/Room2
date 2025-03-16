@@ -2,23 +2,6 @@
   font-family: 'Roboto Mono', monospace;
 }
 
-#button1{
-    display: none;
-    
-}
-
-#button2{
-    display: none;
-}
-#button3{
-    display: none;
-}
-#button4{
-    display: none;
-}
-#button5{
-    display: none;
-}
 
 footer {
   position: absolute;
@@ -97,6 +80,97 @@ footer ul li a:hover {
 
 .close:hover {
   color: red;
+}
+
+#socialWheel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* 🚀 OPEN ANIMATION */
+#socialWheel.active {
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* 🔄 CLOSE ANIMATION (REVERSES ENTRY) */
+#socialWheel.inactive {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* ✨ Icons Enter Staggered */
+#socialWheel.active .icon {
+  opacity: 1;
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  transition-delay: calc(var(--i) * 0.07s);
+}
+
+
+#socialWheel.inactive .icon {
+  opacity: 0;
+  transform: rotate(calc(var(--i) * 40deg)) translate(0px) rotate(calc(var(--i) * -40deg));
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  transition-delay: calc((5 - var(--i)) * 0.07s); /* Reverse Order */
+}
+
+/* 🔥 Hover Effects */
+.icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transform: rotate(calc(var(--i) * 40deg)) translate(100px) rotate(calc(var(--i) * -40deg));
+  opacity: 0;
+}
+
+.icon:hover {
+  transform: rotate(calc(var(--i) * 40deg)) translate(110px) rotate(calc(var(--i) * -40deg)) !important;
+  background: #4476b0;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out !important;
+}
+
+.icon img {
+  width: 60%;
+  height: 60%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.icon:hover img {
+  transform: scale(1.1);
+}
+
+/* 🔥 Center Button Click Effect */
+.icon.center {
+  transform: none;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.icon.center:active {
+  transform: scale(0.9);
 }
 
 
@@ -234,18 +308,18 @@ button  {
     transition: 0.2s;
     background-color: #2761c3;
     top: 40% !important;
-    width: 15%;
-    height: 40%;
+    width: 16%;
+    height: 39%;
   }
   
   #leftArrow {
-    left: -13.5%;
+    left: -19.5%;
     -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
   }
   
   #rightArrow {
     -webkit-clip-path: polygon(100% 49%, 0 0, 0 100%);
-    left: 108%;
+    left: 104.5%;
   }
   
   button:hover #rightArrow {
@@ -454,55 +528,258 @@ button  {
         animation: floatButton5 4s ease-in-out infinite;
     }
 
+.checkbox-wrapper-35 {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
 
+.checkbox-wrapper-35 .switch {
+  display: none;
+}
+
+.checkbox-wrapper-35 .switch + label {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #78768d;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-wrapper-35 .switch + label::before,
+  .checkbox-wrapper-35 .switch + label::after {
+  content: '';
+  display: block;
+}
+
+.checkbox-wrapper-35 .switch + label::before {
+  background-color:#2761c3;
+  border-radius: 500px;
+  height: 15px;
+  margin-right: 8px;
+  -webkit-transition: background-color 0.125s ease-out;
+  transition: background-color 0.125s ease-out;
+  width: 25px;
+}
+
+.checkbox-wrapper-35 .switch + label::after {
+  background-color: #fff;
+  border-radius: 13px;
+  box-shadow: 0 3px 1px 0 rgba(19, 0, 222, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+  height: 13px;
+  left: 1px;
+  position: absolute;
+  top: 1px;
+  -webkit-transition: -webkit-transform 0.125s ease-out;
+  transition: -webkit-transform 0.125s ease-out;
+  transition: transform 0.125s ease-out;
+  transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
+  width: 13px;
+}
+
+.checkbox-wrapper-35 .switch + label .switch-x-text {
+  display: block;
+  margin-right: .3em;
+}
+
+.checkbox-wrapper-35 .switch + label .switch-x-toggletext {
+  display: block;
+  font-weight: bold;
+  height: 15px;
+  overflow: hidden;
+  position: relative;
+  width: 25px;
+}
+
+.checkbox-wrapper-35 .switch + label .switch-x-unchecked,
+  .checkbox-wrapper-35 .switch + label .switch-x-checked {
+  left: 0;
+  position: absolute;
+  top: 0;
+  -webkit-transition: opacity 0.125s ease-out, -webkit-transform 0.125s ease-out;
+  transition: opacity 0.125s ease-out, -webkit-transform 0.125s ease-out;
+  transition: transform 0.125s ease-out, opacity 0.125s ease-out;
+  transition: transform 0.125s ease-out, opacity 0.125s ease-out, -webkit-transform 0.125s ease-out;
+}
+
+.checkbox-wrapper-35 .switch + label .switch-x-unchecked {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+}
+
+.checkbox-wrapper-35 .switch + label .switch-x-checked {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+
+.checkbox-wrapper-35 .switch + label .switch-x-hiddenlabel {
+  position: absolute;
+  visibility: hidden;
+}
+
+.checkbox-wrapper-35 .switch:checked + label::before {
+  background-color:rgb(59, 43, 0);
+}
+
+.checkbox-wrapper-35 .switch:checked + label::after {
+  -webkit-transform: translate3d(10px, 0, 0);
+  transform: translate3d(10px, 0, 0);
+}
+
+.checkbox-wrapper-35 .switch:checked + label .switch-x-unchecked {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+}
+
+.checkbox-wrapper-35 .switch:checked + label .switch-x-checked {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+}
+ 
+  @media screen and (min-width: 450px) {
+    .hamburger {
+      display: none;
+
+    }
+    .toggle-checkbox {
+      display: none;
+    }
+  }
     
     @media screen and (max-width: 450px) {
+
+      .hidden-menu {
+        position: fixed;
+        top: 0;
+        right: -110%;
+        width: 420px;
+        height: 100vh;
+        backdrop-filter: blur(3px);
+        transition: transform 0.5s ease-in-out;
+
+      }
+
+      .toggle-checkbox:checked ~ .hidden-menu {
+        transform: translateX(-95%);
+      }
+
+
+        .toggle-checkbox {
+          display: none;
+        }
+
+        .hamburger {
+          position: fixed;
+          top: 15px;
+          right: 15px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 35px;
+          height: 24px;
+          cursor: pointer;
+          z-index: 99999;
+        }
+
+        .hamburger .bar {
+          width: 100%;
+          height: 4px;
+          background-color: #333;
+          border-radius: 10px;
+          transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+          position: relative;
+        }
+
+        .toggle-checkbox:checked + .hamburger .bar:nth-child(2) {
+          transform: translate(0px, 10px);
+          opacity: 0;
+          transition-delay: 0.3s;
+        }
+
+        .toggle-checkbox:checked + .hamburger .bar:nth-child(3) {
+          transform: translate(0px, -10px);
+          transition-delay: 0s;
+        }
+
+        .toggle-checkbox:checked + .hamburger .bar:nth-child(1) {
+          transform: rotate(-45deg) scale(0.7);
+          transition-delay: 0.6s;
+        }
+        .toggle-checkbox:checked + .hamburger .bar:nth-child(3) {
+          transform: rotate(45deg) scale(0.7);
+          transition-delay: 0.6s;
+        }
+
+
         button {
-            width: 12em;
-            height: 3em;
+            width: 15em;
+            height: 4em;
             font-size: 10px;
             top: 20%;
-            left: 55%;
+            left: 30%;
         }
     
         .button2 {
-            width: 11em;
-            height: 3em;
+            width: 15em;
+            height: 4em;
             font-size: 10px;
             top: 30%;
-            left: 65%;
+            left: 30%;
         }
     
         .button3 {
-            width: 11em;
-            height: 3em;
+            width: 15em;
+            height: 4em;
             font-size: 10px;
             top: 55%;
-            left: 65%;
+            left: 30%;
         }
     
         .button4 {
-            width: 12em;
-            height: 3em;
+            width: 15em;
+            height: 4em;
             font-size: 10px;
             top: 67%;
-            left: 55%;
+            left: 30%;
         }
     
         .button5 {
-            width: 10em;
-            height: 3em;
+            width: 15em;
+            height: 4em;
             font-size: 10px;
             top: 41%;
-        }
-
-        .nav-link {
-            font-size: 6px;
+            left: 30%;
         }
 
         #footerDiv {
             font-size: 6px;
         }
+
+        .modal-content {
+          background: rgba(234, 234, 234, 0.9); /* Slight transparency */
+          width: 80%;
+          font-size: 12px;
+        }
+        
     }
     
   
