@@ -715,16 +715,26 @@ const light2 = createBlinkingLight({ x: 90, y: 65, z: 160 });
 const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20}, 0xffffff); // White
 
 
-const ufoGeometry = new THREE.CylinderGeometry(5, 8, 2, 32); // (radiusTop, radiusBottom, height, radialSegments)
-const ufoMaterial = new THREE.MeshStandardMaterial({ color: 0x666666, metalness: 0.9, roughness: 0.3 });
+const ufoGeometry = new THREE.CylinderGeometry(2, 8, 2, 64); // Wider, flatter
+const ufoMaterial = new THREE.MeshStandardMaterial({
+    color: 0x666666, 
+    metalness: 1,  // More metallic shine
+    roughness: 0.2
+});
 const ufo = new THREE.Mesh(ufoGeometry, ufoMaterial);
 scene.add(ufo);
 
-// UFO Dome (Top)
+// UFO Dome (Glass-Like)
 const domeGeometry = new THREE.SphereGeometry(2, 32, 32);
-const domeMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.8 });
+const domeMaterial = new THREE.MeshStandardMaterial({
+    color: 0x666666,
+    transparent: true,
+    opacity: 5,
+    roughness: 0.1, // More reflective
+    metalness: 0.8
+});
 const dome = new THREE.Mesh(domeGeometry, domeMaterial);
-dome.position.y = 2; // Raise above the disc
+dome.position.y = 1; // Raise slightly above the disc
 scene.add(dome);
 
 // Attach the dome to the UFO body
@@ -733,7 +743,7 @@ ufoGroup.add(ufo);
 ufoGroup.add(dome);
 scene.add(ufoGroup);
 
-ufoGroup.position.set(-150, 15, -50); // Start far left
+ufoGroup.position.set(-100, 5, 10); // Start far left
 
 
 // Blinking Lights Under the UFO
@@ -754,7 +764,7 @@ lightPositions.forEach((pos, index) => {
 
 function flyByAnimation() {
     gsap.to(ufoGroup.position, {
-        x:150, // Move across the screen
+        x:120, // Move across the screen
         y: 20,  // Slight height change
         z: 7,  // Move forward slightly
         duration: 4, // Duration of fly-by
@@ -763,9 +773,8 @@ function flyByAnimation() {
             scene.remove(ufoGroup); // Remove UFO from the scene after animation
         }
     });
-
     gsap.to(ufoGroup.rotation, {
-        z: -1, // Slight tilt for realism
+        z: -5, // Slight tilt for realism
         duration: 5,
         repeat: -1, // Keep rotating during flight
         yoyo: false,
