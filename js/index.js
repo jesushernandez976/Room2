@@ -66,7 +66,7 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   loadModel(modelPath2, 0.5, { x: -4, y: -2, z: -20 });
   loadModel(modelPath3, .24, { x: -30, y: -10, z: -50 });
   loadModel(modelPath4, 1, { x: 150, y: 150, z: -60 });
-  loadModel(modelPath5, 0.3, { x: 90, y: 60, z: 160 });
+  loadModel(modelPath5, 0.3, { x: 90, y: 40, z: 160 });
   
   // Camera positioning
 
@@ -711,7 +711,7 @@ function updateVersion() {
 
 // Create two blinking lights at specified locations
 const light1 = createBlinkingLight({ x: -30, y: -9.5, z: -50 });
-const light2 = createBlinkingLight({ x: 90, y: 65, z: 160 });
+const light2 = createBlinkingLight({ x: 90, y: 45, z: 160 });
 const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20}, 0xffffff); // White
 
 
