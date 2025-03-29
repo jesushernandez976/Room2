@@ -195,37 +195,67 @@ for (let i = 0; i < gridDivisions; i++) {
     scene.add(line);
 }
 
-// Particle System for Blue Background (inside the sphere)
-const particleCount = 10000;
+
+const particleCount = 6000;
 const particles = new THREE.BufferGeometry();
 const positions = [];
+const opacities = new Float32Array(particleCount).fill(1.0); // Stores individual opacity values
+const flickerSpeeds = new Float32Array(particleCount).fill(0.04); // Controls how fast each particle flickers
 
 for (let i = 0; i < particleCount; i++) {
     positions.push(Math.random() * 1000 - 500); // x
     positions.push(Math.random() * 1000 - 500); // y
     positions.push(Math.random() * 1000 - 500); // z
+    opacities[i] = Math.random(); // Start with random opacity
+    flickerSpeeds[i] = Math.random() * 0.06 + 4; // Random flicker speed per particle
 }
 
+// Set attributes for position and opacity
 particles.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+particles.setAttribute('alpha', new THREE.Float32BufferAttribute(opacities, 1));
 
-// Create circular particles using a texture
+// Load circular particle texture
 const particleTexture = new THREE.TextureLoader().load("https://threejs.org/examples/textures/sprites/circle.png");
 
-const particleMaterial = new THREE.PointsMaterial({
-    color: 0xFFFFFF,  
-    size: 1.7,  // Adjust particle size
-    map: particleTexture,  // Use a circular texture
+const particleMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+        pointTexture: { value: particleTexture }
+    },
+    vertexShader: `
+        attribute float alpha;
+        varying float vAlpha;
+        void main() {
+            vAlpha = alpha;
+            gl_PointSize = 4.1;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    `,
+    fragmentShader: `
+        uniform sampler2D pointTexture;
+        varying float vAlpha;
+        void main() {
+            vec4 color = texture2D(pointTexture, gl_PointCoord);
+            gl_FragColor = vec4(color.rgb, color.a * vAlpha);
+        }
+    `,
     transparent: true,
-    opacity: 0.8,
-    depthWrite: false,  // Prevents z-fighting
-    sizeAttenuation: true,  // Makes particles scale with distance
-    blending: THREE.AdditiveBlending,  // Glow effect
-    alphaTest: 0.5  // Removes transparent edges
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
 });
 
 const particleSystem = new THREE.Points(particles, particleMaterial);
-// Place the particles inside the sphere by scaling down the particle count
 scene.add(particleSystem);
+
+// Function to animate particle flickering smoothly
+function animateParticleFlicker() {
+    for (let i = 0; i < particleCount; i++) {
+        opacities[i] += (Math.random() - 0.5) * flickerSpeeds[i]; // Slightly change opacity
+        opacities[i] = Math.max(0.1, Math.min(1.0, opacities[i])); // Clamp between 0.1 and 1.0
+    }
+    particles.attributes.alpha.needsUpdate = true;
+}
+
+
 
 // Resize Handling
 window.addEventListener("resize", () => {
@@ -325,6 +355,14 @@ const getRandomRockTexture = (() => {
         "./images/lava.jpg",
         "./images/Marble.jpg",
         "./images/Metal05.jpg",
+        "./images/Onyx.jpg",
+        "./images/Concrete.jpg",
+        "./images/Asphalt.jpg",
+        "./images/Ground.jpg",
+        "./images/fingerprints.jpg",
+        "./images/Sponge.jpg",
+    
+
     ];
     
     return () => {
@@ -367,7 +405,7 @@ const planet2 = createPlanet(12, -60, -15, planetTextures[1], 0.001, planetColor
 const planet3 = createPlanet(2, 200, 30, planetTextures[2], 0.003, planetColors[2]);
 const planet4 = createPlanet(4, -250, 10, planetTextures[3], 0.004, planetColors[3]);
 const planet5 = createPlanet(2, 30, 5, planetTextures[4], 0.01, planetColors[4]);
-const planet6 = createPlanet(3.5, -280, -25, planetTextures[5], 0.006, planetColors[5]);
+const planet6 = createPlanet(12.5, -280, -25, planetTextures[5], 0.006, planetColors[5]);
 const planet7 = createPlanet(8.8, 300, -30, planetTextures[6], 0.009, planetColors[6]);
 const planet8 = createPlanet(3, -100, 2, planetTextures[7], 0.005, planetColors[7]);
 const planet9 = createPlanet(2.5, 150, 40, planetTextures[8], 0.002, planetColors[8]);
@@ -834,7 +872,7 @@ function animate() {
     // Update shooting stars
     updateShootingStars();
 
-    // Update nebula
+    animateParticleFlicker();
 
     renderer.render(scene, camera);
 }
