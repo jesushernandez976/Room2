@@ -649,6 +649,44 @@ button  {
   -webkit-transform: none;
   transform: none;
 }
+
+.testimonial-container {
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.testimonial-profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4476b0;
+}
+
+.testimonial-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+.testimonial-text {
+  font-size: 1em;
+  color: #666;
+  font-style: italic;
+}
+
+
+
+
+
+
+
+
  
   @media screen and (min-width: 550px) {
     .hamburger {
@@ -660,7 +698,7 @@ button  {
     }
   }
     
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 650px) {
 
       .hidden-menu {
         position: fixed;
@@ -798,6 +836,25 @@ button  {
           
           left: 105.5%;
         }
+
+        .testimonial-container {
+          
+          max-width: 350px;
+          padding: 10px;
+      }
+
+      .testimonial-profile {
+          width: 60px;
+          height: 60px;
+      }
+
+      .testimonial-name {
+          font-size: 1em;
+      }
+
+      .testimonial-text {
+          font-size: 0.85em;
+      }
         
     }
     

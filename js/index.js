@@ -127,11 +127,7 @@ window.onload = () => {
     zoomAndPan();
 };
 
-// Call the zoom and pan function on page load
-window.onload = () => {
-    camera.position.set(-100, -100, -100);
-    zoomAndPan();
-};
+
 
   // Optionally, update based on screen width (if needed)
   if (window.innerWidth <= 500) {
@@ -195,6 +191,9 @@ for (let i = 0; i < gridDivisions; i++) {
     scene.add(line);
 }
 
+// Animation Loop
+let gridRotationSpeed = 0.0005; // Control rotation speed
+let particleRotationSpeed = -0.001; // Control particle system's opposite rotation speed
 
 const particleCount = 6000;
 const particles = new THREE.BufferGeometry();
@@ -207,7 +206,7 @@ for (let i = 0; i < particleCount; i++) {
     positions.push(Math.random() * 1000 - 500); // y
     positions.push(Math.random() * 1000 - 500); // z
     opacities[i] = Math.random(); // Start with random opacity
-    flickerSpeeds[i] = Math.random() * 0.06 + 4; // Random flicker speed per particle
+    flickerSpeeds[i] = Math.random() * 1 + 4; // Random flicker speed per particle
 }
 
 // Set attributes for position and opacity
@@ -264,9 +263,6 @@ window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Animation Loop
-let gridRotationSpeed = 0.0005; // Control rotation speed
-let particleRotationSpeed = -0.001; // Control particle system's opposite rotation speed
 
 // Shooting Star Particle System
 const shootingStarCount = 250; // Number of shooting stars to spawn
