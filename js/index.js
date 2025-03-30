@@ -355,9 +355,14 @@ const getRandomRockTexture = (() => {
         "./images/Concrete.jpg",
         "./images/Asphalt.jpg",
         "./images/Ground.jpg",
-        "./images/fingerprints.jpg",
-        "./images/Sponge.jpg",
-    
+        "./images/jupitermap.jpg",
+        "./images/mars_1k_color.jpg",
+        "./images/neptunemap.jpg",
+        "./images/phobosbump.jpg",
+        "./images/plutomap2k.jpg",
+        "./images/saturnmap.jpg",
+        "./images/sunmap.jpg",
+        "./images/venusmap.jpg",
 
     ];
     
