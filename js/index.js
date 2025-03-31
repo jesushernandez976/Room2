@@ -70,7 +70,6 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   
   // Camera positioning
 
-  
   const zoomAndPan = () => {
     // Get the container element
     const container = document.getElementById("container");
@@ -78,7 +77,6 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
     // Hide the container initially
     container.style.opacity = "0";
     container.style.pointerEvents = "none"; // Disable all clicks
-
 
     // Start position (far from the scene)
     camera.position.set(-100, -100, -100);
@@ -94,6 +92,11 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
 
     gsap.set(camera, { fov: isMobile ? 75 : 75 });
     camera.updateProjectionMatrix();
+    // Play the Welcome sound 1 second before the GSAP animation ends
+    setTimeout(() => {
+        welcomeSound.currentTime = 0;
+        welcomeSound.play();
+    }, 5000); // 1 second before the animation completes (5 seconds)
 
     // Animate the camera position
     gsap.to(camera.position, {
@@ -101,9 +104,25 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
         y: 0,
         z: isMobile ? 6 : 3,
         duration: 6,
-        ease: "power2.inOut"
+        ease: "power2.inOut",
+        onUpdate: () => {
+            camera.updateProjectionMatrix();
+        },
+        onComplete: () => {
+            // Fade in the container when animation completes
+            container.style.transition = "opacity 1s ease-in-out";
+            container.style.opacity = "1";
+            container.style.pointerEvents = "auto";
+        }
     });
 
+    // Play the ACP theme 1 second after the GSAP animation starts
+    setTimeout(() => {
+        if (!isMuted) { // Check before playing
+            acpTheme.currentTime = 0;
+            acpTheme.play();
+        }
+    }, 1000);
     // Animate the field of view
     gsap.to(camera, {
         fov: isMobile ? 50 : 50,
@@ -121,11 +140,13 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
     });
 };
 
+
 // Call the zoom and pan function on page load
 window.onload = () => {
     camera.position.set(-100, -100, -100);
     zoomAndPan();
 };
+
 
 
 
@@ -361,8 +382,9 @@ const getRandomRockTexture = (() => {
         "./images/phobosbump.jpg",
         "./images/plutomap2k.jpg",
         "./images/saturnmap.jpg",
-        "./images/sunmap.jpg",
         "./images/venusmap.jpg",
+        "./images/moonmap1k.jpg",
+        "./images/earthcloudmap (1).jpg",
 
     ];
     
@@ -802,16 +824,26 @@ lightPositions.forEach((pos, index) => {
 });
 
 function flyByAnimation() {
+    // Create the UFO sound effect
+    const ufoSound = new Audio('./audio/ufo.wav');
+    ufoSound.volume = 0.09; // Adjust volume as needed
+
+    // Delay the sound by 0.5 seconds
+    setTimeout(() => {
+        ufoSound.play();
+    }, 500); // 500ms = 0.5 second
+
     gsap.to(ufoGroup.position, {
-        x:120, // Move across the screen
+        x: 120, // Move across the screen
         y: 20,  // Slight height change
         z: 7,  // Move forward slightly
-        duration: 4, // Duration of fly-by
+        duration: 4.5, // Duration of fly-by
         ease: "power1.inOut",
         onComplete: () => {
             scene.remove(ufoGroup); // Remove UFO from the scene after animation
         }
     });
+
     gsap.to(ufoGroup.rotation, {
         z: -5, // Slight tilt for realism
         duration: 5,
@@ -822,6 +854,90 @@ function flyByAnimation() {
 }
 
 flyByAnimation();
+
+
+
+
+// Function to check if the device is mobile
+const isMobile = () => window.innerWidth <= 600;
+
+// Create audio elements
+const hoverSound = new Audio('./audio/Hover.mp3');
+const clickSound = new Audio('./audio/Click.mp3');
+const acpTheme = new Audio('./audio/ACP theme.wav');
+const welcomeSound = new Audio('./audio/Welcome .wav'); // Path to the Welcome sound
+
+// Set initial volume levels based on screen size (mobile or desktop)
+function setVolume() {
+    const mobile = isMobile();
+    hoverSound.volume = 0.07;
+    clickSound.volume = 0.1;
+    welcomeSound.volume = mobile ? 0.02 : 0.05;
+    acpTheme.volume = mobile ? 0.005 : 0.04;
+}
+
+// Set volume when the page loads
+setVolume();
+
+// Recalculate volume on window resize
+window.addEventListener('resize', setVolume);
+
+// Tracks whether sound is muted
+let isMuted = false;
+
+// Timeout for hover delay
+let hoverTimeout;
+
+// Flag to prevent hover sound on click
+let isClicking = false;
+
+// Select all menu items
+const menuItems = document.querySelectorAll('.sound');
+
+// Select the mute toggle switch
+const muteToggle = document.getElementById('switch');
+
+// Add event listener to mute toggle switch
+muteToggle.addEventListener('change', () => {
+    isMuted = !isMuted; // Toggle mute state
+
+    if (isMuted) {
+        acpTheme.pause();
+    } else {
+        acpTheme.currentTime = 0;
+        acpTheme.play();
+    }
+});
+
+// Add event listeners to each menu item
+menuItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        // On desktop, apply hover delay; on mobile, this will be skipped
+        if (!isMuted && !isClicking && window.innerWidth > 600) { 
+            clearTimeout(hoverTimeout);
+            hoverTimeout = setTimeout(() => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            }, 50);
+        }
+    });
+
+    item.addEventListener('click', () => {
+        if (!isMuted) { 
+            isClicking = true;
+            clickSound.currentTime = 0;
+            clickSound.play();
+            
+            // For mobile, disable hover sound after click to avoid conflicting sounds
+            clearTimeout(hoverTimeout); 
+
+            setTimeout(() => {
+                isClicking = false;
+            }, 50);
+        }
+    });
+});
+
 
 
 function animate() {
