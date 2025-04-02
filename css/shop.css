@@ -1,10 +1,11 @@
 @font-face {
-    font-family: 'Digital Cards Demo';
-    src: url('../fonts/Digital Cards Demo.woff2') format('woff2'),
-         url('../fonts/Digital Cards Demo.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'DigitalCardsDemo';
+  src: url('../fonts/DigitalCardsDemo.woff2') format('woff2'),
+       url('../fonts/DigitalCardsDemo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
+
 
 html, body {
     margin: 0px;
@@ -38,7 +39,7 @@ html, body {
     top: 0; 
     left: 50%; 
     transform: translateX(-50%);
-    font-family: 'Digital Cards Demo' !important;
+    font-family: 'DigitalCardsDemo';
     font-size: 11px;
     color: #fff;
     text-align: center;
@@ -66,7 +67,7 @@ html, body {
     top: 0; /* Keeps it at the top */
     left: 50%; /* Centers it horizontally */
     transform: translateX(-50%); /* Adjusts the element to perfectly center it */
-    font-family: 'Digital Cards Demo';
+    font-family: 'DigitalCardsDemo';
     font-size: 40px;
     text-align: center;
     --btn-letter-spacing: .1rem;
