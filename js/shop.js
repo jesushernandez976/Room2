@@ -1,8 +1,7 @@
-// Import necessary modules
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { DRACOLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/DRACOLoader.js";
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -17,9 +16,14 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 scene.add(directionalLight);
 
-const pinkLight = new THREE.PointLight(0xff00ff, 10, 100); // Pink light (color: #ff00ff)
-pinkLight.position.set(0, 2, 4); // Position the light
+const pinkLight = new THREE.PointLight(0xff00ff, 25, 20); // Pink light
+pinkLight.position.set(-3, 2, -3); // Move to the left and backward
 scene.add(pinkLight);
+
+const blueLight = new THREE.PointLight(0x0099ff, 35, 10); // Blue light
+blueLight.position.set(3, 2, 3); // Move to the right and forward
+scene.add(blueLight);
+
 
 function updateLight() {
     directionalLight.position.copy(camera.position);

@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Digital Cards Demo';
-    src: url('./fonts/Digital Cards Demo.woff2') format('woff2'),
-         url('./fonts/Digital Cards Demo.woff') format('woff');
+    src: url('../fonts/Digital Cards Demo.woff2') format('woff2'),
+         url('../fonts/Digital Cards Demo.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
