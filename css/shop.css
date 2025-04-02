@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'DigitalCardsDemo';
-    src: url('fonts/Digital Cards Demo.otf') format('opentype');
+    src: url('/fonts/Digital Cards Demo.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
