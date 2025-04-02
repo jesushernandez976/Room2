@@ -4,11 +4,27 @@
     font-weight: normal;
     font-style: normal;
 }
+.arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px; 
+    z-index: 100; 
+}
+
+.arrow > svg {
+    fill: #000; 
+    transition: fill 0.3s ease; 
+}
+
+.arrow > svg:hover {
+    fill: rgb(33, 109, 250); 
+}
+
 
 .ui-btn3{
     position: absolute;
-    top: 0; /* Keeps it at the top */
-    left: 50%; /* Centers it horizontally */
+    top: 0; 
+    left: 50%; 
     transform: translateX(-50%);
     font-family: 'Digital Cards Demo';
     font-size: 11px;
