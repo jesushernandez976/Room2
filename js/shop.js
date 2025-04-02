@@ -51,7 +51,7 @@ loader.load(
     './models/eye/pinkspaceroom.glb',
     function (gltf) {
         spaceRoom = gltf.scene;
-        spaceRoom.scale.set(3, 3.4, 3);
+        spaceRoom.scale.set(1, 1.4, 1);
         spaceRoom.position.set(0, 0, 0);
         scene.add(spaceRoom);
         console.log("SpaceRoom loaded successfully.");
