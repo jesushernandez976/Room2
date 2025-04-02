@@ -1,14 +1,22 @@
 @font-face {
-    font-family: 'DigitalCardsDemo';
-    src: url('/fonts/Digital Cards Demo.otf') format('opentype');
+    font-family: 'Digital Cards Demo';
+    src: url('/fonts/Digital Cards Demo.woff2') format('woff2'),
+         url('/fonts/Digital Cards Demo.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+
 .arrow {
     position: absolute;
     top: 10px;
     left: 10px; 
-    z-index: 100; 
 }
 
 .arrow > svg {
@@ -18,6 +26,10 @@
 
 .arrow > svg:hover {
     fill: rgb(33, 109, 250); 
+}
+
+html, body {
+    touch-action: manipulation;
 }
 
 
@@ -295,13 +307,7 @@
   --arrow-color: #fff;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+
 
 button {
   all: unset;

@@ -2,6 +2,9 @@
   font-family: 'Roboto Mono', monospace;
 }
 
+html, body {
+  touch-action: manipulation;
+}
 
 footer {
   position: absolute;
