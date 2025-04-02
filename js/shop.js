@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { DRACOLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/DRACOLoader.js";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -37,8 +38,13 @@ controls.enableDamping = true;
 // Load SpaceRoom (Background)
 let spaceRoom;
 const loader = new GLTFLoader();
+
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+loader.setDRACOLoader(dracoLoader);
+
 loader.load(
-    './models/eye/spaceroom2.glb',
+    './models/eye/pinkspaceroom.glb',
     function (gltf) {
         spaceRoom = gltf.scene;
         spaceRoom.scale.set(3, 3.4, 3);
