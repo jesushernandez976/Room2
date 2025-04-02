@@ -57,9 +57,9 @@ function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
   // Load all models
   const modelPath1 = './models/eye/logo3.glb';
   const modelPath2 = './models/eye/sat1.glb';
-  const modelPath3 = './models/eye/shuttle2.glb';
-  const modelPath4 = './models/eye/nebula2.glb';
-  const modelPath5 = './models/eye/craftplanet1.glb';
+  const modelPath3 = './models/eye/Shuttle3.glb';
+  const modelPath4 = './models/eye/nebula3.glb';
+  const modelPath5 = './models/eye/craftplanet2.glb';
   
   // Load models with appropriate scaling and positioning
   loadModel(modelPath1, 15, { x: 0, y: 0, z: 0 });  

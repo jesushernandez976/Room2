@@ -16,7 +16,7 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 scene.add(directionalLight);
 
-const pinkLight = new THREE.PointLight(0xff00ff, 25, 20); // Pink light
+const pinkLight = new THREE.PointLight(0xff00ff, 20, 20); // Pink light
 pinkLight.position.set(-3, 2, -3); // Move to the left and backward
 scene.add(pinkLight);
 
