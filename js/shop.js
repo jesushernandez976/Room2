@@ -47,19 +47,66 @@ const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
 loader.setDRACOLoader(dracoLoader);
 
-loader.load(
-    './models/eye/pinkspaceroom.glb',
-    function (gltf) {
-        spaceRoom = gltf.scene;
-        spaceRoom.scale.set(1, 1.4, 1);
-        spaceRoom.position.set(0, 0, 0);
-        scene.add(spaceRoom);
-    },
-    undefined,
-    function (error) {
-        console.error("Error loading spaceroom2.glb:", error);
+document.addEventListener("DOMContentLoaded", () => {
+    // Select the existing loading bar
+    const loadingBar = document.querySelector(".loading-bar");
+
+    // Ensure Three.js and GLTFLoader are loaded
+    if (typeof THREE === "undefined") {
+        return;
     }
-);
+
+    let loadedModels = 0;
+
+    // Define model paths
+    const modelPaths = [
+        './models/eye/3DHoodieblack2.glb',
+        './models/eye/3DHoodieblue.glb',
+        './models/eye/3DHoodieWhite.glb'
+    ];
+    const totalModels = modelPaths.length + 1; // Include the space room
+
+    function checkLoadingComplete() {
+        if (loadedModels === totalModels) {
+            document.querySelector(".loading-container").style.display = "none";
+        }
+    }
+
+    // Load space room model
+    loader.load(
+        './models/eye/pinkspaceroom.glb',
+        function (gltf) {
+            const spaceRoom = gltf.scene;
+            spaceRoom.scale.set(1, 1.4, 1);
+            spaceRoom.position.set(0, 0, 0);
+            scene.add(spaceRoom);
+            loadedModels++;
+            checkLoadingComplete();
+        },
+        undefined,
+        function () {}
+    );
+
+    // Load hoodie models
+    let models = [];
+
+    modelPaths.forEach((path) => {
+        loader.load(
+            path,
+            function (gltf) {
+                let model = gltf.scene;
+                models.push(model);
+                scene.add(model);
+                loadedModels++;
+                checkLoadingComplete();
+            },
+            undefined,
+            function () {}
+        );
+    });
+});
+
+
 
 // Load hoodie models
 let models = [];
