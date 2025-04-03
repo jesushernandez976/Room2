@@ -54,7 +54,6 @@ loader.load(
         spaceRoom.scale.set(1, 1.4, 1);
         spaceRoom.position.set(0, 0, 0);
         scene.add(spaceRoom);
-        console.log("SpaceRoom loaded successfully.");
     },
     undefined,
     function (error) {
