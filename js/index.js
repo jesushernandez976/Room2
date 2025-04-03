@@ -33,42 +33,52 @@ dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5
 loader.setDRACOLoader(dracoLoader);
 
 
-// Set up a function to handle loading models with reusable logic
-function loadModel(path, scale = 1, position = { x: 0, y: 0, z: 0 }) {
-    loader.load(
-      path,  // Path to the GLB file
-      (gltf) => {  // onLoad callback
-        const model = gltf.scene;
-        model.scale.set(scale, scale, scale);
-        model.position.set(position.x, position.y, position.z);
-        scene.add(model);
-      },
-      (xhr) => {  // onProgress callback
-        console.log(`Loading progress: ${(xhr.loaded / xhr.total) * 100}%`);
-      },
-      (error) => {  // onError callback
-        console.error('An error occurred while loading the model:', error);
-      }
-    );
-  }
-  
+document.addEventListener("DOMContentLoaded", () => {
+    // Create the loading screen ONCE
+    const loadingContainer = document.createElement("div");
+    loadingContainer.classList.add("loading-container");
+    loadingContainer.innerHTML = '<div class="loading-bar">Loading</div>';
+    document.body.appendChild(loadingContainer);
 
-  
-  // Load all models
-  const modelPath1 = './models/eye/logo3.glb';
-  const modelPath2 = './models/eye/sat1.glb';
-  const modelPath3 = './models/eye/Shuttle3.glb';
-  const modelPath4 = './models/eye/nebula3.glb';
-  const modelPath5 = './models/eye/craftplanet2.glb';
-  
-  // Load models with appropriate scaling and positioning
-  loadModel(modelPath1, 15, { x: 0, y: 0, z: 0 });  
-  loadModel(modelPath2, 0.5, { x: -4, y: -2, z: -20 });
-  loadModel(modelPath3, .24, { x: -30, y: -10, z: -50 });
-  loadModel(modelPath4, 1, { x: 150, y: 150, z: -60 });
-  loadModel(modelPath5, 0.3, { x: 90, y: 40, z: 160 });
-  
-  // Camera positioning
+    // Model paths with scale and position
+    const modelPaths = [
+        { path: './models/eye/logo3.glb', scale: 15, position: { x: 0, y: 0, z: 0 } },
+        { path: './models/eye/sat1.glb', scale: 0.5, position: { x: -4, y: -2, z: -20 } },
+        { path: './models/eye/Shuttle3.glb', scale: 0.24, position: { x: -30, y: -10, z: -50 } },
+        { path: './models/eye/nebula3.glb', scale: 1, position: { x: 150, y: 150, z: -60 } },
+        { path: './models/eye/craftplanet2.glb', scale: 0.3, position: { x: 90, y: 40, z: 160 } }
+    ];
+
+    let loadedModels = 0;
+    const totalModels = modelPaths.length;
+
+    function checkLoadingComplete() {
+        if (loadedModels === totalModels) {
+            loadingContainer.style.display = "none"; // Hide loading screen once
+        }
+    }
+
+    function loadModel(path, scale, position) {
+        loader.load(
+            path,
+            (gltf) => {
+                const model = gltf.scene;
+                model.scale.set(scale, scale, scale);
+                model.position.set(position.x, position.y, position.z);
+                scene.add(model);
+                loadedModels++;
+                checkLoadingComplete();
+            },
+            undefined,
+            (error) => {
+                console.error(`Error loading ${path}:`, error);
+            }
+        );
+    }
+
+    // Load all models
+    modelPaths.forEach(({ path, scale, position }) => loadModel(path, scale, position));
+});
 
   const zoomAndPan = () => {
     // Get the container element

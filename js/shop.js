@@ -48,64 +48,69 @@ dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5
 loader.setDRACOLoader(dracoLoader);
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Select the existing loading bar
+    const loadingContainer = document.querySelector(".loading-container");
     const loadingBar = document.querySelector(".loading-bar");
-
-    // Ensure Three.js and GLTFLoader are loaded
-    if (typeof THREE === "undefined") {
-        return;
-    }
-
     let loadedModels = 0;
 
-    // Define model paths
     const modelPaths = [
         './models/eye/3DHoodieblack2.glb',
         './models/eye/3DHoodieblue.glb',
         './models/eye/3DHoodieWhite.glb'
     ];
-    const totalModels = modelPaths.length + 1; // Include the space room
+    const totalModels = modelPaths.length + 1; // Including the pink room
+
+    let models = [];
 
     function checkLoadingComplete() {
         if (loadedModels === totalModels) {
-            document.querySelector(".loading-container").style.display = "none";
+            loadingContainer.style.display = "none";
         }
     }
 
-    // Load space room model
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+    loader.setDRACOLoader(dracoLoader);
+
+    // Load pink space room first
     loader.load(
         './models/eye/pinkspaceroom.glb',
         function (gltf) {
-            const spaceRoom = gltf.scene;
+            spaceRoom = gltf.scene;
             spaceRoom.scale.set(1, 1.4, 1);
-            spaceRoom.position.set(0, 0, 0);
             scene.add(spaceRoom);
             loadedModels++;
             checkLoadingComplete();
         },
         undefined,
-        function () {}
+        function (error) {
+            console.error("Error loading pinkspaceroom.glb:", error);
+            loadedModels++; // Prevents infinite loading in case of failure
+            checkLoadingComplete();
+        }
     );
 
-    // Load hoodie models
-    let models = [];
-
+    // Load other models
     modelPaths.forEach((path) => {
         loader.load(
             path,
             function (gltf) {
                 let model = gltf.scene;
+                model.visible = false;
                 models.push(model);
                 scene.add(model);
                 loadedModels++;
                 checkLoadingComplete();
             },
             undefined,
-            function () {}
+            function (error) {
+                console.error(`Error loading ${path}:`, error);
+                loadedModels++; // Prevents infinite loading in case of failure
+                checkLoadingComplete();
+            }
         );
     });
 });
-
 
 
 // Load hoodie models
@@ -281,7 +286,8 @@ const animate = function () {
     });
 
     if (spaceRoom) {
-        spaceRoom.rotation.y -= 0.0003; // Rotate slower than the hoodie models for a subtle effect
+        spaceRoom.rotation.y -= 0.0005;
+    } else {
     }
 
     controls.update();
@@ -291,10 +297,13 @@ const animate = function () {
 // Pagination buttons
 const pr = document.querySelector('.paginate.left');
 const pl = document.querySelector('.paginate.right');
+pr.onclick = () => {
+    if (index > 0) slide(-1);
+};
 
-pr.onclick = () => slide(-1);
-pl.onclick = () => slide(1);
-
+pl.onclick = () => {
+    if (index < total - 1) slide(1);
+};
 let index = 0;
 const total = modelPaths.length;
 
