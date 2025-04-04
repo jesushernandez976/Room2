@@ -44,7 +44,7 @@ let models = [];  // Store hoodie models
 const modelPaths = [
     './models/eye/3DHoodieblack2.glb',
     './models/eye/3DHoodieblue.glb',
-    './models/eye/3DHoodieWhite.glb',
+    './models/eye/3DHoodieWhite.glb'
 ];
 
 const loader = new GLTFLoader();
@@ -371,6 +371,7 @@ function updateVersion() {
 
   updateVersion(); // Initial call
   setInterval(updateVersion, 86400000);
+
 
 // Render loop
 const animate = function () {
