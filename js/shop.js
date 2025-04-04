@@ -122,6 +122,8 @@ function swapModel(newModel) {
     scene.add(newModel);
 }
 
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     if (!scene || !renderer) {
         console.error("Scene or renderer is not initialized!");
@@ -136,12 +138,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         return; // Stop further execution if loadingBar is not found
     }
 
+    camera.position.set(0, 6, 9);
+
     const totalModels = modelPaths.length + 1; // Hoodie models + pink room
 
     function checkLoadingComplete() {
         console.log(`Loaded models: ${loadedModels}/${totalModels}`);
         if (loadedModels >= totalModels) {
-            loadingContainer.style.display = "none"; // Hide loader when all models are ready
+            loadingContainer.style.display = "none"; 
+
+            gsap.to(camera.position, {
+                duration: 1.5,
+                y: camera.position.y - 5, // raise camera 2 units up
+                ease: "power2.out"
+            });
         }
     }
 
@@ -172,6 +182,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("Failed to load some models:", error);
     }
+
+
 });
 
 // Cleanup Scene on Page Switch
@@ -349,7 +361,14 @@ function updateVersion() {
   updateVersion(); // Initial call
   setInterval(updateVersion, 86400000);
 
-
+  const toggleButton = document.getElementById('toggleMenu');
+  const sideMenu = document.getElementById('sideMenu');
+  
+  toggleButton.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+    toggleButton.classList.toggle('open');
+    toggleButton.classList.toggle('flipped');
+  });
 // Render loop
 const animate = function () {
     requestAnimationFrame(animate);
