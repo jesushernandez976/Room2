@@ -41,6 +41,7 @@ controls.enableDamping = true;
 
 let spaceRoom;
 let models = [];  // Store hoodie models
+let loadedModels = 0;  // Track models loaded globally
 const modelPaths = [
     './models/eye/3DHoodieblack2.glb',
     './models/eye/3DHoodieblue.glb',
@@ -121,8 +122,6 @@ function swapModel(newModel) {
     scene.add(newModel);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", async () => {
     if (!scene || !renderer) {
         console.error("Scene or renderer is not initialized!");
@@ -137,7 +136,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return; // Stop further execution if loadingBar is not found
     }
 
-    let loadedModels = 0;
     const totalModels = modelPaths.length + 1; // Hoodie models + pink room
 
     function checkLoadingComplete() {
@@ -178,34 +176,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Cleanup Scene on Page Switch
 window.addEventListener("beforeunload", () => {
-    scene.children.forEach(child => scene.remove(child));
-    models.forEach(model => {
-        model.traverse(obj => {
-            if (obj.isMesh) {
-                obj.geometry.dispose();
-                if (obj.material.isMaterial) {
-                    obj.material.dispose();
-                }
-            }
-        });
-    });
-    renderer.dispose();
-});
-
-
-
-
-// Prevent Navigation While Models Are Loading
-window.addEventListener("beforeunload", (event) => {
     if (loadedModels < totalModels) {
+        // Prevent page navigation if models are still loading
         event.preventDefault();
         event.returnValue = "Models are still loading!";
     }
-});
 
-// Cleanup Scene on Page Switch to Prevent Memory Leaks
-window.addEventListener("beforeunload", () => {
-    scene.children.forEach(child => scene.remove(child)); // Remove all objects
+    // Cleanup the scene and models to avoid memory leaks
+    scene.children.forEach(child => scene.remove(child));  // Remove all objects
     models.forEach(model => {
         model.traverse(obj => {
             if (obj.isMesh) {
@@ -218,7 +196,6 @@ window.addEventListener("beforeunload", () => {
     });
     renderer.dispose();
 });
-
 
 // Function to load a GLB model
 function loadGLBModel(path, index) {
