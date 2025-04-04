@@ -39,87 +39,186 @@ function updateLight() {
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-// Load SpaceRoom (Background)
 let spaceRoom;
-const loader = new GLTFLoader();
+let models = [];  // Store hoodie models
+const modelPaths = [
+    './models/eye/3DHoodieblack2.glb',
+    './models/eye/3DHoodieblue.glb',
+    './models/eye/3DHoodieWhite.glb',
+];
 
+const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
 loader.setDRACOLoader(dracoLoader);
 
-document.addEventListener("DOMContentLoaded", () => {
+function loadModelWithRetry(path, retries = 3) {
+    return new Promise((resolve, reject) => {
+        let attempts = 0;
+
+        const attemptLoad = () => {
+            loader.load(
+                path,
+                (gltf) => {
+                    const model = gltf.scene;
+                    resolve(model);
+                },
+                (xhr) => { // Progress event
+                    // Keep this part only to track loading, but do not update numbers or rotate
+                    const loadingBar = document.querySelector(".loading-bar");
+                    if (loadingBar) {
+                        loadingBar.textContent = "Loading";  // Static text for loading
+                    }
+                },
+                (error) => {
+                    attempts++;
+                    console.error(`Error loading ${path}:`, error);
+
+                    if (attempts < retries) {
+                        console.log(`Retrying... Attempt ${attempts} of ${retries}`);
+                        attemptLoad(); // Retry loading the model
+                    } else {
+                        reject(`Failed to load ${path} after ${retries} attempts`);
+                    }
+                }
+            );
+        };
+
+        attemptLoad();
+    });
+}
+
+function disposeModel(model) {
+    if (!model) {
+        console.error('Model is undefined or null');
+        return;  // Exit if model is not valid
+    }
+
+    // Safely traverse and dispose of the model's geometry and material
+    model.traverse(obj => {
+        if (obj.isMesh) {
+            obj.geometry.dispose();
+            if (obj.material.isMaterial) {
+                obj.material.dispose();
+            }
+        }
+    });
+    
+    scene.remove(model);  // Remove the model from the scene
+}
+
+function swapModel(newModel) {
+    // Dispose of the old model before adding a new one
+    if (models.length > 0) {
+        const oldModel = models[0];  // Get the old model to dispose of it
+        disposeModel(oldModel);
+        
+        models = [];  // Reset the models array
+    }
+
+    // Add the new model
+    models.push(newModel);
+    scene.add(newModel);
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    if (!scene || !renderer) {
+        console.error("Scene or renderer is not initialized!");
+        return;
+    }
+
     const loadingContainer = document.querySelector(".loading-container");
     const loadingBar = document.querySelector(".loading-bar");
+
+    if (!loadingBar) {
+        console.error("loading-bar element not found in the HTML!");
+        return; // Stop further execution if loadingBar is not found
+    }
+
     let loadedModels = 0;
-
-    const modelPaths = [
-        './models/eye/3DHoodieblack2.glb',
-        './models/eye/3DHoodieblue.glb',
-        './models/eye/3DHoodieWhite.glb'
-    ];
-    const totalModels = modelPaths.length + 1; // Including the pink room
-
-    let models = [];
+    const totalModels = modelPaths.length + 1; // Hoodie models + pink room
 
     function checkLoadingComplete() {
-        if (loadedModels === totalModels) {
-            loadingContainer.style.display = "none";
+        console.log(`Loaded models: ${loadedModels}/${totalModels}`);
+        if (loadedModels >= totalModels) {
+            loadingContainer.style.display = "none"; // Hide loader when all models are ready
         }
     }
 
-    const loader = new GLTFLoader();
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
-    loader.setDRACOLoader(dracoLoader);
+    try {
+        // Load pink space room first
+        spaceRoom = await loadModelWithRetry('./models/eye/pinkspaceroom.glb');
+        spaceRoom.scale.set(1, 1.4, 1);
+        scene.add(spaceRoom);
+        loadedModels++;
+        checkLoadingComplete();
 
-    // Load pink space room first
-    loader.load(
-        './models/eye/pinkspaceroom.glb',
-        function (gltf) {
-            spaceRoom = gltf.scene;
-            spaceRoom.scale.set(1, 1.4, 1);
-            scene.add(spaceRoom);
-            loadedModels++;
-            checkLoadingComplete();
-        },
-        undefined,
-        function (error) {
-            console.error("Error loading pinkspaceroom.glb:", error);
-            loadedModels++; // Prevents infinite loading in case of failure
-            checkLoadingComplete();
-        }
-    );
-
-    // Load other models
-    modelPaths.forEach((path) => {
-        loader.load(
-            path,
-            function (gltf) {
-                let model = gltf.scene;
-                model.visible = false;
+        // Load hoodie models in sequence
+        for (let path of modelPaths) {
+            try {
+                let model = await loadModelWithRetry(path);
+                model.visible = false; // Hide until needed
                 models.push(model);
                 scene.add(model);
                 loadedModels++;
                 checkLoadingComplete();
-            },
-            undefined,
-            function (error) {
-                console.error(`Error loading ${path}:`, error);
-                loadedModels++; // Prevents infinite loading in case of failure
+            } catch (modelError) {
+                console.warn(`Skipping failed model: ${path}`);
+                loadedModels++; // Still increase count to prevent freeze
                 checkLoadingComplete();
             }
-        );
+        }
+    
+    } catch (error) {
+        console.error("Failed to load some models:", error);
+    }
+});
+
+// Cleanup Scene on Page Switch
+window.addEventListener("beforeunload", () => {
+    scene.children.forEach(child => scene.remove(child));
+    models.forEach(model => {
+        model.traverse(obj => {
+            if (obj.isMesh) {
+                obj.geometry.dispose();
+                if (obj.material.isMaterial) {
+                    obj.material.dispose();
+                }
+            }
+        });
     });
+    renderer.dispose();
 });
 
 
-// Load hoodie models
-let models = [];
-const modelPaths = [
-    './models/eye/3DHoodieblack2.glb',
-    './models/eye/3DHoodieblue.glb',
-    './models/eye/3DHoodieWhite.glb'
-];
+
+
+// Prevent Navigation While Models Are Loading
+window.addEventListener("beforeunload", (event) => {
+    if (loadedModels < totalModels) {
+        event.preventDefault();
+        event.returnValue = "Models are still loading!";
+    }
+});
+
+// Cleanup Scene on Page Switch to Prevent Memory Leaks
+window.addEventListener("beforeunload", () => {
+    scene.children.forEach(child => scene.remove(child)); // Remove all objects
+    models.forEach(model => {
+        model.traverse(obj => {
+            if (obj.isMesh) {
+                obj.geometry.dispose();
+                if (obj.material.isMaterial) {
+                    obj.material.dispose();
+                }
+            }
+        });
+    });
+    renderer.dispose();
+});
+
 
 // Function to load a GLB model
 function loadGLBModel(path, index) {

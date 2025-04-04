@@ -9,10 +9,21 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(2, 1, 1);
 
+
+
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+    
+    const loadingContainer = document.createElement("div");
+    loadingContainer.classList.add("loading-container");
+    loadingContainer.innerHTML = '<div class="loading-bar">Loading</div>';
+    document.body.appendChild(loadingContainer);
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -23,22 +34,13 @@ directionalLight.position.set(2, 5, 5);
 scene.add(directionalLight);
 
 // Orbit Controls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
 
-// Load GLB Model
+window.onload = () => {
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
 loader.setDRACOLoader(dracoLoader);
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Create the loading screen ONCE
-    const loadingContainer = document.createElement("div");
-    loadingContainer.classList.add("loading-container");
-    loadingContainer.innerHTML = '<div class="loading-bar">Loading</div>';
-    document.body.appendChild(loadingContainer);
 
     // Model paths with scale and position
     const modelPaths = [
@@ -52,12 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let loadedModels = 0;
     const totalModels = modelPaths.length;
 
+    // Check if all models are loaded
     function checkLoadingComplete() {
         if (loadedModels === totalModels) {
-            loadingContainer.style.display = "none"; // Hide loading screen once
+            loadingContainer.style.display = "none"; // Hide loading screen once all models are loaded
         }
     }
 
+    // Load GLB models
     function loadModel(path, scale, position) {
         loader.load(
             path,
@@ -65,11 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const model = gltf.scene;
                 model.scale.set(scale, scale, scale);
                 model.position.set(position.x, position.y, position.z);
-                scene.add(model);
+                scene.add(model); // Add model to the scene
                 loadedModels++;
-                checkLoadingComplete();
+                checkLoadingComplete(); // Check if all models are loaded
             },
-            undefined,
+            undefined, // No progress bar needed
             (error) => {
                 console.error(`Error loading ${path}:`, error);
             }
@@ -78,9 +82,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Load all models
     modelPaths.forEach(({ path, scale, position }) => loadModel(path, scale, position));
-});
 
-  const zoomAndPan = () => {
+    // Function to dispose old models (cleanup)
+    function disposeModel(model) {
+        if (model) {
+            model.traverse(obj => {
+                if (obj.isMesh) {
+                    obj.geometry.dispose();
+                    if (obj.material && obj.material.isMaterial) {
+                        obj.material.dispose();
+                    }
+                }
+            });
+            scene.remove(model); // Remove from the scene
+        }
+    }
+
+    // Example of switching models and disposing old ones
+    function switchModel(newModelPath) {
+        // Dispose of all previous models before adding the new one
+        scene.children.forEach(child => disposeModel(child));
+
+        // Load the new model
+        modelPaths.forEach(({ path, scale, position }) => {
+            if (path === newModelPath) {
+                loadModel(path, scale, position); // Load the new model
+            }
+        });
+    }
+};
+
+const zoomAndPan = () => {
     // Get the container element
     const container = document.getElementById("container");
 
@@ -102,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.set(camera, { fov: isMobile ? 75 : 75 });
     camera.updateProjectionMatrix();
+
     // Play the Welcome sound 1 second before the GSAP animation ends
     setTimeout(() => {
         welcomeSound.currentTime = 0;
@@ -133,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
             acpTheme.play();
         }
     }, 1000);
+
     // Animate the field of view
     gsap.to(camera, {
         fov: isMobile ? 50 : 50,
@@ -150,14 +184,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 };
 
-
-// Call the zoom and pan function on page load
-window.onload = () => {
-    camera.position.set(-100, -100, -100);
-    zoomAndPan();
-};
-
-
+// Call the zoom and pan function directly on page load
+window.addEventListener("load", zoomAndPan);
 
 
   // Optionally, update based on screen width (if needed)
@@ -519,40 +547,9 @@ const createFirePlanet = (size, distance, positionY, textureUrl, rotationSpeed) 
     planet.rotationSpeed = rotationSpeed;  
     scene.add(planet);
 
-    // Add fire particles around the planet
-    addFireParticles(planet);
-
     return planet;
 };
 
-// Function to add fire particles around the planet
-const addFireParticles = (planet) => {
-    const particleCount = 300; // Number of fire particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesMaterial = new THREE.PointsMaterial({
-        color: new THREE.Color(1, 0.5, 0), // Fire-like orange color
-        size: 5,  // Particle size
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-    });
-
-    const positions = [];
-    for (let i = 0; i < particleCount; i++) {
-        const radius = Math.random() * 2 + 3; // Random distance from the planet
-        const theta = Math.random() * Math.PI * 2; // Random angle
-        const phi = Math.random() * Math.PI * 2; // Random angle
-
-        const x = radius * Math.sin(phi) * Math.cos(theta);
-        const y = radius * Math.sin(phi) * Math.sin(theta);
-        const z = radius * Math.cos(phi);
-
-        positions.push(x, y, z);
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    planet.add(particles); // Attach the particles to the planet
-};
 
 // Function to create the Electric Planet
 const createElectricPlanet = (size, distance, positionY, textureUrl, rotationSpeed) => {
@@ -572,74 +569,11 @@ const createElectricPlanet = (size, distance, positionY, textureUrl, rotationSpe
     planet.position.set(distance, positionY, -100);
     planet.rotationSpeed = rotationSpeed;  
     scene.add(planet);
-
-    // Add electricity particles around the planet
-    addElectricityParticles(planet);
-
     return planet;
 };
 
 // Function to add electricity particles (like sparks or arcs) around the planet
-const addElectricityParticles = (planet) => {
-    const particleCount = 100; // Number of electricity particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesMaterial = new THREE.PointsMaterial({
-        color: new THREE.Color(0, 0, 1), // Electric blue color
-        size: .3,  // Particle size
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-        opacity: 0.2
-    });
 
-    const positions = [];
-    const velocities = []; // Store the movement direction for each particle
-    for (let i = 0; i < particleCount; i++) {
-        // Position particles around the planet in a spherical pattern
-        const radius = Math.random() * 2 + 3; // Random distance from the planet
-        const theta = Math.random() * Math.PI * 2; // Random angle
-        const phi = Math.random() * Math.PI * 2; // Random angle
-
-        const x = radius * Math.sin(phi) * Math.cos(theta);
-        const y = radius * Math.sin(phi) * Math.sin(theta);
-        const z = radius * Math.cos(phi);
-
-        positions.push(x, y, z);
-
-        // Assign random velocity to simulate lightning movement
-        velocities.push(Math.random() * 0.1 - 0.05, Math.random() * 0.1 - 0.05, Math.random() * 0.1 - 0.05);
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    particlesGeometry.setAttribute('velocity', new THREE.Float32BufferAttribute(velocities, 3));
-
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    planet.add(particles); // Attach the particles to the planet
-
-    // Update particle movement over time (simulate electric arcs)
-    function updateElectricityParticles() {
-        const positions = particlesGeometry.attributes.position.array;
-        const velocities = particlesGeometry.attributes.velocity.array;
-
-        for (let i = 0; i < positions.length; i += 3) {
-            // Apply random movement to each particle
-            positions[i] += velocities[i];
-            positions[i + 1] += velocities[i + 1];
-            positions[i + 2] += velocities[i + 2];
-
-            // Add some randomness to the velocities to simulate electric arcs
-            if (Math.random() < 0.01) {
-                velocities[i] += Math.random() * 0.05 - 0.025;
-                velocities[i + 1] += Math.random() * 0.05 - 0.025;
-                velocities[i + 2] += Math.random() * 0.05 - 0.025;
-            }
-        }
-
-        particlesGeometry.attributes.position.needsUpdate = true;
-    }
-
-    // Return the update function so it can be called in the animation loop
-    planet.updateElectricityParticles = updateElectricityParticles;
-};
 
 console.log("Generated Colors:", planetColors);
 planetColors.forEach((color, index) => {
@@ -765,7 +699,7 @@ function updateVersion() {
   function createBlinkingLight(position, color = 0xff0000, intensity = 40, size = 0.1) {
     const light = new THREE.PointLight(color, intensity, 40); // Small range light
     const sphereGeometry = new THREE.SphereGeometry(size, .5, .5);
-    const sphereMaterial = new THREE.MeshBasicMaterial({ color, emissive: color });
+    const sphereMaterial = new THREE.MeshBasicMaterial({ color });
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
     const lightGroup = new THREE.Group();

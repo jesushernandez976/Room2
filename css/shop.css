@@ -24,7 +24,7 @@
   text-transform: uppercase;
   text-shadow: 0 0 20px #fff000;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  z-index: 1000; /* Ensure it stays on top */
+  z-index: 99999; /* Ensure it stays on top */
 }
 
 .loading-bar:before {
@@ -60,7 +60,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
+  z-index: 9999999;
 }
 
 
