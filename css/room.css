@@ -16,33 +16,62 @@ header h1 {
   font-weight: 900;
 }
 
-.loading-screen {
+.loading-bar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  height: 110px;
+  background: black; /* Set background to black */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 111px;
+  font-family: sans-serif;
+  font-size: 15px;
+  color:rgb(90, 155, 228);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #fff000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 99999; /* Ensure it stays on top */
+}
+
+.loading-bar:before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 5px solid rgb(90, 155, 228);
+  border-right: 5px solid rgb(90, 155, 228);
+  border-radius: 50%;
+  animation: animateC 2s linear infinite;
+}
+
+@keyframes animateC {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background: black;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  z-index: 9999;
-  overflow: hidden;
+  justify-content: center;
+  z-index: 9999999;
 }
-
-.loading-video {
-  width: 60%;
-  max-width: 250px;
-}
-
-.loading-text {
-  font-size: 12px;
-  color: #3b5e8d;
-  margin-top: 15px;
-  font-family: Arial, sans-serif;
-}
-
 
 
 
@@ -205,7 +234,7 @@ z-index: 1040; /* Ensures backdrop is behind modal */
 
 #marker3aDiv {
   position: absolute;
-  width: 120px;  /* Adjust to fit marker size */
+  width: 150px;  /* Adjust to fit marker size */
   height: 85px; /* Adjust as needed */
   background: transparent;
   pointer-events: auto; /* Ensure it can be clicked */
@@ -252,25 +281,34 @@ z-index: 1040; /* Ensures backdrop is behind modal */
 
   .blinking-dot {
     position: fixed;
-    width: 5px; /* Size of the dot */
+    width: 5px;
     height: 5px;
-    background-color: white; /* Change color as needed */
+    background-color: white;
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    animation: blink 1.2s infinite alternate;
-    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    animation: ripple 1.5s infinite ease-out;
+    pointer-events: none;
+    z-index: 9999;
   }
   
-  @keyframes blink {
+  @keyframes ripple {
     0% {
       opacity: 1;
       transform: scale(1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    70% {
+      opacity: 0.3;
+      transform: scale(2);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
     100% {
-      opacity: 0.1;
-      transform: scale(3);
+      opacity: 0;
+      transform: scale(4);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0);
     }
   }
+  
 
   #marker1Div {
     width: 85px;  /* Adjust to fit marker size */

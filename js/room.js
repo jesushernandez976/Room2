@@ -41,13 +41,6 @@ camera.lookAt(2.5, 2.3, 0);
 controls.target.set(5.5, 2.3, 0);
 controls.update();
 
-// Load 3D Models
-const loadingScreen = document.getElementById('loadingScreen');
-const loadingText = document.getElementById('loadingText');
-
-let loadedItems = 0;
-const totalItems = 1;
-
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
@@ -58,70 +51,19 @@ renderer.domElement.addEventListener("webglcontextlost", (event) => {
     event.preventDefault();
     console.error("❌ WebGL Context Lost! Freeing memory and reloading model...");
 
-    // Dispose of existing models before reloading
     if (currentModel) {
         disposeModel(currentModel);
     }
 
-    // Reload the model without refreshing the page
+  
     loadModel();
 });
-const analysisPhrases = [
-    "Initializing System",
-    "Optimizing System Performance",
-    "Scanning Environment",
-    "Executing Neural Mapping",
-    "Integrating Data Nodes",
-    "Running Predictive Analysis",
-    "Compiling Insights FPS speeds",
-    "Generating Visualizations",
-    "Processing Data Streams",
-    "Finalizing Operations",
-    "Loading Shader Modules",
-    "Rendering 3D Models",
-    "Compiling Shaders",
-    "Loading Textures"
-];
-// Keep track of the current model
+
 let currentModel = null;
-let index = 0;
-let targetPercentage = 100; // Ensure it reaches 100%
-let currentPercentage = 0;
-
-function updateLoadingProgress() {
-    let interval = setInterval(() => {
-        if (currentPercentage < targetPercentage) {
-            currentPercentage++;
-            loadingText.textContent = `${analysisPhrases[index]} ${currentPercentage}%`;
-        } else {
-            clearInterval(interval);
-            loadingText.textContent = "Loading 100%"; // Final loading message
-
-            setTimeout(() => {
-                loadingText.textContent = "Welcome"; // Display "Welcome" after loading
-                setTimeout(() => {
-                    loadingScreen.style.opacity = "0"; 
-                    setTimeout(() => loadingScreen.style.display = "none", 100);
-                    initScene(); // Transition to the scene
-                }, 900); // Delay before hiding loading screen
-            }, 600); // Display "Welcome" for 500ms
-        }
-    }, 9); // Adjust speed of counting
-
-    // Change analysis phrases every 1.5 seconds
-    setInterval(() => {
-        if (currentPercentage < 100) { // Only change messages while loading
-            index = (index + 1) % analysisPhrases.length;
-        }
-    }, 120);
-}
-
-        
 
 
+const loadingContainer = document.querySelector(".loading-container");
 
-
-// Function to load the model
 function loadModel() {
     loader.load("./models/eye/r21.glb", function (gltf) {
         if (currentModel) {
@@ -130,8 +72,12 @@ function loadModel() {
 
         scene.add(gltf.scene);
         currentModel = gltf.scene;
-        loadedItems++;
-        updateLoadingProgress(); // ✅ Track loading progress
+
+        // ✅ When done loading, fade out the screen
+        loadingContainer.classList.add("fade-out");
+        setTimeout(() => {
+            loadingContainer.style.display = "none";
+        }, 800);
 
         const whiteboard = currentModel.getObjectByName("whiteboard");
         if (whiteboard) {
@@ -140,9 +86,10 @@ function loadModel() {
         } else {
             console.error("❌ Whiteboard not found in the scene!");
         }
+
+        
     });
 }
-
 
 // Function to properly dispose of models
 function disposeModel(model) {
@@ -161,10 +108,10 @@ function disposeModel(model) {
     scene.remove(model);
 }
 
-// Load the model initially
+
 loadModel();
 
-// Clickable Markers
+
 function createMarker(position, size, name, rotation = [0, 0, 0], shape = "box") {
     let geometry;
 
@@ -191,17 +138,17 @@ const marker3a = createMarker([5.9, 1.29, 1.9], [2.5, 2.5,2.5], "Marker3a", [Mat
 marker3a.visible = false;
 const marker4 = createMarker([.10, 1.2, -1.7], [.8, 2, 1.2], "Marker4", [Math.PI / 2, Math.PI / 2, 0]);
 const marker5 = createMarker([5.3, 3.2, -3.2], [.7, .7, .7], "Marker5", [0, 0, 0]);
-const marker6 = createMarker([-3.2, 2.1, .4], [.4, 1, 2], "Marker6", [0, 0, 0]);
+const marker6 = createMarker([-2.5, 2.1, .4], [1, 1, 2], "Marker6", [0, 0, 0]);
 
 
 
 // Reset View Button
 const resetButton = document.createElement("button");
-resetButton.innerText = "Reset View";
+resetButton.innerText = "Back";
 resetButton.style.position = "absolute";
 resetButton.style.top = "10px";
 resetButton.style.left = "10px";
-resetButton.style.padding = "10px 15px";
+resetButton.style.padding = "10px 30px";
 resetButton.style.fontSize = "14px";
 resetButton.style.background = "#4476b0";
 resetButton.style.color = "#fff";
@@ -257,10 +204,19 @@ hoverTextMarker4.style.padding = "5px 10px";
 hoverTextMarker4.style.borderRadius = "5px";
 hoverTextMarker4.style.fontSize = "16px";
 hoverTextMarker4.style.fontFamily = "Arial, sans-serif";
-hoverTextMarker4.style.display = "none"; // Hide initially
+hoverTextMarker4.style.display = "none"; 
 document.body.appendChild(hoverTextMarker4);
 
-
+const hoverTextMarker6 = document.createElement("div");
+hoverTextMarker6.innerText = "Whiteboard";
+hoverTextMarker6.style.position = "absolute";
+hoverTextMarker6.style.color = "white";
+hoverTextMarker6.style.padding = "5px 10px";
+hoverTextMarker6.style.borderRadius = "5px";
+hoverTextMarker6.style.fontSize = "16px";
+hoverTextMarker6.style.fontFamily = "Arial, sans-serif";
+hoverTextMarker6.style.display = "none"; 
+document.body.appendChild(hoverTextMarker6);
 
 
 // Function to handle mouse movement (for hover effect)
@@ -446,8 +402,8 @@ function updateMarker3aDiv() {
     const markerPos = marker3a.position.clone();
     markerPos.project(camera); // Convert 3D position to 2D screen space
 
-    const x = (markerPos.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-markerPos.y * 0.42 + 0.57) * window.innerHeight;
+    const x = (markerPos.x * 0.5 + 0.53) * window.innerWidth;
+    const y = (-markerPos.y * 0.42 + 0.43) * window.innerHeight;
 
     const markerDiv = document.getElementById("marker3aDiv");
     if (markerDiv) {
@@ -564,6 +520,15 @@ function onPointerMove3(event) {
     } else {
         hoverTextMarker4.style.display = "none";
     }
+    const intersectsMarker6 = raycaster.intersectObject(marker6);
+    if (intersectsMarker6.length > 0) {
+        hoverTextMarker6.style.display = "block";
+        hoverTextMarker6.style.left = `${event.clientX + 10}px`;
+        hoverTextMarker6.style.top = `${event.clientY + 10}px`;
+    } else {
+        hoverTextMarker6.style.display = "none";
+    }
+    
 
 }
 
@@ -709,6 +674,21 @@ function forceHideDivs() {
         if (whiteboardContainer) {
             whiteboardContainer.style.display = "none";
         }
+
+        const dotIds = [
+            "marker1Dot",
+            "marker2Dot",
+            "marker3Dot",
+            "marker4Dot",
+            "marker6Dot"
+        ];
+    
+        dotIds.forEach(dotId => {
+            const dot = document.getElementById(dotId);
+            if (dot) {
+                dot.style.display = "block"; // Show the blinking dot
+            }
+        });
     });
 
 // Raycasting
@@ -725,7 +705,7 @@ function forceHideDivs() {
         const intersects = raycaster.intersectObjects([marker1, marker2, marker3, marker4, marker5, marker6]);
 
         if (intersects.length > 0) {
-            gsap.to(intersects[0].object.material, { opacity: 0.6, duration: 0.3 });
+            gsap.to(intersects[0].object.material, { opacity: .005, duration: 0.3 });
             document.body.style.cursor = "pointer";
         } else {
             gsap.to([marker1.material, marker2.material, marker3.material, marker4.material, marker5.material, marker6.material], { opacity: 0, duration: 0.3 });
@@ -736,6 +716,28 @@ function forceHideDivs() {
 
     
     const markers = [marker1, marker2, marker3, marker4, marker5, marker6];
+
+    function hideBlinkingDot(dotId) {
+        const dot = document.getElementById(dotId);
+        if (dot) {
+            dot.style.display = "none"; // Hide the blinking dot
+        }
+    }
+    
+
+    function hideAllBlinkingDots() {
+        const dotIds = [
+            "marker1Dot",
+            "marker2Dot",
+            "marker3Dot",
+            "marker4Dot",
+            "marker6Dot"
+        ];
+    
+        // Loop through all dot IDs and hide them
+        dotIds.forEach(dotId => hideBlinkingDot(dotId));
+    }
+    
 
     function onPointerDown(event) {
         if (resetRecently) return;
@@ -753,30 +755,37 @@ function forceHideDivs() {
             if (clickedObject.name === "Marker1") {
                 moveCamera(marker1);
                 enableMarkerDivsAfterDelay(2500, [marker1Div, marker1Div2, marker1Div3, marker1Div4, marker1Div5, marker1Div6]);
+                hideAllBlinkingDots(); // Hide all dots
             }
-
+            
             if (clickedObject.name === "Marker2") {
                 moveCamera(marker2, -4, 4, 6);
                 enableMarkerDivsAfterDelay(2500, [marker2Div]);
+                hideAllBlinkingDots(); // Hide all dots
             }
-
+            
             if (clickedObject.name === "Marker3") {
                 moveCamera(marker3, -0.5, 1, -2);
                 enableMarkerDivsAfterDelay(2500, [marker3aDiv, marker3aDiv2]);
+                hideAllBlinkingDots(); // Hide all dots
             }
-
+            
             if (clickedObject.name === "Marker4") {
                 moveCamera(marker4, 1, 1, 1.6);
                 enableMarkerDivsAfterDelay(2500, [marker4Div]);
+                hideAllBlinkingDots(); // Hide all dots
             }
-
+            
             if (clickedObject.name === "Marker5") {
-                toggleLight(); // ✅ Call function to dim/restore light
+                toggleLight();
             }
+            
             if (clickedObject.name === "Marker6") {
                 moveCamera(marker6, 9, 1, -0.5);
                 enableMarkerDivsAfterDelay(2500, [marker6Div]);
+                hideAllBlinkingDots(); // Hide all dots
             }
+            
             
         }
     } 
@@ -1005,8 +1014,6 @@ function setMarkerVisibility(opacityValue) {
     });
 }
 
-// Function to handle touch interactions (no hover required)
-
 
 
 function onTouchStart(event) {
@@ -1040,21 +1047,29 @@ function onTouchStart(event) {
                 if (clickedObject.name === "Marker1") {
                     moveCamera(marker1);
                     enableMarkerDivsAfterDelay(2500, [marker1Div, marker1Div2, marker1Div3, marker1Div4, marker1Div5, marker1Div6]);
+                    hideAllBlinkingDots(); // Hide all dots
+
                 }
 
                 if (clickedObject.name === "Marker2") {
                     moveCamera(marker2, -4, 4, 6);
                     enableMarkerDivsAfterDelay(2500, [marker2Div]);
+                    hideAllBlinkingDots(); // Hide all dots
+
                 }
 
                 if (clickedObject.name === "Marker3") {
                     moveCamera(marker3, -0.5, 1, -2);
                     enableMarkerDivsAfterDelay(2500, [marker3aDiv, marker3aDiv2]);
+                    hideAllBlinkingDots(); // Hide all dots
+
                 }
 
                 if (clickedObject.name === "Marker4") {
                     moveCamera(marker4, 1, 1, 1.6);
                     enableMarkerDivsAfterDelay(2500, [marker4Div]);
+                    hideAllBlinkingDots(); // Hide all dots
+
                 }
                 
 
@@ -1065,6 +1080,8 @@ function onTouchStart(event) {
                 if (clickedObject.name === "Marker6") {
                     moveCamera(marker6, 9, 1, -0.5);
                     enableMarkerDivsAfterDelay(2500, [marker6Div]);
+                    hideAllBlinkingDots(); // Hide all dots
+
                 }
                 
             }
@@ -1121,6 +1138,48 @@ function toggleLight() {
 }
 
 
+const blinkingLights = [];
+
+function createBlinkingLight(position, color = 0xff0000, intensity = 1, size = 0.02, blinkSpeed = 1) {
+    const light = new THREE.PointLight(color, intensity, 3); // PointLight with small range
+
+    // Glowing sphere material
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 1
+    });
+
+    const sphereGeometry = new THREE.SphereGeometry(size, 16, 16);
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+    // Group to hold light and visual sphere
+    const lightGroup = new THREE.Group();
+    lightGroup.add(light);
+    lightGroup.add(sphere);
+    lightGroup.position.set(position.x, position.y, position.z);
+    scene.add(lightGroup);
+
+    const clock = new THREE.Clock();
+
+    // Save light with blink data
+    blinkingLights.push({
+        light,
+        intensity,
+        blinkSpeed,
+        clock,
+        sphere
+    });
+
+    return light;
+}
+
+// Create multiple blinking lights
+const light1 = createBlinkingLight({ x: 5, y: 3.199, z: -3.65 });
+const light2 = createBlinkingLight({ x: 90, y: 45, z: 160 });
+const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20 }, 0xffffff);
+
+
 // Function to create a blinking dot on a marker
 function createBlinkingDot(dotId) {
     const dot = document.createElement("div");
@@ -1134,8 +1193,8 @@ createBlinkingDot("marker1Dot");
 createBlinkingDot("marker2Dot");
 createBlinkingDot("marker3Dot");
 createBlinkingDot("marker4Dot");
+createBlinkingDot("marker6Dot");
 
-// Function to update the blinking dot position based on the 3D marker position
 function updateBlinkingDot(marker, dotId) {
     if (!marker) return;
 
@@ -1175,16 +1234,62 @@ window.addEventListener("load", applyResponsiveStyles);
 window.addEventListener("resize", applyResponsiveStyles);
 
 
+function updateVersion() {
+    let startDate = new Date("2025-03-15T00:00:00"); // Set the initial start date
+    let now = new Date();
 
+    // Calculate the number of days elapsed since startDate
+    let diffInMs = now - startDate;
+    let daysElapsed = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Convert ms to days
 
-// Animation Loop
+    let major = 1;  // First number (1-10)
+    let minor = 0;  // Middle number (0-50)
+    let patch = daysElapsed; // Last number (increments daily)
+
+    // Handle rollovers
+    if (patch >= 100) {
+      minor += Math.floor(patch / 100); // Increment minor when patch reaches 100
+      patch = patch % 100; // Reset patch to 0 after 100
+    }
+    if (minor >= 50) {
+      major += Math.floor(minor / 50); // Increment major when minor reaches 50
+      minor = minor % 50; // Reset minor to 0 after 50
+    }
+    if (major > 10) {
+      major = 10; // Cap major version at 10
+      minor = 50; // Stop minor at 50 when major is 10
+      patch = 100; // Stop patch at 100 when both limits are hit
+    }
+
+    let version = `[Version ${major}.${minor}.${patch}]`;
+    document.getElementById('version').textContent = version;
+  }
+
+  updateVersion(); // Initial call
+  setInterval(updateVersion, 86400000);
+
+ 
+
 function animate() {
     requestAnimationFrame(animate);
     updateBlinkingDot(marker1, "marker1Dot");
     updateBlinkingDot(marker2, "marker2Dot");
     updateBlinkingDot(marker3, "marker3Dot");
     updateBlinkingDot(marker4, "marker4Dot");
-    
+    updateBlinkingDot(marker6, "marker6Dot");
+
+    blinkingLights.forEach(({ light, intensity, blinkSpeed, clock, sphere }) => {
+        const t = clock.getElapsedTime();
+        const blinkOn = Math.floor(t * 2 / blinkSpeed) % 2 === 0;
+
+        // Toggle intensity
+        light.intensity = blinkOn ? intensity : 0;
+
+        // Update sphere opacity for visual blinking effect
+        if (sphere && sphere.material) {
+            sphere.material.opacity = blinkOn ? 1 : 0.1;
+        }
+    });
     controls.update();
     updateMarker3aDiv();  
     renderer.render(scene, camera);

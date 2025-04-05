@@ -714,10 +714,9 @@ function updateVersion() {
     return light;
 }
 
-// Create two blinking lights at specified locations
 const light1 = createBlinkingLight({ x: -30, y: -9.5, z: -50 });
 const light2 = createBlinkingLight({ x: 90, y: 45, z: 160 });
-const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20}, 0xffffff); // White
+const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20}, 0xffffff);
 
 
 const ufoGeometry = new THREE.CylinderGeometry(2, 8, 2, 64); // Wider, flatter
@@ -901,9 +900,9 @@ function animate() {
     scene.rotation.y += gridRotationSpeed;
     const time = performance.now() * 0.007;
 
-    light1.intensity = Math.abs(Math.sin(time)) * 4; // Blink effect
+    light1.intensity = Math.abs(Math.sin(time)) * 4; 
     light2.intensity = Math.abs(Math.sin(time + 1)) * 4; 
-    whiteLight.intensity = Math.abs(Math.sin(time * .1)) * 1; // White blink, slightly faster
+    whiteLight.intensity = Math.abs(Math.sin(time * .1)) * 1; 
 
     ufoGroup.rotation.y += 0.01;
 
