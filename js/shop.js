@@ -187,12 +187,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Cleanup Scene on Page Switch
-window.addEventListener("beforeunload", () => {
+window.addEventListener("beforeunload", (event) => {
     if (loadedModels < totalModels) {
-        // Prevent page navigation if models are still loading
         event.preventDefault();
         event.returnValue = "Models are still loading!";
     }
+
+    // Stop animation if you have one
+    cancelAnimationFrame(animationId); // ← only if you use one
+
+    // Remove and dispose all scene content
+    scene.children.forEach(child => {
+        scene.remove(child);
+        if (child.isMesh) {
+            child.geometry?.dispose();
+            child.material?.dispose();
+        } else if (child.traverse) {
+            child.traverse(obj => {
+                if (obj.isMesh) {
+                    obj.geometry?.dispose();
+                    if (Array.isArray(obj.material)) {
+                        obj.material.forEach(m => m.dispose());
+                    } else {
+                        obj.material?.dispose();
+                    }
+                }
+            });
+        }
+    });
+
+    // Dispose renderer
+    renderer.dispose();
+    renderer.forceContextLoss(); // optional but recommended
+
 
     // Cleanup the scene and models to avoid memory leaks
     scene.children.forEach(child => scene.remove(child));  // Remove all objects
@@ -361,14 +388,14 @@ function updateVersion() {
   updateVersion(); // Initial call
   setInterval(updateVersion, 86400000);
 
-  const toggleButton = document.getElementById('toggleMenu');
-  const sideMenu = document.getElementById('sideMenu');
-  
-  toggleButton.addEventListener('click', () => {
-    sideMenu.classList.toggle('open');
-    toggleButton.classList.toggle('open');
-    toggleButton.classList.toggle('flipped');
-  });
+const toggleButton = document.getElementById('toggleMenu');
+const sideMenu = document.getElementById('sideMenu');
+
+toggleButton.addEventListener('click', () => {
+  sideMenu.classList.toggle('open');
+  toggleButton.classList.toggle('open');
+  toggleButton.classList.toggle('flipped');
+});
 // Render loop
 const animate = function () {
     requestAnimationFrame(animate);

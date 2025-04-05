@@ -36,11 +36,15 @@ scene.add(directionalLight);
 // Orbit Controls
 
 window.onload = () => {
-const loader = new GLTFLoader();
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
-loader.setDRACOLoader(dracoLoader);
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+    loader.setDRACOLoader(dracoLoader);
 
+    const loadingContainer = document.querySelector(".loading-container");
+    let loadedModels = 0;
+    const models = []; // Track all loaded models
+    let animationId;   // For canceling requestAnimationFrame
 
     // Model paths with scale and position
     const modelPaths = [
@@ -51,17 +55,14 @@ loader.setDRACOLoader(dracoLoader);
         { path: './models/eye/craftplanet2.glb', scale: 0.3, position: { x: 90, y: 40, z: 160 } }
     ];
 
-    let loadedModels = 0;
     const totalModels = modelPaths.length;
 
-    // Check if all models are loaded
     function checkLoadingComplete() {
         if (loadedModels === totalModels) {
-            loadingContainer.style.display = "none"; // Hide loading screen once all models are loaded
+            loadingContainer.style.display = "none";
         }
     }
 
-    // Load GLB models
     function loadModel(path, scale, position) {
         loader.load(
             path,
@@ -69,11 +70,12 @@ loader.setDRACOLoader(dracoLoader);
                 const model = gltf.scene;
                 model.scale.set(scale, scale, scale);
                 model.position.set(position.x, position.y, position.z);
-                scene.add(model); // Add model to the scene
+                scene.add(model);
+                models.push(model);
                 loadedModels++;
-                checkLoadingComplete(); // Check if all models are loaded
+                checkLoadingComplete();
             },
-            undefined, // No progress bar needed
+            undefined,
             (error) => {
                 console.error(`Error loading ${path}:`, error);
             }
@@ -83,33 +85,48 @@ loader.setDRACOLoader(dracoLoader);
     // Load all models
     modelPaths.forEach(({ path, scale, position }) => loadModel(path, scale, position));
 
-    // Function to dispose old models (cleanup)
     function disposeModel(model) {
         if (model) {
             model.traverse(obj => {
                 if (obj.isMesh) {
-                    obj.geometry.dispose();
-                    if (obj.material && obj.material.isMaterial) {
-                        obj.material.dispose();
+                    obj.geometry?.dispose();
+                    if (Array.isArray(obj.material)) {
+                        obj.material.forEach(mat => mat?.dispose());
+                    } else {
+                        obj.material?.dispose();
                     }
                 }
             });
-            scene.remove(model); // Remove from the scene
+            scene.remove(model);
         }
     }
 
-    // Example of switching models and disposing old ones
     function switchModel(newModelPath) {
-        // Dispose of all previous models before adding the new one
-        scene.children.forEach(child => disposeModel(child));
+        // Dispose old models
+        models.forEach(disposeModel);
+        models.length = 0;
 
-        // Load the new model
+        // Load the new one
         modelPaths.forEach(({ path, scale, position }) => {
             if (path === newModelPath) {
-                loadModel(path, scale, position); // Load the new model
+                loadModel(path, scale, position);
             }
         });
     }
+
+    // Optional: start animation loop
+    function animate() {
+        animationId = requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // Clean up on page exit
+    window.addEventListener("beforeunload", () => {
+        cancelAnimationFrame(animationId);
+        models.forEach(disposeModel);
+        renderer.dispose();
+    });
 };
 
 const zoomAndPan = () => {

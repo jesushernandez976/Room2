@@ -55,6 +55,14 @@ renderer.domElement.addEventListener("webglcontextlost", (event) => {
         disposeModel(currentModel);
     }
 
+    if (renderer) {
+        renderer.dispose();
+        renderer.forceContextLoss();
+        renderer.context = null;
+        renderer.domElement = null;
+    }
+
+
   
     loadModel();
 });
@@ -91,7 +99,6 @@ function loadModel() {
     });
 }
 
-// Function to properly dispose of models
 function disposeModel(model) {
     model.traverse((child) => {
         if (child.isMesh) {
