@@ -1268,6 +1268,15 @@ function updateVersion() {
   updateVersion(); // Initial call
   setInterval(updateVersion, 86400000);
 
+  const toggleButton = document.getElementById('toggleMenu');
+  const sideMenu = document.getElementById('sideMenu');
+  
+  toggleButton.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+    toggleButton.classList.toggle('open');
+    toggleButton.classList.toggle('flipped');
+  });
+
  
 
 function animate() {
