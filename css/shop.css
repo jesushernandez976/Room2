@@ -785,24 +785,7 @@ button {
         top: 5px;
       }
 
-      .testimonial-container {
-          
-        max-width: 350px;
-        padding: 10px;
-    }
-
-    .testimonial-profile {
-        width: 60px;
-        height: 60px;
-    }
-
-    .testimonial-name {
-        font-size: 1em;
-    }
-
-    .testimonial-text {
-        font-size: 0.85em;
-    }
+    
       
     #footerDiv {
         font-size: 6px;
@@ -820,6 +803,12 @@ button {
       left: 0px;
       
      
+    }
+
+    .modal-content {
+      background: rgba(234, 234, 234, 0.9); /* Slight transparency */
+      width: 80%;
+      font-size: 12px;
     }
 
 
