@@ -43,7 +43,7 @@ let spaceRoom;
 let models = [];  // Store hoodie models
 let loadedModels = 0;  // Track models loaded globally
 const modelPaths = [
-    './models/eye/3DHoodieblack2.glb',
+    './models/eye/newhoodie.glb',
     './models/eye/3DHoodieblue.glb',
     './models/eye/3DHoodieWhite.glb'
 ];
