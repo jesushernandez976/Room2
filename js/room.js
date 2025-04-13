@@ -73,7 +73,9 @@ let currentModel = null;
 const loadingContainer = document.querySelector(".loading-container");
 
 function loadModel() {
-    loader.load("./models/eye/r21.glb", function (gltf) {
+    loader.load('https://d3n24sjr83qswf.cloudfront.net/models/r21.glb', function (gltf) {
+        // Your callback code here
+    
         if (currentModel) {
             disposeModel(currentModel);
         }

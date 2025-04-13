@@ -48,12 +48,33 @@ window.onload = () => {
 
     // Model paths with scale and position
     const modelPaths = [
-        { path: './models/eye/logo3.glb', scale: 15, position: { x: 0, y: 0, z: 0 } },
-        { path: './models/eye/sat1.glb', scale: 0.5, position: { x: -4, y: -2, z: -20 } },
-        { path: './models/eye/Shuttle3.glb', scale: 0.24, position: { x: -30, y: -10, z: -50 } },
-        { path: './models/eye/nebula3.glb', scale: 1, position: { x: 150, y: 150, z: -60 } },
-        { path: './models/eye/craftplanet2.glb', scale: 0.3, position: { x: 90, y: 40, z: 160 } }
+        {
+            path: 'https://d3n24sjr83qswf.cloudfront.net/models/logo3.glb',
+            scale: 15,
+            position: { x: 0, y: 0, z: 0 }
+        },
+        {
+            path: 'https://d3n24sjr83qswf.cloudfront.net/models/sat1.glb',
+            scale: 0.5,
+            position: { x: -4, y: -2, z: -20 }
+        },
+        {
+            path: 'https://d3n24sjr83qswf.cloudfront.net/models/Shuttle3.glb',
+            scale: 0.24,
+            position: { x: -30, y: -10, z: -50 }
+        },
+        {
+            path: 'https://d3n24sjr83qswf.cloudfront.net/models/nebula3.glb',
+            scale: 1,
+            position: { x: 150, y: 150, z: -60 }
+        },
+        {
+            path: 'https://d3n24sjr83qswf.cloudfront.net/models/craftplanet2.glb',
+            scale: 0.3,
+            position: { x: 90, y: 40, z: 160 }
+        }
     ];
+    
 
     const totalModels = modelPaths.length;
 
@@ -420,28 +441,29 @@ const getRandomColor = () => {
 
 const getRandomRockTexture = (() => {
     const textures = [
-        "./images/Rocks011.jpg",  
-        "./images/Ground068.jpg",
-        "./images/Moss002.jpg",
-        "./images/Ground081.jpg",
-        "./images/lava.jpg",
-        "./images/Marble.jpg",
-        "./images/Metal05.jpg",
-        "./images/Onyx.jpg",
-        "./images/Concrete.jpg",
-        "./images/Asphalt.jpg",
-        "./images/Ground.jpg",
-        "./images/jupitermap.jpg",
-        "./images/mars_1k_color.jpg",
-        "./images/neptunemap.jpg",
-        "./images/phobosbump.jpg",
-        "./images/plutomap2k.jpg",
-        "./images/saturnmap.jpg",
-        "./images/venusmap.jpg",
-        "./images/moonmap1k.jpg",
-        "./images/earthcloudmap (1).jpg",
-
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Rocks011.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Ground068.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Moss002.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Ground081.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/lava.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Marble.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Metal05.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Onyx.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Concrete.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Asphalt.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/Ground.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/jupitermap.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/mars_1k_color.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/neptunemap.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/phobosbump.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/plutomap2k.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/saturnmap.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/venusmap.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/moonmap1k.jpg',
+        'https://d3n24sjr83qswf.cloudfront.net/Images/earthcloudmap (1).jpg',
     ];
+    
+    
     
     return () => {
         if (textures.length > 0) {
@@ -540,8 +562,8 @@ const ringedPlanet = createRingedPlanet(
     12,             // Planet size
     350,           // Distance from the center
     10,     // Vertical position
-    "./images/Ice.jpg",  // Planet texture
-    "./images/Foil002.png",  // Transparent ring texture
+  'https://d3n24sjr83qswf.cloudfront.net/Images/Ice.jpg',  // Planet texture
+    'https://d3n24sjr83qswf.cloudfront.net/Images/Foil002.png',  // Transparent ring texture
     0.005,         // Rotation speed
     "#89CFF0"      // Planet color (Orange)
 );
@@ -785,7 +807,8 @@ lightPositions.forEach((pos, index) => {
 
 function flyByAnimation() {
     // Create the UFO sound effect
-    const ufoSound = new Audio('./audio/ufo.wav');
+    const ufoSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/ufo.wav');
+
     ufoSound.volume = 0.09; // Adjust volume as needed
 
     // Delay the sound by 0.5 seconds
@@ -822,10 +845,10 @@ flyByAnimation();
 const isMobile = () => window.innerWidth <= 600;
 
 // Create audio elements
-const hoverSound = new Audio('./audio/Hover.mp3');
-const clickSound = new Audio('./audio/Click.mp3');
-const acpTheme = new Audio('./audio/ACP theme.wav');
-const welcomeSound = new Audio('./audio/Welcome .wav'); // Path to the Welcome sound
+const hoverSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/Hover.mp3');
+const clickSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/Click.mp3');
+const acpTheme = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/ACP theme.wav');
+const welcomeSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/Welcome .wav'); // Path to the Welcome sound
 
 // Set initial volume levels based on screen size (mobile or desktop)
 function setVolume() {

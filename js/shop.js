@@ -43,10 +43,11 @@ let spaceRoom;
 let models = [];  // Store hoodie models
 let loadedModels = 0;  // Track models loaded globally
 const modelPaths = [
-    './models/eye/hoodie1.glb',
-    './models/eye/hoodie2.glb',
-    './models/eye/hoodie3.glb'
+    'https://d3n24sjr83qswf.cloudfront.net/models/hoodie1.glb',
+    'https://d3n24sjr83qswf.cloudfront.net/models/hoodie2.glb',
+    'https://d3n24sjr83qswf.cloudfront.net/models/hoodie3.glb'
 ];
+
 
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
@@ -157,7 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         // Load pink space room first
-        spaceRoom = await loadModelWithRetry('./models/eye/pinkspaceroom.glb');
+        spaceRoom = await loadModelWithRetry('https://d3n24sjr83qswf.cloudfront.net/models/pinkspaceroom.glb');
         spaceRoom.scale.set(1, 1.4, 1);
         scene.add(spaceRoom);
         loadedModels++;
