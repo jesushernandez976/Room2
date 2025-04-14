@@ -49,7 +49,7 @@ window.onload = () => {
     // Model paths with scale and position
     const modelPaths = [
         {
-            path: 'https://d3n24sjr83qswf.cloudfront.net/models/logo3.glb',
+            path: './models/eye/logo3.glb',
             scale: 15,
             position: { x: 0, y: 0, z: 0 }
         },
@@ -135,12 +135,6 @@ window.onload = () => {
         });
     }
 
-    // Optional: start animation loop
-    function animate() {
-        animationId = requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-    }
-    animate();
 
     // Clean up on page exit
     window.addEventListener("beforeunload", () => {
@@ -807,8 +801,7 @@ lightPositions.forEach((pos, index) => {
 
 function flyByAnimation() {
     // Create the UFO sound effect
-    const ufoSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/ufo.wav');
-
+    const ufoSound = new Audio('./audio/ufo.wav');
     ufoSound.volume = 0.09; // Adjust volume as needed
 
     // Delay the sound by 0.5 seconds
@@ -845,11 +838,10 @@ flyByAnimation();
 const isMobile = () => window.innerWidth <= 600;
 
 // Create audio elements
-const hoverSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/Hover.mp3');
-const clickSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/Click.mp3');
-const acpTheme = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/ACP theme.wav');
-const welcomeSound = new Audio('https://d3n24sjr83qswf.cloudfront.net/Audio/Welcome .wav'); // Path to the Welcome sound
-
+const hoverSound = new Audio('./audio/Hover.mp3');
+const clickSound = new Audio('./audio/Click.mp3');
+const acpTheme = new Audio('./audio/ACP theme.wav');
+const welcomeSound = new Audio('./audio/Welcome .wav');
 // Set initial volume levels based on screen size (mobile or desktop)
 function setVolume() {
     const mobile = isMobile();
