@@ -2,7 +2,10 @@
   font-family: 'Roboto Mono', monospace;
 }
 
-/* Loading bar styling */
+.container {
+  display: none;
+} 
+
 .loading-bar {
   position: fixed;
   top: 50%;
