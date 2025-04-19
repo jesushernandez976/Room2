@@ -28,10 +28,6 @@ body {
 main {
   flex: 1;
 }
-.nav1 {
-    width: 100vw; 
-    border-bottom: 2px solid black;
-  }
 
 .nav-pills .nav-link {
   font-family: "Roboto Mono", monospace;
