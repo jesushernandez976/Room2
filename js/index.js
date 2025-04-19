@@ -152,7 +152,6 @@ const zoomAndPan = () => {
     container.style.opacity = "0";
     container.style.pointerEvents = "none"; // Disable all clicks
 
-    // Start position (far from the scene)
     camera.position.set(-100, -100, -100);
 
     const isMobile = window.innerWidth <= 500; // Detect mobile screen
@@ -186,8 +185,8 @@ const zoomAndPan = () => {
         onComplete: () => {
             // Fade in the container when animation completes
             container.style.transition = "opacity 1s ease-in-out";
-            container.style.opacity = "1";
             container.style.pointerEvents = "auto";
+            container.style.display = "block"; 
         }
     });
 
