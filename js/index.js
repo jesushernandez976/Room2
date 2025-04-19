@@ -150,7 +150,7 @@ const zoomAndPan = () => {
 
     // Hide the container initially
     container.style.opacity = "0";
-    container.style.pointerEvents = "none"; // Disable all clicks
+    container.style.pointerEvents = "none"; 
 
     camera.position.set(-100, -100, -100);
 
@@ -170,7 +170,7 @@ const zoomAndPan = () => {
     setTimeout(() => {
         welcomeSound.currentTime = 0;
         welcomeSound.play();
-    }, 5000); // 1 second before the animation completes (5 seconds)
+    }, 5000); 
 
     // Animate the camera position
     gsap.to(camera.position, {
@@ -184,15 +184,15 @@ const zoomAndPan = () => {
         },
         onComplete: () => {
             // Fade in the container when animation completes
+            container.style.display = "block";
             container.style.transition = "opacity 1s ease-in-out";
-            container.style.pointerEvents = "auto";
-            container.style.display = "block"; 
+            container.style.pointerEvents = "block";
+             
         }
     });
 
-    // Play the ACP theme 1 second after the GSAP animation starts
     setTimeout(() => {
-        if (!isMuted) { // Check before playing
+        if (!isMuted) { 
             acpTheme.currentTime = 0;
             acpTheme.play();
         }
