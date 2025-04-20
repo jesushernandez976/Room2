@@ -85,8 +85,8 @@ main {
 
   .hamburger {
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 20px;
     font-size: 36px; /* Make it bigger! */
     color: black; /* Optional: match your theme */
     background: none;
@@ -134,8 +134,8 @@ main {
 
   .close-btn {
     position: fixed; /* changed from absolute for consistency */
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 20px;
     font-size: 36px;
     color: white;
     background: none;
@@ -447,6 +447,13 @@ footer ul li a:hover {
       .hamburger {
         display: block;
       }
+
+      .title img {
+        width: 20%;
+      }
+
+
+      
     }
 
    
