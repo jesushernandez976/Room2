@@ -23,36 +23,37 @@
   </head>
   <body>
     <div class="container nav1">
-      <header class="d-flex justify-content-between  align-items-center  py-3">
+      <header class="d-flex justify-content-between align-items-center py-3">
         <div class="title">
-            <img
-              src="images/logoblack.png"
-              class="d-block mx-lg-auto img-fluid"
-              width="70"
-              height="500"
-              alt="Logo"
-              loading="lazy"
-            />
+          <img
+            src="images/logoblack.png"
+            class="d-block mx-lg-auto img-fluid"
+            width="70"
+            height="70" 
+            alt="Logo"
+            loading="lazy"
+          />
+        </div>
+    
+        <nav class="navbar px-3 py-2">
+          <div class="container-fluid d-flex justify-content-between align-items-center">
+            
+            <!-- Hamburger button -->
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+    
+            <!-- Main nav (desktop only) -->
+            <ul class="nav nav-pills ms-auto main-nav">
+              <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
+              <li class="nav-item"><a href="room.html" class="nav-link">Metaworld</a></li>
+              <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
+            </ul>
           </div>
-          
-
-          <nav class="navbar px-3 py-2">
-            <div class="container-fluid d-flex justify-content-between align-items-center">
-              
-          
-              <!-- Hamburger button -->
-              <button class="hamburger" onclick="toggleMenu()">☰</button>
-          
-              <!-- Main nav (desktop only) -->
-              <ul class="nav nav-pills ms-auto main-nav">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
-                <li class="nav-item"><a href="room.html" class="nav-link">Metaworld</a></li>
-                <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
-              </ul>
-            </div>
-          </nav>
+        </nav>
+      </header>
+    </div>
+    
 
           <div class="overlay-menu" id="menuOverlay">
             <button class="close-btn" onclick="toggleMenu()">&times;</button>
