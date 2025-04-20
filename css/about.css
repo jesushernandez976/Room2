@@ -84,13 +84,21 @@ main {
   .bar8 { width: 2px;   transform: skew(-12deg); }
 
   .hamburger {
-    display: none;
-    font-size: 28px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 36px; /* Make it bigger! */
+    color: black; /* Optional: match your theme */
     background: none;
     border: none;
-    color: #000;
-  }
+    cursor: pointer;
+    display: none;
+    justify-content: center;
+    align-items: center;
 
+  
+  }
+  
   .overlay-menu {
     position: fixed;
     top: 0;
@@ -125,13 +133,14 @@ main {
   }
 
   .close-btn {
-    position: absolute;
-    top: 17px;
-    right: 57px;
+    position: fixed; /* changed from absolute for consistency */
+    top: 15px;
+    right: 15px;
     font-size: 36px;
     color: white;
     background: none;
     border: none;
+    cursor: pointer;
   }
 
 
