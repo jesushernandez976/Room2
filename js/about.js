@@ -65,6 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+function toggleMenu() {
+    document.getElementById('menuOverlay').classList.toggle('show');
+  }
+
+
 function updateVersion() {
     let startDate = new Date("2025-03-15T00:00:00"); // Set the initial start date
     let now = new Date();

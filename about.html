@@ -36,13 +36,34 @@
           </div>
           
 
-        <ul class="nav nav-pills ms-auto">
-          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="room.html" class="nav-link">Metaworld</a></li>
-          <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
-        </ul>
+          <nav class="navbar px-3 py-2">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+              
+          
+              <!-- Hamburger button -->
+              <button class="hamburger" onclick="toggleMenu()">☰</button>
+          
+              <!-- Main nav (desktop only) -->
+              <ul class="nav nav-pills ms-auto main-nav">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="room.html" class="nav-link">Metaworld</a></li>
+                <li class="nav-item"><a href="shop.html" class="nav-link">Shop</a></li>
+              </ul>
+            </div>
+          </nav>
+
+          <div class="overlay-menu" id="menuOverlay">
+            <button class="close-btn" onclick="toggleMenu()">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Projects</a>
+            <a href="room.html">Metaworld</a>
+            <a href="shop.html">Shop</a>
+          </div>
+          
+          
       </header>
     </div>
 
