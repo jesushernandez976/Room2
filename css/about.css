@@ -84,7 +84,6 @@ main {
   .bar8 { width: 2px;   transform: skew(-12deg); }
 
   .hamburger {
-    position: fixed;
     top: 10px;
     right: 20px;
     font-size: 36px; /* Make it bigger! */
@@ -133,10 +132,10 @@ main {
   }
 
   .close-btn {
-    position: fixed; /* changed from absolute for consistency */
-    top: 10px;
-    right: 20px;
-    font-size: 36px;
+    position: absolute; 
+    top: 5px;
+    right: 40px;
+    font-size: 56px;
     color: white;
     background: none;
     border: none;
