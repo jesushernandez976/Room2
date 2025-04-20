@@ -29,6 +29,7 @@ main {
   flex: 1;
 }
 
+
 .nav-pills .nav-link {
   font-family: "Roboto Mono", monospace;
   color: black;
@@ -199,14 +200,6 @@ footer ul li a:hover {
   text-decoration: underline;
 }
 
-/* #particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background:transparent;
-  }
-   */
 
 #footerDiv {
   margin-top: 5px;

@@ -25,18 +25,16 @@
     <div class="container nav1">
       <header class="d-flex justify-content-between align-items-center py-3">
         <div class="title">
-          <video
-            class="d-block mx-lg-auto img-fluid"
-            width="100"
-            height="500"
-            autoplay
-            muted
-            loop
-            playsinline
-          >
-            <source src="videos/3D.mp4" type="video/mp4" />
-          </video>
-        </div>
+            <img
+              src="images/logoblack.png"
+              class="d-block mx-lg-auto img-fluid"
+              width="70"
+              height="500"
+              alt="Logo"
+              loading="lazy"
+            />
+          </div>
+          
 
         <ul class="nav nav-pills ms-auto">
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
@@ -269,33 +267,146 @@
       </div>
     </div>
 
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('privacyModal')">&times;</span>
+            <h2>Privacy Policy</h2>
+           <p>Last Updated: 04/04/2025
+                    <br>
+                    Welcome to Access Code Programming, LLC. We take your privacy seriously and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.<br>
+                    1. Information We Collect
+                    We collect only the necessary information to provide and improve our services. This may include:
+                    •	Personal Information:
+                    o	Name
+                    o	Email address
+                    o	Phone number
+                    o	Shipping address (only when processing orders for physical products)
+                    •	Automatically Collected Data:
+                    o	IP address
+                    o	Browser type and version
+                    o	Usage data (such as pages visited, time spent on our site, and interactions)
+                    We do not collect sensitive personal data, such as payment details or government-issued identification.<br>
+                    2. How We Use Your Information
+                    We use the information we collect for the following purposes:
+                    •	To provide and improve our services
+                    •	To respond to inquiries and provide customer support
+                    •	To process transactions and orders
+                    •	To send important service-related updates
+                    •	To enhance security and prevent fraudulent activities <br>
+                    3. Data Sharing and Third-Party Services
+                    We do not sell, trade, or rent your personal information to third parties. However, we may share your data with trusted third-party service providers that help us operate our website and services, including:
+                    •	Amazon Web Services (AWS) for secure cloud storage and hosting
+                    •	Amazon CloudFront (CDN) for fast and reliable content delivery
+                    We take extensive measures to ensure the security of these third-party services but are not responsible for their independent policies or service failures.<br>
+                    4. Data Security
+                    We implement industry-standard security measures to protect your personal information, including secure data storage. While we strive to protect your data, no system is completely immune to security breaches. By using our services, you acknowledge this risk.<br>
+                    5. Cookies and Tracking Technologies
+                    Our website may use cookies and similar tracking technologies to enhance user experience and gather analytics. You can choose to disable cookies through your browser settings, but doing so may impact website functionality. <br>
+                    6. Your Rights and Choices
+                    You have the following rights regarding your personal data:
+                    •	Access & Update: You can request access to the personal information we store about you and update any inaccuracies.
+                    •	Opt-Out: You may opt out of marketing communications at any time.
+                    •	Deletion: You can request the deletion of your personal data, subject to legal and contractual obligations. <br>
+                    To exercise these rights, contact us at info@accesscodepro.com.<br>
+                    7. Children's Privacy
+                    Our website and services are intended for children of all ages. We do not knowingly collect personal information from children. If you believe we have unintentionally collected data from a child, please contact us for removal.<br>
+                    8. Changes to This Privacy Policy
+                    We may update this Privacy Policy periodically to reflect changes in our practices. Any updates will be posted on this page, and continued use of our services constitutes acceptance of the revised policy.<br><br>
+                    Contact Information
+                    For any questions or concerns regarding this Privacy Policy, contact us at:<br>
+                    Email: info@accesscodepro.com<br>
+                    Website: accesscodepro.com
+                    
+                    </p>
+                    <a href="./pdfs/Privacy Policy.pdf" download="Privacy_Policy.pdf" class="download-btn">
+                        Download Privacy Policy (PDF)
+                    </a>
+
+        </div>
+    </div>
+
+    <!-- Credits Modal -->
+    <div id="creditsModal" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('creditsModal')">&times;</span>
+            <h2>Credentials</h2>
+            <p>With a Bachelor of Science in Information Technology specializing in Programming and Software Development, I have honed my skills in front-end and back-end web development, 3D modeling, and interactive application design. At Access Code Programming, we are dedicated to developing innovative digital solutions that create highly interactive and immersive experiences. We focus on crafting seamless user experiences, optimizing performance, and ensuring that every project meets the highest standards of functionality and engagement. Our commitment to pushing the boundaries of innovation allows us to deliver cutting-edge solutions tailored to our clients' needs.</p>
+        </div>
+    </div>
+
+    <div id="testimonalModal" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('testimonalModal')">&times;</span>
+            <h2>Testimonials</h2>
+            <div class="testimonial-container">
+                <img src="https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png" alt="Empty Profile Picture Circle@pngkey.com" class="testimonial-profile">
+                <p class="testimonial-name">Shane B.</p>
+                <p class="testimonial-location">St. Charles</p>
+                <p class="testimonial-company">Chiropractic Practice</p>
+                <p class="testimonial-text">"Jesus with Access Code Programming was great to work with. He was able to build a website that went above and beyond what I was expecting. I needed something that stood out and he absolutely crushed it. Not only that, but he got the job done faster than expected. 
+                    Whenever I reached out to him with a question or needed something fixed he would help me with that. Highly recommend to anyone that wants to take their website and business to the next level."</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socialWheel" class="social-wheel">
+        <a href="https://instagram.com/accesscodepro" target="_blank" class="icon sound" style="--i:0">
+            <img src="./icons/instagram.png" alt="instagram">
+        </a>
+
+        <a href="mailto:info@accesscode.com" class="icon sound" style="--i:1">
+            <img src="./icons/email2.png" alt="email">
+        </a>
+
+        <a href="https://instagram.com/yourprofile" target="_blank" class="icon sound" style="--i:2">
+            <img src="./icons/tiktok.png" alt="phone">
+        </a>
+
+        <a href="https://tiktok.com/@yourusername" target="_blank" class="icon sound" style="--i:3">
+            <img src="./icons/x.png" alt="messages">
+        </a>
+
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="icon sound" style="--i:4">
+            <img src="./icons/facebook1.png" alt="LinkedIn">
+        </a>
+
+        <a href="tel:+13128852636" class="icon sound" style="--i:5">
+            <img src="./icons/phone.png" alt="Call">
+        </a>
+
+        <a href="sms:+13128852636" class="icon sound" style="--i:6">
+            <img src="./icons/messages.png" alt="messages">
+        </a>
+        
+        <a href="https://discord.gg/yourserver" target="_blank" class="icon sound" style="--i:7">
+            <img src="facebook.png" alt="Discord">
+        </a>
+
+        <a href="#" class="icon center">
+            <img src="./icons/email1.png" alt="Email">
+        </a>
+
+        <a href="https://discord.gg/yourserver" target="_blank" class="icon sound" style="--i:8">
+            <img src="facebook.png" alt="Discord">
+        </a>
+    </div>
+    
+
     <footer id="footer">
-      <ul>
-        <li>
-          <a href="#" class="sound" onclick="openModal('termsModal')"
-            >Terms & Conditions</a
-          >
-        </li>
-        <li>
-          <a href="#" class="sound" onclick="openModal('privacyModal')"
-            >Privacy Policy</a
-          >
-        </li>
-        <li><a href="#" class="sound" id="socialLink">Contact</a></li>
-      </ul>
+      
       <p id="footerDiv">
         Access Code Programming, LLC <span id="version">[Version 1.0.0]</span>
         <br />
         © 2025 [ACP] All Rights Reserved.
       </p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./js/about.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+   
   
   </body>
 </html>
