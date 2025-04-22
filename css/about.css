@@ -25,6 +25,62 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+.loading-bar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  height: 110px;
+  background: black; /* Set background to black */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 111px;
+  font-family: sans-serif;
+  font-size: 15px;
+  color:rgb(90, 155, 228);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #fff000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 99999; /* Ensure it stays on top */
+}
+
+.loading-bar:before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 5px solid rgb(90, 155, 228);
+  border-right: 5px solid rgb(90, 155, 228);
+  border-radius: 50%;
+  animation: animateC 2s linear infinite;
+}
+
+@keyframes animateC {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999999;
+}
 .heading1 {
   padding: 10px;
   margin-top: 3.5%;
@@ -5397,207 +5453,8 @@ blockquote {
   }
 }
 
-.ui-btn {
-  position: absolute;
-  top: 87%;
-  left: 50%;
-  transform: translateX(-50%); /* Centers horizontally */
-  --btn-padding: 15px 20px;
-  --btn-transition: .3s;
-  --btn-letter-spacing: .1rem;
-  --btn-animation-duration: 1.2s;
-  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
-  --hover-btn-color:rgb(33, 109, 250);
-  --default-btn-color: #fff;
-  --font-size: 12px;
-  --font-weight: 100;
-  --font-family: Menlo,Roboto Mono,monospace;
+
+  
 }
 
 
-.ui-btn {
-  box-sizing: border-box;
-  padding: var(--btn-padding);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--default-btn-color);
-  font: var(--font-weight) var(--font-size) var(--font-family);
-  background: var(--btn-default-bg);
-  border: none;
-  cursor: pointer;
-  transition: var(--btn-transition);
-  overflow: hidden;
-  box-shadow: var(--btn-shadow);
-}
-
-.ui-btn span {
-  letter-spacing: var(--btn-letter-spacing);
-  transition: var(--btn-transition);
-  box-sizing: border-box;
-  position: relative;
-  background: inherit;
-}
-
-
-
-.ui-btn3 span {
-  transition: var(--btn-transition);
-  box-sizing: border-box;
-  background: inherit;
-}
-
-.ui-btn span::before {
-  box-sizing: border-box;
-  position: absolute;
-  content: "";
-  background: inherit;
-}
-
-.ui-btn2 span::before {
-  box-sizing: border-box;
-  position: absolute;
-  content: "";
-  background: inherit;
-}
-
-.ui-btn3 span::before {
-  box-sizing: border-box;
-  position: absolute;
-  content: "";
-  background: inherit;
-}
-
-
-
-.ui-btn2:hover, .ui-btn2:focus {
-  background: var(--btn-hover-bg);
-}
-
-.ui-btn3:hover, .ui-btn3:focus {
-  background: var(--btn-hover-bg);
-}
-
-.ui-btn:hover, .ui-btn:focus {
-  background: var(--btn-hover-bg);
-}
-
-.ui-btn2:hover span, .ui-btn2:focus span {
-  color: var(--hover-btn-color);
-}
-
-.ui-btn3:hover span, .ui-btn3:focus span {
-  color: var(--hover-btn-color);
-}
-
-.ui-btn:hover span, .ui-btn:focus span {
-  color: var(--hover-btn-color);
-}
-
-.ui-btn2:hover span::before, .ui-btn2:focus span::before {
-  animation: chitchat linear both var(--btn-animation-duration);
-}
-
-.ui-btn3:hover span::before, .ui-btn3:focus span::before {
-  animation: chitchat linear both var(--btn-animation-duration);
-}
-
-
-.ui-btn:hover span::before, .ui-btn:focus span::before {
-  animation: chitchat linear both var(--btn-animation-duration);
-}
-
-@keyframes chitchat {
-  0% {
-    content: "#";
-  }
-
-  5% {
-    content: ".";
-  }
-
-  10% {
-    content: "^{";
-  }
-
-  15% {
-    content: "-!";
-  }
-
-  20% {
-    content: "#$_";
-  }
-
-  25% {
-    content: "№:0";
-  }
-
-  30% {
-    content: "#4{+.";
-  }
-
-  35% {
-    content: "@}-?";
-  }
-
-  40% {
-    content: "?{4@%";
-  }
-
-  45% {
-    content: "=.,^!";
-  }
-
-  50% {
-    content: "?2@%";
-  }
-
-  55% {
-    content: "\;1}]";
-  }
-
-  60% {
-    content: "?{%:%";
-    right: 0;
-  }
-
-  65% {
-    content: "|{f[4";
-    right: 0;
-  }
-
-  70% {
-    content: "{4%0%";
-    right: 0;
-  }
-
-  75% {
-    content: "'1_0<";
-    right: 0;
-  }
-
-  80% {
-    content: "{0%";
-    right: 0;
-  }
-
-  85% {
-    content: "]>'";
-    right: 0;
-  }
-
-  90% {
-    content: "4";
-    right: 0;
-  }
-
-  95% {
-    content: "2";
-    right: 0;
-  }
-
-  100% {
-    content: "";
-    right: 0;
-  }
-}

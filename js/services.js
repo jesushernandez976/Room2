@@ -33,6 +33,15 @@
       isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
       mod
     ));
+    window.addEventListener("load", () => {
+      const loader = document.querySelector(".loading-container");
+      if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+          loader.style.display = "none";
+        }, 500); // Matches the CSS transition duration
+      }
+    });
     var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
   
     // packages/shared/render/plugins/BaseSiteModules/tram-min.js
