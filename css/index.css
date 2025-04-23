@@ -76,6 +76,11 @@ html, body {
   touch-action: manipulation;
 }
 
+#footer{
+  display: none;
+
+}
+
 footer {
   position: absolute;
   bottom: 5px;

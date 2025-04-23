@@ -145,18 +145,21 @@ window.onload = () => {
 };
 
 const zoomAndPan = () => {
-    // Get the container element
-    const container = document.getElementById("container");
+    // Start the fly-by animation right away when zoomAndPan starts
+    flyByAnimation();
 
-    // Hide the container initially
+    const container = document.getElementById("container");
+    const footer = document.getElementById("footer");
+
     container.style.opacity = "0";
-    container.style.pointerEvents = "none"; 
+    container.style.pointerEvents = "none";
+    footer.style.opacity = "0";
+    footer.style.pointerEvents = "none";
 
     camera.position.set(-100, -100, -100);
 
-    const isMobile = window.innerWidth <= 500; // Detect mobile screen
+    const isMobile = window.innerWidth <= 500;
 
-    // Instantly set the initial position to prevent flickering
     gsap.set(camera.position, {
         x: -40,
         y: -20,
@@ -166,13 +169,11 @@ const zoomAndPan = () => {
     gsap.set(camera, { fov: isMobile ? 75 : 75 });
     camera.updateProjectionMatrix();
 
-    // Play the Welcome sound 1 second before the GSAP animation ends
     setTimeout(() => {
         welcomeSound.currentTime = 0;
         welcomeSound.play();
     }, 5000); 
 
-    // Animate the camera position
     gsap.to(camera.position, {
         x: 3,
         y: 0,
@@ -183,11 +184,12 @@ const zoomAndPan = () => {
             camera.updateProjectionMatrix();
         },
         onComplete: () => {
-            // Fade in the container when animation completes
             container.style.display = "block";
             container.style.transition = "opacity 1s ease-in-out";
             container.style.pointerEvents = "block";
-             
+            footer.style.display = "block";
+            footer.style.transition = "opacity 1s ease-in-out";
+            footer.style.pointerEvents = "block";
         }
     });
 
@@ -198,7 +200,6 @@ const zoomAndPan = () => {
         }
     }, 1000);
 
-    // Animate the field of view
     gsap.to(camera, {
         fov: isMobile ? 50 : 50,
         duration: 7,
@@ -207,16 +208,19 @@ const zoomAndPan = () => {
             camera.updateProjectionMatrix();
         },
         onComplete: () => {
-            // Fade in the container when animation completes
             container.style.transition = "opacity 1s ease-in-out";
             container.style.opacity = "1";
             container.style.pointerEvents = "auto";
+            footer.style.transition = "opacity 1s ease-in-out";
+            footer.style.opacity = "1";
+            footer.style.pointerEvents = "auto";
         }
     });
 };
 
-// Call the zoom and pan function directly on page load
+// Trigger it on page load
 window.addEventListener("load", zoomAndPan);
+
 
 
   // Optionally, update based on screen width (if needed)
@@ -828,7 +832,7 @@ function flyByAnimation() {
     });
 }
 
-flyByAnimation();
+
 
 
 
