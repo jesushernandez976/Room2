@@ -2966,6 +2966,12 @@ blockquote {
   height: 100%;
 }
 
+.scrolling-logo-image2 {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
 .nav-links-conatiner {
   flex-direction: row;
   flex: 1;
