@@ -5353,6 +5353,10 @@ blockquote {
   font-size: 12px;
 }
 
+.pics{
+  display: none;
+}
+
 .holographic-container {
  margin-bottom: 500px;
 }

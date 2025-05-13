@@ -42,11 +42,12 @@ window.onload = () => {
     loader.setDRACOLoader(dracoLoader);
 
     const loadingContainer = document.querySelector(".loading-container");
+    const enterButton = document.getElementById("enter-button");
+    const enterdiv = document.getElementById("enterBtn");
     let loadedModels = 0;
-    const models = []; // Track all loaded models
-    let animationId;   // For canceling requestAnimationFrame
+    const models = [];
+    let animationId;
 
-    // Model paths with scale and position
     const modelPaths = [
         {
             path: './models/eye/logo3.glb',
@@ -74,13 +75,13 @@ window.onload = () => {
             position: { x: 90, y: 40, z: 160 }
         }
     ];
-    
 
     const totalModels = modelPaths.length;
 
     function checkLoadingComplete() {
         if (loadedModels === totalModels) {
             loadingContainer.style.display = "none";
+            enterButton.style.display = "block"; // Show Enter button after all models load
         }
     }
 
@@ -103,7 +104,6 @@ window.onload = () => {
         );
     }
 
-    // Load all models
     modelPaths.forEach(({ path, scale, position }) => loadModel(path, scale, position));
 
     function disposeModel(model) {
@@ -123,11 +123,8 @@ window.onload = () => {
     }
 
     function switchModel(newModelPath) {
-        // Dispose old models
         models.forEach(disposeModel);
         models.length = 0;
-
-        // Load the new one
         modelPaths.forEach(({ path, scale, position }) => {
             if (path === newModelPath) {
                 loadModel(path, scale, position);
@@ -135,18 +132,27 @@ window.onload = () => {
         });
     }
 
-
     // Clean up on page exit
     window.addEventListener("beforeunload", () => {
         cancelAnimationFrame(animationId);
         models.forEach(disposeModel);
         renderer.dispose();
     });
+
+    // 🟡 When user clicks Enter, start zoomAndPan
+    enterdiv.addEventListener("click", () => {
+        enterButton.style.display = "none";
+        enterdiv.style.display = 'none';
+
+        zoomAndPan(); // Start animation
+    });
 };
+
 
 const zoomAndPan = () => {
     // Start the fly-by animation right away when zoomAndPan starts
     flyByAnimation();
+    animate();
 
     const container = document.getElementById("container");
     const footer = document.getElementById("footer");
@@ -158,7 +164,7 @@ const zoomAndPan = () => {
 
     camera.position.set(-100, -100, -100);
 
-    const isMobile = window.innerWidth <= 500;
+    const isMobile = window.innerWidth <= 600;
 
     gsap.set(camera.position, {
         x: -40,
@@ -218,8 +224,6 @@ const zoomAndPan = () => {
     });
 };
 
-// Trigger it on page load
-window.addEventListener("load", zoomAndPan);
 
 
 
@@ -232,6 +236,7 @@ window.addEventListener("load", zoomAndPan);
       }
     });
   }
+  
 
   
 const gridRadius = 12;  // Radius of the sphere
@@ -840,11 +845,14 @@ function flyByAnimation() {
 // Function to check if the device is mobile
 const isMobile = () => window.innerWidth <= 600;
 
+
+
 // Create audio elements
 const hoverSound = new Audio('./audio/Hover.mp3');
 const clickSound = new Audio('./audio/Click.mp3');
 const acpTheme = new Audio('./audio/ACP theme.wav');
 const welcomeSound = new Audio('./audio/Welcome .wav');
+
 // Set initial volume levels based on screen size (mobile or desktop)
 function setVolume() {
     const mobile = isMobile();
@@ -972,4 +980,4 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-animate();
+
