@@ -194,31 +194,31 @@ window.addEventListener("beforeunload", (event) => {
         event.returnValue = "Models are still loading!";
     }
 
-    // Stop animation if you have one
-    cancelAnimationFrame(animationId); // ← only if you use one
+  let animationId;
+function animate() {
+    animationId = requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
 
-    // Remove and dispose all scene content
     scene.children.forEach(child => {
-        scene.remove(child);
-        if (child.isMesh) {
-            child.geometry?.dispose();
-            child.material?.dispose();
-        } else if (child.traverse) {
-            child.traverse(obj => {
-                if (obj.isMesh) {
-                    obj.geometry?.dispose();
-                    if (Array.isArray(obj.material)) {
-                        obj.material.forEach(m => m.dispose());
-                    } else {
-                        obj.material?.dispose();
-                    }
+    if (child.isMesh) {
+        child.geometry?.dispose();
+        child.material?.dispose();
+    } else if (child.traverse) {
+        child.traverse(obj => {
+            if (obj.isMesh) {
+                obj.geometry?.dispose();
+                if (Array.isArray(obj.material)) {
+                    obj.material.forEach(m => m.dispose());
+                } else {
+                    obj.material?.dispose();
                 }
-            });
-        }
-    });
+            }
+        });
+    }
+    scene.remove(child);
+});
 
-    // Dispose renderer
-    renderer.dispose();
     renderer.forceContextLoss(); // optional but recommended
 
 
@@ -228,9 +228,11 @@ window.addEventListener("beforeunload", (event) => {
         model.traverse(obj => {
             if (obj.isMesh) {
                 obj.geometry.dispose();
-                if (obj.material.isMaterial) {
-                    obj.material.dispose();
-                }
+                if (Array.isArray(obj.material)) {
+    obj.material.forEach(m => m.dispose());
+} else if (obj.material && obj.material.dispose) {
+    obj.material.dispose();
+}
             }
         });
     });
