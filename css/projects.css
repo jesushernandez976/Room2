@@ -126,13 +126,13 @@ body {
 }
 
 
-
-
 .holographic-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin-bottom: 100px;
+  
 }
 
 .holographic-card {
@@ -5345,8 +5345,8 @@ blockquote {
 
 .heading1 {
   padding: 8px;
-  margin-top: 8.5%;
-  font-size: 30px;
+  margin-top: 15.5%;
+  font-size: 20px;
  
 }
 .foot1{
@@ -5354,7 +5354,9 @@ blockquote {
 }
 
 .holographic-container {
- margin-bottom: 500px;
+  
+  margin-bottom: 500px;
+  
 }
 
 
