@@ -19,11 +19,11 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-    
-    const loadingContainer = document.createElement("div");
-    loadingContainer.classList.add("loading-container");
-    loadingContainer.innerHTML = '<div class="loading-bar">Loading</div>';
-    document.body.appendChild(loadingContainer);
+
+const loadingContainer = document.createElement("div");
+loadingContainer.classList.add("loading-container");
+loadingContainer.innerHTML = '<div class="loading-bar">Loading</div>';
+document.body.appendChild(loadingContainer);
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -178,7 +178,7 @@ const zoomAndPan = () => {
     setTimeout(() => {
         welcomeSound.currentTime = 0;
         welcomeSound.play();
-    }, 5000); 
+    }, 5000);
 
     gsap.to(camera.position, {
         x: 3,
@@ -200,7 +200,7 @@ const zoomAndPan = () => {
     });
 
     setTimeout(() => {
-        if (!isMuted) { 
+        if (!isMuted) {
             acpTheme.currentTime = 0;
             acpTheme.play();
         }
@@ -227,39 +227,39 @@ const zoomAndPan = () => {
 
 
 
-  // Optionally, update based on screen width (if needed)
-  if (window.innerWidth <= 500) {
+// Optionally, update based on screen width (if needed)
+if (window.innerWidth <= 500) {
     // Adjust model positions or scaling for small screens here
     scene.traverse((object) => {
-      if (object instanceof THREE.Mesh) {
-        object.position.set(0, 0, 0); // Modify position for small screens if needed
-      }
+        if (object instanceof THREE.Mesh) {
+            object.position.set(0, 0, 0); // Modify position for small screens if needed
+        }
     });
-  }
-  
+}
 
-  
+
+
 const gridRadius = 12;  // Radius of the sphere
 const gridDivisions = 30;  // Number of divisions (latitude and longitude lines)
 
 // Create spherical grid lines (longitude lines)
 for (let i = 0; i < gridDivisions; i++) {
     const theta = (i / gridDivisions) * Math.PI * 2; // Longitude angle (around the sphere)
-    
+
     // Create line for each longitude
     const geometry = new THREE.BufferGeometry();
     const positions = [];
-    
+
     for (let j = 0; j <= gridDivisions; j++) {
         const phi = (j / gridDivisions) * Math.PI; // Latitude angle (from top to bottom)
-        
+
         const x = gridRadius * Math.sin(phi) * Math.cos(theta);
         const y = gridRadius * Math.cos(phi);
         const z = gridRadius * Math.sin(phi) * Math.sin(theta);
-        
+
         positions.push(x, y, z);
     }
-    
+
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     const material = new THREE.LineBasicMaterial({ color: 0x2761c3, opacity: 3 });
     const line = new THREE.Line(geometry, material);
@@ -269,21 +269,21 @@ for (let i = 0; i < gridDivisions; i++) {
 // Create spherical grid lines (latitude lines)
 for (let i = 0; i < gridDivisions; i++) {
     const phi = (i / gridDivisions) * Math.PI; // Latitude angle (from top to bottom)
-    
+
     // Create line for each latitude
     const geometry = new THREE.BufferGeometry();
     const positions = [];
-    
+
     for (let j = 0; j <= gridDivisions; j++) {
         const theta = (j / gridDivisions) * Math.PI * 2; // Longitude angle (around the sphere)
-        
+
         const x = gridRadius * Math.sin(phi) * Math.cos(theta);
         const y = gridRadius * Math.cos(phi);
         const z = gridRadius * Math.sin(phi) * Math.sin(theta);
-        
+
         positions.push(x, y, z);
     }
-    
+
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     const material = new THREE.LineBasicMaterial({ color: 0x2761c3, opacity: 1 });
     const line = new THREE.Line(geometry, material);
@@ -464,9 +464,9 @@ const getRandomRockTexture = (() => {
         'https://d3n24sjr83qswf.cloudfront.net/Images/moonmap1k.jpg',
         'https://d3n24sjr83qswf.cloudfront.net/Images/earthcloudmap (1).jpg',
     ];
-    
-    
-    
+
+
+
     return () => {
         if (textures.length > 0) {
             return textures.splice(Math.floor(Math.random() * textures.length), 1)[0];
@@ -480,7 +480,7 @@ const getRandomRockTexture = (() => {
 
 const createPlanet = (size, distance, positionY, textureUrl, rotationSpeed, color) => {
     const geometry = new THREE.SphereGeometry(size, 31, 32);
-    const texture = new THREE.TextureLoader().load(textureUrl);  
+    const texture = new THREE.TextureLoader().load(textureUrl);
     const material = new THREE.MeshStandardMaterial({
         map: texture,
         roughness: 0.7,
@@ -564,7 +564,7 @@ const ringedPlanet = createRingedPlanet(
     12,             // Planet size
     350,           // Distance from the center
     10,     // Vertical position
-  'https://d3n24sjr83qswf.cloudfront.net/Images/Ice.jpg',  // Planet texture
+    'https://d3n24sjr83qswf.cloudfront.net/Images/Ice.jpg',  // Planet texture
     'https://d3n24sjr83qswf.cloudfront.net/Images/Foil002.png',  // Transparent ring texture
     0.005,         // Rotation speed
     "#89CFF0"      // Planet color (Orange)
@@ -585,7 +585,7 @@ const createFirePlanet = (size, distance, positionY, textureUrl, rotationSpeed) 
 
     const planet = new THREE.Mesh(geometry, material);
     planet.position.set(distance, positionY, -100);
-    planet.rotationSpeed = rotationSpeed;  
+    planet.rotationSpeed = rotationSpeed;
     scene.add(planet);
 
     return planet;
@@ -608,7 +608,7 @@ const createElectricPlanet = (size, distance, positionY, textureUrl, rotationSpe
 
     const planet = new THREE.Mesh(geometry, material);
     planet.position.set(distance, positionY, -100);
-    planet.rotationSpeed = rotationSpeed;  
+    planet.rotationSpeed = rotationSpeed;
     scene.add(planet);
     return planet;
 };
@@ -716,28 +716,28 @@ function updateVersion() {
 
     // Handle rollovers
     if (patch >= 100) {
-      minor += Math.floor(patch / 100); // Increment minor when patch reaches 100
-      patch = patch % 100; // Reset patch to 0 after 100
+        minor += Math.floor(patch / 100); // Increment minor when patch reaches 100
+        patch = patch % 100; // Reset patch to 0 after 100
     }
     if (minor >= 50) {
-      major += Math.floor(minor / 50); // Increment major when minor reaches 50
-      minor = minor % 50; // Reset minor to 0 after 50
+        major += Math.floor(minor / 50); // Increment major when minor reaches 50
+        minor = minor % 50; // Reset minor to 0 after 50
     }
     if (major > 10) {
-      major = 10; // Cap major version at 10
-      minor = 50; // Stop minor at 50 when major is 10
-      patch = 100; // Stop patch at 100 when both limits are hit
+        major = 10; // Cap major version at 10
+        minor = 50; // Stop minor at 50 when major is 10
+        patch = 100; // Stop patch at 100 when both limits are hit
     }
 
     let version = `[Version ${major}.${minor}.${patch}]`;
     document.getElementById('version').textContent = version;
-  }
+}
 
-  updateVersion(); // Initial call
-  setInterval(updateVersion, 86400000);
+updateVersion(); // Initial call
+setInterval(updateVersion, 86400000);
 
 
-  function createBlinkingLight(position, color = 0xff0000, intensity = 40, size = 0.1) {
+function createBlinkingLight(position, color = 0xff0000, intensity = 40, size = 0.1) {
     const light = new THREE.PointLight(color, intensity, 40); // Small range light
     const sphereGeometry = new THREE.SphereGeometry(size, .5, .5);
     const sphereMaterial = new THREE.MeshBasicMaterial({ color });
@@ -757,12 +757,12 @@ function updateVersion() {
 
 const light1 = createBlinkingLight({ x: -30, y: -9.5, z: -50 });
 const light2 = createBlinkingLight({ x: 90, y: 45, z: 160 });
-const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20}, 0xffffff);
+const whiteLight = createBlinkingLight({ x: -4, y: -2, z: -20 }, 0xffffff);
 
 
 const ufoGeometry = new THREE.CylinderGeometry(2, 8, 2, 64); // Wider, flatter
 const ufoMaterial = new THREE.MeshStandardMaterial({
-    color: 0x666666, 
+    color: 0x666666,
     metalness: 1,  // More metallic shine
     roughness: 0.2
 });
@@ -899,7 +899,7 @@ muteToggle.addEventListener('change', () => {
 menuItems.forEach(item => {
     item.addEventListener('mouseenter', () => {
         // On desktop, apply hover delay; on mobile, this will be skipped
-        if (!isMuted && !isClicking && window.innerWidth > 600) { 
+        if (!isMuted && !isClicking && window.innerWidth > 600) {
             clearTimeout(hoverTimeout);
             hoverTimeout = setTimeout(() => {
                 hoverSound.currentTime = 0;
@@ -909,13 +909,13 @@ menuItems.forEach(item => {
     });
 
     item.addEventListener('click', () => {
-        if (!isMuted) { 
+        if (!isMuted) {
             isClicking = true;
             clickSound.currentTime = 0;
             clickSound.play();
-            
+
             // For mobile, disable hover sound after click to avoid conflicting sounds
-            clearTimeout(hoverTimeout); 
+            clearTimeout(hoverTimeout);
 
             setTimeout(() => {
                 isClicking = false;
@@ -936,16 +936,15 @@ function animate() {
 
     // Update the fire particles (if the planet has fire particles)
     if (firePlanet) {
-        // You can add a function to animate the fire particles too (if needed)
     }
 
     // Rotate the entire scene to create the spherical motion effect
     scene.rotation.y += gridRotationSpeed;
     const time = performance.now() * 0.007;
 
-    light1.intensity = Math.abs(Math.sin(time)) * 4; 
-    light2.intensity = Math.abs(Math.sin(time + 1)) * 4; 
-    whiteLight.intensity = Math.abs(Math.sin(time * .1)) * 1; 
+    light1.intensity = Math.abs(Math.sin(time)) * 4;
+    light2.intensity = Math.abs(Math.sin(time + 1)) * 4;
+    whiteLight.intensity = Math.abs(Math.sin(time * .1)) * 1;
 
     ufoGroup.rotation.y += 0.01;
 
