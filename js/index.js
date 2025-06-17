@@ -146,88 +146,91 @@ window.onload = () => {
 
         zoomAndPan(); // Start animation
     });
+
+
+    const zoomAndPan = () => {
+        // Start the fly-by animation right away when zoomAndPan starts
+        flyByAnimation();
+        animate();
+
+        const container = document.getElementById("container");
+        const footer = document.getElementById("footer");
+
+        container.style.opacity = "0";
+        container.style.pointerEvents = "none";
+        footer.style.opacity = "0";
+        footer.style.pointerEvents = "none";
+
+        camera.position.set(-100, -100, -100);
+
+        const isMobile = window.innerWidth <= 600;
+
+        gsap.set(camera.position, {
+            x: -40,
+            y: -20,
+            z: -90
+        });
+
+
+        gsap.set(camera, { fov: isMobile ? 75 : 75 });
+        camera.updateProjectionMatrix();
+
+        setTimeout(() => {
+            welcomeSound.currentTime = 0;
+            welcomeSound.play();
+        }, 5000);
+
+        gsap.to(camera.position, {
+            x: 3,
+            y: 0,
+            z: isMobile ? 6 : 3,
+            duration: 6,
+            ease: "power2.inOut",
+            onUpdate: () => {
+                camera.updateProjectionMatrix();
+            },
+            onComplete: () => {
+                container.style.display = "block";
+                container.style.transition = "opacity 1s ease-in-out";
+                container.style.pointerEvents = "block";
+                footer.style.display = "block";
+                footer.style.transition = "opacity 1s ease-in-out";
+                footer.style.pointerEvents = "block";
+            }
+        });
+
+        setTimeout(() => {
+            if (!isMuted) {
+                acpTheme.currentTime = 0;
+                acpTheme.play();
+            }
+        }, 1000);
+
+        gsap.to(camera, {
+            fov: isMobile ? 50 : 50,
+            duration: 7,
+            ease: "power2.inOut",
+            onUpdate: () => {
+                camera.updateProjectionMatrix();
+            },
+            onComplete: () => {
+                container.style.transition = "opacity 1s ease-in-out";
+                container.style.opacity = "1";
+                container.style.pointerEvents = "auto";
+                footer.style.transition = "opacity 1s ease-in-out";
+                footer.style.opacity = "1";
+                footer.style.pointerEvents = "auto";
+            }
+        });
+    };
+
+
+
+
 };
 
 
-const zoomAndPan = () => {
-    // Start the fly-by animation right away when zoomAndPan starts
-    flyByAnimation();
-    animate();
 
-    const container = document.getElementById("container");
-    const footer = document.getElementById("footer");
-
-    container.style.opacity = "0";
-    container.style.pointerEvents = "none";
-    footer.style.opacity = "0";
-    footer.style.pointerEvents = "none";
-
-    camera.position.set(-100, -100, -100);
-
-    const isMobile = window.innerWidth <= 600;
-
-    gsap.set(camera.position, {
-        x: -40,
-        y: -20,
-        z: -90
-    });
-
-    gsap.set(camera, { fov: isMobile ? 75 : 75 });
-    camera.updateProjectionMatrix();
-
-    setTimeout(() => {
-        welcomeSound.currentTime = 0;
-        welcomeSound.play();
-    }, 5000);
-
-    gsap.to(camera.position, {
-        x: 3,
-        y: 0,
-        z: isMobile ? 6 : 3,
-        duration: 6,
-        ease: "power2.inOut",
-        onUpdate: () => {
-            camera.updateProjectionMatrix();
-        },
-        onComplete: () => {
-            container.style.display = "block";
-            container.style.transition = "opacity 1s ease-in-out";
-            container.style.pointerEvents = "block";
-            footer.style.display = "block";
-            footer.style.transition = "opacity 1s ease-in-out";
-            footer.style.pointerEvents = "block";
-        }
-    });
-
-    setTimeout(() => {
-        if (!isMuted) {
-            acpTheme.currentTime = 0;
-            acpTheme.play();
-        }
-    }, 1000);
-
-    gsap.to(camera, {
-        fov: isMobile ? 50 : 50,
-        duration: 7,
-        ease: "power2.inOut",
-        onUpdate: () => {
-            camera.updateProjectionMatrix();
-        },
-        onComplete: () => {
-            container.style.transition = "opacity 1s ease-in-out";
-            container.style.opacity = "1";
-            container.style.pointerEvents = "auto";
-            footer.style.transition = "opacity 1s ease-in-out";
-            footer.style.opacity = "1";
-            footer.style.pointerEvents = "auto";
-        }
-    });
-};
-
-
-
-
-// Optionally, update based on screen width (if needed)
 if (window.innerWidth <= 500) {
     // Adjust model positions or scaling for small screens here
     scene.traverse((object) => {
@@ -496,7 +499,6 @@ const createPlanet = (size, distance, positionY, textureUrl, rotationSpeed, colo
 };
 
 
-// Generate unique textures and colors for each planet
 // Generate unique textures and colors for each planet
 const planetTextures = Array.from({ length: 12 }, () => getRandomRockTexture());
 const planetColors = Array.from({ length: 12 }, () => getRandomColor()); // Unique random colors
@@ -862,7 +864,6 @@ function setVolume() {
     acpTheme.volume = mobile ? 0.005 : 0.04;
 }
 
-// Set volume when the page loads
 setVolume();
 
 // Recalculate volume on window resize
