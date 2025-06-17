@@ -5,6 +5,10 @@ body {
   overflow: hidden;
 }
 
+html, body {
+  touch-action: manipulation;
+}
+
 header {
   margin-top: 3em;
   text-align: center;
