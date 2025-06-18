@@ -2943,6 +2943,8 @@ blockquote {
   width: 100vw;
   padding-left: 2.5vw;
   padding-right: 2.5vw;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: flex;
   position: relative;
   inset: 0% 0% auto;

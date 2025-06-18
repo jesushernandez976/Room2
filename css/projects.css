@@ -2943,6 +2943,8 @@ blockquote {
   width: 100vw;
   padding-left: 2.5vw;
   padding-right: 2.5vw;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: flex;
   position: relative;
   inset: 0% 0% auto;
@@ -3459,6 +3461,16 @@ blockquote {
   position: relative;
 }
 
+.section2 {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 10rem;
+  padding-bottom: 50rem;
+  position: relative;
+}
+
 .section.section-hero {
   justify-content: space-between;
   align-items: center;
@@ -3467,6 +3479,8 @@ blockquote {
   padding-bottom: 2rem;
   display: flex;
   overflow: hidden;
+  padding-bottom: 10rem;
+
 }
 
 .section.intro {
@@ -4378,6 +4392,11 @@ blockquote {
   text-shadow: 0 3px 20px var(--theme--primary-color);
   font-style: italic;
   font-weight: 400;
+}
+
+.italic-text:hover {
+  color: #66a3ff;
+  text-shadow: 0 3px 30px var(--theme--primary-color);
 }
 
 .footer-span-link {
