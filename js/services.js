@@ -13620,63 +13620,6 @@
     require_webflow_slider();
   })();
 
-  
-  const track = document.querySelector('.carousel-track');
-  const slides = Array.from(track.children);
-  const nextButton = document.querySelector('.carousel-btn.next');
-  const prevButton = document.querySelector('.carousel-btn.prev');
-
-  let currentSlide = 0;
-
-  function updateCarousel() {
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-  }
-
-  nextButton.addEventListener('click', () => {
-    if (currentSlide < slides.length - 1) {
-      currentSlide++;
-      updateCarousel();
-    }
-  });
-
-  prevButton.addEventListener('click', () => {
-    if (currentSlide > 0) {
-      currentSlide--;
-      updateCarousel();
-    }
-  });
-
-  window.addEventListener('resize', updateCarousel);
-
-  // Carousel Part 2 Logic
-document.addEventListener("DOMContentLoaded", function () {
-    const track2 = document.querySelector(".carousel-track-2");
-    const images2 = document.querySelectorAll(".carousel-track-2 .carousel-image");
-    const prevButton2 = document.querySelector(".prev-2");
-    const nextButton2 = document.querySelector(".next-2");
-  
-    let currentIndex2 = 0;
-  
-    function updateCarousel2() {
-      const width = images2[0].clientWidth;
-      track2.style.transform = `translateX(-${currentIndex2 * width}px)`;
-    }
-  
-    nextButton2.addEventListener("click", () => {
-      currentIndex2 = (currentIndex2 + 1) % images2.length;
-      updateCarousel2();
-    });
-  
-    prevButton2.addEventListener("click", () => {
-      currentIndex2 = (currentIndex2 - 1 + images2.length) % images2.length;
-      updateCarousel2();
-    });
-  
-    window.addEventListener("resize", updateCarousel2); // keep carousel responsive
-    updateCarousel2(); // initial position
-  });
-  
 
 
   Webflow.require('ix2').init(
