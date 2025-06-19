@@ -30,7 +30,7 @@ window.handleFormSubmit = function () {
     }
 
     // If all validations pass, proceed
-    fetch('http://localhost:3001/send-email', {
+    fetch('https://email-backend-nwmz.onrender.com/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, message }),
