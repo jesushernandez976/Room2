@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Goldman:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Orbitron:wght@400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE:wght@100..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/shop.css" >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Electrolize&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Goldman:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Orbitron:wght@400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE:wght@100..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/shop.css">
     <title>Shop</title>
+    <meta name="description"
+        content="Access Code Programming builds innovative digital solutions through advanced web & software development, immersive 3D interactivity, and cutting-edge design. specializing in websites using advanced front-end, back-end, and 3D modeling technology. Get your business noticed online.">
+    <meta name="keywords"
+        content="web development, 3D interactivity, interactive websites, software development, front-end, back-end, design, Access Code Programming">
+    <link rel="canonical" href="https://www.accesscodepro.com/" />
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Access Code Programming | Web and Software Solutions">
+    <meta property="og:description"
+        content="Access Code Programming builds immersive digital experiences using advanced web development, software, and 3D technology.">
+    <meta property="og:image" content="https://accesscodepro.com/images/Access%2002-01%20R.png">
+    <meta property="og:url" content="https://www.accesscodepro.com">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Access Code Programming",
+    "url": "https://accesscodepro.com",
+    "logo": "https://accesscodepro.com/images/Access%2002-01%20R.png",
+    "description": "Access Code Programming builds innovative digital solutions through advanced web & software development, immersive 3D interactivity, and cutting-edge design. specializing in websites using advanced front-end, back-end, and 3D modeling technology. Get your business noticed online.",
+    "sameAs": [
+      "https://www.instagram.com/accesscodepro"
+    ]
+  }
+  </script>
     <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; height: 100vh; }
-    </style> 
-  <script type="importmap">
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            height: 100vh;
+        }
+    </style>
+    <script type="importmap">
     {
       "imports": {
         "three": "https://cdn.jsdelivr.net/npm/three@latest/build/three.module.min.js",
@@ -20,410 +55,599 @@
       }
     }
     </script>
-    <link href="images/logoprof.png" rel="shortcut icon" type="image/x-icon"/>
-    <link href="images/logoprof.png" rel="apple-touch-icon"/>
-    
+    <link href="images/logoprof.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="images/logoprof.png" rel="apple-touch-icon" />
+
 </head>
+
 <body>
     <div class="container">
         <div class="loading-container">
             <div class="loading-bar">Loading</div>
-          </div>
-
-          <div class="arrow-menu" id="toggleMenu">
-          <svg id="arrowIcon" width="40px" height="60px" viewBox="0 0 512 512" version="1.1"
-            xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
-            <path d="M146.662,26.814L358.221,238.27c10.755,10.222,10.755,26.193,0,36.414L146.662,486.139"
-              style="fill:none;stroke:#ffffff;stroke-width:19.456;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2.6131;" />
-          </svg>
         </div>
 
-      <div class="menu" id="sideMenu">
-        <div class="menu-items" id="menuItems">
-            <a href="index.html" target="_blank" rel="noopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z" fill="#ffffff"></path> </g></svg></a>
-            <a href="services.html" rel="reopener noreferrer"><svg height="64px" width="25px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 502.672 502.672" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path style="fill:#ffffff;" d="M138.29,168.019h258.806v-16.178c0-13.352-10.936-24.267-24.267-24.267H266.011v-14.129 c0-20.104-16.351-36.39-36.39-36.39h-62.124c-9.707,0-18.831,3.796-25.734,10.699c-6.903,6.903-10.678,15.962-10.678,25.691 v14.15H24.267C10.915,127.574,0,138.488,0,151.841v216.722l81.581-165.275C91.482,183.161,115.9,168.019,138.29,168.019z M155.353,113.445c0-3.214,1.316-6.256,3.581-8.542c2.265-2.33,5.328-3.602,8.542-3.602h62.124 c6.709,0,12.123,5.436,12.123,12.144v14.15h-86.369V113.445z"></path> <path style="fill:#ffffff;" d="M486.874,192.243H138.29c-13.331,0-29.099,9.793-34.945,21.743L9.599,403.895 c-5.91,11.929,0.194,21.722,13.525,21.722h348.584c13.331,0,29.121-9.772,34.988-21.722l93.725-189.909 C506.309,202.036,500.248,192.243,486.874,192.243z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg></a></a>
-            <a href="about.html" rel="reopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>about-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="drop" fill="#ffffff" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.154987,3.55271368e-14 426.666667,95.51168 426.666667,213.333333 C426.666667,331.153707 331.154987,426.666667 213.333333,426.666667 C95.51296,426.666667 3.55271368e-14,331.153707 3.55271368e-14,213.333333 C3.55271368e-14,95.51168 95.51296,3.55271368e-14 213.333333,3.55271368e-14 Z M234.713387,192 L192.04672,192 L192.04672,320 L234.713387,320 L234.713387,192 Z M213.55008,101.333333 C197.99616,101.333333 186.713387,112.5536 186.713387,127.704107 C186.713387,143.46752 197.698773,154.666667 213.55008,154.666667 C228.785067,154.666667 240.04672,143.46752 240.04672,128 C240.04672,112.5536 228.785067,101.333333 213.55008,101.333333 Z" id="Shape"> </path> </g> </g> </g></svg></a>
-            <a href="room.html" target="_blank" rel="noopener noreferrer">
-                <svg width="30px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path d="M12,10,3,6l9-4,9,4Zm-1,2L3,8V18l8,4Zm10,6V8l-8,4V22Z"></path>
-                    </g>
-                </svg>
-            </a>
-          <a href="projects.html" rel="noopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>work-case-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="work-case" fill="#ffffff" transform="translate(42.666667, 64.000000)"> <path d="M1.20792265e-13,197.76 C54.5835501,218.995667 112.186031,231.452204 170.666667,234.666667 L170.666667,277.333333 L256,277.333333 L256,234.666667 C314.339546,231.013 371.833936,218.86731 426.666667,198.613333 L426.666667,362.666667 L1.20792265e-13,362.666667 L1.20792265e-13,197.76 Z M277.333333,-1.42108547e-14 L298.666667,21.3333333 L298.666667,64 L426.666667,64 L426.666667,175.146667 C361.254942,199.569074 292.110481,212.488551 222.293333,213.333333 L222.293333,213.333333 L206.933333,213.333333 C136.179047,212.568604 66.119345,199.278929 7.10542736e-15,174.08 L7.10542736e-15,174.08 L7.10542736e-15,64 L128,64 L128,21.3333333 L149.333333,-1.42108547e-14 L277.333333,-1.42108547e-14 Z M256,42.6666667 L170.666667,42.6666667 L170.666667,64 L256,64 L256,42.6666667 Z" id="Combined-Shape-Copy"> </path> </g> </g> </g></svg></a>
+        <div class="arrow-menu" id="toggleMenu">
+            <svg id="arrowIcon" width="40px" height="60px" viewBox="0 0 512 512" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+                <path d="M146.662,26.814L358.221,238.27c10.755,10.222,10.755,26.193,0,36.414L146.662,486.139"
+                    style="fill:none;stroke:#ffffff;stroke-width:19.456;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2.6131;" />
+            </svg>
         </div>
+
+        <div class="menu" id="sideMenu">
+            <div class="menu-items" id="menuItems">
+                <a href="index.html" target="_blank" rel="noopener noreferrer"><svg width="64px" height="25px"
+                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z"
+                                fill="#ffffff"></path>
+                        </g>
+                    </svg></a>
+                <a href="services.html" rel="reopener noreferrer"><svg height="64px" width="25px" version="1.1"
+                        id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 502.672 502.672" xml:space="preserve" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <g>
+                                    <g>
+                                        <path style="fill:#ffffff;"
+                                            d="M138.29,168.019h258.806v-16.178c0-13.352-10.936-24.267-24.267-24.267H266.011v-14.129 c0-20.104-16.351-36.39-36.39-36.39h-62.124c-9.707,0-18.831,3.796-25.734,10.699c-6.903,6.903-10.678,15.962-10.678,25.691 v14.15H24.267C10.915,127.574,0,138.488,0,151.841v216.722l81.581-165.275C91.482,183.161,115.9,168.019,138.29,168.019z M155.353,113.445c0-3.214,1.316-6.256,3.581-8.542c2.265-2.33,5.328-3.602,8.542-3.602h62.124 c6.709,0,12.123,5.436,12.123,12.144v14.15h-86.369V113.445z">
+                                        </path>
+                                        <path style="fill:#ffffff;"
+                                            d="M486.874,192.243H138.29c-13.331,0-29.099,9.793-34.945,21.743L9.599,403.895 c-5.91,11.929,0.194,21.722,13.525,21.722h348.584c13.331,0,29.121-9.772,34.988-21.722l93.725-189.909 C506.309,202.036,500.248,192.243,486.874,192.243z">
+                                        </path>
+                                    </g>
+                                </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                            </g>
+                        </g>
+                    </svg></a></a>
+                <a href="about.html" rel="reopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512"
+                        version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <title>about-filled</title>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="drop" fill="#ffffff" transform="translate(42.666667, 42.666667)">
+                                    <path
+                                        d="M213.333333,3.55271368e-14 C331.154987,3.55271368e-14 426.666667,95.51168 426.666667,213.333333 C426.666667,331.153707 331.154987,426.666667 213.333333,426.666667 C95.51296,426.666667 3.55271368e-14,331.153707 3.55271368e-14,213.333333 C3.55271368e-14,95.51168 95.51296,3.55271368e-14 213.333333,3.55271368e-14 Z M234.713387,192 L192.04672,192 L192.04672,320 L234.713387,320 L234.713387,192 Z M213.55008,101.333333 C197.99616,101.333333 186.713387,112.5536 186.713387,127.704107 C186.713387,143.46752 197.698773,154.666667 213.55008,154.666667 C228.785067,154.666667 240.04672,143.46752 240.04672,128 C240.04672,112.5536 228.785067,101.333333 213.55008,101.333333 Z"
+                                        id="Shape"> </path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg></a>
+                <a href="room.html" target="_blank" rel="noopener noreferrer">
+                    <svg width="30px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff" stroke="#ffffff">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M12,10,3,6l9-4,9,4Zm-1,2L3,8V18l8,4Zm10,6V8l-8,4V22Z"></path>
+                        </g>
+                    </svg>
+                </a>
+                <a href="projects.html" rel="noopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512"
+                        version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <title>work-case-filled</title>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="work-case" fill="#ffffff" transform="translate(42.666667, 64.000000)">
+                                    <path
+                                        d="M1.20792265e-13,197.76 C54.5835501,218.995667 112.186031,231.452204 170.666667,234.666667 L170.666667,277.333333 L256,277.333333 L256,234.666667 C314.339546,231.013 371.833936,218.86731 426.666667,198.613333 L426.666667,362.666667 L1.20792265e-13,362.666667 L1.20792265e-13,197.76 Z M277.333333,-1.42108547e-14 L298.666667,21.3333333 L298.666667,64 L426.666667,64 L426.666667,175.146667 C361.254942,199.569074 292.110481,212.488551 222.293333,213.333333 L222.293333,213.333333 L206.933333,213.333333 C136.179047,212.568604 66.119345,199.278929 7.10542736e-15,174.08 L7.10542736e-15,174.08 L7.10542736e-15,64 L128,64 L128,21.3333333 L149.333333,-1.42108547e-14 L277.333333,-1.42108547e-14 Z M256,42.6666667 L170.666667,42.6666667 L170.666667,64 L256,64 L256,42.6666667 Z"
+                                        id="Combined-Shape-Copy"> </path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg></a>
+            </div>
 
         </div>
 
 
         <button class="ui-btn">
             <span>
-              COMING SOON
+                COMING SOON
             </span>
-          </button>
+        </button>
 
-          <h3 class="ui-btn3">
+        <h3 class="ui-btn3">
             <span>
-              ACCESS CoDe PrO
+                ACCESS CoDe PrO
             </span>
 
-          </h3>
+        </h3>
 
-          <h1 class="ui-btn2">
+        <h1 class="ui-btn2">
             <span>
-              shop
+                shop
             </span>
-          </h1>
+        </h1>
 
-          <div class="counter"></div>
+        <div class="counter"></div>
 
-            <button class="paginate left">
-                <i></i><i></i></button>
-            <button class="paginate right">
-                <i></i><i></i></button>
+        <button class="paginate left">
+            <i></i><i></i></button>
+        <button class="paginate right">
+            <i></i><i></i></button>
 
-    </div> 
+    </div>
 
     <div id="termsModal" class="modal">
-      <div class="modal-content">
-          <span class="close sound" onclick="closeModal('termsModal')">&times;</span>
-          <h2>Terms & Conditions</h2>
-          <p>Last Updated: 04/04/2025<br>
-    
-            Welcome to Access Code Programming, LLC. These Terms and Conditions ("Terms") govern your use of our website, services, and products. By accessing or using our website, you agree to comply with and be bound by these Terms.<br>
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('termsModal')">&times;</span>
+            <h2>Terms & Conditions</h2>
+            <p>Last Updated: 04/04/2025<br>
 
-            1. Definitions<br>
-            "Company," "we," "our," or "us" refers to Access Code Programming, LLC.
-            "You" or "User" refers to any visitor, client, or customer accessing our website or services.
-            "Services" refers to web development, standard websites, applications, 3D modeling, AR/VR integration, software solutions, and related services provided by us.<br>
-            
-            2. Use of Our Services<br>
-            2.1 Website Access
-            Our website is open to users of all ages. However, certain services, purchases, or agreements may require individuals to be 18 years or older or have parental/guardian consent.
-            
-            2.2 License to Use
-            We grant you a limited, non-exclusive, non-transferable license to use our website and services for personal or business use, subject to these Terms.
-            
-            2.3 Prohibited Activities
-            You agree not to:
-            
-            Use our services for unlawful purposes.
-            Copy, modify, or reverse-engineer our software, code, or 3D assets.
-            Interfere with our website’s security or functionality.
-            Misrepresent your identity or engage in fraudulent activity. <br>
-            
-            3. Purchases, Payments, and Refunds<br>
-            3.1 Pricing & Payment Structure
-            Pricing for our services is not listed on our website because each project is unique and tailored to specific user requirements. Prices vary based on project complexity, features, customization, and scope of work. We provide custom quotes based on an individual assessment of each client’s needs.
-            
-            3.2 Deposit Requirement
-            To initiate a project, clients must pay 50% of the agreed total cost as a temporary refundable deposit. This deposit secures the project and ensures serious inquiries while protecting our business time and efforts.
-            
-            3.3 Refund Policy
-            Full Refund: Clients are eligible for a 100% refund of their deposit within the first 7 days from the date of initial payment.
-            No Refund: After the project has commenced beyond the initial planning phase, or significant work has been completed, no refunds will be issued. After 7 days, clients may not receive the 50% refund of their deposit if they choose to cancel.
-            
-            3.4 Final Payment
-            The remaining 50% balance must be paid upon project completion before the final product is delivered, deployed, or transferred. <br>
-            
-            4. Intellectual Property & Data Ownership<br>
-            4.1 Intellectual Property Rights
-            All content, including code, 3D models, designs, and software created by Access Code Programming, LLC, is our intellectual property. Clients may not copy, distribute, or resell any assets without prior written permission.
-            
-            4.2 Client Content & Modification Rights
-            Clients retain ownership of any content they provide and have the right to modify, customize, or request removal of assets related to their project. While we maintain ownership of the original assets created, clients are free to request changes, updates, or deletion of specific elements as needed.
-            
-            If a client wishes to remove or alter specific elements, they may submit a formal request, and we will work with them to accommodate their needs.
-            
-            4.3 Data Ownership & Backups
-            Clients retain ownership of all data and content they provide. All original project files, including source code and 3D assets, remain the intellectual property of Access Code Programming, LLC unless otherwise specified in a written agreement. We do not guarantee ongoing data backups, and clients are responsible for storing copies of their project files. Access Code Programming LLC is not liable for any lost or corrupted data. <br>
-            
-            5. Disclaimers & Limitation of Liability<br>
-            5.1 No Guarantees
-            We strive to provide high-quality services but do not guarantee specific results, uninterrupted service, or error-free performance.
-            
-            5.2 Limitation of Liability
-            To the maximum extent permitted by law, Access Code Programming is not liable for any:
-            
-            Loss of data, profits, or business opportunities.
-            Service interruptions, security breaches, or unauthorized access.
-            Third-party software issues or compatibility errors.
-            You agree to use our services at your own risk. <br>
-            
-            6. Third-Party Links & Services<br>
-            6.1 Third-Party Websites & Tools
-            Our website may contain links to third-party websites, tools, or services. These third-party services operate independently, and we do not endorse, control, or take responsibility for their content, privacy policies, security practices, or business operations. Any interactions, transactions, or agreements you enter with third-party providers are strictly between you and that provider.
-            
-            6.2 Hosting, Cloud Storage, and Content Delivery
-            To ensure high performance, security, and scalability for our projects and client websites, Access Code Programming relies on third-party hosting providers, cloud storage solutions, and content delivery networks (CDNs). These services allow us to optimize loading speeds, store large assets efficiently, and enhance the overall user experience.
-            
-            6.3 Amazon Web Services (AWS) & CloudFront
-            We utilize Amazon Web Services (AWS) for secure, scalable, and high-performance cloud storage and content delivery solutions. Our AWS integrations include:
-            
-            Amazon S3 (Simple Storage Service) is used to securely store and manage large files such as 3D models, images, videos, PDFs, and application data.
-            
-            Amazon CloudFront (CDN) is a global content delivery network that accelerates website performance, reduces latency, and ensures faster access to assets by serving cached content from edge locations worldwide. This minimizes loading times for users across different geographic regions.
-            
-            6.4 Reliability & Service Responsibility
-            While we take extensive measures to ensure the reliability and security of these third-party services, we are not responsible for downtime, service interruptions, or outages caused by third-party providers.
-            
-            We are not liable for security breaches, unauthorized access, or data loss that occur due to issues within third-party infrastructure.
-            
-            Changes in third-party terms, pricing, or policies that may affect service availability or performance are beyond our control.
-            
-            We continuously monitor and optimize our integration with these services to provide the best experience possible for our clients. However, by using our services, you acknowledge and agree that Access Code Programming is not liable for any third-party service failures or disruptions. <br>
-            7. Privacy & Data Protection<br>
-            7.1 Commitment to Privacy
-            We take your privacy seriously and do not sell, share, or distribute any personal information to third parties. All collected information remains strictly within our company and is used solely for the purpose of delivering our services.
-            
-            7.2 Information We Collect
-            To provide our services effectively, we may collect the following necessary information:
-            
-            Name
-            
-            Email address
-            
-            Phone number
-            
-            Shipping address (only when processing orders for physical products) 
-            
-            7.3 Data Usage & Storage
-            No additional personal data is stored or used beyond what is required to fulfill our services. All collected information is handled securely and used exclusively for communication, order processing, and service-related interactions. <br>
-            
-            8. Termination<br>
-            8.1 Suspension or Termination by Access Code Programming
-            We reserve the right to suspend or terminate your access to our services if you violate these Terms.
-            
-            At Access Code Programming, we do not tolerate fraud, discrimination, or hateful behavior of any kind. We are committed to serving everyone equally, regardless of race, gender, ethnicity, nationality, or background. Any client or user found engaging in fraudulent activities, discriminatory behavior, or offensive conduct will have their project and access to our services immediately terminated.
-            
-            If a project is terminated due to these violations, no refunds will be issued. We take these matters very seriously and will not hesitate to discontinue any collaboration if these principles are in question.
-            
-            8.2 Compliance with Laws
-            By using our services, you agree to comply with all applicable local, state, and federal laws and regulations. We reserve the right to refuse service to any client engaging in illegal or unethical activities, including but not limited to fraud, copyright infringement, or malicious online activities.
-            
-            8.3 Termination by Client
-            If you choose to terminate a project before completion, the following terms apply:
-            
-            If substantial work has been completed after the initial deposit was made and it has been past 7 days, no refunds will be issued, and you may be required to pay for any work performed up to the termination date.
-            
-            Any deliverables completed before termination will be provided in their current state, without further revisions. <br>
-            
-            
-            9. Governing Law & Dispute Resolution<br>
-            9.1 Initial Resolution Process
-            All disputes shall first be handled directly between Access Code Programming, LLC and the client in an effort to reach a fair resolution. We encourage open communication to resolve any concerns before pursuing legal action.
-            
-            9.2 Jurisdiction & Legal Proceedings
-            If a resolution cannot be reached, the matter will be taken to court. By agreeing to these Terms, you acknowledge that any legal disputes shall be handled exclusively in the courts of DuPage County, Illinois. Both parties agree to submit to the jurisdiction of these courts for any disputes arising out of or related to these Terms and Services. <br>
-            
-            10. Service-Level Agreements (SLA), Service Modifications, User-Generated Content & Client Responsibilities<br>
-            10.1 Project Scope Changes
-            Any additional features, modifications, or requests beyond the agreed-upon project scope may require additional fees. Changes to the original agreement will be reviewed, and a revised quote or timeline may be provided based on the complexity of the modifications.
-            
-            10.2 Client Responsibilities
-            Clients are responsible for providing all necessary materials, including logos, content, images, and other project-related assets, in a timely manner. Delays in delivering the required assets may extend project timelines, and Access Code Programming LLC is not liable for any delays resulting from late submissions.
-            
-            10.3 User-Generated Content
-            If you submit any content (e.g., text, images, reviews, project materials) to Access Code Programming, LLC, you grant us a non-exclusive, royalty-free license to use, display, and modify such content for the purpose of providing our services. You affirm that you own the rights to the content or have permission to use it. We are not responsible for any legal disputes regarding third-party intellectual property rights.
-            
-            10.4 Service-Level Agreements (SLA)
-            While we strive to provide high-quality services and timely responses, uninterrupted availability is not guaranteed. Any service level commitments, including response times, ongoing support, or maintenance, must be agreed upon in a separate written contract.
-            
-            Service-level agreements may apply to services such as website maintenance, cloud hosting, and ongoing technical support. If no separate SLA is in place, all services will be provided on a best-effort basis. <br>
-            
-            11. Maintenance & Support<br>
-            Unless otherwise agreed, post-launch maintenance is not included.
-            Support services for bug fixes, updates, or modifications may require a separate agreement. This includes, if agreed upon, a monthly charge for hosting + maintenance fee (fee is discussed and agreed upon). Access Code Programming, LLC does not pay nor keep the website up if they are not paid for by the client. 
-            If the client is to stop payments for any reason, the website will be fully taken down until the fee is paid once again. If clients would like to host and maintain their own website, they can do so if the website is fully paid for. Please to remove hosting server, client will be prone to a cancellation fee if the hosting prover requires so. Domain name, website file, source code and all the essentials need will be given to the client (only if the website is paid in full). <br>
-            
-            12. Force Majeure Clause<br>
-            We are not responsible for delays or failures beyond our control, including natural disasters, cyberattacks, server failures, or government actions.
-            If CDNs or any linked content is taken down that is being use in client’s website. We are not responsible for this loss. <br>
-            
-            13. Changes to These Terms<br>
-            We may update these Terms at any time. Changes take effect upon posting. Continued use of our services means you accept the updated Terms. <br>
-            
-            
-            14. Indemnification Clause<br>
-            You agree to indemnify, defend, and hold harmless Access Code Programming, LLC, its affiliates, employees, and partners from any claims, damages, losses, liabilities, or expenses (including legal fees) arising from:
-            
-            14.1 Misuse of Services
-            Any improper, unauthorized, or unlawful use of our services, website, or provided materials.
-            
-            14.2 Violation of Terms
-            Failure to comply with these Terms and Conditions, including any breach of contractual obligations.
-            
-            14.3 Intellectual Property Infringement
-            Any unauthorized use, reproduction, or distribution of copyrighted material, trademarks, or proprietary assets belonging to Access Code Programming, LLC or third parties.
-            
-            This indemnification obligation extends to all legal proceedings, settlements, and damages incurred as a result of your actions, whether direct or indirect. <br>
-            
-            
-            
-            15. Cookie & Tracking Policy<br>
-            Our website may use cookies and tracking technologies to improve user experience, analyze traffic, and optimize services. By using our website, you consent to our use of cookies in accordance with our Privacy Policy. You may disable cookies through your browser settings, but this may affect website functionality. <br>
-            
-            
-            
-            16. Contact Information<br>
-            For any questions, contact us at: <br>
-            info@accesscodepro.com<br>
-            accesscodepro.com<br>
-            
-  </p>
-  <a href="./pdfs/Terms and Conditions.pdf" download="Terms_and_Conditions.pdf" class="download-btn">
-      Download Terms & Conditions (PDF)
-  </a>
-      </div>
-  
-  </div>
-  
-  <!-- Privacy Policy Modal -->
-      <div id="privacyModal" class="modal">
-          <div class="modal-content">
-              <span class="close sound" onclick="closeModal('privacyModal')">&times;</span>
-              <h2>Privacy Policy</h2>
-              <p>Last Updated: 04/04/2025
-                  <br>
-                  Welcome to Access Code Programming, LLC. We take your privacy seriously and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.<br>
-                  1. Information We Collect
-                  We collect only the necessary information to provide and improve our services. This may include:
-                  •	Personal Information:
-                  o	Name
-                  o	Email address
-                  o	Phone number
-                  o	Shipping address (only when processing orders for physical products)
-                  •	Automatically Collected Data:
-                  o	IP address
-                  o	Browser type and version
-                  o	Usage data (such as pages visited, time spent on our site, and interactions)
-                  We do not collect sensitive personal data, such as payment details or government-issued identification.<br>
-                  2. How We Use Your Information
-                  We use the information we collect for the following purposes:
-                  •	To provide and improve our services
-                  •	To respond to inquiries and provide customer support
-                  •	To process transactions and orders
-                  •	To send important service-related updates
-                  •	To enhance security and prevent fraudulent activities <br>
-                  3. Data Sharing and Third-Party Services
-                  We do not sell, trade, or rent your personal information to third parties. However, we may share your data with trusted third-party service providers that help us operate our website and services, including:
-                  •	Amazon Web Services (AWS) for secure cloud storage and hosting
-                  •	Amazon CloudFront (CDN) for fast and reliable content delivery
-                  We take extensive measures to ensure the security of these third-party services but are not responsible for their independent policies or service failures.<br>
-                  4. Data Security
-                  We implement industry-standard security measures to protect your personal information, including secure data storage. While we strive to protect your data, no system is completely immune to security breaches. By using our services, you acknowledge this risk.<br>
-                  5. Cookies and Tracking Technologies
-                  Our website may use cookies and similar tracking technologies to enhance user experience and gather analytics. You can choose to disable cookies through your browser settings, but doing so may impact website functionality. <br>
-                  6. Your Rights and Choices
-                  You have the following rights regarding your personal data:
-                  •	Access & Update: You can request access to the personal information we store about you and update any inaccuracies.
-                  •	Opt-Out: You may opt out of marketing communications at any time.
-                  •	Deletion: You can request the deletion of your personal data, subject to legal and contractual obligations. <br>
-                  To exercise these rights, contact us at info@accesscodepro.com.<br>
-                  7. Children's Privacy
-                  Our website and services are intended for children of all ages. We do not knowingly collect personal information from children. If you believe we have unintentionally collected data from a child, please contact us for removal.<br>
-                  8. Changes to This Privacy Policy
-                  We may update this Privacy Policy periodically to reflect changes in our practices. Any updates will be posted on this page, and continued use of our services constitutes acceptance of the revised policy.<br><br>
-                  Contact Information
-                  For any questions or concerns regarding this Privacy Policy, contact us at:<br>
-                  Email: info@accesscodepro.com<br>
-                  Website: accesscodepro.com
-                  
-                  </p>
-                  <a href="./pdfs/Privacy Policy.pdf" download="Privacy_Policy.pdf" class="download-btn">
-                      Download Privacy Policy (PDF)
-                  </a>
-  
-          </div>
-      </div>
-  
-      <!-- Credits Modal -->
-      <div id="creditsModal" class="modal">
-          <div class="modal-content">
-              <span class="close sound" onclick="closeModal('creditsModal')">&times;</span>
-              <h2>Credentials</h2>
-              <p>With a Bachelor of Science in Information Technology specializing in Programming and Software Development, I have honed my skills in front-end and back-end web development, 3D modeling, and interactive application design. At Access Code Programming, we are dedicated to developing innovative digital solutions that create highly interactive and immersive experiences. We focus on crafting seamless user experiences, optimizing performance, and ensuring that every project meets the highest standards of functionality and engagement. Our commitment to pushing the boundaries of innovation allows us to deliver cutting-edge solutions tailored to our clients' needs.</p>
-          </div>
-      </div>
-  
-      <div id="sellModal" class="modal">
-          <div class="modal-content">
-              <span class="close sound" onclick="closeModal('sellModal')">&times;</span>
-              <h2>We Do Not Sell Your Information</h2>
-                    <p>
-                        In compliance with the California Consumer Privacy Act (CCPA), we want to assure you that <strong>we do not sell or share your personal information</strong>. Your privacy is important to us, and we are committed to handling your data with transparency and care.
-                      </p>
-                      <p>
-                        For more details on how we manage personal information, please refer to our <a href="./pdfs/Privacy Policy.pdf" download="Privacy_Policy.pdf" class="download-btn">
-                            Download Privacy Policy (PDF)
-                        </a> or contact us directly. Your trust is our priority, and we will never share your information with third parties without your explicit consent.
-                      </p>
-                      
-          </div>
-      </div>
-  
-      <div id="socialWheel" class="social-wheel">
-            <a href="https://instagram.com/accesscodepro" target="_blank" class="icon sound" style="--i:0">
-                <img src="./icons/instagram.png" alt="instagram">
-            </a>
-    
-            <a href="mailto:info@accesscode.com" class="icon sound" style="--i:1">
-                <img src="./icons/email2.png" alt="email">
-            </a>
-    
-            <a href="https://www.tiktok.com/@accesscodepro" target="_blank" class="icon sound" style="--i:2">
-                <img src="./icons/tiktok.png" alt="Tiktok">
-            </a>
-    
-            <a href="https://x.com/accesscodepro" target="_blank" class="icon sound" style="--i:3">
-                <img src="./icons/x.png" alt="x">
-            </a>
-    
-            <a href="" target="_blank" class="icon sound" style="--i:4">
-                <img src="./icons/facebook1.png" alt="LinkedIn">
-            </a>
-    
-            <a href="tel:+13128852636" class="icon sound" style="--i:5">
-                <img src="./icons/phone.png" alt="Call">
-            </a>
-    
-            <a href="sms:+13128852636" class="icon sound" style="--i:6">
-                <img src="./icons/messages.png" alt="messages">
-            </a>
-            
-            <a href="https://www.twitch.tv/accesscodepro" target="_blank" class="icon sound" style="--i:7">
-                <img src="icons/twitch.png" alt="twitch">
-            </a>
-    
-            <a href="#" class="icon center">
-                <img src="./icons/email1.png" alt="Email">
-            </a>
-    
-            <a href="https://discord.gg/zKg2HGsXhn" target="_blank" class="icon sound" style="--i:8">
-                <img src="images/discord.png" alt="Discord">
+                Welcome to Access Code Programming, LLC. These Terms and Conditions ("Terms") govern your use of our
+                website, services, and products. By accessing or using our website, you agree to comply with and be
+                bound by these Terms.<br>
+
+                1. Definitions<br>
+                "Company," "we," "our," or "us" refers to Access Code Programming, LLC.
+                "You" or "User" refers to any visitor, client, or customer accessing our website or services.
+                "Services" refers to web development, standard websites, applications, 3D modeling, AR/VR integration,
+                software solutions, and related services provided by us.<br>
+
+                2. Use of Our Services<br>
+                2.1 Website Access
+                Our website is open to users of all ages. However, certain services, purchases, or agreements may
+                require individuals to be 18 years or older or have parental/guardian consent.
+
+                2.2 License to Use
+                We grant you a limited, non-exclusive, non-transferable license to use our website and services for
+                personal or business use, subject to these Terms.
+
+                2.3 Prohibited Activities
+                You agree not to:
+
+                Use our services for unlawful purposes.
+                Copy, modify, or reverse-engineer our software, code, or 3D assets.
+                Interfere with our website’s security or functionality.
+                Misrepresent your identity or engage in fraudulent activity. <br>
+
+                3. Purchases, Payments, and Refunds<br>
+                3.1 Pricing & Payment Structure
+                Pricing for our services is not listed on our website because each project is unique and tailored to
+                specific user requirements. Prices vary based on project complexity, features, customization, and scope
+                of work. We provide custom quotes based on an individual assessment of each client’s needs.
+
+                3.2 Deposit Requirement
+                To initiate a project, clients must pay 50% of the agreed total cost as a temporary refundable deposit.
+                This deposit secures the project and ensures serious inquiries while protecting our business time and
+                efforts.
+
+                3.3 Refund Policy
+                Full Refund: Clients are eligible for a 100% refund of their deposit within the first 7 days from the
+                date of initial payment.
+                No Refund: After the project has commenced beyond the initial planning phase, or significant work has
+                been completed, no refunds will be issued. After 7 days, clients may not receive the 50% refund of their
+                deposit if they choose to cancel.
+
+                3.4 Final Payment
+                The remaining 50% balance must be paid upon project completion before the final product is delivered,
+                deployed, or transferred. <br>
+
+                4. Intellectual Property & Data Ownership<br>
+                4.1 Intellectual Property Rights
+                All content, including code, 3D models, designs, and software created by Access Code Programming, LLC,
+                is our intellectual property. Clients may not copy, distribute, or resell any assets without prior
+                written permission.
+
+                4.2 Client Content & Modification Rights
+                Clients retain ownership of any content they provide and have the right to modify, customize, or request
+                removal of assets related to their project. While we maintain ownership of the original assets created,
+                clients are free to request changes, updates, or deletion of specific elements as needed.
+
+                If a client wishes to remove or alter specific elements, they may submit a formal request, and we will
+                work with them to accommodate their needs.
+
+                4.3 Data Ownership & Backups
+                Clients retain ownership of all data and content they provide. All original project files, including
+                source code and 3D assets, remain the intellectual property of Access Code Programming, LLC unless
+                otherwise specified in a written agreement. We do not guarantee ongoing data backups, and clients are
+                responsible for storing copies of their project files. Access Code Programming LLC is not liable for any
+                lost or corrupted data. <br>
+
+                5. Disclaimers & Limitation of Liability<br>
+                5.1 No Guarantees
+                We strive to provide high-quality services but do not guarantee specific results, uninterrupted service,
+                or error-free performance.
+
+                5.2 Limitation of Liability
+                To the maximum extent permitted by law, Access Code Programming is not liable for any:
+
+                Loss of data, profits, or business opportunities.
+                Service interruptions, security breaches, or unauthorized access.
+                Third-party software issues or compatibility errors.
+                You agree to use our services at your own risk. <br>
+
+                6. Third-Party Links & Services<br>
+                6.1 Third-Party Websites & Tools
+                Our website may contain links to third-party websites, tools, or services. These third-party services
+                operate independently, and we do not endorse, control, or take responsibility for their content, privacy
+                policies, security practices, or business operations. Any interactions, transactions, or agreements you
+                enter with third-party providers are strictly between you and that provider.
+
+                6.2 Hosting, Cloud Storage, and Content Delivery
+                To ensure high performance, security, and scalability for our projects and client websites, Access Code
+                Programming relies on third-party hosting providers, cloud storage solutions, and content delivery
+                networks (CDNs). These services allow us to optimize loading speeds, store large assets efficiently, and
+                enhance the overall user experience.
+
+                6.3 Amazon Web Services (AWS) & CloudFront
+                We utilize Amazon Web Services (AWS) for secure, scalable, and high-performance cloud storage and
+                content delivery solutions. Our AWS integrations include:
+
+                Amazon S3 (Simple Storage Service) is used to securely store and manage large files such as 3D models,
+                images, videos, PDFs, and application data.
+
+                Amazon CloudFront (CDN) is a global content delivery network that accelerates website performance,
+                reduces latency, and ensures faster access to assets by serving cached content from edge locations
+                worldwide. This minimizes loading times for users across different geographic regions.
+
+                6.4 Reliability & Service Responsibility
+                While we take extensive measures to ensure the reliability and security of these third-party services,
+                we are not responsible for downtime, service interruptions, or outages caused by third-party providers.
+
+                We are not liable for security breaches, unauthorized access, or data loss that occur due to issues
+                within third-party infrastructure.
+
+                Changes in third-party terms, pricing, or policies that may affect service availability or performance
+                are beyond our control.
+
+                We continuously monitor and optimize our integration with these services to provide the best experience
+                possible for our clients. However, by using our services, you acknowledge and agree that Access Code
+                Programming is not liable for any third-party service failures or disruptions. <br>
+                7. Privacy & Data Protection<br>
+                7.1 Commitment to Privacy
+                We take your privacy seriously and do not sell, share, or distribute any personal information to third
+                parties. All collected information remains strictly within our company and is used solely for the
+                purpose of delivering our services.
+
+                7.2 Information We Collect
+                To provide our services effectively, we may collect the following necessary information:
+
+                Name
+
+                Email address
+
+                Phone number
+
+                Shipping address (only when processing orders for physical products)
+
+                7.3 Data Usage & Storage
+                No additional personal data is stored or used beyond what is required to fulfill our services. All
+                collected information is handled securely and used exclusively for communication, order processing, and
+                service-related interactions. <br>
+
+                8. Termination<br>
+                8.1 Suspension or Termination by Access Code Programming
+                We reserve the right to suspend or terminate your access to our services if you violate these Terms.
+
+                At Access Code Programming, we do not tolerate fraud, discrimination, or hateful behavior of any kind.
+                We are committed to serving everyone equally, regardless of race, gender, ethnicity, nationality, or
+                background. Any client or user found engaging in fraudulent activities, discriminatory behavior, or
+                offensive conduct will have their project and access to our services immediately terminated.
+
+                If a project is terminated due to these violations, no refunds will be issued. We take these matters
+                very seriously and will not hesitate to discontinue any collaboration if these principles are in
+                question.
+
+                8.2 Compliance with Laws
+                By using our services, you agree to comply with all applicable local, state, and federal laws and
+                regulations. We reserve the right to refuse service to any client engaging in illegal or unethical
+                activities, including but not limited to fraud, copyright infringement, or malicious online activities.
+
+                8.3 Termination by Client
+                If you choose to terminate a project before completion, the following terms apply:
+
+                If substantial work has been completed after the initial deposit was made and it has been past 7 days,
+                no refunds will be issued, and you may be required to pay for any work performed up to the termination
+                date.
+
+                Any deliverables completed before termination will be provided in their current state, without further
+                revisions. <br>
+
+
+                9. Governing Law & Dispute Resolution<br>
+                9.1 Initial Resolution Process
+                All disputes shall first be handled directly between Access Code Programming, LLC and the client in an
+                effort to reach a fair resolution. We encourage open communication to resolve any concerns before
+                pursuing legal action.
+
+                9.2 Jurisdiction & Legal Proceedings
+                If a resolution cannot be reached, the matter will be taken to court. By agreeing to these Terms, you
+                acknowledge that any legal disputes shall be handled exclusively in the courts of DuPage County,
+                Illinois. Both parties agree to submit to the jurisdiction of these courts for any disputes arising out
+                of or related to these Terms and Services. <br>
+
+                10. Service-Level Agreements (SLA), Service Modifications, User-Generated Content & Client
+                Responsibilities<br>
+                10.1 Project Scope Changes
+                Any additional features, modifications, or requests beyond the agreed-upon project scope may require
+                additional fees. Changes to the original agreement will be reviewed, and a revised quote or timeline may
+                be provided based on the complexity of the modifications.
+
+                10.2 Client Responsibilities
+                Clients are responsible for providing all necessary materials, including logos, content, images, and
+                other project-related assets, in a timely manner. Delays in delivering the required assets may extend
+                project timelines, and Access Code Programming LLC is not liable for any delays resulting from late
+                submissions.
+
+                10.3 User-Generated Content
+                If you submit any content (e.g., text, images, reviews, project materials) to Access Code Programming,
+                LLC, you grant us a non-exclusive, royalty-free license to use, display, and modify such content for the
+                purpose of providing our services. You affirm that you own the rights to the content or have permission
+                to use it. We are not responsible for any legal disputes regarding third-party intellectual property
+                rights.
+
+                10.4 Service-Level Agreements (SLA)
+                While we strive to provide high-quality services and timely responses, uninterrupted availability is not
+                guaranteed. Any service level commitments, including response times, ongoing support, or maintenance,
+                must be agreed upon in a separate written contract.
+
+                Service-level agreements may apply to services such as website maintenance, cloud hosting, and ongoing
+                technical support. If no separate SLA is in place, all services will be provided on a best-effort basis.
+                <br>
+
+                11. Maintenance & Support<br>
+                Unless otherwise agreed, post-launch maintenance is not included.
+                Support services for bug fixes, updates, or modifications may require a separate agreement. This
+                includes, if agreed upon, a monthly charge for hosting + maintenance fee (fee is discussed and agreed
+                upon). Access Code Programming, LLC does not pay nor keep the website up if they are not paid for by the
+                client.
+                If the client is to stop payments for any reason, the website will be fully taken down until the fee is
+                paid once again. If clients would like to host and maintain their own website, they can do so if the
+                website is fully paid for. Please to remove hosting server, client will be prone to a cancellation fee
+                if the hosting prover requires so. Domain name, website file, source code and all the essentials need
+                will be given to the client (only if the website is paid in full). <br>
+
+                12. Force Majeure Clause<br>
+                We are not responsible for delays or failures beyond our control, including natural disasters,
+                cyberattacks, server failures, or government actions.
+                If CDNs or any linked content is taken down that is being use in client’s website. We are not
+                responsible for this loss. <br>
+
+                13. Changes to These Terms<br>
+                We may update these Terms at any time. Changes take effect upon posting. Continued use of our services
+                means you accept the updated Terms. <br>
+
+
+                14. Indemnification Clause<br>
+                You agree to indemnify, defend, and hold harmless Access Code Programming, LLC, its affiliates,
+                employees, and partners from any claims, damages, losses, liabilities, or expenses (including legal
+                fees) arising from:
+
+                14.1 Misuse of Services
+                Any improper, unauthorized, or unlawful use of our services, website, or provided materials.
+
+                14.2 Violation of Terms
+                Failure to comply with these Terms and Conditions, including any breach of contractual obligations.
+
+                14.3 Intellectual Property Infringement
+                Any unauthorized use, reproduction, or distribution of copyrighted material, trademarks, or proprietary
+                assets belonging to Access Code Programming, LLC or third parties.
+
+                This indemnification obligation extends to all legal proceedings, settlements, and damages incurred as a
+                result of your actions, whether direct or indirect. <br>
+
+
+
+                15. Cookie & Tracking Policy<br>
+                Our website may use cookies and tracking technologies to improve user experience, analyze traffic, and
+                optimize services. By using our website, you consent to our use of cookies in accordance with our
+                Privacy Policy. You may disable cookies through your browser settings, but this may affect website
+                functionality. <br>
+
+
+
+                16. Contact Information<br>
+                For any questions, contact us at: <br>
+                info@accesscodepro.com<br>
+                accesscodepro.com<br>
+
+            </p>
+            <a href="./pdfs/Terms and Conditions.pdf" download="Terms_and_Conditions.pdf" class="download-btn">
+                Download Terms & Conditions (PDF)
             </a>
         </div>
-      
-  
-      <footer id="footer">
-          <ul>
-              <li><a href="#" class="sound" onclick="openModal('termsModal')">Terms & Conditions</a></li>
-              <li><a href="#" class="sound" onclick="openModal('privacyModal')">Privacy Policy</a></li>
-              <!-- <li><a href="#" onclick="openModal('creditsModal')">Credentials</a></li> -->
-              <li><a href="#" class="sound" onclick="openModal('sellModal')">We Do Not Sell Information</a></li>
-  
-              <li><a href="#" class="sound" id="socialLink">Contact</a></li>
-          </ul>
-          <p id="footerDiv">Access Code Programming, LLC <span id="version">[Version 1.0.0]</span> <br>
-              © 2025 [ACP] All Rights Reserved.</p>
-      </footer>
 
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    </div>
 
-<script type="module" src="./js/shop.js" defer></script>
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('privacyModal')">&times;</span>
+            <h2>Privacy Policy</h2>
+            <p>Last Updated: 04/04/2025
+                <br>
+                Welcome to Access Code Programming, LLC. We take your privacy seriously and are committed to protecting
+                your personal information. This Privacy Policy explains how we collect, use, and safeguard your data
+                when you visit our website or use our services.<br>
+                1. Information We Collect
+                We collect only the necessary information to provide and improve our services. This may include:
+                • Personal Information:
+                o Name
+                o Email address
+                o Phone number
+                o Shipping address (only when processing orders for physical products)
+                • Automatically Collected Data:
+                o IP address
+                o Browser type and version
+                o Usage data (such as pages visited, time spent on our site, and interactions)
+                We do not collect sensitive personal data, such as payment details or government-issued
+                identification.<br>
+                2. How We Use Your Information
+                We use the information we collect for the following purposes:
+                • To provide and improve our services
+                • To respond to inquiries and provide customer support
+                • To process transactions and orders
+                • To send important service-related updates
+                • To enhance security and prevent fraudulent activities <br>
+                3. Data Sharing and Third-Party Services
+                We do not sell, trade, or rent your personal information to third parties. However, we may share your
+                data with trusted third-party service providers that help us operate our website and services,
+                including:
+                • Amazon Web Services (AWS) for secure cloud storage and hosting
+                • Amazon CloudFront (CDN) for fast and reliable content delivery
+                We take extensive measures to ensure the security of these third-party services but are not responsible
+                for their independent policies or service failures.<br>
+                4. Data Security
+                We implement industry-standard security measures to protect your personal information, including secure
+                data storage. While we strive to protect your data, no system is completely immune to security breaches.
+                By using our services, you acknowledge this risk.<br>
+                5. Cookies and Tracking Technologies
+                Our website may use cookies and similar tracking technologies to enhance user experience and gather
+                analytics. You can choose to disable cookies through your browser settings, but doing so may impact
+                website functionality. <br>
+                6. Your Rights and Choices
+                You have the following rights regarding your personal data:
+                • Access & Update: You can request access to the personal information we store about you and update any
+                inaccuracies.
+                • Opt-Out: You may opt out of marketing communications at any time.
+                • Deletion: You can request the deletion of your personal data, subject to legal and contractual
+                obligations. <br>
+                To exercise these rights, contact us at info@accesscodepro.com.<br>
+                7. Children's Privacy
+                Our website and services are intended for children of all ages. We do not knowingly collect personal
+                information from children. If you believe we have unintentionally collected data from a child, please
+                contact us for removal.<br>
+                8. Changes to This Privacy Policy
+                We may update this Privacy Policy periodically to reflect changes in our practices. Any updates will be
+                posted on this page, and continued use of our services constitutes acceptance of the revised
+                policy.<br><br>
+                Contact Information
+                For any questions or concerns regarding this Privacy Policy, contact us at:<br>
+                Email: info@accesscodepro.com<br>
+                Website: accesscodepro.com
+
+            </p>
+            <a href="./pdfs/Privacy Policy.pdf" download="Privacy_Policy.pdf" class="download-btn">
+                Download Privacy Policy (PDF)
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Credits Modal -->
+    <div id="creditsModal" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('creditsModal')">&times;</span>
+            <h2>Credentials</h2>
+            <p>With a Bachelor of Science in Information Technology specializing in Programming and Software
+                Development, I have honed my skills in front-end and back-end web development, 3D modeling, and
+                interactive application design. At Access Code Programming, we are dedicated to developing innovative
+                digital solutions that create highly interactive and immersive experiences. We focus on crafting
+                seamless user experiences, optimizing performance, and ensuring that every project meets the highest
+                standards of functionality and engagement. Our commitment to pushing the boundaries of innovation allows
+                us to deliver cutting-edge solutions tailored to our clients' needs.</p>
+        </div>
+    </div>
+
+    <div id="sellModal" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('sellModal')">&times;</span>
+            <h2>We Do Not Sell Your Information</h2>
+            <p>
+                In compliance with the California Consumer Privacy Act (CCPA), we want to assure you that <strong>we do
+                    not sell or share your personal information</strong>. Your privacy is important to us, and we are
+                committed to handling your data with transparency and care.
+            </p>
+            <p>
+                For more details on how we manage personal information, please refer to our <a
+                    href="./pdfs/Privacy Policy.pdf" download="Privacy_Policy.pdf" class="download-btn">
+                    Download Privacy Policy (PDF)
+                </a> or contact us directly. Your trust is our priority, and we will never share your information with
+                third parties without your explicit consent.
+            </p>
+
+        </div>
+    </div>
+
+    <div id="socialWheel" class="social-wheel">
+        <a href="https://instagram.com/accesscodepro" target="_blank" class="icon sound" style="--i:0">
+            <img src="./icons/instagram.png" alt="instagram">
+        </a>
+
+        <a href="mailto:info@accesscode.com" class="icon sound" style="--i:1">
+            <img src="./icons/email2.png" alt="email">
+        </a>
+
+        <a href="https://www.tiktok.com/@accesscodepro" target="_blank" class="icon sound" style="--i:2">
+            <img src="./icons/tiktok.png" alt="Tiktok">
+        </a>
+
+        <a href="https://x.com/accesscodepro" target="_blank" class="icon sound" style="--i:3">
+            <img src="./icons/x.png" alt="x">
+        </a>
+
+        <a href="" target="_blank" class="icon sound" style="--i:4">
+            <img src="./icons/facebook1.png" alt="LinkedIn">
+        </a>
+
+        <a href="tel:+13128852636" class="icon sound" style="--i:5">
+            <img src="./icons/phone.png" alt="Call">
+        </a>
+
+        <a href="sms:+13128852636" class="icon sound" style="--i:6">
+            <img src="./icons/messages.png" alt="messages">
+        </a>
+
+        <a href="https://www.twitch.tv/accesscodepro" target="_blank" class="icon sound" style="--i:7">
+            <img src="icons/twitch.png" alt="twitch">
+        </a>
+
+        <a href="#" class="icon center">
+            <img src="./icons/email1.png" alt="Email">
+        </a>
+
+        <a href="https://discord.gg/zKg2HGsXhn" target="_blank" class="icon sound" style="--i:8">
+            <img src="images/discord.png" alt="Discord">
+        </a>
+    </div>
+
+
+    <footer id="footer">
+        <ul>
+            <li><a href="#" class="sound" onclick="openModal('termsModal')">Terms & Conditions</a></li>
+            <li><a href="#" class="sound" onclick="openModal('privacyModal')">Privacy Policy</a></li>
+            <!-- <li><a href="#" onclick="openModal('creditsModal')">Credentials</a></li> -->
+            <li><a href="#" class="sound" onclick="openModal('sellModal')">We Do Not Sell Information</a></li>
+
+            <li><a href="#" class="sound" id="socialLink">Contact</a></li>
+        </ul>
+        <p id="footerDiv">Access Code Programming, LLC <span id="version">[Version 1.0.0]</span> <br>
+            © 2025 [ACP] All Rights Reserved.</p>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script type="module" src="./js/shop.js" defer></script>
 </body>
 
 </html>

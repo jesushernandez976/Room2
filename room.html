@@ -1,461 +1,653 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Metaworld</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/room.css" />
-    <link href="images/logoprof.png" rel="shortcut icon" type="image/x-icon"/>
-    <link href="images/logoprof.png" rel="apple-touch-icon"/>
-  </head>
-  <body>
-    <header></header>
-    <main>
-      <div class="loading-container">
-        <div class="loading-bar">Loading</div>
-      </div>
 
-      <div class="arrow-menu" id="toggleMenu">
-        <svg id="arrowIcon" width="40px" height="60px" viewBox="0 0 512 512" version="1.1"
-          xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
-          <path d="M146.662,26.814L358.221,238.27c10.755,10.222,10.755,26.193,0,36.414L146.662,486.139"
-            style="fill:none;stroke:#ffffff;stroke-width:19.456;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2.6131;" />
-        </svg>
-      </div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Metaworld</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/room.css" />
+  <link href="images/logoprof.png" rel="shortcut icon" type="image/x-icon" />
+  <link href="images/logoprof.png" rel="apple-touch-icon" />
+  <meta name="description"
+    content="Access Code Programming builds innovative digital solutions through advanced web & software development, immersive 3D interactivity, and cutting-edge design. specializing in websites using advanced front-end, back-end, and 3D modeling technology. Get your business noticed online.">
+  <meta name="keywords"
+    content="web development, 3D interactivity, interactive websites, software development, front-end, back-end, design, Access Code Programming">
+  <link rel="canonical" href="https://www.accesscodepro.com/" />
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Access Code Programming | Web and Software Solutions">
+  <meta property="og:description"
+    content="Access Code Programming builds immersive digital experiences using advanced web development, software, and 3D technology.">
+  <meta property="og:image" content="https://accesscodepro.com/images/Access%2002-01%20R.png">
+  <meta property="og:url" content="https://www.accesscodepro.com">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Access Code Programming",
+    "url": "https://accesscodepro.com",
+    "logo": "https://accesscodepro.com/images/Access%2002-01%20R.png",
+    "description": "Access Code Programming builds innovative digital solutions through advanced web & software development, immersive 3D interactivity, and cutting-edge design. specializing in websites using advanced front-end, back-end, and 3D modeling technology. Get your business noticed online.",
+    "sameAs": [
+      "https://www.instagram.com/accesscodepro"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header></header>
+  <main>
+    <div class="loading-container">
+      <div class="loading-bar">Loading</div>
+    </div>
+
+    <div class="arrow-menu" id="toggleMenu">
+      <svg id="arrowIcon" width="40px" height="60px" viewBox="0 0 512 512" version="1.1"
+        xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+        <path d="M146.662,26.814L358.221,238.27c10.755,10.222,10.755,26.193,0,36.414L146.662,486.139"
+          style="fill:none;stroke:#ffffff;stroke-width:19.456;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2.6131;" />
+      </svg>
+    </div>
 
     <div class="menu" id="sideMenu">
       <div class="menu-items" id="menuItems">
-          <a href="index.html" target="_blank" rel="noopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z" fill="#ffffff"></path> </g></svg></a>
-          <a href="services.html" rel="reopener noreferrer"><svg height="64px" width="25px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 502.672 502.672" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path style="fill:#ffffff;" d="M138.29,168.019h258.806v-16.178c0-13.352-10.936-24.267-24.267-24.267H266.011v-14.129 c0-20.104-16.351-36.39-36.39-36.39h-62.124c-9.707,0-18.831,3.796-25.734,10.699c-6.903,6.903-10.678,15.962-10.678,25.691 v14.15H24.267C10.915,127.574,0,138.488,0,151.841v216.722l81.581-165.275C91.482,183.161,115.9,168.019,138.29,168.019z M155.353,113.445c0-3.214,1.316-6.256,3.581-8.542c2.265-2.33,5.328-3.602,8.542-3.602h62.124 c6.709,0,12.123,5.436,12.123,12.144v14.15h-86.369V113.445z"></path> <path style="fill:#ffffff;" d="M486.874,192.243H138.29c-13.331,0-29.099,9.793-34.945,21.743L9.599,403.895 c-5.91,11.929,0.194,21.722,13.525,21.722h348.584c13.331,0,29.121-9.772,34.988-21.722l93.725-189.909 C506.309,202.036,500.248,192.243,486.874,192.243z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg></a></a>
-          <a href="about.html" rel="reopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>about-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="drop" fill="#ffffff" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.154987,3.55271368e-14 426.666667,95.51168 426.666667,213.333333 C426.666667,331.153707 331.154987,426.666667 213.333333,426.666667 C95.51296,426.666667 3.55271368e-14,331.153707 3.55271368e-14,213.333333 C3.55271368e-14,95.51168 95.51296,3.55271368e-14 213.333333,3.55271368e-14 Z M234.713387,192 L192.04672,192 L192.04672,320 L234.713387,320 L234.713387,192 Z M213.55008,101.333333 C197.99616,101.333333 186.713387,112.5536 186.713387,127.704107 C186.713387,143.46752 197.698773,154.666667 213.55008,154.666667 C228.785067,154.666667 240.04672,143.46752 240.04672,128 C240.04672,112.5536 228.785067,101.333333 213.55008,101.333333 Z" id="Shape"> </path> </g> </g> </g></svg></a>
-          <a href="shop.html" target="_blank" rel="noopener noreferrer"><svg fill="#000000" width="32px" height="64px" viewBox="0 0 50 50" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" overflow="inherit"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M47.36 14.75c.08.29-.021.61-.19.86l-5.39 8.02c-.2.31-.62.48-.971.48-.1 0-.38-.02-.489-.05l-4.32-1.06v19c0 .58-.41 1-1 1h-21c-.59 0-1-.42-1-1v-19l-3.88 1.07c-.45.14-.84-.04-1.09-.43l-5.35-8c-.17-.26-.22-.55-.14-.84.07-.3.28-.5.55-.64l10.91-5.16h5c.59 0 1 .41 1 1 0 2.06 2.89 3.52 4.95 3.52s5.05-1.45 5.05-3.52c0-.58.41-1 1-1h5l10.8 5.06c.28.14.48.39.56.69z"></path></g></svg></a>         
-          <a href="projects.html" rel="noopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>work-case-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="work-case" fill="#ffffff" transform="translate(42.666667, 64.000000)"> <path d="M1.20792265e-13,197.76 C54.5835501,218.995667 112.186031,231.452204 170.666667,234.666667 L170.666667,277.333333 L256,277.333333 L256,234.666667 C314.339546,231.013 371.833936,218.86731 426.666667,198.613333 L426.666667,362.666667 L1.20792265e-13,362.666667 L1.20792265e-13,197.76 Z M277.333333,-1.42108547e-14 L298.666667,21.3333333 L298.666667,64 L426.666667,64 L426.666667,175.146667 C361.254942,199.569074 292.110481,212.488551 222.293333,213.333333 L222.293333,213.333333 L206.933333,213.333333 C136.179047,212.568604 66.119345,199.278929 7.10542736e-15,174.08 L7.10542736e-15,174.08 L7.10542736e-15,64 L128,64 L128,21.3333333 L149.333333,-1.42108547e-14 L277.333333,-1.42108547e-14 Z M256,42.6666667 L170.666667,42.6666667 L170.666667,64 L256,64 L256,42.6666667 Z" id="Combined-Shape-Copy"> </path> </g> </g> </g></svg></a>
+        <a href="index.html" target="_blank" rel="noopener noreferrer"><svg width="64px" height="25px"
+            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z" fill="#ffffff"></path>
+            </g>
+          </svg></a>
+        <a href="services.html" rel="reopener noreferrer"><svg height="64px" width="25px" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 502.672 502.672"
+            xml:space="preserve" fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <g>
+                <g>
+                  <g>
+                    <path style="fill:#ffffff;"
+                      d="M138.29,168.019h258.806v-16.178c0-13.352-10.936-24.267-24.267-24.267H266.011v-14.129 c0-20.104-16.351-36.39-36.39-36.39h-62.124c-9.707,0-18.831,3.796-25.734,10.699c-6.903,6.903-10.678,15.962-10.678,25.691 v14.15H24.267C10.915,127.574,0,138.488,0,151.841v216.722l81.581-165.275C91.482,183.161,115.9,168.019,138.29,168.019z M155.353,113.445c0-3.214,1.316-6.256,3.581-8.542c2.265-2.33,5.328-3.602,8.542-3.602h62.124 c6.709,0,12.123,5.436,12.123,12.144v14.15h-86.369V113.445z">
+                    </path>
+                    <path style="fill:#ffffff;"
+                      d="M486.874,192.243H138.29c-13.331,0-29.099,9.793-34.945,21.743L9.599,403.895 c-5.91,11.929,0.194,21.722,13.525,21.722h348.584c13.331,0,29.121-9.772,34.988-21.722l93.725-189.909 C506.309,202.036,500.248,192.243,486.874,192.243z">
+                    </path>
+                  </g>
+                </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+                <g> </g>
+              </g>
+            </g>
+          </svg></a></a>
+        <a href="about.html" rel="reopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <title>about-filled</title>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="drop" fill="#ffffff" transform="translate(42.666667, 42.666667)">
+                  <path
+                    d="M213.333333,3.55271368e-14 C331.154987,3.55271368e-14 426.666667,95.51168 426.666667,213.333333 C426.666667,331.153707 331.154987,426.666667 213.333333,426.666667 C95.51296,426.666667 3.55271368e-14,331.153707 3.55271368e-14,213.333333 C3.55271368e-14,95.51168 95.51296,3.55271368e-14 213.333333,3.55271368e-14 Z M234.713387,192 L192.04672,192 L192.04672,320 L234.713387,320 L234.713387,192 Z M213.55008,101.333333 C197.99616,101.333333 186.713387,112.5536 186.713387,127.704107 C186.713387,143.46752 197.698773,154.666667 213.55008,154.666667 C228.785067,154.666667 240.04672,143.46752 240.04672,128 C240.04672,112.5536 228.785067,101.333333 213.55008,101.333333 Z"
+                    id="Shape"> </path>
+                </g>
+              </g>
+            </g>
+          </svg></a>
+        <a href="shop.html" target="_blank" rel="noopener noreferrer"><svg fill="#000000" width="32px" height="64px"
+            viewBox="0 0 50 50" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" overflow="inherit">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M47.36 14.75c.08.29-.021.61-.19.86l-5.39 8.02c-.2.31-.62.48-.971.48-.1 0-.38-.02-.489-.05l-4.32-1.06v19c0 .58-.41 1-1 1h-21c-.59 0-1-.42-1-1v-19l-3.88 1.07c-.45.14-.84-.04-1.09-.43l-5.35-8c-.17-.26-.22-.55-.14-.84.07-.3.28-.5.55-.64l10.91-5.16h5c.59 0 1 .41 1 1 0 2.06 2.89 3.52 4.95 3.52s5.05-1.45 5.05-3.52c0-.58.41-1 1-1h5l10.8 5.06c.28.14.48.39.56.69z">
+              </path>
+            </g>
+          </svg></a>
+        <a href="projects.html" rel="noopener noreferrer"><svg width="64px" height="25px" viewBox="0 0 512 512"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <title>work-case-filled</title>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="work-case" fill="#ffffff" transform="translate(42.666667, 64.000000)">
+                  <path
+                    d="M1.20792265e-13,197.76 C54.5835501,218.995667 112.186031,231.452204 170.666667,234.666667 L170.666667,277.333333 L256,277.333333 L256,234.666667 C314.339546,231.013 371.833936,218.86731 426.666667,198.613333 L426.666667,362.666667 L1.20792265e-13,362.666667 L1.20792265e-13,197.76 Z M277.333333,-1.42108547e-14 L298.666667,21.3333333 L298.666667,64 L426.666667,64 L426.666667,175.146667 C361.254942,199.569074 292.110481,212.488551 222.293333,213.333333 L222.293333,213.333333 L206.933333,213.333333 C136.179047,212.568604 66.119345,199.278929 7.10542736e-15,174.08 L7.10542736e-15,174.08 L7.10542736e-15,64 L128,64 L128,21.3333333 L149.333333,-1.42108547e-14 L277.333333,-1.42108547e-14 Z M256,42.6666667 L170.666667,42.6666667 L170.666667,64 L256,64 L256,42.6666667 Z"
+                    id="Combined-Shape-Copy"> </path>
+                </g>
+              </g>
+            </g>
+          </svg></a>
       </div>
 
-      </div>
-
-      <div id="container3D"></div>
-      <div id="whiteboardContainer">
-        <!-- The canvas will be appended here -->
     </div>
-    <div id="whiteboardControls" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;">
+
+    <div id="container3D"></div>
+    <div id="whiteboardContainer">
+      <!-- The canvas will be appended here -->
+    </div>
+    <div id="whiteboardControls"
+      style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;">
       <input type="color" id="colorPicker" value="#000000">
       <input type="range" id="brushSize" min="1" max="20" value="5">
       <button id="eraserButton">Eraser</button>
       <button id="clearButton">Clear</button>
-  </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- Modals -->
-    <div class="modal fade" id="modalAbout" tabindex="-1" aria-labelledby="modalAboutLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalAboutLabel">About</h1>
-          </div>
-          <div class="modal-body">
-            This project introduces a fully interactive 3D web experience, redefining user engagement with immersive navigation and dynamic interactions.<br><br>  
+  <!-- Modals -->
+  <div class="modal fade" id="modalAbout" tabindex="-1" aria-labelledby="modalAboutLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalAboutLabel">About</h1>
+        </div>
+        <div class="modal-body">
+          This project introduces a fully interactive 3D web experience, redefining user engagement with immersive
+          navigation and dynamic interactions.<br><br>
 
-            Visitors can explore a virtual environment where every element is interactive, creating a seamless and engaging journey.<br><br>  
-            
-            Key features include:<br>  
-            - Smooth, real-time navigation through a 3D space.<br>  
-            - Clickable 3D markers that trigger modals with detailed information, services, and external links.<br>  
-            - A futuristic, interactive UI that enhances traditional web navigation.<br><br>  
-            
-            At the heart of this experience is a 3D box room, where users can freely look around, move through the space, and interact with objects like a fridge, tables, computer, and more.<br><br>  
-            
-            This creates a highly realistic and engaging digital environment, transforming the way users interact with web content.<br><br>  
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+          Visitors can explore a virtual environment where every element is interactive, creating a seamless and
+          engaging journey.<br><br>
+
+          Key features include:<br>
+          - Smooth, real-time navigation through a 3D space.<br>
+          - Clickable 3D markers that trigger modals with detailed information, services, and external links.<br>
+          - A futuristic, interactive UI that enhances traditional web navigation.<br><br>
+
+          At the heart of this experience is a 3D box room, where users can freely look around, move through the space,
+          and interact with objects like a fridge, tables, computer, and more.<br><br>
+
+          This creates a highly realistic and engaging digital environment, transforming the way users interact with web
+          content.<br><br>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modalServices" tabindex="-1" aria-labelledby="modalServicesLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalServicesLabel">Our Services</h1>
-          </div>
-          <div class="modal-body">
-            We specialize in cutting-edge 3D services that transform ideas into stunning visuals and interactive experiences.<br><br>  
+  <div class="modal fade" id="modalServices" tabindex="-1" aria-labelledby="modalServicesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalServicesLabel">Our Services</h1>
+        </div>
+        <div class="modal-body">
+          We specialize in cutting-edge 3D services that transform ideas into stunning visuals and interactive
+          experiences.<br><br>
 
-            From 3D modeling, texturing, and rendering to real-time interactive environments, we bring products, spaces, and characters to life with exceptional detail and precision.<br><br>  
-            
-            Our expertise includes:<br>  
-            - High-quality 3D modeling and rendering for products, architecture, and characters.<br>  
-            - Immersive real-time 3D experiences for websites, applications, and virtual environments.<br>  
-            - Interactive elements designed to enhance user engagement and interaction.<br><br>  
-            
-            Whether you need architectural visualizations, product showcases, or custom 3D assets, we deliver high-performance solutions tailored to your vision.<br><br>  
-            
-            Let’s build something extraordinary.<br><br>  
-             
-             </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+          From 3D modeling, texturing, and rendering to real-time interactive environments, we bring products, spaces,
+          and characters to life with exceptional detail and precision.<br><br>
+
+          Our expertise includes:<br>
+          - High-quality 3D modeling and rendering for products, architecture, and characters.<br>
+          - Immersive real-time 3D experiences for websites, applications, and virtual environments.<br>
+          - Interactive elements designed to enhance user engagement and interaction.<br><br>
+
+          Whether you need architectural visualizations, product showcases, or custom 3D assets, we deliver
+          high-performance solutions tailored to your vision.<br><br>
+
+          Let’s build something extraordinary.<br><br>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="modalContactLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalContactLabel">Contact Us</h1>
-          </div>
-          <div class="modal-body">
-            We're here to bring your ideas to life. Contact us for inquiries, collaborations, or support. <br><br>
+  <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="modalContactLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalContactLabel">Contact Us</h1>
+        </div>
+        <div class="modal-body">
+          We're here to bring your ideas to life. Contact us for inquiries, collaborations, or support. <br><br>
 
-            <p>📧 <a href="mailto:info@accesscodepro.com">info@accesscodepro.com</a></p>
-            <p>🌍 <a href="https://www.accesscodepro.com" target="_blank">www.accesscodepro.com</a></p>
-            <p>📱 <a href="https://www.instagram.com/accesscodepro" target="_blank">@accesscodepro</a></p>
+          <p>📧 <a href="mailto:info@accesscodepro.com">info@accesscodepro.com</a></p>
+          <p>🌍 <a href="https://www.accesscodepro.com" target="_blank">www.accesscodepro.com</a></p>
+          <p>📱 <a href="https://www.instagram.com/accesscodepro" target="_blank">@accesscodepro</a></p>
 
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modalGallery" tabindex="-1" aria-labelledby="modalGalleryLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalGalleryLabel">Gallery</h1>
-          </div>
-          <div class="modal-body">
-            View our latest projects and designs.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+  <div class="modal fade" id="modalGallery" tabindex="-1" aria-labelledby="modalGalleryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalGalleryLabel">Gallery</h1>
+        </div>
+        <div class="modal-body">
+          View our latest projects and designs.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modalFAQ" tabindex="-1" aria-labelledby="modalFAQLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalFAQLabel">FAQ</h1>
-          </div>
-          <div class="modal-body">
-                <strong>1. What is a 3D website?</strong><br>  
-                A 3D website integrates interactive three-dimensional elements, allowing users to explore, engage, and navigate in a virtual space. Unlike traditional flat websites, 3D websites create an immersive experience by using real-time rendering, animations, and interactive objects.<br><br>  
+  <div class="modal fade" id="modalFAQ" tabindex="-1" aria-labelledby="modalFAQLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalFAQLabel">FAQ</h1>
+        </div>
+        <div class="modal-body">
+          <strong>1. What is a 3D website?</strong><br>
+          A 3D website integrates interactive three-dimensional elements, allowing users to explore, engage, and
+          navigate in a virtual space. Unlike traditional flat websites, 3D websites create an immersive experience by
+          using real-time rendering, animations, and interactive objects.<br><br>
 
-                <strong>2. How do 3D websites work?</strong><br>  
-                3D websites use WebGL (Web Graphics Library) to render graphics directly in a browser without needing additional plugins. Technologies like Three.js and A-Frame help create realistic 3D environments that users can interact with, using mouse clicks, touch gestures, or even VR/AR integration.<br><br>  
+          <strong>2. How do 3D websites work?</strong><br>
+          3D websites use WebGL (Web Graphics Library) to render graphics directly in a browser without needing
+          additional plugins. Technologies like Three.js and A-Frame help create realistic 3D environments that users
+          can interact with, using mouse clicks, touch gestures, or even VR/AR integration.<br><br>
 
-                <strong>3. What are the benefits of a 3D website?</strong><br>  
-                - Engagement – Interactive visuals keep users engaged longer.<br>  
-                - Realism – Products, spaces, and animations look more lifelike.<br>  
-                - Immersion – Users can navigate and explore in a more dynamic way.<br>  
-                - Modern Appeal – Stands out compared to traditional websites.<br><br>  
+          <strong>3. What are the benefits of a 3D website?</strong><br>
+          - Engagement – Interactive visuals keep users engaged longer.<br>
+          - Realism – Products, spaces, and animations look more lifelike.<br>
+          - Immersion – Users can navigate and explore in a more dynamic way.<br>
+          - Modern Appeal – Stands out compared to traditional websites.<br><br>
 
-                <strong>4. Do 3D websites work on all devices?</strong><br>  
-                Yes, but performance depends on the device. Modern browsers on desktops and high-end mobile devices support 3D rendering smoothly. However, older or low-powered devices may experience lag. To improve performance, 3D websites use optimization techniques like model compression and adaptive rendering.<br><br>  
+          <strong>4. Do 3D websites work on all devices?</strong><br>
+          Yes, but performance depends on the device. Modern browsers on desktops and high-end mobile devices support 3D
+          rendering smoothly. However, older or low-powered devices may experience lag. To improve performance, 3D
+          websites use optimization techniques like model compression and adaptive rendering.<br><br>
 
-                <strong>5. Do I need special software to view a 3D website?</strong><br>  
-                No special software is required! Any modern web browser (Chrome, Firefox, Edge, Safari) can display 3D content as long as WebGL is enabled.<br><br>  
+          <strong>5. Do I need special software to view a 3D website?</strong><br>
+          No special software is required! Any modern web browser (Chrome, Firefox, Edge, Safari) can display 3D content
+          as long as WebGL is enabled.<br><br>
 
-                <strong>6. Can a 3D website be interactive?</strong><br>  
-                Absolutely! 3D websites allow users to interact with elements, such as clicking objects, zooming, rotating, and even triggering animations. Advanced setups can also integrate VR (Virtual Reality) or AR (Augmented Reality) for a more immersive experience.<br><br>  
+          <strong>6. Can a 3D website be interactive?</strong><br>
+          Absolutely! 3D websites allow users to interact with elements, such as clicking objects, zooming, rotating,
+          and even triggering animations. Advanced setups can also integrate VR (Virtual Reality) or AR (Augmented
+          Reality) for a more immersive experience.<br><br>
 
-                <strong>7. Are 3D websites slower than regular websites?</strong><br>  
-                3D websites may require more processing power than standard sites, but with proper optimization—such as reducing model complexity, using efficient textures, and leveraging WebGL performance features—they can run smoothly without significant delays.<br><br>  
+          <strong>7. Are 3D websites slower than regular websites?</strong><br>
+          3D websites may require more processing power than standard sites, but with proper optimization—such as
+          reducing model complexity, using efficient textures, and leveraging WebGL performance features—they can run
+          smoothly without significant delays.<br><br>
 
-                <strong>8. What industries benefit from 3D websites?</strong><br>  
-                3D websites are ideal for industries like:<br>  
-                - E-commerce – Showcasing products in a realistic, interactive way.<br>  
-                - Architecture & Real Estate – Virtual property tours.<br>  
-                - Gaming & Entertainment – Interactive storytelling and experiences.<br>  
-                - Education & Training – Simulations and learning tools.<br><br>  
+          <strong>8. What industries benefit from 3D websites?</strong><br>
+          3D websites are ideal for industries like:<br>
+          - E-commerce – Showcasing products in a realistic, interactive way.<br>
+          - Architecture & Real Estate – Virtual property tours.<br>
+          - Gaming & Entertainment – Interactive storytelling and experiences.<br>
+          - Education & Training – Simulations and learning tools.<br><br>
 
-                <strong>9. How do users navigate a 3D website?</strong><br>  
-                Navigation varies depending on the design. Users can move through a 3D space by clicking, dragging, using a keyboard, or even motion controls. Some 3D websites use first-person or orbit controls to create an interactive experience similar to video games.<br><br>  
+          <strong>9. How do users navigate a 3D website?</strong><br>
+          Navigation varies depending on the design. Users can move through a 3D space by clicking, dragging, using a
+          keyboard, or even motion controls. Some 3D websites use first-person or orbit controls to create an
+          interactive experience similar to video games.<br><br>
 
-                <strong>10. Can a 3D website be optimized for SEO?</strong><br>  
-                Yes! Even though 3D content is visual-heavy, proper SEO strategies—like structured metadata, alt tags, keyword-rich descriptions, and fast-loading assets—can ensure search engines index the site properly.<br><br>  
+          <strong>10. Can a 3D website be optimized for SEO?</strong><br>
+          Yes! Even though 3D content is visual-heavy, proper SEO strategies—like structured metadata, alt tags,
+          keyword-rich descriptions, and fast-loading assets—can ensure search engines index the site properly.<br><br>
 
-                <strong>11. How do businesses benefit from 3D websites?</strong><br>  
-                A 3D website enhances user engagement, provides a unique brand experience, and helps businesses showcase products, services, or environments in a highly interactive and memorable way. It’s a powerful tool to stand out in competitive markets.<br><br>  
+          <strong>11. How do businesses benefit from 3D websites?</strong><br>
+          A 3D website enhances user engagement, provides a unique brand experience, and helps businesses showcase
+          products, services, or environments in a highly interactive and memorable way. It’s a powerful tool to stand
+          out in competitive markets.<br><br>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modalTerms" tabindex="-1" aria-labelledby="modalTermsLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalTermsLabel">Terms & Conditions</h1>
-          </div>
-          <div class="modal-body">
-            Terms and Conditions<br>
-            Last Updated: 03/02/2025<br>
+  <div class="modal fade" id="modalTerms" tabindex="-1" aria-labelledby="modalTermsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalTermsLabel">Terms & Conditions</h1>
+        </div>
+        <div class="modal-body">
+          Terms and Conditions<br>
+          Last Updated: 03/02/2025<br>
 
-            Welcome to Access Code Programming, LLC. These Terms and Conditions ("Terms") govern your use of our website, services, and products. By accessing or using our website, you agree to comply with and be bound by these Terms.
+          Welcome to Access Code Programming, LLC. These Terms and Conditions ("Terms") govern your use of our website,
+          services, and products. By accessing or using our website, you agree to comply with and be bound by these
+          Terms.
 
-            <br>
-            1. Definitions
-            "Company," "we," "our," or "us" refers to Access Code Programming, LLC.
-            "You" or "User" refers to any visitor, client, or customer accessing our website or services.
-            "Services" refers to web development, standard websites, applications, 3D modeling, AR/VR integration, software solutions, and related services provided by us.
-            <br>
-            2. Use of Our Services
-            2.1 Website Access
-            Our website is open to users of all ages. However, certain services, purchases, or agreements may require individuals to be 18 years or older or have parental/guardian consent.
-            2.2 License to Use
-            We grant you a limited, non-exclusive, non-transferable license to use our website and services for personal or business use, subject to these Terms.
+          <br>
+          1. Definitions
+          "Company," "we," "our," or "us" refers to Access Code Programming, LLC.
+          "You" or "User" refers to any visitor, client, or customer accessing our website or services.
+          "Services" refers to web development, standard websites, applications, 3D modeling, AR/VR integration,
+          software solutions, and related services provided by us.
+          <br>
+          2. Use of Our Services
+          2.1 Website Access
+          Our website is open to users of all ages. However, certain services, purchases, or agreements may require
+          individuals to be 18 years or older or have parental/guardian consent.
+          2.2 License to Use
+          We grant you a limited, non-exclusive, non-transferable license to use our website and services for personal
+          or business use, subject to these Terms.
 
-            2.3 Prohibited Activities
-            You agree not to:
+          2.3 Prohibited Activities
+          You agree not to:
 
-            Use our services for unlawful purposes.
-            Copy, modify, or reverse-engineer our software, code, or 3D assets.
-            Interfere with our website’s security or functionality.
-            Misrepresent your identity or engage in fraudulent activity.
-            <br>
-            3. Purchases, Payments, and Refunds
-            3.1 Pricing & Payment Structure
-            Pricing for our services is not listed on our website because each project is unique and tailored to specific user requirements. Prices vary based on project complexity, features, customization, and scope of work. We provide custom quotes based on an individual assessment of each client’s needs.
+          Use our services for unlawful purposes.
+          Copy, modify, or reverse-engineer our software, code, or 3D assets.
+          Interfere with our website’s security or functionality.
+          Misrepresent your identity or engage in fraudulent activity.
+          <br>
+          3. Purchases, Payments, and Refunds
+          3.1 Pricing & Payment Structure
+          Pricing for our services is not listed on our website because each project is unique and tailored to specific
+          user requirements. Prices vary based on project complexity, features, customization, and scope of work. We
+          provide custom quotes based on an individual assessment of each client’s needs.
 
-            3.2 Deposit Requirement
-            To initiate a project, clients must pay 50% of the agreed total cost as a temporary refundable deposit. This deposit secures the project and ensures serious inquiries while protecting our business time and efforts.
+          3.2 Deposit Requirement
+          To initiate a project, clients must pay 50% of the agreed total cost as a temporary refundable deposit. This
+          deposit secures the project and ensures serious inquiries while protecting our business time and efforts.
 
-            3.3 Refund Policy
-            Full Refund: Clients are eligible for a 100% refund of their deposit within the first 14 days from the date of payment.
-            Partial Refund: After 14 days, clients may receive a 50% refund of their deposit if they choose to cancel.
-            No Refund: After the project has commenced beyond the initial planning phase, or significant work has been completed, no refunds will be issued.
-            3.4 Final Payment
-            The remaining 50% balance must be paid upon project completion before the final product is delivered, deployed, or transferred. 
-            <br>
-            4. Intellectual Property
-            All content, including code, 3D models, designs, and software created by Access Code Programming, is our intellectual property and may not be copied, distributed, or resold without permission.
+          3.3 Refund Policy
+          Full Refund: Clients are eligible for a 100% refund of their deposit within the first 14 days from the date of
+          payment.
+          Partial Refund: After 14 days, clients may receive a 50% refund of their deposit if they choose to cancel.
+          No Refund: After the project has commenced beyond the initial planning phase, or significant work has been
+          completed, no refunds will be issued.
+          3.4 Final Payment
+          The remaining 50% balance must be paid upon project completion before the final product is delivered,
+          deployed, or transferred.
+          <br>
+          4. Intellectual Property
+          All content, including code, 3D models, designs, and software created by Access Code Programming, is our
+          intellectual property and may not be copied, distributed, or resold without permission.
 
-            Clients retain ownership of any content they provide and have the right to modify, customize, or request removal of assets related to their project. While we maintain ownership of the original assets created, clients are free to request changes, updates, or deletion of specific elements as needed.
+          Clients retain ownership of any content they provide and have the right to modify, customize, or request
+          removal of assets related to their project. While we maintain ownership of the original assets created,
+          clients are free to request changes, updates, or deletion of specific elements as needed.
 
-            If a client wishes to remove or alter specific elements, they may submit a formal request, and we will work with them to accommodate their needs.
-            <br>
-            5. Disclaimers & Limitation of Liability
-            5.1 No Guarantees
-            We strive to provide high-quality services but do not guarantee specific results, uninterrupted service, or error-free performance.
+          If a client wishes to remove or alter specific elements, they may submit a formal request, and we will work
+          with them to accommodate their needs.
+          <br>
+          5. Disclaimers & Limitation of Liability
+          5.1 No Guarantees
+          We strive to provide high-quality services but do not guarantee specific results, uninterrupted service, or
+          error-free performance.
 
-            5.2 Limitation of Liability
-            To the maximum extent permitted by law, Access Code Programming is not liable for any:
+          5.2 Limitation of Liability
+          To the maximum extent permitted by law, Access Code Programming is not liable for any:
 
-            Loss of data, profits, or business opportunities.
-            Service interruptions, security breaches, or unauthorized access.
-            Third-party software issues or compatibility errors.
-            You agree to use our services at your own risk.
-            <br>
-            6. Third-Party Links & Services
-            Our website may contain links to third-party websites, tools, or services. These third-party services operate independently, and we do not endorse, control, or take responsibility for their content, privacy policies, security practices, or business operations. Any interactions, transactions, or agreements you enter with third-party providers are strictly between you and that provider.
+          Loss of data, profits, or business opportunities.
+          Service interruptions, security breaches, or unauthorized access.
+          Third-party software issues or compatibility errors.
+          You agree to use our services at your own risk.
+          <br>
+          6. Third-Party Links & Services
+          Our website may contain links to third-party websites, tools, or services. These third-party services operate
+          independently, and we do not endorse, control, or take responsibility for their content, privacy policies,
+          security practices, or business operations. Any interactions, transactions, or agreements you enter with
+          third-party providers are strictly between you and that provider.
 
-            Hosting, Cloud Storage, and Content Delivery
-            To ensure high performance, security, and scalability for our projects and client websites, Access Code Programming relies on third-party hosting providers, cloud storage solutions, and content delivery networks (CDNs). These services allow us to optimize loading speeds, store large assets efficiently, and enhance the overall user experience.
+          Hosting, Cloud Storage, and Content Delivery
+          To ensure high performance, security, and scalability for our projects and client websites, Access Code
+          Programming relies on third-party hosting providers, cloud storage solutions, and content delivery networks
+          (CDNs). These services allow us to optimize loading speeds, store large assets efficiently, and enhance the
+          overall user experience.
 
-            Amazon Web Services (AWS) & CloudFront
-            We utilize Amazon Web Services (AWS) for secure, scalable, and high-performance cloud storage and content delivery solutions. Our AWS integrations include:
+          Amazon Web Services (AWS) & CloudFront
+          We utilize Amazon Web Services (AWS) for secure, scalable, and high-performance cloud storage and content
+          delivery solutions. Our AWS integrations include:
 
-            Amazon S3 (Simple Storage Service): Used to securely store and manage large files such as 3D models, images, videos, PDFs, and application data.
-            Amazon CloudFront (CDN): A global content delivery network that accelerates website performance, reduces latency, and ensures faster access to assets by serving cached content from edge locations worldwide. This minimizes loading times for users across different geographic regions.
-            Reliability & Service Responsibility
-            While we take extensive measures to ensure the reliability and security of these third-party services, we are not responsible for:
+          Amazon S3 (Simple Storage Service): Used to securely store and manage large files such as 3D models, images,
+          videos, PDFs, and application data.
+          Amazon CloudFront (CDN): A global content delivery network that accelerates website performance, reduces
+          latency, and ensures faster access to assets by serving cached content from edge locations worldwide. This
+          minimizes loading times for users across different geographic regions.
+          Reliability & Service Responsibility
+          While we take extensive measures to ensure the reliability and security of these third-party services, we are
+          not responsible for:
 
-            Downtime, service interruptions, or outages caused by third-party providers.
-            Security breaches, unauthorized access, or data loss that occur due to issues within third-party infrastructure.
-            Changes in third-party terms, pricing, or policies that may affect service availability or performance.
-            We continuously monitor and optimize our integration with these services to provide the best experience possible for our clients. However, by using our services, you acknowledge and agree that Access Code Programming is not liable for any third-party service failures or disruptions.
-            <br>
-            7. Privacy & Data Protection
-            We take your privacy seriously. No personal information is sold, shared, or distributed to any third parties. Any information collected stays strictly within our company and is used solely for the purpose of delivering our services.
+          Downtime, service interruptions, or outages caused by third-party providers.
+          Security breaches, unauthorized access, or data loss that occur due to issues within third-party
+          infrastructure.
+          Changes in third-party terms, pricing, or policies that may affect service availability or performance.
+          We continuously monitor and optimize our integration with these services to provide the best experience
+          possible for our clients. However, by using our services, you acknowledge and agree that Access Code
+          Programming is not liable for any third-party service failures or disruptions.
+          <br>
+          7. Privacy & Data Protection
+          We take your privacy seriously. No personal information is sold, shared, or distributed to any third parties.
+          Any information collected stays strictly within our company and is used solely for the purpose of delivering
+          our services.
 
-            We only collect the necessary information, which may include:
+          We only collect the necessary information, which may include:
 
-            Name
-            Email address
-            Phone number
-            Shipping address (only when processing orders for physical products)
-            No additional personal data is stored or used beyond what is required to fulfill our services.
-            <br>
-            8. Termination
-            We reserve the right to suspend or terminate your access to our services if you violate these Terms.
+          Name
+          Email address
+          Phone number
+          Shipping address (only when processing orders for physical products)
+          No additional personal data is stored or used beyond what is required to fulfill our services.
+          <br>
+          8. Termination
+          We reserve the right to suspend or terminate your access to our services if you violate these Terms.
 
-            At Access Code Programming, we do not tolerate fraud, discrimination, or hateful behavior of any kind. We are committed to serving everyone equally, regardless of race, gender, ethnicity, nationality, or background. Any client or user found engaging in fraudulent activities, discriminatory behavior, or offensive conduct will have their project and access to our services immediately terminated.
+          At Access Code Programming, we do not tolerate fraud, discrimination, or hateful behavior of any kind. We are
+          committed to serving everyone equally, regardless of race, gender, ethnicity, nationality, or background. Any
+          client or user found engaging in fraudulent activities, discriminatory behavior, or offensive conduct will
+          have their project and access to our services immediately terminated.
 
-            If a project is terminated due to these violations, no refunds will be issued. We take these matters very seriously and will not hesitate to discontinue any collaboration if these principles are in question.
-            <br>
-            9. Governing Law & Dispute Resolution
-            All disputes shall first be handled directly between Access Code Programming, LLC and the client in an effort to reach a fair resolution. If a resolution cannot be reached, the matter will be taken to court.
+          If a project is terminated due to these violations, no refunds will be issued. We take these matters very
+          seriously and will not hesitate to discontinue any collaboration if these principles are in question.
+          <br>
+          9. Governing Law & Dispute Resolution
+          All disputes shall first be handled directly between Access Code Programming, LLC and the client in an effort
+          to reach a fair resolution. If a resolution cannot be reached, the matter will be taken to court.
 
-            By agreeing to these Terms, you acknowledge that any legal disputes shall be handled exclusively in the courts of DuPage County, Illinois. Both parties agree to submit to the jurisdiction of these courts for any disputes arising out of or related to these Terms and Services.
-            <br>
-            10. Service Modifications & Client Responsibilities
-            Project Scope Changes: Additional features or modifications beyond the agreed-upon scope may require additional fees.
-            Client Responsibilities: Clients must provide logos, content, images, and other materials in a timely manner. Delays in delivering assets may extend project timelines. 
-            <br>
-            11. Maintenance & Support
-            Unless otherwise agreed, post-launch maintenance is not included.
-            Support services for bug fixes, updates, or modifications may require a separate agreement. 
-            <br>
-            12. Force Majeure Clause
-            We are not responsible for delays or failures beyond our control, including natural disasters, cyberattacks, server failures, or government actions.
-            <br>
-            13. Changes to These Terms
-            We may update these Terms at any time. Changes take effect upon posting. Continued use of our services means you accept the updated Terms.
-            <br>
-            <br>
-            14. Contact Information
-            <br>
-            For any questions, contact us at:
-            <br>
-            📧 info@accesscodepro.com
-            <br>
-            🌐 accesscodepro.com
+          By agreeing to these Terms, you acknowledge that any legal disputes shall be handled exclusively in the courts
+          of DuPage County, Illinois. Both parties agree to submit to the jurisdiction of these courts for any disputes
+          arising out of or related to these Terms and Services.
+          <br>
+          10. Service Modifications & Client Responsibilities
+          Project Scope Changes: Additional features or modifications beyond the agreed-upon scope may require
+          additional fees.
+          Client Responsibilities: Clients must provide logos, content, images, and other materials in a timely manner.
+          Delays in delivering assets may extend project timelines.
+          <br>
+          11. Maintenance & Support
+          Unless otherwise agreed, post-launch maintenance is not included.
+          Support services for bug fixes, updates, or modifications may require a separate agreement.
+          <br>
+          12. Force Majeure Clause
+          We are not responsible for delays or failures beyond our control, including natural disasters, cyberattacks,
+          server failures, or government actions.
+          <br>
+          13. Changes to These Terms
+          We may update these Terms at any time. Changes take effect upon posting. Continued use of our services means
+          you accept the updated Terms.
+          <br>
+          <br>
+          14. Contact Information
+          <br>
+          For any questions, contact us at:
+          <br>
+          📧 info@accesscodepro.com
+          <br>
+          🌐 accesscodepro.com
 
-                      </div>
-                      <div class="modal-footer">
-                        <a href="./models/eye/Terms and Conditions.pdf" 
-                           download="Terms_and_Conditions.pdf" 
-                           class="btn btn-primary">
-                           Download Terms & Conditions
-                        </a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+        </div>
+        <div class="modal-footer">
+          <a href="./models/eye/Terms and Conditions.pdf" download="Terms_and_Conditions.pdf" class="btn btn-primary">
+            Download Terms & Conditions
+          </a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- DOTfiles Modal -->
-<div class="modal fade" id="modalDOTfiles" tabindex="-1" aria-labelledby="modalDOTfilesLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalDOTfilesLabel">DOTfiles</h1>
-      </div>
-      <div class="modal-body">
-        DOTfiles is a quick and efficient file converter application designed to seamlessly convert PDFs, JPGs, JPEGs, and PNGs. Whether you need to transform documents into images or vice versa, DOTfiles provides a fast, user-friendly experience with high-quality output.
-      </div>
-      <div class="modal-footer">
-        <a href="https://jesushernandez976.github.io/threeJS/" target="_blank" class="btn btn-primary">Visit DOTfiles</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <!-- DOTfiles Modal -->
+  <div class="modal fade" id="modalDOTfiles" tabindex="-1" aria-labelledby="modalDOTfilesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalDOTfilesLabel">DOTfiles</h1>
+        </div>
+        <div class="modal-body">
+          DOTfiles is a quick and efficient file converter application designed to seamlessly convert PDFs, JPGs, JPEGs,
+          and PNGs. Whether you need to transform documents into images or vice versa, DOTfiles provides a fast,
+          user-friendly experience with high-quality output.
+        </div>
+        <div class="modal-footer">
+          <a href="https://jesushernandez976.github.io/threeJS/" target="_blank" class="btn btn-primary">Visit
+            DOTfiles</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Narrify Modal -->
-<div class="modal fade" id="modalNarrify" tabindex="-1" aria-labelledby="modalNarrifyLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalNarrifyLabel">Narrify</h1>
-      </div>
-      <div class="modal-body">
-        Narrify is an interactive platform offering innovative storytelling experiences powered by real-time 3D technology.
-      </div>
-      <div class="modal-footer">
-        <a href="https://jesushernandez976.github.io/NarrifyPlus/" target="_blank" class="btn btn-primary">Visit Narrify</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <!-- Narrify Modal -->
+  <div class="modal fade" id="modalNarrify" tabindex="-1" aria-labelledby="modalNarrifyLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalNarrifyLabel">Narrify</h1>
+        </div>
+        <div class="modal-body">
+          Narrify is an interactive platform offering innovative storytelling experiences powered by real-time 3D
+          technology.
+        </div>
+        <div class="modal-footer">
+          <a href="https://jesushernandez976.github.io/NarrifyPlus/" target="_blank" class="btn btn-primary">Visit
+            Narrify</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Shop Modal -->
-<div class="modal fade" id="modalShop" tabindex="-1" aria-labelledby="modalShopLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalShopLabel">[ACP] Shop</h1>
-      </div>
-      <div class="modal-body">
-        Access Code Shop offers official merchandise and exclusive branded items. As the brand grows, more unique products and innovative designs will be added, expanding the collection beyond just merch. Stay tuned for future releases and updates.
-      </div>
-      <div class="modal-footer">
-        <a href="shop.html" target="_blank" class="btn btn-primary">Visit Shop</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <!-- Shop Modal -->
+  <div class="modal fade" id="modalShop" tabindex="-1" aria-labelledby="modalShopLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalShopLabel">[ACP] Shop</h1>
+        </div>
+        <div class="modal-body">
+          Access Code Shop offers official merchandise and exclusive branded items. As the brand grows, more unique
+          products and innovative designs will be added, expanding the collection beyond just merch. Stay tuned for
+          future releases and updates.
+        </div>
+        <div class="modal-footer">
+          <a href="shop.html" target="_blank" class="btn btn-primary">Visit Shop</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Explore Modal -->
-<div class="modal fade" id="modalExplore" tabindex="-1" aria-labelledby="modalExploreLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalExploreLabel">Explore</h1>
-      </div>
-      <div class="modal-body">
-        Explore showcases a variety of ongoing projects that Access Code is actively developing. This includes unfinished concepts, experimental 
-        applications, games, and unreleased projects. It’s a glimpse into the creative and technical innovations in progress, giving users early access to what’s coming next.
-      </div>
-      <div class="modal-footer">
-        <a href="computer.html" target="_blank" class="btn btn-primary">Explore Now</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <!-- Explore Modal -->
+  <div class="modal fade" id="modalExplore" tabindex="-1" aria-labelledby="modalExploreLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalExploreLabel">Explore</h1>
+        </div>
+        <div class="modal-body">
+          Explore showcases a variety of ongoing projects that Access Code is actively developing. This includes
+          unfinished concepts, experimental
+          applications, games, and unreleased projects. It’s a glimpse into the creative and technical innovations in
+          progress, giving users early access to what’s coming next.
+        </div>
+        <div class="modal-footer">
+          <a href="computer.html" target="_blank" class="btn btn-primary">Explore Now</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade" id="modalWhiteboard" tabindex="-1" aria-labelledby="modalWhiteboardLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modalWhiteboardLabel">Whiteboard</h1>
-      </div>
-      <div class="modal-body">
-        An interactive 3D whiteboard where users can draw with a virtual marker. Drawings appear in real-time and can be submitted for display, making the experience creative, collaborative, and fully integrated into the 3D scene.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="drawButton">Start Drawing</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <div class="modal fade" id="modalWhiteboard" tabindex="-1" aria-labelledby="modalWhiteboardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalWhiteboardLabel">Whiteboard</h1>
+        </div>
+        <div class="modal-body">
+          An interactive 3D whiteboard where users can draw with a virtual marker. Drawings appear in real-time and can
+          be submitted for display, making the experience creative, collaborative, and fully integrated into the 3D
+          scene.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="drawButton">Start Drawing</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-    <!-- Socials Container -->
-    <div class="socials-container">
-      <a id="marker1Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalAbout" data-social="About"></a>
-      <a id="marker1Div2" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalServices" data-social="Services"></a>
-      <a id="marker1Div3" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalContact" data-social="Contact"></a>
-      <a id="marker1Div4" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalGallery" data-social="Gallery"></a>
-      <a id="marker1Div5" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalFAQ" data-social="FAQ"></a>
-      <a id="marker1Div6" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalTerms" data-social="Terms"></a>
-    
-      <a id="marker3aDiv" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalDOTfiles" data-social="DOTfiles"></a>
-      <a id="marker3aDiv2" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalNarrify" data-social="Narrify"></a>
-      <a id="marker4Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalShop" data-social="ACP Shop"></a>
-      <a id="marker2Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalExplore" data-social="Explore More"></a>
-      <a id="marker6Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal" data-bs-target="#modalWhiteboard" data-social="Whiteboard"></a>
-      <footer id="footer">
-        <p id="footerDiv">Access Code Programming, LLC Beta <span id="version">[Version 1.0.0]</span> <br>
-            © 2025 [ACP] All Rights Reserved.</p>
+  <!-- Socials Container -->
+  <div class="socials-container">
+    <a id="marker1Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalAbout" data-social="About"></a>
+    <a id="marker1Div2" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalServices" data-social="Services"></a>
+    <a id="marker1Div3" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalContact" data-social="Contact"></a>
+    <a id="marker1Div4" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalGallery" data-social="Gallery"></a>
+    <a id="marker1Div5" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalFAQ" data-social="FAQ"></a>
+    <a id="marker1Div6" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalTerms" data-social="Terms"></a>
+
+    <a id="marker3aDiv" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalDOTfiles" data-social="DOTfiles"></a>
+    <a id="marker3aDiv2" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalNarrify" data-social="Narrify"></a>
+    <a id="marker4Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalShop" data-social="ACP Shop"></a>
+    <a id="marker2Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalExplore" data-social="Explore More"></a>
+    <a id="marker6Div" class="markerDiv nav-link px-1 text-body-secondary" data-bs-toggle="modal"
+      data-bs-target="#modalWhiteboard" data-social="Whiteboard"></a>
+    <footer id="footer">
+      <p id="footerDiv">Access Code Programming, LLC Beta <span id="version">[Version 1.0.0]</span> <br>
+        © 2025 [ACP] All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./js/room.js" defer></script>
-  </body>
-</html>
+</body>
 
+</html>
