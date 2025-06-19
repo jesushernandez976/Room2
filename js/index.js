@@ -144,7 +144,7 @@ window.onload = () => {
         enterButton.style.display = "none";
         enterdiv.style.display = 'none';
 
-        zoomAndPan(); // Start animation
+        zoomAndPan();
     });
 
 
@@ -168,7 +168,7 @@ window.onload = () => {
         gsap.set(camera.position, {
             x: -40,
             y: -20,
-            z: -90
+            z: -120
         });
 
 
@@ -223,7 +223,6 @@ window.onload = () => {
             }
         });
     };
-
 
 
 
@@ -615,7 +614,6 @@ const createElectricPlanet = (size, distance, positionY, textureUrl, rotationSpe
     return planet;
 };
 
-// Function to add electricity particles (like sparks or arcs) around the planet
 
 
 console.log("Generated Colors:", planetColors);
@@ -625,7 +623,6 @@ planetColors.forEach((color, index) => {
     }
 });
 
-// You can add more planets by repeating the createPlanet function with different parameters
 const firePlanet = createFirePlanet(25, 500, 100, "./images/lava.jpg", 0.005);
 const electricPlanet = createElectricPlanet(6, 400, 20, "./images/lava.jpg", 0.008);
 
@@ -924,6 +921,7 @@ menuItems.forEach(item => {
         }
     });
 });
+
 
 
 

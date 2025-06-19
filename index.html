@@ -30,8 +30,6 @@
         <div id="enter-button" style="display: none;">Enter</div>
     </div>
 
-    <audio id="acpTheme" src="./audio/ACP theme.wav" loop></audio>
-
 
     <div id="termsModal" class="modal">
         <div class="modal-content">
@@ -403,6 +401,38 @@
         </div>
     </div>
 
+    <div id="formMessage" class="form-message">
+        <span id="closeMessage" class="close-message">&times;</span>
+        <span id="formMessageText"></span>
+    </div>
+
+    <div id="emailForm" class="modal">
+        <div class="modal-content">
+            <span class="close sound" onclick="closeModal('emailForm')">&times;</span>
+
+            <h2>Submit Inquiry</h2>
+            <form id="contactForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <div class="submit-btn" onclick="handleFormSubmit()">Send</div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
     <!-- <div id="testimonalModal" class="modal">
         <div class="modal-content">
             <span class="close sound" onclick="closeModal('testimonalModal')">&times;</span>
@@ -594,8 +624,8 @@
             <li><a href="#" class="sound" onclick="openModal('privacyModal')">Privacy Policy</a></li>
             <li><a href="#" class="sound" onclick="openModal('donationModal')">Contributions</a></li>
             <!-- <li><a href="#" class="sound" onclick="openModal('testimonalModal')">Testimonials</a></li> -->
-
-            <li><a href="#" class="sound" id="socialLink">Contact</a></li>
+            <li><a href="#" class="sound" id="socialLink">Social Media</a></li>
+            <li><a href="#" class="sound" onclick="openModal('emailForm')">Contact</a></li>
         </ul>
         <p id="footerDiv">Access Code Programming, LLC <span id="version">[Version 1.0.0]</span> <br>
             © 2025 [ACP] All Rights Reserved.</p>
@@ -605,6 +635,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" defer></script>
     <script type="module" src="./js/index.js" defer></script>
+    <script type="module" src="./js/app.js" defer></script>
 </body>
 
 </html>
