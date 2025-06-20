@@ -455,73 +455,24 @@ function updateButtons() {
     pl.setAttribute('data-state', index === total - 1 ? 'disabled' : '');
 }
 
-const home = document.querySelector('#homeHover');
-const homeHover = document.querySelector("#hover1");
-const services = document.querySelector('#servicesHover');
-const servicesHover = document.querySelector("#hover2");
-const about = document.querySelector('#aboutHover');
-const aboutHover = document.querySelector("#hover3");
-const meta = document.querySelector('#metaHover');
-const metaHover = document.querySelector("#hover4");
-const project = document.querySelector('#projectHover');
-const projectHover = document.querySelector("#hover5");
+const hoverPairs = [
+  { trigger: '#homeHover', target: '#hover1' },
+  { trigger: '#servicesHover', target: '#hover2' },
+  { trigger: '#aboutHover', target: '#hover3' },
+  { trigger: '#metaHover', target: '#hover4' },
+  { trigger: '#projectHover', target: '#hover5' }
+];
 
+hoverPairs.forEach(({ trigger, target }) => {
+  const triggerEl = document.querySelector(trigger);
+  const targetEl = document.querySelector(target);
 
-function hoverOver() {
-    home.addEventListener("mouseover", function () {
-        homeHover.classList.add('display');
-    });
+  if (triggerEl && targetEl) {
+    triggerEl.addEventListener('mouseover', () => targetEl.classList.add('display'));
+    triggerEl.addEventListener('mouseout', () => targetEl.classList.remove('display'));
+  }
+});
 
-    services.addEventListener("mouseover", function () {
-        servicesHover.classList.add('display');
-    });
-
-    about.addEventListener("mouseover", function () {
-        aboutHover.classList.add('display');
-    });
-
-    meta.addEventListener("mouseover", function () {
-        metaHover.classList.add('display');
-    });
-
-    project.addEventListener("mouseover", function () {
-        projectHover.classList.add('display');
-    });
-
-
-
-}
-
-function hoverOut() {
-
-
-    home.addEventListener("mouseout", function () {
-        homeHover.classList.remove('display');
-
-    });
-
-    services.addEventListener("mouseout", function () {
-        servicesHover.classList.remove('display');
-    });
-
-    about.addEventListener("mouseout", function () {
-        aboutHover.classList.remove('display');
-    });
-
-    meta.addEventListener("mouseout", function () {
-        metaHover.classList.remove('display');
-    });
-
-    project.addEventListener("mouseout", function () {
-        projectHover.classList.remove('display');
-    });
-
-
-
-}
-
-hoverOver();
-hoverOut();
 updateButtons();
 animate();
 
