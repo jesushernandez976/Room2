@@ -6,6 +6,121 @@
   font-style: normal;
 }
 
+.hover1 {
+  position: absolute;
+  top: 100px;
+  left: 35px;
+  height: 20px;
+  width: 100px;
+  z-index: 99999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-family: Menlo,Roboto Mono,monospace;
+  font-size: 12px;
+
+
+}
+
+.hoverText {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+}
+
+.hover2 {
+  position: absolute;
+  top: 220px;
+  left: 35px;
+  height: 20px;
+  width: 100px;
+  z-index: 99999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-family: Menlo,Roboto Mono,monospace;
+  font-size: 12px;
+
+}
+
+.hoverText2 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+}
+
+.hover3 {
+  position: absolute;
+  top: 330px;
+  left: 35px;
+  height: 20px;
+  width: 100px;
+  z-index: 99999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-family: Menlo,Roboto Mono,monospace;
+  font-size: 12px;
+
+}
+
+.hoverText3 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+}
+
+.hover4 {
+  position: absolute;
+  top: 450px;
+  left: 35px;
+  height: 20px;
+  width: 100px;
+  z-index: 99999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-family: Menlo,Roboto Mono,monospace;
+  font-size: 12px;
+
+}
+
+.hoverText4 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+}
+
+.hover5 {
+  position: absolute;
+  top: 470px;
+  left: 35px;
+  height: 20px;
+  width: 100px;
+  z-index: 99999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-family: Menlo,Roboto Mono,monospace;
+  font-size: 12px;
+
+}
+
+.hoverText5 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+}
+
+.display {
+  display:flex;
+}
+
 .arrow-menu {
   position: fixed;
   top: 50%;

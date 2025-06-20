@@ -105,7 +105,7 @@ function disposeModel(model) {
             }
         }
     });
-    
+
     scene.remove(model);  // Remove the model from the scene
 }
 
@@ -114,7 +114,7 @@ function swapModel(newModel) {
     if (models.length > 0) {
         const oldModel = models[0];  // Get the old model to dispose of it
         disposeModel(oldModel);
-        
+
         models = [];  // Reset the models array
     }
 
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     function checkLoadingComplete() {
         console.log(`Loaded models: ${loadedModels}/${totalModels}`);
         if (loadedModels >= totalModels) {
-            loadingContainer.style.display = "none"; 
+            loadingContainer.style.display = "none";
 
             gsap.to(camera.position, {
                 duration: 1.5,
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 checkLoadingComplete();
             }
         }
-    
+
     } catch (error) {
         console.error("Failed to load some models:", error);
     }
@@ -194,30 +194,30 @@ window.addEventListener("beforeunload", (event) => {
         event.returnValue = "Models are still loading!";
     }
 
-  let animationId;
-function animate() {
-    animationId = requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-}
+    let animationId;
+    function animate() {
+        animationId = requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
 
     scene.children.forEach(child => {
-    if (child.isMesh) {
-        child.geometry?.dispose();
-        child.material?.dispose();
-    } else if (child.traverse) {
-        child.traverse(obj => {
-            if (obj.isMesh) {
-                obj.geometry?.dispose();
-                if (Array.isArray(obj.material)) {
-                    obj.material.forEach(m => m.dispose());
-                } else {
-                    obj.material?.dispose();
+        if (child.isMesh) {
+            child.geometry?.dispose();
+            child.material?.dispose();
+        } else if (child.traverse) {
+            child.traverse(obj => {
+                if (obj.isMesh) {
+                    obj.geometry?.dispose();
+                    if (Array.isArray(obj.material)) {
+                        obj.material.forEach(m => m.dispose());
+                    } else {
+                        obj.material?.dispose();
+                    }
                 }
-            }
-        });
-    }
-    scene.remove(child);
-});
+            });
+        }
+        scene.remove(child);
+    });
 
     renderer.forceContextLoss(); // optional but recommended
 
@@ -229,10 +229,10 @@ function animate() {
             if (obj.isMesh) {
                 obj.geometry.dispose();
                 if (Array.isArray(obj.material)) {
-    obj.material.forEach(m => m.dispose());
-} else if (obj.material && obj.material.dispose) {
-    obj.material.dispose();
-}
+                    obj.material.forEach(m => m.dispose());
+                } else if (obj.material && obj.material.dispose) {
+                    obj.material.dispose();
+                }
             }
         });
     });
@@ -371,33 +371,33 @@ function updateVersion() {
 
     // Handle rollovers
     if (patch >= 100) {
-      minor += Math.floor(patch / 100); // Increment minor when patch reaches 100
-      patch = patch % 100; // Reset patch to 0 after 100
+        minor += Math.floor(patch / 100); // Increment minor when patch reaches 100
+        patch = patch % 100; // Reset patch to 0 after 100
     }
     if (minor >= 50) {
-      major += Math.floor(minor / 50); // Increment major when minor reaches 50
-      minor = minor % 50; // Reset minor to 0 after 50
+        major += Math.floor(minor / 50); // Increment major when minor reaches 50
+        minor = minor % 50; // Reset minor to 0 after 50
     }
     if (major > 10) {
-      major = 10; // Cap major version at 10
-      minor = 50; // Stop minor at 50 when major is 10
-      patch = 100; // Stop patch at 100 when both limits are hit
+        major = 10; // Cap major version at 10
+        minor = 50; // Stop minor at 50 when major is 10
+        patch = 100; // Stop patch at 100 when both limits are hit
     }
 
     let version = `[Version ${major}.${minor}.${patch}]`;
     document.getElementById('version').textContent = version;
-  }
+}
 
-  updateVersion(); // Initial call
-  setInterval(updateVersion, 86400000);
+updateVersion(); // Initial call
+setInterval(updateVersion, 86400000);
 
 const toggleButton = document.getElementById('toggleMenu');
 const sideMenu = document.getElementById('sideMenu');
 
 toggleButton.addEventListener('click', () => {
-  sideMenu.classList.toggle('open');
-  toggleButton.classList.toggle('open');
-  toggleButton.classList.toggle('flipped');
+    sideMenu.classList.toggle('open');
+    toggleButton.classList.toggle('open');
+    toggleButton.classList.toggle('flipped');
 });
 // Render loop
 const animate = function () {
@@ -455,7 +455,73 @@ function updateButtons() {
     pl.setAttribute('data-state', index === total - 1 ? 'disabled' : '');
 }
 
-// Ensure the first button states are correct on load
+const home = document.querySelector('#homeHover');
+const homeHover = document.querySelector("#hover1");
+const services = document.querySelector('#servicesHover');
+const servicesHover = document.querySelector("#hover2");
+const about = document.querySelector('#aboutHover');
+const aboutHover = document.querySelector("#hover3");
+const meta = document.querySelector('#metaHover');
+const metaHover = document.querySelector("#hover4");
+const project = document.querySelector('#projectHover');
+const projectHover = document.querySelector("#hover5");
+
+
+function hoverOver() {
+    home.addEventListener("mouseover", function () {
+        homeHover.classList.add('display');
+    });
+
+    services.addEventListener("mouseover", function () {
+        servicesHover.classList.add('display');
+    });
+
+    about.addEventListener("mouseover", function () {
+        aboutHover.classList.add('display');
+    });
+
+    meta.addEventListener("mouseover", function () {
+        metaHover.classList.add('display');
+    });
+
+    project.addEventListener("mouseover", function () {
+        projectHover.classList.add('display');
+    });
+
+
+
+}
+
+function hoverOut() {
+
+
+    home.addEventListener("mouseout", function () {
+        homeHover.classList.remove('display');
+
+    });
+
+    services.addEventListener("mouseout", function () {
+        servicesHover.classList.remove('display');
+    });
+
+    about.addEventListener("mouseout", function () {
+        aboutHover.classList.remove('display');
+    });
+
+    meta.addEventListener("mouseout", function () {
+        metaHover.classList.remove('display');
+    });
+
+    project.addEventListener("mouseout", function () {
+        projectHover.classList.remove('display');
+    });
+
+
+
+}
+
+hoverOver();
+hoverOut();
 updateButtons();
 animate();
 
