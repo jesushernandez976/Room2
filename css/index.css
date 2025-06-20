@@ -332,14 +332,14 @@ footer ul li a:hover {
   opacity: 0;
 }
 
-/* 🚀 OPEN ANIMATION */
+
 #socialWheel.active {
   transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
   opacity: 1;
 }
 
-/* 🔄 CLOSE ANIMATION (REVERSES ENTRY) */
+
 #socialWheel.inactive {
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
@@ -347,7 +347,7 @@ footer ul li a:hover {
   transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* ✨ Icons Enter Staggered */
+
 #socialWheel.active .icon {
   opacity: 1;
   transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
@@ -362,7 +362,7 @@ footer ul li a:hover {
   transition-delay: calc((5 - var(--i)) * 0.07s); /* Reverse Order */
 }
 
-/* 🔥 Hover Effects */
+
 .icon {
   position: absolute;
   width: 50px;
@@ -396,7 +396,7 @@ footer ul li a:hover {
   transform: scale(1.1);
 }
 
-/* 🔥 Center Button Click Effect */
+
 .icon.center {
   transform: none;
   width: 60px;
@@ -949,6 +949,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
   }
 
   /* When menu is active */
