@@ -109,6 +109,87 @@
   cursor: pointer;
 }
 
+#chat-bubble {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* SVG sizing and hover effects */
+#chat-bubble svg {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Glowing effect on hover */
+#chat-bubble:hover svg {
+  filter: drop-shadow(0 0 8px #00f0ff) brightness(1.2);
+  transform: scale(1.08);
+}
+
+/* Float animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Chat window container */
+#chat-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 300px;
+  height: 450px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: none;
+  z-index: 10000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  background: white;
+}
+
+.chatCover {
+  position: absolute;
+  bottom: 91px;
+  right: 22px;
+  width: 299px;
+  height: 41px;
+  display: none;
+  z-index: 100002;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.chatCover p {
+  display: flex;
+  justify-content: center;
+  font-size: 9px;
+}
+
+#chat-window iframe {
+  transform-origin: top left;
+  width: 111%; /* adjust so iframe fills container when scaled */
+  height: 111%; /* adjust proportionally */
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -332,13 +413,11 @@ footer ul li a:hover {
   opacity: 0;
 }
 
-
 #socialWheel.active {
   transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
   opacity: 1;
 }
-
 
 #socialWheel.inactive {
   transform: translate(-50%, -50%) scale(0);
@@ -346,7 +425,6 @@ footer ul li a:hover {
   pointer-events: none;
   transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
 }
-
 
 #socialWheel.active .icon {
   opacity: 1;
@@ -361,7 +439,6 @@ footer ul li a:hover {
   transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
   transition-delay: calc((5 - var(--i)) * 0.07s); /* Reverse Order */
 }
-
 
 .icon {
   position: absolute;
@@ -395,7 +472,6 @@ footer ul li a:hover {
 .icon:hover img {
   transform: scale(1.1);
 }
-
 
 .icon.center {
   transform: none;
@@ -930,6 +1006,18 @@ button {
 }
 
 @media screen and (max-width: 650px) {
+  #chat-bubble {
+    top: 40px;
+    left: -4px;
+  }
+
+  #chat-window,
+  .chatCover {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
   .hidden-menu {
     position: fixed;
     top: 0;

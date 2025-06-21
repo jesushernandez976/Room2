@@ -155,11 +155,15 @@ window.onload = () => {
 
         const container = document.getElementById("container");
         const footer = document.getElementById("footer");
+        const chatBubble = document.getElementById('chat-bubble');
 
         container.style.opacity = "0";
         container.style.pointerEvents = "none";
         footer.style.opacity = "0";
         footer.style.pointerEvents = "none";
+        chatBubble.style.opacity = "0";
+        chatBubble.style.pointerEvents = "none";
+
 
         camera.position.set(-100, -100, -100);
 
@@ -196,6 +200,8 @@ window.onload = () => {
                 footer.style.display = "block";
                 footer.style.transition = "opacity 1s ease-in-out";
                 footer.style.pointerEvents = "block";
+                chatBubble.style.transition = "opacity 1s ease-in-out";
+                chatBubble.style.pointerEvents = "block";
             }
         });
 
@@ -220,6 +226,10 @@ window.onload = () => {
                 footer.style.transition = "opacity 1s ease-in-out";
                 footer.style.opacity = "1";
                 footer.style.pointerEvents = "auto";
+                chatBubble.style.transition = "opacity 1s ease-in-out";
+                chatBubble.style.opacity = "1";
+                chatBubble.style.pointerEvents = "auto";
+
             }
         });
     };
@@ -922,6 +932,17 @@ menuItems.forEach(item => {
     });
 });
 
+const bubble = document.getElementById('chat-bubble');
+const chatWindow = document.getElementById('chat-window');
+const chatCover = document.getElementById('chatCover');
+
+bubble.addEventListener('click', () => {
+    const isVisible = chatWindow.style.display === 'block';
+
+    // Toggle chat window and cover visibility together
+    chatWindow.style.display = isVisible ? 'none' : 'block';
+    chatCover.style.display = isVisible ? 'none' : 'block';
+});
 
 
 
