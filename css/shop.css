@@ -770,7 +770,6 @@ button {
     font-size: 16px;
   }
   
-  /* Close Button */
   .close {
     color: black;
     float: right;
@@ -799,14 +798,12 @@ button {
     opacity: 0;
   }
   
-  /* 🚀 OPEN ANIMATION */
   #socialWheel.active {
     transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
     opacity: 1;
   }
   
-  /* 🔄 CLOSE ANIMATION (REVERSES ENTRY) */
   #socialWheel.inactive {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
@@ -814,7 +811,6 @@ button {
     transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
   }
   
-  /* ✨ Icons Enter Staggered */
   #socialWheel.active .icon {
     opacity: 1;
     transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
@@ -829,7 +825,6 @@ button {
     transition-delay: calc((5 - var(--i)) * 0.07s); /* Reverse Order */
   }
   
-  /* 🔥 Hover Effects */
   .icon {
     position: absolute;
     width: 50px;
@@ -877,6 +872,8 @@ button {
 
 
 @media (max-width: 600px) {
+
+
 
     .paginate.right {
         left: 60%;

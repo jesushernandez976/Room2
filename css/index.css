@@ -1031,7 +1031,7 @@ button {
     width: 15em;
     height: 4em;
     font-size: 10px;
-    top: 42%;
+    top: 57%;
     left: 30%;
   }
 
@@ -1039,7 +1039,7 @@ button {
     width: 15em;
     height: 4em;
     font-size: 10px;
-    top: 57%;
+    top: 72%;
     left: 30%;
   }
 
@@ -1047,7 +1047,7 @@ button {
     width: 15em;
     height: 4em;
     font-size: 10px;
-    top: 72%;
+    top: 42%;
     left: 30%;
   }
 
@@ -1085,5 +1085,9 @@ button {
 
   .testimonial-text {
     font-size: 0.85em;
+  }
+
+  footer {
+    z-index: 1;
   }
 }
