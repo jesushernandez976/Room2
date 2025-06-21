@@ -166,7 +166,7 @@
 }
 
 .chatCover {
-  position: absolute;
+  position: fixed;
   bottom: 91px;
   right: 22px;
   width: 349px;

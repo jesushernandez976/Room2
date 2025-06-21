@@ -125,6 +125,88 @@ body {
   }
 }
 
+#chat-bubble {
+  position: fixed;
+  bottom: -5px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* SVG sizing and hover effects */
+#chat-bubble svg {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Glowing effect on hover */
+#chat-bubble:hover svg {
+  filter: drop-shadow(0 0 8px #00f0ff) brightness(1.2);
+  transform: scale(1.08);
+}
+
+/* Float animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Chat window container */
+#chat-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 450px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: none;
+  z-index: 10000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  background: white;
+}
+
+.chatCover {
+  position: fixed;
+  bottom: 91px;
+  right: 22px;
+  width: 347px;
+  height: 41px;
+  display: none;
+  z-index: 100003;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.chatCover p {
+  display: flex;
+  justify-content: center;
+  font-size: 9px;
+  color: black;
+}
+
+#chat-window iframe {
+  transform-origin: top left;
+  width: 111%; /* adjust so iframe fills container when scaled */
+  height: 111%; /* adjust proportionally */
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -4575,6 +4657,13 @@ blockquote {
     font-size: 4rem;
   }
 
+   #chat-window,
+  .chatCover {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
   .hero-heading {
       z-index: 2;
       font-size: 60px;
@@ -5496,6 +5585,8 @@ blockquote {
 .holographic-container {
  margin-bottom: 500px;
 }
+
+
 
 
   .reg {
