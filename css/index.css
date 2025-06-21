@@ -111,7 +111,7 @@
 
 #chat-bubble {
   position: fixed;
-  bottom: 10px;
+  bottom: -5px;
   right: 20px;
   width: 70px;
   height: 70px;
@@ -154,7 +154,7 @@
   position: fixed;
   bottom: 90px;
   right: 20px;
-  width: 300px;
+  width: 350px;
   height: 450px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -169,7 +169,7 @@
   position: absolute;
   bottom: 91px;
   right: 22px;
-  width: 299px;
+  width: 349px;
   height: 41px;
   display: none;
   z-index: 100002;
