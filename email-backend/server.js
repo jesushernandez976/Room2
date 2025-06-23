@@ -77,7 +77,7 @@ app.post('/send-email', async (req, res) => {
     }
 
     // Create transporter object using SMTP (example uses Gmail)
-    let transporter = nodemailer.createTransporter({
+    let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,      // Your Gmail address
