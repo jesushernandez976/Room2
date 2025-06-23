@@ -448,10 +448,10 @@
         <span id="formMessageText"></span>
     </div>
 
+
     <div id="emailForm" class="modal">
         <div class="modal-content">
             <span class="close sound" onclick="closeModal('emailForm')">&times;</span>
-
             <h2>Submit Inquiry</h2>
             <form id="contactForm">
                 <label for="name">Name</label>
@@ -466,12 +466,14 @@
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows="4" required></textarea>
 
+                <!-- reCAPTCHA checkbox -->
+                <div class="g-recaptcha" data-sitekey="6LclPWorAAAAANXBBzkmkbuq9ujAsQnN6fEIF4-v"></div>
+
+                <!-- OR if you prefer your original styling -->
                 <div class="submit-btn" onclick="handleFormSubmit()">Send</div>
             </form>
-
         </div>
     </div>
-
 
 
 
@@ -673,6 +675,7 @@
 
     </div>
     </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" defer></script>
     <script type="module" src="./js/index.js" defer></script>
     <script type="module" src="./js/app.js" defer></script>

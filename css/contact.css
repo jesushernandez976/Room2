@@ -258,6 +258,15 @@ textarea:focus {
   background-color: #336199;
 }
 
+
+.g-recaptcha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; 
+  border-radius: 6px;
+}
+
 .form-message {
   position: absolute;
   top: 800px;

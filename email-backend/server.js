@@ -3,6 +3,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const https = require('https'); // Add this for reCAPTCHA verification
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -11,45 +12,106 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
-// POST route to receive form data and send email
-app.post('/send-email', (req, res) => {
-  const { name, email, phone, message } = req.body;
+// Function to verify reCAPTCHA
+function verifyRecaptcha(token) {
+  return new Promise((resolve, reject) => {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const postData = `secret=${secretKey}&response=${token}`;
 
+    const options = {
+      hostname: 'www.google.com',
+      port: 443,
+      path: '/recaptcha/api/siteverify',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        try {
+          const result = JSON.parse(data);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    req.write(postData);
+    req.end();
+  });
+}
+
+// POST route to receive form data and send email
+app.post('/send-email', async (req, res) => {
+  const { name, email, phone, message, recaptchaResponse } = req.body;
+
+  // Validate all required fields
   if (!name || !email || !phone || !message) {
     return res.status(400).json({ error: 'Please fill all fields' });
   }
 
-  // Create transporter object using SMTP (example uses Gmail)
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,      // Your Gmail address
-      pass: process.env.EMAIL_PASS    // Gmail App Password (not your normal password)
+  // Validate reCAPTCHA
+  if (!recaptchaResponse) {
+    return res.status(400).json({ error: 'Please complete the reCAPTCHA verification' });
+  }
+
+  try {
+    // Verify reCAPTCHA with Google
+    const recaptchaResult = await verifyRecaptcha(recaptchaResponse);
+
+    if (!recaptchaResult.success) {
+      console.log('reCAPTCHA verification failed:', recaptchaResult);
+      return res.status(400).json({ error: 'reCAPTCHA verification failed. Please try again.' });
     }
-  });
 
-  // Email options
-  let mailOptions = {
-    from: email,
-    to: process.env.EMAIL_USER, // Your email to receive messages
-    subject: `New inquiry from ${name}`,
-    text: `
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Message: ${message}
-    `
-  };
+    // Create transporter object using SMTP (example uses Gmail)
+    let transporter = nodemailer.createTransporter({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,      // Your Gmail address
+        pass: process.env.EMAIL_PASS       // Gmail App Password (not your normal password)
+      }
+    });
 
-  // Send email
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Email sending error:', error);
-      return res.status(500).json({ error: 'Failed to send email' });
-    } 
-    console.log('Email sent: ' + info.response);
-    res.json({ message: 'Email sent successfully!' });
-  });
+    // Email options
+    let mailOptions = {
+      from: email,
+      to: process.env.EMAIL_USER, // Your email to receive messages
+      subject: `New inquiry from ${name}`,
+      text: `
+        Name: ${name}
+        Email: ${email}
+        Phone: ${phone}
+        Message: ${message}
+      `
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Email sending error:', error);
+        return res.status(500).json({ error: 'Failed to send email' });
+      }
+      console.log('Email sent: ' + info.response);
+      res.json({ message: 'Email sent successfully!' });
+    });
+
+  } catch (error) {
+    console.error('reCAPTCHA verification error:', error);
+    return res.status(500).json({ error: 'Server error during verification. Please try again.' });
+  }
 });
 
 // Start server
