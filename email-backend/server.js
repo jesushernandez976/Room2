@@ -3,7 +3,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const https = require('https'); // Add this for reCAPTCHA verification
+const https = require('https'); 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -80,15 +80,15 @@ app.post('/send-email', async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,      // Your Gmail address
-        pass: process.env.EMAIL_PASS       // Gmail App Password (not your normal password)
+        user: process.env.EMAIL_USER,      
+        pass: process.env.EMAIL_PASS       
       }
     });
 
     // Email options
     let mailOptions = {
       from: email,
-      to: process.env.EMAIL_USER, // Your email to receive messages
+      to: process.env.EMAIL_USER, 
       subject: `New inquiry from ${name}`,
       text: `
         Name: ${name}
@@ -115,6 +115,11 @@ app.post('/send-email', async (req, res) => {
 });
 
 // Start server
+
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

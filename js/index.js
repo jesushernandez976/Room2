@@ -306,7 +306,7 @@ for (let i = 0; i < gridDivisions; i++) {
 let gridRotationSpeed = 0.0005; // Control rotation speed
 let particleRotationSpeed = -0.001; // Control particle system's opposite rotation speed
 
-const particleCount = 8000;
+const particleCount = 3000;
 const particles = new THREE.BufferGeometry();
 const positions = [];
 const opacities = new Float32Array(particleCount).fill(1.0); // Stores individual opacity values
@@ -376,7 +376,7 @@ window.addEventListener("resize", () => {
 
 
 // Shooting Star Particle System
-const shootingStarCount = 250; // Number of shooting stars to spawn
+const shootingStarCount = 200; // Number of shooting stars to spawn
 const shootingStars = new THREE.BufferGeometry();
 const shootingStarPositions = [];
 const velocities = [];
