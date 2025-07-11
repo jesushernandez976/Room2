@@ -35,6 +35,78 @@ summary {
   display: block;
 }
 
+.promo-container {
+  max-width: 80%;
+  margin: 0 auto;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 20px;
+  margin-top: 150px;
+}
+
+.promo-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.promo-title {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .promo-container {
+    margin: 10px auto;
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .promo-title {
+    font-size: 20px;
+  }
+
+  .promo-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  video {
+    width: 100%;
+    min-height: 200px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-container {
+    margin: 5px auto;
+    padding: 10px;
+    max-width: 98%;
+  }
+
+  .promo-wrapper {
+    width: 100%;
+  }
+
+  video {
+    min-height: 180px;
+  }
+}
 .scrolling-logo-wrapper {
   cursor: pointer;
 }
@@ -4761,8 +4833,6 @@ blockquote {
     grid-row-gap: 32px;
   }
 
-
-
   .next-project-title {
     font-size: 3rem;
     line-height: 1.2em;
@@ -5137,7 +5207,7 @@ blockquote {
   }
 
   .hero-background-wrapper video {
-    opacity: 1 !important; 
+    opacity: 1 !important;
   }
 
   .skill-card {
@@ -5405,7 +5475,6 @@ blockquote {
     font-family: "Roboto Mono", monospace;
     font-size: 20px;
   }
-
 
   .display-heading-1 {
     margin-bottom: 1rem;
