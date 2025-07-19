@@ -56,7 +56,7 @@ window.handleFormSubmit = function () {
     }
 
     // If all validations pass, proceed with sending email
-    fetch('http://localhost:5000/send-email', {
+    fetch('https://accesscodepro-blog.onrender.com/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
