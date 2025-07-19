@@ -56,7 +56,7 @@ window.handleFormSubmit = function () {
     }
 
     // If all validations pass, proceed with sending email
-    fetch('https://email-backend-nwmz.onrender.com/send-email', {
+    fetch('http://localhost:5000/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

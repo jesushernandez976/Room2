@@ -50,7 +50,7 @@ window.onload = () => {
 
     const modelPaths = [
         {
-            path: './models/eye/logo3.glb',
+            path: 'https://d3n24sjr83qswf.cloudfront.net/models/logo3.glb',
             scale: 15,
             position: { x: 0, y: 0, z: 0 }
         },
@@ -209,6 +209,7 @@ window.onload = () => {
             if (!isMuted) {
                 acpTheme.currentTime = 0;
                 acpTheme.play();
+
             }
         }, 1000);
 
@@ -818,7 +819,7 @@ lightPositions.forEach((pos, index) => {
 
 function flyByAnimation() {
     // Create the UFO sound effect
-    const ufoSound = new Audio('./audio/ufo.wav');
+    const ufoSound = new Audio('https://ik.imagekit.io/08srsqfeh/ufo.wav?updatedAt=1752899882219');
     ufoSound.volume = 0.09; // Adjust volume as needed
 
     // Delay the sound by 0.5 seconds
@@ -857,41 +858,34 @@ const isMobile = () => window.innerWidth <= 600;
 
 
 // Create audio elements
-const hoverSound = new Audio('./audio/Hover.mp3');
-const clickSound = new Audio('./audio/Click.mp3');
-const acpTheme = new Audio('./audio/ACP theme.wav');
+const hoverSound = new Audio('./audio/ps2s.mp3');
+const clickSound = new Audio('./audio/12.mp3');
+const acpTheme = new Audio('./audio/acptheme.mp3');
 const welcomeSound = new Audio('./audio/Welcome .wav');
 
 // Set initial volume levels based on screen size (mobile or desktop)
 function setVolume() {
     const mobile = isMobile();
     hoverSound.volume = 0.07;
-    clickSound.volume = 0.1;
+    clickSound.volume = 0.03;
     welcomeSound.volume = mobile ? 0.02 : 0.05;
     acpTheme.volume = mobile ? 0.005 : 0.04;
 }
 
 setVolume();
 
-// Recalculate volume on window resize
 window.addEventListener('resize', setVolume);
 
-// Tracks whether sound is muted
 let isMuted = false;
 
-// Timeout for hover delay
 let hoverTimeout;
 
-// Flag to prevent hover sound on click
 let isClicking = false;
 
-// Select all menu items
 const menuItems = document.querySelectorAll('.sound');
 
-// Select the mute toggle switch
 const muteToggle = document.getElementById('switch');
 
-// Add event listener to mute toggle switch
 muteToggle.addEventListener('change', () => {
     isMuted = !isMuted; // Toggle mute state
 
@@ -903,26 +897,23 @@ muteToggle.addEventListener('change', () => {
     }
 });
 
-// Add event listeners to each menu item
 menuItems.forEach(item => {
     item.addEventListener('mouseenter', () => {
-        // On desktop, apply hover delay; on mobile, this will be skipped
         if (!isMuted && !isClicking && window.innerWidth > 600) {
             clearTimeout(hoverTimeout);
             hoverTimeout = setTimeout(() => {
                 hoverSound.currentTime = 0;
                 hoverSound.play();
-            }, 50);
+            }, 250);
         }
     });
 
     item.addEventListener('click', () => {
-        if (!isMuted) {
+        if (!isMuted && window.innerWidth > 600) { 
             isClicking = true;
             clickSound.currentTime = 0;
             clickSound.play();
 
-            // For mobile, disable hover sound after click to avoid conflicting sounds
             clearTimeout(hoverTimeout);
 
             setTimeout(() => {
