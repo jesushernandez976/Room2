@@ -3467,8 +3467,12 @@ blockquote {
   align-items: center;
   width: 100%;
   padding-top: 10rem;
-  padding-bottom: 50rem;
+  padding-bottom: 105rem;
   position: relative;
+}
+
+.margin-bottom {
+  padding-bottom: 5rem;
 }
 
 .section.section-hero {
@@ -4990,7 +4994,9 @@ blockquote {
     line-height: 200%;
   }
 
-  
+  .section2 {
+    margin-bottom: 50rem;
+  }
 
   .heading-h4 {
     font-size: 1.5em;
